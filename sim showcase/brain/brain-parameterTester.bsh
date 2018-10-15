@@ -1,0 +1,317 @@
+// Imports
+import ij.IJ;
+import ij.ImagePlus;
+import ij.ImageStack;
+import ij.Prefs;
+import ij.process.FloatProcessor;	
+import ij.process.ImageProcessor;
+import ij.process.ImageStatistics;	
+import ij.gui.GenericDialog;
+import ij.gui.NonBlockingGenericDialog;
+import ij.gui.MessageDialog;
+
+import org.fairsim.sim_algorithm.SimAlgorithm;
+import org.fairsim.sim_algorithm.SimParam;
+import org.fairsim.sim_algorithm.SimParam.FilterStyle;
+import org.fairsim.sim_algorithm.SimUtils;
+import org.fairsim.sim_algorithm.OtfProvider;
+import org.fairsim.fiji.DisplayWrapper;
+import org.fairsim.utils.ImageDisplay;
+import org.fairsim.linalg.Vec2d;
+import org.fairsim.utils.Tool;
+import loci.plugins.BF;
+
+
+
+
+// Check open image only has 9 frames: we want this to be quick! 
+ImagePlus iPl = ij.WindowManager.getCurrentImage();
+if (iPl.getStackSize() != 9){
+	MessageDialog errorDlg = new MessageDialog(null, "Raw data stack size error!", "Please use a single-slice, single-channel image for parameter finding.");
+	return;
+}
+
+// Log fairSIM output in the FIJI log
+Tool.setLogger( new Tool.Logger() {
+	public void writeTrace(String w) {
+		IJ.log("-fs- "+w);		
+	}
+	public void writeError(String e) {
+		IJ.log("fs ERR: "+e);
+	}
+	public void writeShortMessage(String s) {
+		IJ.showStatus(s);
+	}
+});
+
+// Ask for channel, lens. Timelapse, optosplit. 
+GenericDialog msDlg = new GenericDialog("Enter microscope parameters");
+msDlg.addChoice("Channel", new String[]{"488", "561", "640"}, "488");
+msDlg.addCheckbox("Debug?", false);
+msDlg.showDialog();
+
+if(msDlg.wasCanceled())
+	return;
+
+String wavelength = msDlg.getNextChoice();
+boolean debug = msDlg.getNextBoolean();
+
+// Find illumination parameters. 
+// fairSIM pattern-finding parameters
+// SIM reconstruction parameters
+int nrBands = 2;		// #SIM bands
+int nrAng   = 3;		// #angles
+int nrPha   = 3;		// #phases
+
+int fitBand = 1;
+boolean coarsePeakFit = false;	
+double fitExclude = 0.5;		// freq. region (DC) to ignore when search for k0, in fraction of OTF cutoff
+
+// Microscope parameters - default for 60X water
+double otfNA     = 1.2;	// NA
+double otfCorr   = 0.1;	// compensation
+int imgSize = 1024;		// width & height of image
+double pxlSize = 0.0677;	// pixel size in micron
+
+/*
+switch(lens){
+	case "60X Water":
+		otfNA = 1.2;
+		pxlSize = 0.0833;
+	break;
+	case "100X Oil":
+		oftNA = 1.49;
+		pxlSize = 0.05;
+	break;
+}*/
+
+double emWavelen;
+double px1, py1, px2, py2, px3, py3; // Coarse parameters
+
+switch(wavelength){
+	case "488": // 488nm
+		emWavelen = 525; 
+	    px1 = -175.5;
+	    py1 = 3;
+	    px2 = 91;
+	    py2 = 151;
+	    px3 = 85;
+	    py3 = -155;
+	break;
+	case "561": // 561nm
+		emWavelen = 600;
+	    px1 = -175.5;
+	    py1 = 3;
+	    px2 = 90;
+	    py2 = 151;
+	    px3 = 85;
+	    py3 = -155;
+	break;
+	case "640": // 640nm
+		emWavelen = 700;
+	    px1 = -140;
+	    py1 = 3;
+	    px2 = 71;
+	    py2 = 121;
+	    px3 = -68;
+	    py3 = 124;
+	break;
+}
+
+OtfProvider otf   = OtfProvider.fromEstimate( otfNA, emWavelen, otfCorr );
+SimParam simParam = SimParam.create( nrBands, nrAng, nrPha, imgSize, pxlSize, otf );
+
+// copy raw data, window, fft
+Vec2d.Cplx [][] rawImages = new Vec2d.Cplx[nrAng][nrPha];
+double[] means = new double[9];
+
+for (int a = 0; a<nrAng; a++) {
+	for (int p=0; p<nrPha; p++) {
+
+		ImageProcessor iP = iPl.getStack().getProcessor( a*nrPha + p + 1 );
+		means[a*nrPha + p] = ImageStatistics.getStatistics(iP).mean;
+		
+		// get the current image as 16bit short
+		short [] curImg = (short[])iP.convertToShortProcessor().getPixels();
+	
+		// copy to a complex-value vector
+		rawImages[a][p] = Vec2d.createCplx( imgSize, imgSize );
+		rawImages[a][p].setFrom16bitPixels( curImg );
+
+		// subtract background, window, fft
+		//double pc = SimUtils.subtractBackground( rawImages[a][p], background );
+		
+		SimUtils.fadeBorderCos( rawImages[a][p], 15);
+		rawImages[a][p].fft2d(false);
+		
+		//Tool.trace("fft'd input "+a+" "+p+", subtracted background, % pixels clipped: "+pc*100);
+		Tool.trace("fft'd input "+a+" "+p);
+	}
+}
+
+// Set initial guesses for parameters
+simParam.dir(0).setPxPy(px1, py1);
+simParam.dir(1).setPxPy(px2, py2);
+simParam.dir(2).setPxPy(px3, py3);
+
+// Get sim parameters
+int visualFeedback = -1;
+ImageDisplay.Factory idf = null;
+if (debug){
+	visualFeedback = 2; 
+	idf = DisplayWrapper.getFactory();
+}
+
+SimAlgorithm.estimateParameters( simParam, rawImages, fitBand, -1, idf, visualFeedback, null);
+
+
+
+// Open reconstruction dialog. Dialog box with sliders to set parameters
+// Parameters:
+boolean correctIllumination = Prefs.get("lagsim.correctIllumination", "false") == "true" ? true : false;
+String filter = Prefs.get("lagsim.filter", "Wiener out");
+double wienerParameter = Double.parseDouble(Prefs.get("lagsim.wienerParameter", "0.05"));
+double rlSteps = Double.parseDouble(Prefs.get("lagsim.rlSteps", "5"));
+double apoCutoff = Double.parseDouble(Prefs.get("lagsim.apoCutoff", "1.8"));
+double apoBend = Double.parseDouble(Prefs.get("lagsim.apoBend", "0.9"));
+boolean otfAttenuation = Prefs.get("lagsim.otfAttenuation", "false") == "true" ? true : false;
+double attenFWHM = Double.parseDouble(Prefs.get("lagsim.attenFWHM", "1.2"));
+double attenStrength = Double.parseDouble(Prefs.get("lagsim.attenStrength", "0.995"));
+
+boolean finished = false;
+
+ImageStack outputStack = new ImageStack(2*imgSize, 2*imgSize);
+ImagePlus outputIP = null;
+
+while (!finished){
+	NonBlockingGenericDialog simDlg = new NonBlockingGenericDialog("Choose reconstruction parameters");
+	simDlg.enableYesNoCancel("Test!", "Finish");
+	simDlg.addCheckbox("Correct Illumination?", correctIllumination);
+	simDlg.addChoice("Filtering", new String[]{"Wiener out", "RL out", "RL in, Wiener out", "RL in, RL out"}, filter);
+	simDlg.addSlider("Wiener Parameter", 0, 1, wienerParameter);
+	simDlg.addSlider("RL steps", 0, 20, rlSteps, 1);
+	simDlg.addSlider("Apodisation cutoff", 0, 2, apoCutoff);
+	simDlg.addSlider("Apodisation strength", 0, 1, apoBend);
+	simDlg.addCheckbox("OTF Attenuation?", otfAttenuation);
+	simDlg.addSlider("Attenuation FWHM", 0, 2, attenFWHM);
+	simDlg.addSlider("Attenuation strength", 0, 1, attenStrength);
+	simDlg.addCheckbox("Debug?", debug);
+	simDlg.showDialog();
+	
+	if(simDlg.wasCanceled()){
+		return;
+	} else if (simDlg.wasOKed()){
+		// Get response from dialog
+		correctIllumination = simDlg.getNextBoolean();
+		filter = simDlg.getNextChoice();
+		wienerParameter = simDlg.getNextNumber();
+		rlSteps = simDlg.getNextNumber();
+		apoCutoff = simDlg.getNextNumber();
+		apoBend = simDlg.getNextNumber();
+		otfAttenuation = simDlg.getNextBoolean();
+		attenFWHM = simDlg.getNextNumber();
+		attenStrength = simDlg.getNextNumber();
+		debug = simDlg.getNextBoolean();
+
+		// Parse response
+		FilterStyle filterStyle = SimParam.FilterStyle.Wiener; // Wiener: use Wiener filter on output; RLin: Richardson-Lucy on input, Wiener on output; RLout: RL on output; RLboth: RL on input and output
+		switch(filter){
+			case "Wiener out":
+				filterStyle = SimParam.FilterStyle.Wiener;
+			break;
+			case "RL in, Wiener out":
+				filterStyle = SimParam.FilterStyle.RLin;
+			break;
+			case "RL out":
+				filterStyle = SimParam.FilterStyle.RLout;
+			break;
+			case "RL in, RL out":
+				filterStyle = SimParam.FilterStyle.RLboth;
+			break;
+		}
+		
+		// Set up reconstruction
+		// Set deconvolution
+		simParam.setWienerFilter( wienerParameter );   // wiener filter parameter
+		simParam.setRLiterations( (int)rlSteps );
+		simParam.setFilterStyle( filterStyle );
+		
+		// Set apodisation
+		simParam.setApoCutoff( apoCutoff );       // cutoff of apodization
+		simParam.setApoBend( apoBend );         // exponent of apodization 
+
+		// Set attenuation 
+		otf.setAttenuation( attenStrength, attenFWHM );   // set strength (0..1) and FWHM (in 1/micron) of OTF attenuation
+		otf.switchAttenuation( otfAttenuation );      // important: has to be 'true', otherwise no attenuation gets used
+		
+		// Run reconstruction!!
+		boolean otfBeforeShift = false;
+
+		// Intensity correction
+		// Angle by angle
+		for (int a = 0; a<nrAng; a++){
+			double sum = 0;
+			for (int p = 0; p<nrPha; p++){
+				double sliceMean = 1.0;
+				if (correctIllumination){	
+					sliceMean = means[a*nrAng+p]/means[0];
+				}
+				simParam.dir(a).setPhaseIntensityFactor(p, sliceMean);
+				sum += sliceMean;
+			}
+			angleMean = sum/3;
+			simParam.dir(a).setAngleIntensityFactor(angleMean);
+		}
+
+		visualFeedback = -1;
+		idf = null;
+		if (debug){
+			visualFeedback = 2; 
+			idf = DisplayWrapper.getFactory();
+		}
+		
+		Vec2d.Real result = SimAlgorithm.runReconstruction( simParam, rawImages, idf, visualFeedback, 
+			otfBeforeShift, SimParam.CLIPSCALE.CLIP, null);
+		
+		// 'result' now contains the reconstructed image.
+		float [] res = result.vectorData();
+		FloatProcessor fp = new FloatProcessor(2*imgSize, 2*imgSize, res);
+
+		String sliceTitle = filter + ", w: " + wienerParameter + ", RL: " + (int)rlSteps + ", apoC: " + apoCutoff + ", apoS: " + apoBend
+			+ ", at?: " + (otfAttenuation ? "true" : "false") + ", attFW: " + attenFWHM +  ", atS: " + attenStrength; 
+		outputStack.addSlice(sliceTitle, fp);
+
+		if (outputIP == null){
+			outputIP = new ImagePlus("Test results" , outputStack);
+			outputIP.show();
+		}
+		outputIP.setStack(outputStack);
+		outputIP.setSlice(outputStack.getSize());
+	} else {
+		finished = true;
+		break;
+	}
+}
+
+// Save parameters, and print to screen. 
+Prefs.set("lagsim.correctIllumination", (correctIllumination ? "true" : "false"));
+Prefs.set("lagsim.filter", filter);
+Prefs.set("lagsim.wienerParameter", String.valueOf(wienerParameter));
+Prefs.set("lagsim.rlSteps",  String.valueOf(rlSteps));
+Prefs.set("lagsim.apoCutoff",  String.valueOf(apoCutoff));
+Prefs.set("lagsim.apoBend",  String.valueOf(apoBend));
+Prefs.set("lagsim.otfAttenuation", (otfAttenuation ? "true" : "false"));
+Prefs.set("lagsim.attenFWHM",  String.valueOf(attenFWHM));
+Prefs.set("lagsim.attenStrength",  String.valueOf(attenStrength));
+
+String str = "Reconstruction Parameters:" + 
+	"\n\nFilter: " + filter + 
+	"\nWiener: " + String.valueOf(wienerParameter) + 
+	"\nRL Steps: " + String.valueOf(rlSteps) + 
+	"\nApodisation cutoff: " + String.valueOf(apoCutoff) + 
+	"\nApodisation strength: " + String.valueOf(apoBend) + 
+	"\nOTF attenuation: " + (otfAttenuation ? "true" : "false") + 
+	"\nAttenuation FWHM: " + String.valueOf(attenFWHM) + 
+	"\nAttenuation strength: " + String.valueOf(attenStrength);
+
+MessageDialog completeDlg = new MessageDialog(null, "Finished", str);

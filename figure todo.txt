@@ -1,0 +1,45 @@
+Figures to work on still
+
+4.4: MOF loaded with calcein is taken up into cells
+"Images were captured on the LAG SIM, utilising optical sectioning to remove out of focus light. 
+Representative image slices over a \SI{24}{\hour} period are shown in Figure~\ref{fig:calcein-MOF-uptake}. 
+The figure shows that the MOF itself is highly autofluorescent at the same wavelength as calcein, such that the calcein released from the MOF cannot be seen on its own. "
+
+Use image slices from webpage. a b c d e f. Consider running reconstructions again? (But probably don't bother.)
+
+
+Figure 4.6: MOF loaded with siRNA is take up into cells, when the conditions are right. An endosome release factor is required to allow the MOF/siRNA complex to exit the endosome without being degraded.
+4 conditions of uptake. This figure is in the paper, but maybe have another go at reconstruction to tidy it up? Or choose another colour scheme??
+
+
+Figure 5.1 Reproduced from \cite{valm2017applying} ?. ER forms connections with loads of things in the cell.
+Save this til we re-write the introduction
+
+
+Figure 5.3 FRET probe / ATP depletion.
+Again, save til introudction? Or copy Figure out of ER supplementaries
+
+
+Figure 5.4 The ER network is in a state of dynamic equilibrium, with a small number of nodes being created and destroyed at any given time to cause network rearrangement. 
+Figure~\ref{fig:ER-rearrangement} shows a sample image of the ER network, with examples of node and endpoint rearrangement inset.
+This is painful... 
+
+Figure 5.5 
+WEKA vs threshold. Also not so straightforward to make... find an image where threshold has worked badly, and WEKA has worked well!
+
+
+Figure 5.6 RED, GREEN, BLUE figure overlayed on black-and-white ER figure? 
+
+
+Figure 5.7 Tubules growing and shrinking over time. Is this a necessary figure? 
+
+
+Figure 5.8 When ER tubules pinch, their width decreases to below the resolution limit of SIM; however this can still be observed as a decrease in intensity, confirmed by the simulation shown here. Pinches were highlighted using the `Edges' colourmap in ImageJ.
+
+Need to simulate this on MATLAB still
+
+
+Figure 5.9 Normal, blebbing, normal. Can get this directly out of paper supplementaries
+
+
+Figure 5.12 Single particle looks similar to 5.2; and 'homogeneity' measure over time, increasing exponentially? 

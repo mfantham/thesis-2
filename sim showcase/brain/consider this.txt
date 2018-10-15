@@ -1,0 +1,3 @@
+Find parameters manually using SROS-SIM for MATLAB.
+Make manual params file. 
+Reconstruct with speical param-chooser. 
