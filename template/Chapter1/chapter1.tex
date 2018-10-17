@@ -62,7 +62,7 @@ Highlighted in colour are 8 organelles which are utilised in this thesis.
 \begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}}
 \begin{enumerate} 
 	\item Cytosol 
-	\item Plasma membrane 
+	\item Cell membrane 
 	\item Nucleus 
 	\item Lysosome 
 \end{enumerate} &
@@ -88,27 +88,44 @@ Fluorescent labelling can provide a variety of information about the cell, depen
 The cell nucleus contains DNA, and can be visualised under a microscope by labelling with DAPI or SiR-DNA. 
 Labelling the nucleus provides an easy method of automated cell counting, or an easy method for locating cells if it is not obvious from other labels. 
 
-The contents of the cell are contained by the plasma membrane, which acts as a barrier between the contents of the cell and extra-cellular space. 
+The contents of the cell are contained by the cell membrane, which acts as a barrier between the contents of the cell and extra-cellular space. 
 Membrane proteins can be specifically labelled to visualise the outline of cells, to confirm whether another fluorescent object is located inside or outside the cell. 
 
 The cell can import useful raw materials into the cell through a process called endocytosis. 
-When an object sat on the external cell membrane is endocytosed, an intracellular compartment is created from the plasma membrane to contain the foreign material.
-A typical endocytosis pathway will then pass the new contents into an endosome, and then a lysosome, each of which contain different environments as a defence against foreign objects damaging the cell.  %This paragraph needs the most work
-Labelling endosomes alongside other objects can be used for colocalisation studies, as performed in Chapter~\ref{chap:MOF}, which confirm whether another substance is contained within the organelle or is free to move in the cytosol. 
+To enter the cell, an intracellular compartment is created from the plasma membrane to contain the foreign material.
+Once inside the cell, there are many pathways for processing the endocytosed contents. 
+A typical pathway delivers contents into small vesicles called early endosomes, which are selectively sorted to either recycle the contents to the cell membrane or develop into late endosomes. 
+Late endosomes have an acidic environment, about pH\,6, and begin hydrolytic digestion of their contents. 
+Late endosomes mature into lysosomes with a more acidic environment and enzymes to further break down their contents. 
+Labelling endosomes or lysosomes alongside other objects can be used for colocalisation studies, as performed in Chapter~\ref{chap:MOF}, which show whether another fluorescent substance is contained within the organelle or is free to move in the cytosol. 
+[Chapter 13 in alberts2002molecular]
+
+\begin{figure}[htbp!]
+\centering
+\includegraphics[width=1.0\textwidth]{endocytosis-pathway}
+\captionsetup{singlelinecheck=off}
+\caption[Introduction: Cells import external contents through endocytosis]{A typical endocytosis pathway, adapted from ~\cite{alberts2002molecular} shows the formation of various organelles, each of which contains a different environment for ingestion and processing of the external contents. Other endocytosis pathways also occur, for example to pass the contents to ER or release it directly into the cytosol. }
+\label{fig:endocytosis-pathway}
+\end{figure}
 
 In addition to endosomes and lysosomes, other internal membrane structures include the endoplasmic reticulum (ER) and the Golgi apparatus. 
-Protein folding and synthesis occurs in the ER; conversely, the Golgi apparatus is involved in secretion of substances from the cell. 
-Content is transferred between all intracellular compartments through vesicles. 
+Protein folding and synthesis occurs in the ER; conversely, the Golgi apparatus is involved in further protein processing and secretion of substances from the cell~\cite{dyson1978cell}. 
+Content is transferred between all intracellular compartments, either through vesicles or by direct organelle-organelle interaction. 
 To visualise the ER, fluorescent labels can be applied to either the ER membrane or to luminal proteins contained within the ER network; both labelling techniques are utilised in Chapter~\ref{chap:MOF}.  
 
-Mitochondria generate energy for the cell by converting food to adenosine triphosphate (APT), a high-energy molecule that is used as the basic chemical fuel to power cellular activity. 
-The are labelled in Chapter~\ref{chap:MOF} to assess the level of interaction between a therapeutic drug and the mitochondria themselves by observing a change in their shape. 
+Mitochondria generate energy for the cell by converting food to adenosine triphosphate (ATP), an energy-rich molecule that is used as the basic chemical fuel to power cellular activity. 
+This process, known as the Krebs cycle, consumes oxygen and produces carbon dioxide and water as waste products, so is a type of cellular respiration. 
+Furthermore, mitochondria trigger apoptosis - that is, controlled cell death. 
+In cancer cells the Krebs cycle is bypassed, and ATP is produced by a more direct process known as glycolysis~\cite{warburg1930uber}. 
+By avoiding the Krebs cycle, cancer cells stop the mitochondria from triggering apoptosis, such that the cells become immortal and reproduce to form tumours. 
+Chapter~\ref{chap:MOF} uses fluorescently labelled  mitochondria to assess their interaction with a drug designed to restart the Krebs cycle in cancerous cells. 
+[cite Otto Warburg, and https://www.ncbi.nlm.nih.gov/pubmed/17222789 ? for cancer stuff]
+[and https://www.ncbi.nlm.nih.gov/pubmed/17222789]
 
-Krebs cycle, cancer re mitochondria? [check chapter 4]
+All the organelles discussed in this sectiona are located in the cytosol, a crowded solution of many different types of molecules filling the volume of the cell~\cite{goodsell1991inside}. 
+The solution is so dense that the cytosol behaves as a water-based gel rather than a liquid~\cite{alberts2013essential}. 
 
-These organelles are all located in the cytosol, a crowded solution of many different types of molecules filling the volume of the cell~\cite{goodsell1991inside}. 
-The solution is so dense that the cytosol behaves as an water-based gel rather than a liquid~\cite{alberts2013essential}. 
-
+% Do I want to mention the cytoskeleton?? 
 
 \section{Structure of this document}
 Since October 2015, I have been working in the Laser Analytics Group building tools and applying them to answer biological questions. 
@@ -125,7 +142,9 @@ Three biological experiments are described showing various therapeutic effects o
 Chapter~\ref{chap:ER} utilises the fast, high-resolution imaging provided by LAG SIM to present pioneering discoveries about the endoplasmic reticulum. 
 Computational analysis is used to understand and interpret experimental results, and compelling evidence is shown which advances the understanding of fundamental cell biology. 
 
-A concluding Chapter~\ref{chap:conclusion} highlights the key discoveries and contributions made as part of this work.
+Each chapter begins with its own detailed introduction to the topic, including background information and a review of relevant literature. 
+
+Finally, a concluding Chapter~\ref{chap:conclusion} highlights the key discoveries and contributions made as part of this work.
 
 \subsection{Aims of this document}
 As a body of work, this document serves at least three purposes. 

@@ -253,7 +253,7 @@ When ER tubules pinch, their width decreases to below the resolution limit of SI
 	\includegraphics[width=\textwidth]{pinching-atp-depletion}
 	\caption{}\label{fig:pinching-atp-depletion}
 \end{subfigure}
-\caption[ER: Tubule pinching can be observed with the `Edges' colourmap]{A simulation in (a-f) shows that pinching events can be observed even when the pinch width is below the resolution limit of SIM. (a) and (b) show an unpinched and pinched tubule at full simulation resolution, with a width of \SI{80}{\nano\metre}. (c) and (d) show the tubule after convolution with a SIM-resolution point-spread function; (e) and (f) show that using the `Edges' colourmap clearly shows the pinch.  (g) shows experimental data of a tubule pinching in COS-7-ERT cells, highlighted in (h) by the `Edges' colourmap. (i) shows that ATP depletion reduces pinching frequency 3.9$\times$, showing that pinching is an ATP-dependent process. } 
+\caption[ER: Tubule pinching can be observed with the `Edges' colourmap]{A simulation in (a-f) shows that pinching events can be observed even when the pinch width is below the resolution limit of SIM. (a) and (b) show an unpinched and pinched tubule at full simulation resolution, with a width of \SI{80}{\nano\metre}. (c) and (d) show the tubule after convolution with a SIM-resolution point-spread function; (e) and (f) show that using the `Edges' colourmap clearly shows the pinch.  (g) shows experimental data of a tubule pinching in COS-7-ERT cells, highlighted in (h) by the `Edges' colourmap. (i) shows that ATP depletion reduces pinching frequency 3.9$\times$, with a similar dependence on ATP as luminal flow velocity seen in Figure~\ref{fig:er-atp-depletion}. } 
 \label{fig:er-pinching}
 \end{figure}
 
@@ -306,11 +306,11 @@ An ER network was automatically modelled with the following steps:
 The program will accept any binary network image as an input, and will perform these steps automatically using custom C\# implementations of the Moore-Neighbourhood tracing algorithm for tracing tubule edges [cite], the  Zhang-Suen algorithm for skeletonisation [cite], and the Ramer–Douglas–Peucker algorithm for simplifying the tubule skeleton and edges [cite]. 
 
 Dynamics are modelled in the network at a particle level. 
-Each particle which is spawned in the network has a script attached to it controlling its diffusive motion and its flow velocity when in the vicinity of a pinch. 
+Each particle which is spawned in the network has a physics script attached to it controlling its diffusive motion and its flow velocity when in the vicinity of a pinch. 
 
 Diffusive motion was modelled as Brownian motion. \cite{brown, einstein}
-After travelling a random distance sampled from a distributed based on the mean free path, particles randomly change direction, as though collided into by an invisible particle~\cite{lucretius1631}. 
-Diffusion properties are set in the simulation with mean free path $\delta$, time between collisions $\tau$, mean velocity $v$, or the diffusion coefficient, related by $D=\frac{\delta^2}{2\tau}=\frac{v\delta}{2}$. 
+After travelling a random distance, sampled from a distributed centred on the mean free path, particles randomly change direction as though collided into by an invisible particle~\cite{lucretius1631}. 
+Diffusion properties are set in the simulation with two of either mean free path $\delta$, time between collisions $\tau$, mean velocity $v$, or the diffusion coefficient $D$, related by $D=\frac{\delta^2}{2\tau}=\frac{v\delta}{2}$~\cite{}. 
 
 Pinching of the ER tubules simulated a force on particles in the vicinity of the pinch point. 
 As the tubule contracts, this force acts away from the pinch, in a direction along the tubule, and decays exponentially over time. 

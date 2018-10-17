@@ -19,7 +19,7 @@
 
 \section{Introduction} \label{sec:MOF-intro}
 \subsection{siRNA as a cancer treatment}
-When the latest statistics say that one in two people born in the UK will develop some form of cancer in their lifetime [citation on CRUK], it hardly needs stating that cancer has affected almost everyone in the country in some way. 
+When the latest statistics find that over half of people born in the UK since 1960 will develop some form of cancer in their lifetime~\cite{ahmad2015trends}, it hardly needs stating that cancer has affected almost everyone in the country in some way. 
 Any successful efforts to discover new treatments for this set of diseases are therefore very welcome by the community. 
 In this chapter, I describe a novel method of delivering therapeutic drugs to cells, utilising the LAG SIM for imaging and FPBioimage for 3D visualisation and analysis. 
 
@@ -28,28 +28,26 @@ One such form of gene manipulation is RNA interference (RNAi) [cite cite cite].
 RNAi prevents the expression of certain genes by degrading messenger RNA (mRNA) after transcription, thus preventing translation. 
 RNAi can be performed with small interfering RNA (siRNA) [cite Science Nature 1999 Baulcombe Tuschl], which silences mRNA molecules by cleavage of the mRNA strand into two pieces. 
 
-If a specific gene is found to cause cancer in a given cell type, then appropriate siRNA can be synthesised to interfere with that gene. 
+From a molecular biology perspective cancer is a highly complex disease, requiring around five independent events to occur for a malignant tumour to develop~\cite[\textit{ch. 9}]{murray1993cell}. 
+However if a specific gene, or set of genes, can be linked to causing cancer in a given cell type, then appropriate siRNA can be synthesised to silence that gene. 
 The siRNA will be 100\% complementary to the gene sequence it is targeting, providing very high specificity. 
 This means that, assuming the siRNA is inside the cell, it can prevent the cancer without any other side effects. 
 If the siRNA is inside a cell where, for some reason, the mRNA does not transcribe the cancer-causing gene, the siRNA will have nothing to bind to, and will simply degrade. 
 
 There are two difficulties with this potential treatment method. 
-Firstly, discovering genes which are specific to cancer is not trivial. 
-Complicated pathway from gene to disease. 
-That said, now had 2 decades of research on siRNA, with billions of dollars poured in by pharmaceutical companies. 
-A patent search shows ?? hits for siRNA, with ?? for siRNA + cancer. 
+Firstly, discovery of cancer-causing oncogenes is not trivial; though some cancers, such as retinoblastoma, are caused by mutations in just the \textit{RB1} gene~\cite{chial2008tumor}, usually cancer is a multistep process where a series of genetics mutations collectively reduce the function of tumor-suppressor genes~\cite[\textit{ch. 24}]{lodish1999molecular}\cite[\textit{ch. 9}]{murray1993cell}. 
+Nevertheless, it has now been 2 decades since the discorvery of siRNA, with billions of dollars of research funding by pharmaceutical companies~\cite{chakraborty2017therapeutic}; accordingly, a worldwide patent search now gives \num{7200} hits for \textit{siRNA}, with \num{1200} specifically for \textit{siRNA and cancer}~\cite{sirnapatent}. 
 
-The other issue with this treatment method is that siRNA is degraded by enzymes in extracellular space. [cite]
-Intuitively this makes sense - it would not be sensible for the body to allow arbitrary pieces of nucleic acid to enter the cell, since (as just described) it could affect the cell's ability to express genes. 
+The other issue with gene silencing as a treatment method is that siRNA is degraded by enzymes in extracellular space. [cite]
+Intuitively this makes sense - it would be dangerous for the body to allow arbitrary pieces of nucleic acid to enter the cell, since, as described, it can affect the cell's ability to correctly express genes. 
 To allow siRNA to act as a treatment, we therefore require a system to protect the siRNA in extra-cellular space which can also enter the cells. 
 This process is known as delivery. [cite?]
 
 In the literature, we can find several methods under investigation for use as an siRNA delivery agent.
-Lipofectamine. 
-Lipid nanoparticle.
-Virus/nucleocapsid thing. 
-Naked siRNA supported with a strong sugary backbone?
-see [https://www.sciencedirect.com/science/article/pii/S1818087614000646] for more details. 
+Lipofectamine, the gold standard for transfection efficacy~\cite{thermolipofectamine}, is a cationic lipid formulation which can encapsulate siRNA alongside other drugs for delivery to cells~\cite{liu2017efficient}. 
+Alongside lipofectamine exist a large number of other lipid-based nanoparticles under development, with various coatings ~\cite{xu2015delivery}. % Get lots more citations from this paper. 
+Similarly, polymer-based nanoparticles can encapsulate and deliver siRNA in much the same way~\cite{??}. 
+Finally, naked siRNA can be conjugated with other molecules, such as cholesterol~\cite{soutschek2004therapeutic} or cell-penetrating peptides~\cite{chiu2004visualizing} for efficient cell delivery. 
 
 Collaborators in the Department of Chemical Engineering at Biotechnology in Cambridge University are experts in metal organic frameworks (MOFs), and we therefore worked together to develop a method of drug delivery utilising MOFs.
 
@@ -59,21 +57,21 @@ MOFs are a group of crystalline materials which self-assemble from a mixture of 
 They have a diverse use across many fields; because of their ability to contain other molecules within their pores, they have been applied to catalysis [cite cite], ion exchange [cite cite] and sensors [cite cite]. 
 We recently published an application of MOFs for oxygen storage for use in emergency healthcare[cite]; the details of this work fall outside the scope of this thesis. 
 
-A MOF with the correct pore size could be loaded with a drug, protecting the contents from extracellular space. 
-If the MOF is then able to enter cells and release its payload, then the system successfully delivers the drug to the cell. 
-To be an effective drug delivery system, however, the MOF must also be biocompatible.
+A MOF with the correct pore size could be loaded with siRNA, protecting the contents from extracellular space. 
+If the MOF is then able to enter cells and release its payload, then the system successfully delivers the therapeutic to the cell. 
+To be an effective delivery system, however, the MOF must also be biocompatible.
 At all stages of its journey to the cell the MOF must not produce a toxic or immunological response. 
 This requirement extends of course to any of the products the MOF is broken down into. 
-Choosing a biocompatible MOF with an appropriate pore size remains a challenge, and will be discussed in the Results Section~\ref{sec:mofresults}. 
 
-Instead of targeting cancer-causing genes, we can target the cause of cancer itself. 
-Cancer cells become immortal. 
-One thing that happens is that the Krebs cycle stops working, i.e. mitochondria switch off.
-DCA (dichloroacetate) turns the Krebs cycle back on.
-But DCA has a half-life in the body of under an hour. Ie after an hour half the DCA that went in is already out. 
-Again, a biocompatible MOF can be used to protect the DCA from being ejected so fast from the body. (Can it? Check the paper)
-More experiments on cells. 
+As an alternative to targeting specific cancer-causing genes, we can directly target the effect of cancer itself. 
+Cancerous cells generate ATP through glycoysis, which bypasses the normal Krebs cycle and switches off normal mitochondria function. 
+Since mitochondria are also responsible for triggering programmed cell death, cancer cells become immortal, continuously reproducing to form tumours. 
+A potentially exciting drug called dichloroacetate (DCA) is a chemical similar to those involved in the Krebs cycle [cite?]. 
+Experiments on cultured cancer cells have shown that DCA can re-establish the Krebs cycle, preventing further cell division and initiating apoptosis. 
 
+Despite its potential, clinical trials have so far failed to provide sufficient evidence that DCA produces a therapeutic response in cancer patients. 
+Naked DCA has a half-life in the body of under \SI{1}{\hour}~\cite{michelakis2008dichloroacetate}. 
+Protecting the DCA in a biocompatible MOF as a delivery vehicle could be used to deliver it to cells more effectively, increasing the concentration delivered to cells without increasing the overall patient dose~\cite{abanades2018mechanistic}. 
 
 \subsection{Structure of this chapter}
 The Results and methods Section~\ref{sec:mofmethods} describes three experiments which were imaged on the LAG SIM. 
@@ -89,7 +87,7 @@ Microscope setup, image capture and reconstruction, and the subsequent analysis 
 
 \section{Results and methods} \label{sec:mofmethods}
 
-\subsection{Temperature treatment of MOFs to modify release profile} \label{sec:mof-temperature}
+\subsection{Temperature treatment of MOFs delays the release time} \label{sec:mof-temperature}
 A problem of drug delivery systems that has been noted in the literature is the so-called \textit{burst release effect}. [cite?!]
 This is an undesirable characteristic of delivery systems where high concentrations of the drug are released from the carrier soon after loading, decaying quickly so that after a short time there is no payload left to release. 
 This either leads to toxic levels of drug, or low concentrations which must be applied frequently to fulfil their therapeutic effect. 
@@ -310,49 +308,59 @@ The proposed mechanism for the successful gene silencing is confirmed by the SIM
 In contrast to Figure~\ref{fig:siRNA-MOF-uptake}b, yellow areas show that the siRNA-MOF complex is no longer colocalised with endosomes, showing that the cofactor successfully released it from the endosome into the cytoplasm. 
 Furthermore, siRNA can be seen independently in parts of the cell, as red pixels not colocalised with any other colour. 
 
-\subsection{MOFs for degrading mitochondria}
-As detailed in this chapter's introduction (Section~\ref{sec:MOF-intro}), cells become cancerous when the Krebs' cycle stops working. 
-Mitochondira `switches off,' and so the cell continuously reproduces and does not undergo apoptosis, (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2567082/), leading to fatal tumours. 
+\subsection{MOFs deliver DCA to restart the Krebs cycle, with TPP as a cofactor to target mitochondria}
+As described in Section~\ref{sec:MOF-intro}, most cancers occur when cells bypass the Krebs cycle, such that mitochondria continuously divide without undergoing apoptosis.
 This makes cancerous cells difficult to destroy. 
-While chemotherapy treatments, such as radiation therapy, can kill the cancer cells, treatment is non-discriminatory and destroys all cells in the area, leading to unwelcome side-effects. 
+While chemotherapy techniques, such as radiation therapy, can kill the cancer cells, treatment is non-discriminatory and destroys all cells in the area, leading to unwelcome side-effects. 
 
-It has been shown that the surface chemistry of MOFs can be modified so that they are only taken up by cancer cells~\cite{abanades2018mechanistic}. 
-If the MOF is loaded with DCA, in this way it can kill off cancer cells by restarting the mitochondira Krebs cycle. 
-The combination of DCA in a surface-modified MOF creates a targeted cancer therapy. 
+It has been shown DCA is able to induce apoptosis in cancer cells by restoring mitochondrial function and restarting the Krebs cycle. 
+However clinical trials so far have been unsuccessful; perhaps because of a low half-life in the body, so that a therapeutic concentration does not reach the cells. 
+Loading DCA into a MOF could assist with delivery. 
+In this experiment the MOF UiO-66 was used which, like the NU-1000 used in our previous MOF experiments, has a large pore size and good biocompatibility. 
 
-Inspired by our previous work loading a cofactor with siRNA, we investigated the effect of adding a mitochondria-targetting cofactor to the MOF alongside the DCA, with the aim of destroying more cancer cells with a lower concentration of MOF than previously shown. 
-To get a better understanding of how the MOF was acting inside the cell, we used the LAG SIM to image HeLa cancer cells under different treatment conditions. 
+Inspired by our previous work loading a cofactor with siRNA, we investigated the effect of adding a mitochondria-targeting cofactor to the MOF alongside the DCA, with the hypothesis that this would destroy more cancer cells with a lower concentration of MOF than previously shown. 
+The compound triphenyl phosphonium (TPP) has been shown to assist molecules to target mitochondria, so TPP was loaded into UiO-66 MOFs as a cofactor alongside DCA. 
+To obtain a thorough understanding of how the MOF complex was acting inside the cell, we used the LAG SIM to image HeLa cancer cells under different treatment conditions. 
 
-The UiO-66 MOF used for this study was not naturally fluorescent, so was also loaded with calcein to visualise it in the \SI{488}{\nano\metre} excitation channel. 
-Mitochondira were labelled with [something?] in the \SI{561}{\nano\metre} channel, and the cell nucleus was visualised with [something?] in the \SI{640}{\nano\metre} channel. 
+The UiO-66 MOF used for this study was not naturally fluorescent, so was furthermore loaded with calcein to visualise it in the \SI{488}{\nano\metre} excitation channel. 
+Mitochondira were labelled with MitoTracker\textsuperscript{TM} in the \SI{561}{\nano\metre} channel, and the cell nucleus was visualised with SiR-DNA in the \SI{640}{\nano\metre} channel. 
 
 Sample SIM images are shown in Figure~\ref{fig:mito-SIM-images}. 
 We confirm, with 3D reconstructions obtained by optical sectioning, that the UiO-66 MOF is successfully taken up into HeLa cells. % Should I have this as a separate figure, and highlight FPBioimage again? 
 Furthermore, we can now visually observe the physical effect this treatment has on the mitochondria. 
 
-After \SI{8}{\hour} incubation without treatment, the control condition in Figure~\ref{fig:mito-SIM-healthy} shows mitochondria in a healthy condition, with long stringy projections. 
-After \SI{30}{\minute} incubation with MOF and DCA, but no mitochondria-targeting cofactor, the mitochondria mostly retain this healthy shape. 
-After the same period of time, but with [cofactor name?] loaded in the MOF as a cofactor, mitochondria have a noticably more circular shape. 
-After \SI{8}{\hour} of incubation without cofactor, the DCA does start to have an effect, with the mitochondria becoming circular; the effect after \SI{8}{\hour} with cofactor was even more pronounced, with all labelled mitochondria now circular in shape. 
-
+Figure~\ref{fig:mito-30m-no-treatment} shows untreated HeLa cells with inactive mitochondria forming long, stringy projections. 
+After \SI{8}{\hour} of incubation with DCA-loaded MOF, some of the mitochondria in Figure~\ref{fig:mito-8h-mof-dca} have become more circular, resembling the textbook shape of healthy mitochondria performing the Krebs cycle.
+Figure~\ref{fig:mito-30m-mof-dca-tpp} shows a similar effect after just \SI{30}{\minute} when the mitochondria-targeting cofactor TPP is also loaded into the MOFs. 
+After \SI{8}{\hour} of incubation with DCA and TPP both loaded into the MOF, all the mitochondria in Figure~\ref{fig:mito-8h-mof-dca-tpp} resemble the healthy textbook shape. 
 
 To confirm this visual inspection of mitochondrial shape quantitatively, analysis was performed in Cell Profiler~\cite{carpenter2006cellprofiler}.
-Image stacks of 54 cells were captured and reconstructed with optical-sectioning LAG SIM, and from these images \num{6500} mitochondria were extracted using the [??] plugin, as shown in Figure~\ref{cell-profiler-segmentation}. 
-The ellipticity of each classified mitochondria was then calculated with the [ROI statistics?] plugin, to produce a large list of mitochondria ellipticity under the different treatment conditions shown in Figure~\ref{fig:mito-SIM-images}. 
-
-%Thanks to the fast imaging speed of the LAG SIM, these images were captured in just two imaging sessions. % perhaps this sentence should go in the conclusion
+Image stacks of 54 cells were captured and reconstructed in two independent imaging sessions with optical-sectioning LAG SIM, and from these images \num{4811} mitochondria were extracted using the \texttt{IdentifyPrimaryObjects} plugin, as shown in Figure~\ref{cell-profiler-segmentation}. 
+The ellipticity of each classified mitochondria was then calculated with the \texttt{MeasureObjectSizeShape} plugin, to produce a long list of mitochondria ellipticity under the different treatment conditions shown in Figure~\ref{fig:mito-SIM-images}. 
 
 \begin{figure}[p]
 \centering
 	\begin{subfigure}[b]{0.49\textwidth}
-	\includegraphics[width=1.0\textwidth]{mito-sim-healthy}
-	\caption{}
-	\end{subfigure} ~
-	\begin{subfigure}[b]{0.49\textwidth}
-	\includegraphics[width=1.0\textwidth]{mito-sim-unhealthy}
-	\caption{}
+	\includegraphics[width=1.0\textwidth]{mito-30m-no-treatment}
+	\caption{\SI{30}{\minute}, no treatment} \label{fig:mito-30m-no-treatment}
 	\end{subfigure}
-\caption[MOFs: UiO-66 MOF loaded with DCA changes mitochondria's shape]{(a) shows healthy mitochondira in untreated cells. Treating the cells with DCA-loaded UiO-66 MOF, shown in (b), causes mitochondria to lose their long, elliptical shape.  }
+	\hfill
+	\begin{subfigure}[b]{0.49\textwidth}
+	\includegraphics[width=1.0\textwidth]{mito-8h-mof-dca}
+	\caption{\SI{8}{\hour}, DCA@UiO-66} \label{fig:mito-8h-mof-dca}
+	\end{subfigure}
+	
+	~\newline
+		\begin{subfigure}[b]{0.49\textwidth}
+	\includegraphics[width=1.0\textwidth]{mito-30m-mof-dca-tpp}
+	\caption{\SI{30}{\minute}, DCA+TPP@UiO-66}\label{fig:mito-30m-mof-dca-tpp}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.49\textwidth}
+	\includegraphics[width=1.0\textwidth]{mito-8h-mof-dca-tpp}
+	\caption{\SI{8}{\hour}, DCA+TPP@UiO-66}\label{fig:mito-8h-mof-dca-tpp}
+	\end{subfigure}
+\caption[MOFs: UiO-66 MOF loaded with DCA changes mitochondria's shape]{Images show mitochondria coloured in red, MOF visible by calcein-loading coloured in green, and the nucleus labelled by SiR-DNA coloured in blue. (a) shows inactive mitochondira in untreated cells, with long stringy projections. Treating the cells with DCA-loaded UiO-66 MOF, shown in (b), causes mitochondria to lose their long, elliptical shape. (c) and (d) show that this process is enhanced by loading TPP as a cofactor, resulting in circular mitochondira after \SI{8}{\hour} of treatment. Scalebars are \SI{5}{\micro\metre}. }
 \label{fig:mito-SIM-images}
 \end{figure}
 % Do I want a 3D projection figure too?? 
@@ -367,20 +375,32 @@ The ellipticity of each classified mitochondria was then calculated with the [RO
 	\includegraphics[width=1.0\textwidth]{mito-extract-unhealthy}
 	\caption{}
 	\end{subfigure}
-\caption[MOFs: Mitochondria segmentation in Cell Profiler allow statistical shape analysis]{The Cell Profiler\cite{cellprofiler} protocol identifies and segments mitochondria in the cell. The ellipticity of segments is calculated to provide statistics about the change in mitochondria shape caused by DCA-loaded UiO-66. }
+\caption[MOFs: Mitochondria segmentation in Cell Profiler allow statistical shape analysis]{The Cell Profiler\cite{carpenter2006cellprofiler} protocol identifies and segments mitochondria in the cell, shown here applied to Figures~\ref{fig:mito-30m-no-treatment} and~\ref{fig:mito-8h-mof-dca-tpp}. The ellipticity of segments is calculated to provide statistics about the change in mitochondria shape caused by DCA-loaded UiO-66. Scalebars are \SI{5}{\micro\metre}. }
 \label{fig:cell-profiler-segmentation}
 \end{figure}
 
-The mitochondria ellipticity statistics were analysed with a one-way ANOVA test in Graphpad Prism~\cite{graphpadprism}. 
-Figure~\ref{fig:mito-ellipticity-graph} shows that the [chemical] cofactor causes a significant change in the ellipticity of mitochondria. 
-% A few more words about the graph?
-This result correlates with findings from FACS measurements that MOF loaded with the [chemical] cofactor reduces cell viability more than MOF loaded with DCA alone. 
+The mitochondria ellipticity statistics were analysed with a one-way ANOVA test in Graphpad Prism~\cite{graphpadprism}, and the results are presented in Figure~\ref{fig:mito-ellipticity-graph}. 
+Adding DCA-loaded MOF causes a decrease in ellipticity, however there is not a statistically significant difference between the mean ellipticities, with $p=0.2083$. 
+With TPP also added to the MOF as a cofactor, a $p=0.0194$ significant decrease in the ellipticity of mitochondria is observed. 
+Furthermore after \SI{8}{\hour} of treatment there is a significant decreases between the DCA+TPP MOFs and the DCA-only MOFs. 
+These statistics support the visual inspection of Figure~\ref{fig:mito-SIM-images}. 
+
+Furthermore, these findings corroborate data from FACS measurements shown in Figure~\ref{fig:dca-tpp-cytotoxicity}. 
+The graphs show that MOFs loaded with both DCA and TPP are more effective at inducing cell death than MOFs with DCA alone, measured by the MTS assay~\cite{mosmann1983rapid, mtsassay}. 
+Moreover, the graphs show that this enables a lower concentration of drug to be administered for the same therapeutic effect.
 
 \begin{figure}[htbp!]
 \centering
 \includegraphics[width=1.0\textwidth]{mito-ellipticity-graph}
 \caption[MOFs: Mitochondria become more circular when treated with ] {Mitochondria are affected by the DCA-UiO-66 treatment, making them more circular in shape. The reduction in eccentricity is not significant without addition of TPP as a mitochondira-targetting cofactor. $*: p<0.05$, $***: p<0.001$} 
 \label{fig:mito-ellipticity-graph}
+\end{figure}
+
+\begin{figure}[htbp!]
+\centering
+\includegraphics[width=1.0\textwidth]{dca-tpp-cytotoxicity}
+\caption[MOFs: Loading MOFs with TPP as a cofactor facilitates lower drug concentration] {A cytotoxicity study corroborates observations of microscopy images that MOFs loaded with TPP as a cofactor are more effective at inducing cell death in cancerous HeLa cells than MOF loaded with DCA alone. This allows treatment with lower concentrations of drug for the same therapeutic effect.} 
+\label{fig:dca-tpp-cytotoxicity}
 \end{figure}
 
 
