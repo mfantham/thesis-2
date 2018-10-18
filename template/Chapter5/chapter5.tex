@@ -20,16 +20,16 @@
 
 \section{Introduction} 
 \subsection{Role of the Endoplasmic Reticulum}
-The Endoplasmic Reticulum (ER) is an interconnected network of tubular pipes and reservoirs present in most types of eukaryotic cells.
-Its function includes the biogenesis of membrane and secretory proteins, and delivery of these functional solutes throughout the cell.
+The Endoplasmic Reticulum (ER) is an interconnected network of tubular pipes and reservoirs present in eukaryotic cells~\cite{alberts2002molecular}.
+Its function includes the biogenesis of membrane and secretory proteins, and delivery of these functional solutes throughout the cell~\cite{dyson1978cell}.
 Since the ER network extends to the cell periphery, molecules can be transported to distant sites in the cell.
 
-When demand is greater than capacity of ER to fold proteins, ER stress can occur.
-ER stress can also be caused by proteins that cannot properly fold inside the ER.
-A number of signal transduction proteins in the cell monitor proteins secreted by the ER, and if an imbalance is detected the ER stress response begins.
+When demand is greater than capacity of ER to fold proteins, ER stress can occur~\cite{oakes2015role}.
+ER stress can also be caused by proteins that cannot properly fold inside the ER~\cite{rao2004misfolded}.
+A number of signal transduction proteins in the cell monitor proteins secreted by the ER, and if an imbalance is detected the ER stress response begins~\cite{oakes2015role}.
 
 As the largest organelle in a cell, recent studies have shown ER forms membrane contacts with all other cellular organelles, with a higher number of contact sites than any other organelle-organelle interaction~\cite{phillips2016structure, valm2017applying}. 
-Since ER is found in almost all human cells, it is therefore not surprising that a wide range diseases have been associated with ER stress, including neurodegeneration, atherosclerosis, type 2 diabetes, liver disease, metabolic diseases, and cancer~\cite{ozcan2012role}.
+Since ER is found in almost all human cells, it is therefore not surprising that a wide range diseases have been associated with ER stress, including neurodegeneration, atherosclerosis, type 2 diabetes, liver disease, metabolic diseases, and cancer~\cite{oakes2015role, ozcan2012role}.
 
 The rate at which luminal ER content is distributed affects the efficiency of ER-mediated intracellular connectivity~\cite{hubner2014membrane, blackstone2011hereditary}. 
 Understanding the fundamental processes of ER protein mobility is therefore vital to curing diseases caused by mutations in ER proteins.
@@ -38,7 +38,7 @@ Understanding the fundamental processes of ER protein mobility is therefore vita
 ER proteins are delivered around the cell by moving through a network of tubes which make up the ER. 
 It has been shown with fluorescence recovery after photo-bleaching (FRAP) that protein mobility is an ATP-dependent process - that is, proteins move slower when ATP is depleted~\cite{dayel1999diffusion, nehls2000dynamics}.
 
-More recently, we have shown with single particle tracking that molecules in the ER do not move with diffusive motion. 
+More recently, we have shown with single particle tracking that molecules in the ER do not move with diffusive motion~\cite{holcman2018single}. 
 Rather, they have a fast, directed velocity as they flow along ER tubes, but move with slow, diffusive motion at nodes where 3 or more tubes connect, as shown in Figure~\ref{fig:er-directed-flow-velocity}. 
 
 \begin{figure}[htbp!]
@@ -64,7 +64,7 @@ Rather, they have a fast, directed velocity as they flow along ER tubes, but mov
 Figure~\ref{fig:er-directed-flow-distribution} shows that applying data from \num{80563} single particle tracks to a mathematical model with both diffusive and flow terms provided a better fit to experimental data than a model with diffusive motion only. 
 This is particularly convincing in the cumulative frequency distribution shown in Figure~\ref{fig:er-directed-flow-cumulative}. 
 
-Consistent with previous studies, tracking directed flow revealed that depleting ATP causes a 4$\times$ decrease in mean flow velocity, shown in Figure~\ref{fig:er-atp-depletion}. 
+Consistent with previous studies~\cite{nehls2000dynamics}, tracking directed flow revealed that depleting ATP causes a 4$\times$ decrease in mean flow velocity, shown in Figure~\ref{fig:er-atp-depletion}. 
 
 \begin{figure}[htbp!]
 	\centering
@@ -108,7 +108,7 @@ Utilising the high-speed imaging capability of the LAG SIM, we  observed that th
 Imaging was performed at a raw frame rate of \SI{99}{\hertz}, corresponding to a reconstructed frame rate of \SI{11}{\hertz}. 
 
 For optimal imaging conditions, COS-7 cells were selected for the investigation. 
-These characteristically flat cells, with a maximum height of \SI{\sim 10}{\micro\meter}, % Check and cite this
+These characteristically flat cells, with a maximum height of \SI{\sim 10}{\micro\meter}, % Check and cite this?
 meant that the whole ER network could be imaged by LAG SIM in TIRF mode, which physically removes out-of-focus light. % Need to mention TIRF in the SIM chapter then. 
 
 The ER network was labelled with ER-Tracker\textsuperscript{TM} Green, a fluorescent dye from ThermoFisher excited at \SI{488}{\nano\meter}. 
@@ -156,7 +156,7 @@ Therefore a single value threshold was not appropriate to generate binary images
 
 Instead a machine learning technique was used to classify ER pixels from background pixels. 
 Using the WEKA Segmentation plugin for ImageJ~\cite{arganda2017trainable}, a set of training data was generated by manually classifying ER pixels and background pixels. 
-The Adaboost algorithm was used to quickly refine the classification, leading to a reliable and automated adaptive thresholding method. 
+The Adaboost algorithm was used to quickly refine the classification, leading to a reliable and automated adaptive thresholding method~\cite{freund1997decision, schapire1999brief}. 
 The output of WEKA Segmentation shown in Figure~\ref{fig:ER-classifier-WEKA} successfully extracts the ER network even with the unideal imaging properties of HEK-293 cells. 
 
 \begin{figure}[htbp!]
@@ -263,7 +263,7 @@ Nevertheless we believe that SIM is still the only technique capable of capturin
 
 Counting the number of pinches in each tube over time gave the mean frequency of pinches as \SI[separate-uncertainty=true]{1.70 \pm 0.48}{pinches\per\second} in COS-7 cells. 
 Figure~\ref{fig:pinching-atp-depletion} shows that when ATP was depleted, the frequency decreased 3.9$\times$, to \SI[separate-uncertainty=true]{0.44 \pm 0.41}{pinches\per\second}. 
-This decrease in pinching frequency is very similar to the velocity decrease observed with single particle tracking, suggesting that there is a strong link between tubule pinching and directed motion in the ER. 
+This decrease in pinching frequency is very similar to the velocity decrease observed with single particle tracking in Figure~\ref{fig:er-atp-depletion}, suggesting that there is a strong link between tubule pinching and directed motion in the ER. 
 
 \begin{figure}[htbp!]
 \centering
@@ -285,7 +285,7 @@ This decrease in pinching frequency is very similar to the velocity decrease obs
 
 Further evidence for tubule pinching was gathered when the cell was artificially placed under excessive stress. 
 Whilst acquiring time series videos of the ER on the LAG SIM, we occasionally observed a reversible blebbing behaviour of the ER. 
-This phenomenom, shown in Figure~\ref{fig:ER-blebbing}, was particularly evident when imaging samples labelled with TMR fluorescent dye with the \SI{561}{\nano\meter} laser power set to \SI{95}{\milli\watt} or more, equivalent to [?? at the sample]. 
+This phenomenom, shown in Figure~\ref{fig:ER-blebbing}, was particularly evident when imaging samples labelled with TMR fluorescent dye with the \SI{561}{\nano\meter} laser power set to \SI{95}{\milli\watt} or more. %, equivalent to [?? at the sample]. 
 The same behaviour was observed when calcium manipulation~\cite{subramanian1997calcium} was performed on the cell. 
 Notably, the ER recovers its original shape after the stress is removed, demonstrating the ability of ER tubules to undergo reversible pinching.
 
@@ -303,21 +303,21 @@ An ER network was automatically modelled with the following steps:
 	\item Create a simplified skeleton network from binary image
 	\item Spawn `pinch points' on the skeleton, aligned with the skeleton direction and the width of the network at that point
 \end{enumerate}
-The program will accept any binary network image as an input, and will perform these steps automatically using custom C\# implementations of the Moore-Neighbourhood tracing algorithm for tracing tubule edges [cite], the  Zhang-Suen algorithm for skeletonisation [cite], and the Ramer–Douglas–Peucker algorithm for simplifying the tubule skeleton and edges [cite]. 
+The program will accept any binary network image as an input, and will perform these steps automatically using custom C\# implementations of the Moore-Neighbourhood tracing algorithm for tracing tubule edges~\cite{moore-neighbourhood}, the Zhang-Suen algorithm for skeletonisation~\cite{zhang1984fast}, and the Ramer–Douglas–Peucker algorithm for simplifying the tubule skeleton and edges~\cite{ramer1972iterative, douglas1973algorithms}. 
 
 Dynamics are modelled in the network at a particle level. 
 Each particle which is spawned in the network has a physics script attached to it controlling its diffusive motion and its flow velocity when in the vicinity of a pinch. 
 
 Diffusive motion was modelled as Brownian motion. \cite{brown, einstein}
 After travelling a random distance, sampled from a distributed centred on the mean free path, particles randomly change direction as though collided into by an invisible particle~\cite{lucretius1631}. 
-Diffusion properties are set in the simulation with two of either mean free path $\delta$, time between collisions $\tau$, mean velocity $v$, or the diffusion coefficient $D$, related by $D=\frac{\delta^2}{2\tau}=\frac{v\delta}{2}$~\cite{}. 
+Diffusion properties are set in the simulation with two of either mean free path $\delta$, time between collisions $\tau$, mean velocity $v$, or the diffusion coefficient $D$, related by $D=\frac{\delta^2}{2\tau}=\frac{v\delta}{2}$~\cite[\textit{ch. 19}]{fishbane1998physics}. 
 
 Pinching of the ER tubules simulated a force on particles in the vicinity of the pinch point. 
 As the tubule contracts, this force acts away from the pinch, in a direction along the tubule, and decays exponentially over time. 
 When the pinch point relaxes, the force acts in the opposite direction. 
 The magnitude of the force is an adjustable parameter, to control overall energy in the system. 
 
-Inelastic collisions were modelled with the NVIDIA PhysX engine. 
+Inelastic collisions were modelled with the NVIDIA PhysX engine~\cite{nvidia2008physx}. 
 Coefficient of restitution can be adjusted for each material, such that a collision with the ER membrane is different to a particle-particle collisions. 
 
 \begin{figure}[t!]
@@ -377,7 +377,6 @@ A plot of a single particle's trajectory through the network is shown in Figure~
 
 Understanding the reason for ER pinching allows us to associate diseases with ER malfunction. 
 In cells with long projections, such as motor neurons, transporting luminal protein to remote parts of the cell quickly could be vital for correct operation. 
-
 
 \section{Conclusion} 
 In the \textit{Nature Cell Biology} paper, we present evidence that the movement of proteins in the ER is not diffusive, but also has an ATP-dependent directed-flow component~\cite{holcman2018single}.

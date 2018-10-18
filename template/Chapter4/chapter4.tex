@@ -23,30 +23,30 @@ When the latest statistics find that over half of people born in the UK since 19
 Any successful efforts to discover new treatments for this set of diseases are therefore very welcome by the community. 
 In this chapter, I describe a novel method of delivering therapeutic drugs to cells, utilising the LAG SIM for imaging and FPBioimage for 3D visualisation and analysis. 
 
-The availability of the human genome sequence [cite cite?] provides new opportunities for using DNA and other nucleic acids to target specific genes for therapeutic treatment. 
-One such form of gene manipulation is RNA interference (RNAi) [cite cite cite]. 
-RNAi prevents the expression of certain genes by degrading messenger RNA (mRNA) after transcription, thus preventing translation. 
-RNAi can be performed with small interfering RNA (siRNA) [cite Science Nature 1999 Baulcombe Tuschl], which silences mRNA molecules by cleavage of the mRNA strand into two pieces. 
+The availability of the human genome sequence~\cite{venter2001sequence, bentley2008accurate} provides new opportunities for using DNA and other nucleic acids to target specific genes for therapeutic treatment. 
+One such form of gene manipulation is RNA interference (RNAi)~\cite{fire1998potent, timmons1998specific}. 
+RNAi prevents the expression of certain genes by degrading messenger RNA (mRNA) after transcription, thus preventing translation~cite{hannon2002rna}. 
+RNAi can be performed with small interfering RNA (siRNA)~\cite{hamilton1999species, elbashir2001duplexes}, which silences mRNA molecules by cleavage of the mRNA strand into two pieces. 
 
 From a molecular biology perspective cancer is a highly complex disease, requiring around five independent events to occur for a malignant tumour to develop~\cite[\textit{ch. 9}]{murray1993cell}. 
-However if a specific gene, or set of genes, can be linked to causing cancer in a given cell type, then appropriate siRNA can be synthesised to silence that gene. 
+However if a specific gene, or set of genes, can be linked to causing cancer in a given cell type, then appropriate siRNA can be synthesised to silence that gene~\cite{dorsett2004sirnas}. 
 The siRNA will be 100\% complementary to the gene sequence it is targeting, providing very high specificity. 
 This means that, assuming the siRNA is inside the cell, it can prevent the cancer without any other side effects. 
-If the siRNA is inside a cell where, for some reason, the mRNA does not transcribe the cancer-causing gene, the siRNA will have nothing to bind to, and will simply degrade. 
+If the siRNA is inside a cell where, for some reason, the mRNA does not transcribe the cancer-causing gene, the siRNA will have nothing to bind to, and will simply degrade~\cite{dorsett2004sirnas}.
 
 There are two difficulties with this potential treatment method. 
 Firstly, discovery of cancer-causing oncogenes is not trivial; though some cancers, such as retinoblastoma, are caused by mutations in just the \textit{RB1} gene~\cite{chial2008tumor}, usually cancer is a multistep process where a series of genetics mutations collectively reduce the function of tumor-suppressor genes~\cite[\textit{ch. 24}]{lodish1999molecular}\cite[\textit{ch. 9}]{murray1993cell}. 
 Nevertheless, it has now been 2 decades since the discorvery of siRNA, with billions of dollars of research funding by pharmaceutical companies~\cite{chakraborty2017therapeutic}; accordingly, a worldwide patent search now gives \num{7200} hits for \textit{siRNA}, with \num{1200} specifically for \textit{siRNA and cancer}~\cite{sirnapatent}. 
 
-The other issue with gene silencing as a treatment method is that siRNA is degraded by enzymes in extracellular space. [cite]
+The other issue with gene silencing as a treatment method is that siRNA is degraded by enzymes in extracellular space~\cite{dorsett2004sirnas}.
 Intuitively this makes sense - it would be dangerous for the body to allow arbitrary pieces of nucleic acid to enter the cell, since, as described, it can affect the cell's ability to correctly express genes. 
 To allow siRNA to act as a treatment, we therefore require a system to protect the siRNA in extra-cellular space which can also enter the cells. 
-This process is known as delivery. [cite?]
+This process is known as delivery~\cite{tiwari2012drug}.
 
 In the literature, we can find several methods under investigation for use as an siRNA delivery agent.
 Lipofectamine, the gold standard for transfection efficacy~\cite{thermolipofectamine}, is a cationic lipid formulation which can encapsulate siRNA alongside other drugs for delivery to cells~\cite{liu2017efficient}. 
-Alongside lipofectamine exist a large number of other lipid-based nanoparticles under development, with various coatings ~\cite{xu2015delivery}. % Get lots more citations from this paper. 
-Similarly, polymer-based nanoparticles can encapsulate and deliver siRNA in much the same way~\cite{??}. 
+Alongside lipofectamine exist a large number of other lipid-based nanoparticles under development, with various coatings ~\cite{xu2015delivery}. % Get lots more citations from this paper?
+Similarly, polymer-based nanoparticles can encapsulate and deliver siRNA in much the same way~\cite{sahoo2003nanotech, wang2009advances}. 
 Finally, naked siRNA can be conjugated with other molecules, such as cholesterol~\cite{soutschek2004therapeutic} or cell-penetrating peptides~\cite{chiu2004visualizing} for efficient cell delivery. 
 
 Collaborators in the Department of Chemical Engineering at Biotechnology in Cambridge University are experts in metal organic frameworks (MOFs), and we therefore worked together to develop a method of drug delivery utilising MOFs.
@@ -54,8 +54,8 @@ Collaborators in the Department of Chemical Engineering at Biotechnology in Camb
 
 \subsection{MOFs as a delivery vehicle}
 MOFs are a group of crystalline materials which self-assemble from a mixture of metal ions and organic linkers to form porous solids. 
-They have a diverse use across many fields; because of their ability to contain other molecules within their pores, they have been applied to catalysis [cite cite], ion exchange [cite cite] and sensors [cite cite]. 
-We recently published an application of MOFs for oxygen storage for use in emergency healthcare[cite]; the details of this work fall outside the scope of this thesis. 
+They have a diverse use across many fields; because of their ability to contain other molecules within their pores, they have been applied to catalysis~\cite{ma2009enantioselective, farrusseng2011metal}, ion exchange~\cite{custelcean2007anion, fei2010reversible} and sensors~\cite{kreno2011metal, miller2016metal}. 
+We recently published an application of MOFs for oxygen storage for use in emergency healthcare~\cite{moghadam2018computer}; the details of this work fall outside the scope of this thesis. 
 
 A MOF with the correct pore size could be loaded with siRNA, protecting the contents from extracellular space. 
 If the MOF is then able to enter cells and release its payload, then the system successfully delivers the therapeutic to the cell. 
@@ -64,12 +64,12 @@ At all stages of its journey to the cell the MOF must not produce a toxic or imm
 This requirement extends of course to any of the products the MOF is broken down into. 
 
 As an alternative to targeting specific cancer-causing genes, we can directly target the effect of cancer itself. 
-Cancerous cells generate ATP through glycoysis, which bypasses the normal Krebs cycle and switches off normal mitochondria function. 
+Cancerous cells generate ATP through glycoysis, which bypasses the normal Krebs cycle and switches off normal mitochondria function~\cite{warburg1930uber, murray1993cell}. 
 Since mitochondria are also responsible for triggering programmed cell death, cancer cells become immortal, continuously reproducing to form tumours. 
-A potentially exciting drug called dichloroacetate (DCA) is a chemical similar to those involved in the Krebs cycle [cite?]. 
-Experiments on cultured cancer cells have shown that DCA can re-establish the Krebs cycle, preventing further cell division and initiating apoptosis. 
+A potentially exciting drug called dichloroacetate (DCA) is a chemical similar to those involved in the Krebs cycle~\cite{michelakis2008dichloroacetate, matsuhashi2015activation}. 
+Experiments on cultured cancer cells have shown that DCA can re-establish the Krebs cycle, preventing further cell division and initiating apoptosis~\cite{bonnet2007mitochondria}. 
 
-Despite its potential, clinical trials have so far failed to provide sufficient evidence that DCA produces a therapeutic response in cancer patients. 
+Despite its potential, clinical trials have so far failed to provide sufficient evidence that DCA produces a therapeutic response in cancer patients~\cite{michelakis2010metabolic}. 
 Naked DCA has a half-life in the body of under \SI{1}{\hour}~\cite{michelakis2008dichloroacetate}. 
 Protecting the DCA in a biocompatible MOF as a delivery vehicle could be used to deliver it to cells more effectively, increasing the concentration delivered to cells without increasing the overall patient dose~\cite{abanades2018mechanistic}. 
 
@@ -88,9 +88,9 @@ Microscope setup, image capture and reconstruction, and the subsequent analysis 
 \section{Results and methods} \label{sec:mofmethods}
 
 \subsection{Temperature treatment of MOFs delays the release time} \label{sec:mof-temperature}
-A problem of drug delivery systems that has been noted in the literature is the so-called \textit{burst release effect}. [cite?!]
+A problem of drug delivery systems that has been noted in the literature is the so-called \textit{burst release effect}~\cite{huang2001importance, }.
 This is an undesirable characteristic of delivery systems where high concentrations of the drug are released from the carrier soon after loading, decaying quickly so that after a short time there is no payload left to release. 
-This either leads to toxic levels of drug, or low concentrations which must be applied frequently to fulfil their therapeutic effect. 
+This either leads to toxic levels of drug, or low concentrations which must be applied frequently to fulfil their therapeutic effect~\cite{fu2010drug}. 
 An ideal drug delivery system would release its payload slowly and steadily over an extended period of time, maintaining non-toxic concentrations. 
 
 \begin{figure}[htbp!]
@@ -122,7 +122,8 @@ Samples were placed in a high-temperature vacuum oven at \SI{180}{\degreeCelsius
 Pore collapse was verified by power X-ray diffraction patterns. 
 Figure~\ref{fig:MOF-PXRF} shows that Bragg peaks broaden on addition of calcein, but are still visible at the same $\theta$, confirming the overall MOF structure is maintained. 
 The slight broadening of loaded MOF is most likely a result of the loading process, which leads to some decrystallisation of the MOF. 
-The decrease in peak intensity for temperature-treated MOF is due to a loss of crystalline structure from the pore collapse; however peaks are still visible, suggesting that long-range order was not completely destroyed. % Previous work has incuced pore collapse by mechanicmal amorphization, and then peaks completely dissapeared.
+The decrease in peak intensity for temperature-treated MOF is due to a loss of crystalline structure from the pore collapse; however peaks are still visible, suggesting that long-range order was not completely destroyed.
+This is in contrast to previous work, which induced pore collapse by mechanical amorphisation, causing peaks to completely disappear~\cite{orellana2015amorphous}.
 
 The release profile of calcein from NU-1000 MOF is shown in Figure~\ref{fig:calcein-release-profile}, with the inset graph highlighting the burst release effect and its delay by temperature treatment. 
 The effect of temperature treatment is particularly notable at the \SI{24}{\hour} time point, where MOF has only released 30\% of its payload, compared with 60\% released by untreated MOF.
@@ -136,7 +137,7 @@ This shows that the temperature treatment is successfully suppressing the burst 
 \label{fig:calcein-release-profile}
 \end{figure}
 
-In order to visualise calcein release in a biological context, HELA cells were labelled with HCS NuclearMask™ Deep Red Stain to view the nucleus, and CellLight Lysosomes-RFP BacMam 2.0 or CellLight Early Endosomes-RFP BacMam 2.0 to view lysosomes or endosomes respectively. 
+In order to visualise calcein release in a biological context, HeLa cells were labelled with HCS NuclearMask™ Deep Red Stain to view the nucleus, and CellLight Lysosomes-RFP BacMam 2.0 or CellLight Early Endosomes-RFP BacMam 2.0 to view lysosomes or endosomes respectively. 
 Calcein itself is fluorescent at 495/515\,\si{\nano\meter} for excitation and emission wavelengths respectively, so had good spectral separation for imaging in 3-colours. % Need to cite this somehow, thermofisher?
 
 Images were captured on the LAG SIM, utilising optical sectioning to remove out of focus light. 
@@ -200,7 +201,7 @@ Furthermore, the study shows that \SI{0.3}{\Molar} sucrose also causes a signifi
 \end{figure}
 
 Further evidence of endocytosis is provided by video-rate imaging of MOF uptake.
-The supplementary video [somewhere?] shows that MOF outside the cell moves with fast Brownian motion; once inside the cell, however, MOF is comparitvely static. 
+Supplementary video 3 shows that MOF outside the cell moves with fast Brownian motion; once inside the cell, however, MOF is comparitvely static. 
 This provides further evidence that MOF is taken up by the cells to deliver its payload. 
 
 The timescale over which MOF enters cells is important, and emphasises the need for the temperature treatment process. 
@@ -220,7 +221,7 @@ The 21-nucleotide-long sense strand which was most effective at suppressing fluo
 Scrambled siRNA, used as a negative control, did not cause any suppression of fluorescence.
 A combination of mCherry-fluorescent HEK-293 cells and mCherry-targeting siRNA creates a model drug delivery system which is quantifiable: the lower the fluorescence, the more effective the siRNA is at suppressing gene expression. 
 
-Without MOF, Figure~\ref{fig:mof-enzyme-degradation} shows that siRNA is broken down by enzymes present in extra-celluar space - in this case, RNase. [cite]
+Without MOF, Figure~\ref{fig:mof-enzyme-degradation} shows that siRNA is broken down by enzymes present in extra-celluar space - in this case, RNase~\cite{chirgwin1979isolation}.
 When the siRNA is loaded into MOF, it is protected from enzymes, demonstrated by the retention of a mark mark at \SI{21}{nt}. 
 The retention and broadening of low-$\theta$ peaks in Figure~\ref{fig:mof-enzyme-pxrd} confirms that the MOF is loaded inside the pores of the MOF, which protects it from enzymes. 
 
@@ -245,8 +246,7 @@ The CellLight Early Endosomes-RFP BacMam 2.0 stain was used to visualise endosom
 An Alexa Fluor 647 was tagged onto the 5' end of the siRNA sense strand. 
 Multi-colour SIM imaging could then be used to assess cellular uptake of the MOF complex, and confirm that siRNA could enter the cell. 
 
-Figure~\ref{fig:siRNA-MOF-uptake} shows MOF uptake experiments under four conditions. 
-% Images were taken after ? hours of incubation
+Figure~\ref{fig:siRNA-MOF-uptake} shows MOF uptake experiments under four conditions, after \SI{4}{\hour} of incubation. 
 MOF is coloured in green, endosomes in blue, and siRNA in red. 
 
 
@@ -272,7 +272,7 @@ MOF is coloured in green, endosomes in blue, and siRNA in red.
 	\includegraphics[width=\textwidth]{siRNA-MOF-uptake-4}
 	\caption{}\label{fig:siRNA-MOF-uptake-4}
 \end{subfigure}
-\caption[MOFs: siRNA-loaded NU-1000 is endocytosed by HEK-293 cells, and released to the cytoplasm with an endosome release factor]{Images show endosomes coloured in blue, NU-1000 MOF in green, and siRNA in red, for HEK-293 cells incubated for \SI{24}{\hour} under different experimental conditions. (a) shows cells incubated with naked siRNA; the absence of red signal suggests siRNA is degraded in extra-cellular space. (b) shows siRNA loaded into Lipofectamine 2000, which protects the siRNA from degradation, but does not appear to enter cells after \SI{24}{\hour}. (c) shows MOF, siRNA, and endosomes colocalised, characterised by white spots; however despite being taken up by the cells, the siRNA has an insignificant therapeutic effect. Addition of an endosome release factor shown in (d) allows the siRNA-MOF complex to escape the endosome without being degraded, shown by yellow spots not colocalised with endosome. Scalebars are \SI{10}{\micro\metre}. }
+\caption[MOFs: siRNA-loaded NU-1000 is endocytosed by HEK-293 cells, and released to the cytoplasm with an endosome release factor]{Images show endosomes coloured in blue, NU-1000 MOF in green, and siRNA in red, for HEK-293 cells incubated for \SI{4}{\hour} under different experimental conditions. (a) shows cells incubated with naked siRNA; the absence of red signal suggests siRNA is degraded in extra-cellular space. (b) shows siRNA loaded into Lipofectamine 2000, which protects the siRNA from degradation, but does not appear to enter cells after \SI{4}{\hour}. (c) shows MOF, siRNA, and endosomes colocalised, characterised by white spots; however despite being taken up by the cells, the siRNA has an insignificant therapeutic effect. Addition of an endosome release factor shown in (d) allows the siRNA-MOF complex to escape the endosome without being degraded, shown by yellow spots not colocalised with endosome. Scalebars are \SI{10}{\micro\metre}. }
 \label{fig:siRNA-MOF-uptake}
 \end{figure}
 
@@ -281,19 +281,19 @@ This can be seen in Figure~\ref{fig:siRNA-MOF-uptake}a as an absence of red chan
 
 The current state-of-the-art for loading RNA into cells is using a transfection reagent such as Lipofectamine 2000. 
 Figure~\ref{fig:siRNA-MOF-uptake}b shows that this does indeed protect the siRNA from extracellular space, as red clumps of siRNA can be seen. 
-However the siRNA does not appear to be located within the cell at the \SI{1}{\hour} [CHECK] timepoint at which the cells were imaged. 
+However the siRNA does not appear to be located within the cell at the \SI{4}{\hour} timepoint at which the cells were imaged. 
 
 Figure~\ref{fig:siRNA-MOF-uptake}c shows MOF (green) and siRNA (red) colocalised and also within the cell boundary. 
 Furthermore they are colocalised with the endosome stain (blue); the overlap of these three colours produces white. 
 This corroborates with our previous findings from Section~\ref{sec:mof-temperature} that MOF is taken up by endocytosis. 
 
 Although it can be clearly seen in Figure~\ref{fig:siRNA-MOF-uptake}c that MOF and siRNA are taken up by the cell, measuring the decrease in mCherry expression by flow cytometry revealed that simply entering the cell in this way is not enough to suppress gene expression. 
-It was hypothesised that siRNA-MOF complexes were unable to escape the endosome when taken up by the cell, and so the siRNA was degraded by the acidic [?] environment of the endosome. [cite acidic?]
+It was hypothesised that siRNA-MOF complexes were unable to escape the endosome when taken up by the cell, and so the siRNA was degraded by the acidic environment of the endosome~\cite{geisow1984ph}. 
 To test this, endosome release factors were loaded into the MOF alongside the siRNA. 
 
 \begin{figure}[htbp!]
 \centering
-\includegraphics[width=1.0\textwidth]{mCherry-expression} % Can I get the data for this, and make it all one figure? 
+\includegraphics[width=1.0\textwidth]{mCherry-expression}
 \caption[MOFs: siRNA suppresses mCherry expression when an endosome release factor is loaded to MOFs]{ Using siRNA loaded in NU-1000 causes an insignificant decrease in the mCherry expression level. Under this condition siRNA is not able to escape the endosome to cleave the mCherry. Addition of endosome release factors, such as KALA, break down the endosome, allowing the siRNA to enter the cytoplasm and perform its intended function. }
 \label{fig:mCherry-expression}
 \end{figure}
@@ -309,14 +309,14 @@ In contrast to Figure~\ref{fig:siRNA-MOF-uptake}b, yellow areas show that the si
 Furthermore, siRNA can be seen independently in parts of the cell, as red pixels not colocalised with any other colour. 
 
 \subsection{MOFs deliver DCA to restart the Krebs cycle, with TPP as a cofactor to target mitochondria}
-As described in Section~\ref{sec:MOF-intro}, most cancers occur when cells bypass the Krebs cycle, such that mitochondria continuously divide without undergoing apoptosis.
+As described in Section~\ref{sec:MOF-intro}, most cancers occur when cells bypass the Krebs cycle, such that mitochondria continuously divide without undergoing apoptosis~\cite{murray1993cell}.
 This makes cancerous cells difficult to destroy. 
-While chemotherapy techniques, such as radiation therapy, can kill the cancer cells, treatment is non-discriminatory and destroys all cells in the area, leading to unwelcome side-effects. 
+While chemotherapy techniques, such as radiation therapy, can kill the cancer cells, treatment is often non-discriminatory and destroys all cells in the area, leading to unwelcome side-effects~\cite{coates1983receiving, de1997patient, minami2010cardiovascular}. 
 
-It has been shown DCA is able to induce apoptosis in cancer cells by restoring mitochondrial function and restarting the Krebs cycle. 
+It has been shown DCA is able to induce apoptosis in cancer cells by restoring mitochondrial function and restarting the Krebs cycle~\cite{bonnet2007mitochondria}. 
 However clinical trials so far have been unsuccessful; perhaps because of a low half-life in the body, so that a therapeutic concentration does not reach the cells. 
 Loading DCA into a MOF could assist with delivery. 
-In this experiment the MOF UiO-66 was used which, like the NU-1000 used in our previous MOF experiments, has a large pore size and good biocompatibility. 
+In this experiment the MOF UiO-66 was used which, like the NU-1000 used in our previous MOF experiments, has a large pore size and good biocompatibility~\cite{abanades2018mechanistic}. 
 
 Inspired by our previous work loading a cofactor with siRNA, we investigated the effect of adding a mitochondria-targeting cofactor to the MOF alongside the DCA, with the hypothesis that this would destroy more cancer cells with a lower concentration of MOF than previously shown. 
 The compound triphenyl phosphonium (TPP) has been shown to assist molecules to target mitochondria, so TPP was loaded into UiO-66 MOFs as a cofactor alongside DCA. 
@@ -409,7 +409,7 @@ The three experiments presented in this chapter utilise MOFs as a drug delivery 
 We have shown through a variety of techniques that MOFs can be successfully loaded with therapeutic molecules which would otherwise be degraded in extra-cellular space, and subsequently can delivery these drugs to the cell. 
 
 Furthermore, we have observed a significant decrease in cancer cell viability when MOFs are used as a delivery vehicle. 
-Two techniques, based on delivering siRNA for gene silencing and DCA for mitochondrial degradation which restarts the Krebs' cycle, have emerged as successful treatment strategies on cancerous [cell type?] cells. 
+Two techniques, based on delivering siRNA for gene silencing and DCA for mitochondrial degradation which restarts the Krebs' cycle, have emerged as successful treatment strategies on cancerous HeLa cells. 
 Concerns regarding the burst release effect, where much of the MOF's therapeutic payload is released before the MOF has entered the cell, have been addressed with a temperature treatment strategy which induces pore collapse to delay release. 
 
 The utilisation of optical sectioning provided by the LAG SIM has allowed both visual confirmation of biological hypotheses and large datasets for statistical analysis. 
@@ -430,6 +430,6 @@ The next step towards developing a drug that can be used to treat humans is to a
 Work is now underway to apply the siRNA-MOF treatment to mice, to observe the effectiveness of the therapy at organism level and assess any toxicity issues. 
 
 This chapter has presented just 3 MOFs, NU-901, NU-1000, and UiO-66, which have desirable properties for use as a drug delivery vehicle. 
-However our previous work~\cite{meee} has shown that due to the tens-of-thousands of MOF structures possible, selecting the perfect MOF is non-trivial. 
+However our previous work~\cite{moghadam2018computer} has shown that due to the tens-of-thousands of MOF structures possible, selecting the perfect MOF is non-trivial. 
 We have previously built an online tool for screening a database of drugs to select the one most-suited to a given application. 
 Though the tool, accessible at \url{https://aam.ceb.cam.ac.uk/mof-explorer/}, is currently set up for optimising gas storage solutions, adding biologically relevant axes such as toxicity and payload release time could reveal an even better MOF than those already investigated. 
