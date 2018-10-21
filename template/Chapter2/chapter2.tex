@@ -21,7 +21,7 @@
 
 \section{Introduction} \label{sec:simintro}
 \subsection{Background to SIM}
-Widefield, epifluorescent microscopes use a field of light to illuminate a labelled sample~\cite[\textit{ch. 2}]{lakowicz2007principles}. 
+Widefield epifluorescent microscopes use a uniform field of light to illuminate a labelled sample~\cite[\textit{ch. 2}]{lakowicz2007principles}. 
 Fluorescent emission light is then emitted from any fluorescent molecule located within the microscope's field of view~\cite{pawley2012handbook}. 
 In this type of microscope, fluorescent molecules above and below the focal plane of the lens will also receive illumination light and fluoresce, causing an out-of-focus blur on the image~\cite{wilson1984theory}.
 
@@ -31,11 +31,11 @@ The cost of this optical sectioning is a slow acquisition speed due to the natur
 
 A faster way of removing out-of-focus light can be achieved with total internal reflection fluorescence (TIRF)~\cite[\textit{ch. 21}]{periasamy2013methods}. 
 In this scheme light is projected into the outer edge of the back-aperture of a specialised lens, such that it emerges from the lens steeper than the critical angle required for reflection, rather than refraction, from a glass interface. 
-Although this means that no light passes above the microscope slide, energy from the evanescent is able to couple into molecules close to the coverglass, inducing fluorescence~\cite{axelrod1981cell}. 
-TIRF illuminates molecules within \SI{100}{\nano\metre} of the coverglass without being obscured by out-of-focus light, with the disadvantage that details deeper into the sample cannot be observed.
+Although this means that no light passes above the microscope slide, energy from the evanescent field is able to couple into molecules close to the coverglass, inducing fluorescence~\cite{axelrod1981cell}. 
+TIRF illuminates molecules within \SI{100}{\nano\metre} of the coverglass without obscuration by out-of-focus light, with the disadvantage that details deeper into the sample cannot be observed.
 
 Sheppard and Wilson showed that optical sectioning can be achieved computationally if the illumination light is modulated with a structured pattern~\cite{pawley2012handbook, neil1997method}. 
-Illuminating the sample through a grating to produce a 2D sinusoidal illumination pattern, and moving the pattern through 3 evenly-spaced phase steps, produces 3 images described by Equation~\ref{eq:wilson-illumination}, where $i=\left\lbrace1,2,3\right\rbrace$ for three phase steps, $W$ is the sample fluorescence produced by a widefield image, $m$ the modulation index, $t$ the modulation frequency, $x$ a lateral spatial dimension in the sample plane, and $phi_i = \left\lbrace0, \frac{2\pi}{3}, \frac{4\pi}{3}\right\rbrace$ the phase steps of the illumination pattern. 
+Illuminating the sample through a grating to produce a 2D sinusoidal illumination pattern, and moving the pattern through 3 evenly-spaced phase steps, produces 3 images described by Equation~\ref{eq:wilson-illumination}; where $i=\left\lbrace1,2,3\right\rbrace$ for three phase steps, $W$ is the sample fluorescence produced by a widefield image, $m$ the modulation index, $t$ the modulation frequency, $x$ a lateral spatial dimension in the sample plane, and $\phi_i = \left\lbrace0, \frac{2\pi}{3}, \frac{4\pi}{3}\right\rbrace$ the phase steps of the illumination pattern. 
 
 \begin{equation} \label{eq:wilson-illumination}
 I_i = W \left( 1 + m \cos \left(t x + \phi_i \right) \right)
@@ -87,8 +87,8 @@ This can be seen in the Fourier-space image of Figure~\ref{fig:raw-fourier-trans
 
 The same structured illumination microscopy (SIM) used for optical sectioning can be re-purposed for surpassing the diffraction limit. 
 First discussed by Lucosz~\cite{lukosz1966optical}, and then more explicitly described by Heintzmann for sinusoidal illumination patterns~\cite{heintzmann1999laterally}, the first experimental result showing 2D isotropic resolution doubling with 9 raw image acquisitions was published by Gustafsson in the year \num{2000}~\cite{gustafsson2000surpassing}. 
-Heintzmann shows that if we take the Fourier transform of the acquired images shown in Equation~\ref{eq:wilson-illumination}, we obtain the set of images shown in Equation~\ref{eq:heintzmann-fourier}, where \^{}-symbols represent 2D Fourier transforms of their equivalent variables, and $k_x$ is the Fourier variable of $x$, that is $f(x) \Leftrightarrow \hat{f}(k_x)$. 
-Note that $W$ has been replaced with its underlying components $P\otimes S$, where $\hat{P}$, the Fourier transform of the PSF, is known as the optical transfer function (OTF). 
+Heintzmann shows that if we take the Fourier transform of the acquired images shown in Equation~\ref{eq:wilson-illumination}, we obtain the set of images shown in Equation~\ref{eq:heintzmann-fourier}; where \^{}-symbols represent 2D Fourier transforms of their equivalent variables, and $k_x$ is the Fourier variable of $x$, that is $f(x) \Leftrightarrow \hat{f}(k_x)$. 
+Note that $W$ has been replaced with its underlying components $P\otimes S Leftrightarrow \hat{P}\hat{S}$, where $\hat{P}$, the Fourier transform of the PSF, is known as the optical transfer function (OTF). 
 
 \begin{equation} \label{eq:heintzmann-fourier}
 \hat{I_i} = \hat{P} \hat{S} \otimes \left( \delta \left( k_x \right) + \frac{m}{2} e^{j\phi_i} \delta \left( k_x + t \right) + \frac{m}{2} e^{-j\phi_i} \delta \left( k_x - t \right) \right) 
@@ -109,7 +109,7 @@ Assuming phase steps are all equal, performing a 3D Fourier transform of the pha
 \end{equation}
 
 To complete the reconstruction, the separated Fourier components must be placed at in the correct position in Fourier space, as determined by $t$. 
-Assuming the sinusoidal illumination pattern is generated by the same lens used for imaging the sample, the highest frequency sine wave which can be generated will correspond to delta peaks at the edge of the microscope's support in Fourier space~\cite{heintzmann2017super}, shown in Figure~\ref{fig:raw-fourier-transform}. 
+Assuming the sinusoidal illumination pattern is generated by the same lens used for imaging the sample, the highest frequency sinusoid which can be generated will correspond to delta peaks at the edge of the microscope's support in Fourier space~\cite{heintzmann2017super}, visible in Figure~\ref{fig:raw-fourier-transform}. 
 When the components are shifted into the appropriate location, the support and resolution of the microscope doubles in the $x$ direction, as shown in Figure~\ref{fig:x-resolution-doubling}. 
 
 To achieve isotropic 2D resolution doubling, the sinusoidal illumination pattern must be rotated to cover more area in Fourier space. 
@@ -166,7 +166,7 @@ Equation~\ref{eq:matrix-inversion} shows that each shifted frequency component $
 It can be clearly seen in Figure~\ref{fig:isotropic-SIM-fourier} that this results in an overall OTF which does not gradually decrease, but rather has peaks at certain frequencies, shown also in Figure~\ref{fig:OTF-sim-peaks} as a rotationally averaged line profile. 
 These peaks translate directly to frequency peaks in the signal-to-noise ratio, therefore the noise pattern in the reconstructed image is no longer white noise with equal power at all frequencies. 
 Furthermore, it can be seen in Figure~\ref{fig:isotropic-SIM-fourier} that the reconstructed SIM OTF is not rotationally symmetric. 
-These two aspects combine to cause characteristic hexagonal noise artefacts in reconstructed SIM images. 
+These two aspects combine to cause characteristic hexagonal honeycomb artefacts in reconstructed SIM images~\cite{wicker2013phase}. 
 
 To reduce these artefacts, Fourier components are reconstructed through a de-noising algorithm.
 The most common practice is to combine the frequency components through a generalised Wiener filter~\cite{gustafsson2008three}, as shown in Equation~\ref{eq:wiener-filtering}, to produce the reconstructed image $\hat{I_R}$. 
@@ -180,7 +180,7 @@ $w^2$ is a constant, adjusted empirically depending on the level of noise in the
 If $A\left(\mathbf{k}\right)=1$, this reconstruction scheme removes the decaying characteristic of the OTF, instead making a flat top-hat filter shown in Figure~\ref{fig:wiener-no-apo} which suddenly cuts off at the doubled resolution limit. 
 This can also be seen in Figures~\ref{fig:wienered-x-fourier} and \ref{fig:wienered-iso-fourier}, where the Fourier space image now has equal spectral intensity across the reconstructed OTF. 
 However, because the Fourier transform of a top-hat function is a sinc function, this causes ringing artefacts in the reconstructed image~\cite[\textit{ch. 10}]{kreyszig2006advanced}. 
-The apodisation function $A\left(\mathbf{k}\right)$ is therefore chosen as a filter which decays from the 0 frequency to the new resolution limit, for example a Gaussian filter~\cite{nixon2016increased}.
+The apodisation function $A\left(\mathbf{k}\right)$ is therefore chosen as a filter which decays from the 0 frequency to the new resolution limit, for example a Gaussian filter shown in Figure~\ref{fig:wiener-plus-apo}~\cite{nixon2016increased}.
 
 More recent research suggests improvements to generalised Wiener filtering~\cite{righolt2013image, perez2016optimal, chakrova2016deconvolution}, and a detailed discussion of alternative filtering schemes follows in Section~\ref{sec:recon} of this chapter. 
 
@@ -190,7 +190,7 @@ When I arrived in the Laser Analytics Group (LAG) a SIM microscope designed by L
 Issues with device degradation, detailed in Section~\ref{sec:lagsim-pockels}, limited the imaging speed to \SI{0.1}{\hertz}.
 Furthermore, a complicated ensemble of software required an expert user to operate the microscope.
 
-A physical relocation of the laboratory in 2016~\cite{newbuilding} provided the ideal opportunity to rebuild the microscope and the associated control software. The first priority was to restore the microscope to \SI{11}{\hertz} imaging speed. Once this was achieved, a list of several other aims were devised: 
+A physical relocation of the laboratory in early 2017~\cite{newbuilding} provided the ideal opportunity to rebuild the microscope and the associated control software. The first priority was to restore the microscope to \SI{11}{\hertz} imaging speed. Once this was achieved, a list of several other aims were devised: 
 \begin{enumerate}
 	\item Provide an easy method to switch between optical sectioning SIM and resolution-doubling SIM in TIRF (Sections~\ref{sec:hardware} and \ref{sec:labview}). 
 	\item Split the fluorescence emission light at the output of the microscope to facilitate simultaneous capture of multiple colour channels (Section~\ref{sec:lagsim-path}). 
@@ -199,12 +199,12 @@ A physical relocation of the laboratory in 2016~\cite{newbuilding} provided the 
 \end{enumerate}
 
 As well as detailing solutions to these challenges, this chapter also presents a showcase of various biological experiments performed with LAG SIM. 
-Section~\ref{sec:sim-showcase} can therefore be used a collection of case study examples for anyone wishing to run similar studies. 
+Section~\ref{sec:sim-showcase} can therefore be used a collection of case-study examples for anyone wishing to run similar investigations. 
 
 \section{SIM hardware} \label{sec:hardware}
 \subsection{Optical path design to generate a SIM pattern} \label{sec:lagsim-path}
 As part of his PhD work from 2012-2016, Dr. Laurie Young designed and built a SIM microscope in the Laser Analytics Group~\cite{young2016guide}. 
-The current SIM setup in the Laser Analytics Group (`LAG SIM') is based heavily on this original design, but with several modifications which were implemented by me when the Group moved location in February 2017. 
+The rebuilt SIM setup, `LAG SIM,' is based heavily on this original design, but with several modifications which were implemented by me when the Group moved location in February 2017. 
 
 \begin{figure}[p]
 \centering
@@ -213,20 +213,20 @@ The current SIM setup in the Laser Analytics Group (`LAG SIM') is based heavily 
 \label{fig:SIMpath}
 \end{figure}
 
-The optical path diagram is shown in Figure~\ref{fig:SIMpath}, and works as follows: laser light is generated by one of three lasers at a wavelength of \SI{488}{\nano\metre}, \SI{561}{\nano\metre}, or \SI{640}{\nano\metre}; its polarisation is aligned with the direction of the structured illumination pattern by a Pockels cell and achromatic quarter-wave plate; it passes through a beam expander so that it fully covers the SLM display; it reflects and diffracts off the SLM display, which is displaying a binary diffraction grating; it passes through a `beam minimiser' (a beam expander in reverse) so that it is an appropriate size for the microscope lenses; it passes through a spatial filter at a Fourier plane, which removes all but the ±1 diffraction orders from the SLM diffraction; it reflects off of a dichroic mirror; it passes into the microscope's tube lens; it reflects off of a second dichoric mirror, which is perfectly matched to the first; and finally it passes into the objective lens and is focussed onto the sample. 
+The optical path diagram is shown in Figure~\ref{fig:SIMpath}, and works as follows: laser light is generated by one of three lasers at a wavelength of \SI{488}{\nano\metre}, \SI{561}{\nano\metre}, or \SI{640}{\nano\metre}; its polarisation is aligned with the direction of the structured illumination pattern by a Pockels cell and achromatic quarter-wave plate; it passes through a beam expander so that it fully covers the spatial light modulator (SLM) display; it reflects and diffracts off the SLM display, which is displaying a binary diffraction grating; it passes through a `beam minimiser' (a beam expander in reverse) so that it is an appropriate size for the microscope lenses; it passes through a spatial filter at a Fourier plane, which removes all but the ±1 diffraction orders from the SLM diffraction; it reflects off of a dichroic mirror; it passes into the microscope's tube lens; it reflects off of a second dichoric mirror, which is perfectly matched to the first; and finally it passes into the objective lens and is focussed onto the sample. 
 
 This effectively images a low-pass-filtered version of the SLM's diffraction grating onto the sample. 
-The spatial filter means that the binary grating becomes a sinusoidal pattern, with the distance between peaks set by the period of the diffraction grating shown on the SLM display and the demagnification of the system from SLM to sample. 
-An equivalent way of conceptualising this is to picture the two filtered beams of light entering the back aperture of the objective lens, such that they produce an interference pattern when they meet at the sample plane. 
-The result is a sinusoidal illumination pattern at the sample plane, the orientation and period of which can be set by a binary pattern shown on the SLM. 
+The spatial filter means that the binary grating becomes a sinusoidal pattern, with the distance between peaks set by (a) the period of the diffraction grating shown on the SLM display then (b) the demagnification of the system from SLM to sample. 
+An equivalent way of conceptualising this is to picture the two filtered beams of light entering the rear focal plane of the objective lens, such that they produce an interference pattern when they meet at the sample plane~\cite[\textit{ch. 9}]{hecht2017optics}. 
+The result is a sinusoidal illumination pattern at the sample plane, the orientation and period of which can be set by binary patterns shown on the SLM. 
 
-This SIM is a fluorescence microscope, so that (to a reasonable approximation) the amount of light emitted from a point in the sample is proportional to the amount of light illuminating that point, but the emission light is at a different wavelength to the illumination light. 
+This SIM is a fluorescence microscope, so that, at reasonable laser powers, the amount of light emitted from a point in the sample is proportional to the amount of light illuminating that point, but the emission light is at a different wavelength to the illumination light. 
 In the LAG SIM microscope, fluorescent emission light travels back through the objective lens, through the dichroic mirror and towards the camera to record a 2D image. 
-Before it reaches the camera, it is filtered in one of two ways, to remove any reflected illumination light.
+Before it reaches the camera, it is filtered in one of two ways to remove any reflected illumination light.
 The first option is to use a filter wheel, which contains three filters appropriate for removing the illumination light and can be switched via a serial command from the computer. 
 The second option is to use the Optosplit III from Cairn Research, which uses filter cubes to split the emission light into three paths which are imaged onto separate areas of the camera, facilitating simultaneous imaging of three colour channels.
 
-The Optosplit facilitates a significant increase in speed for multicolour imaging. 
+The Optosplit provides a significant increase in speed for multicolour imaging. 
 In this setup, the fastest speed at which the camera can reliably image without dropping frames is \SI{10}{\milli\second}. 
 A SIM reconstruction requires 9 images, giving a total exposure time of \SI{90}{\milli\second} per channel; however switching channels with the filter wheel adds an additional \SI{100}{\milli\second} as the wheel rotates in the next filter and settles. 
 For a 3-colour image using the filter wheel, the fastest SIM imaging rate is therefore \SI{570}{\milli\second} per frame, or \SI{1.75}{\hertz}. 
@@ -236,7 +236,7 @@ Finally, an autofocus system between the microscope frame and filter wheel works
 This is useful in two scenarios. 
 Firstly, when a timelapse sequence is captured over a number of hours, the microscope lens drifts downwards away from the sample. 
 Without the autofocus system, this would result in a loss of focus; however by automatically moving the stage as the lens drifts, focus can be maintained over a period of days.
-Secondly, if a large field of view is imaged, focus can be lost due to the cover glass not being perfectly flat. 
+Secondly, if a large field of view is captured to create a mosaic of images, focus can be lost due to the cover glass not being perfectly flat. 
 Again, the autofocus system holds focus over this full field of view, allowing large areas to be imaged. 
 
 
@@ -253,12 +253,12 @@ Two waves with orthogonal polarisation will not interfere~\cite{nityananda2013in
 As light passes through a high numerical aperture lens, the polarisation state which is parallel to the meridional plane (p-polarised) is rotated; whereas the polarisation state perpendicular (s-polarised) is unaffected~\cite{mansuripur1991effects}. 
 To ensure that light from the two back-aperture spots arrive at sample plane with the same polarisation, it is therefore necessary that the light is entirely s-polarised~\cite{oholleran2012polarization}. 
 
-If the meridional plane is defined at an angle of \SI{0}{\degree} around the $\phi$ axis, aligned with the back-aperture spots when the SLM is showing a vertical SIM grating pattern, the incident light should be linearly polarised at $\phi=90\si{\degree}$ so ensure s-polarised light. 
+If the meridional plane is defined at an angle of \SI{0}{\degree} around the $\phi$ axis, aligned with the back-aperture spots when the SLM is showing a vertical SIM grating pattern, the incident light should be linearly polarised at $\phi=90\si{\degree}$ to ensure s-polarised light. 
 However, for 2D isotropic resolution enhancement, the SIM pattern must also be rotated to $\pm60\si{\degree}$. 
 For these patterns, the spots are no longer aligned with the meridional plane defined for $\phi=0\si{\degree}$, thus the $\phi=90\si{\degree}$ polarisation does not represent s-polarised light for these patterns. 
 In order to maintain s-polarised light, thereby ensuring maximum pattern contrast, the polarisation must be rotated for each orientation of the SIM pattern. 
 
-%DO I WANT TO DRAW AN IMAGE OF THIS??? :( 
+%DO I WANT TO DRAW AN IMAGE OF THIS??? :( yeah :( 
 
 The original SIM system, detailed in reference~\cite{young2016guide}, used a liquid crystal variable retarder (LCVR) from Meadowlark Optics to rotate the polarisation to align with the SLM's grating orientation. 
 This suffered an unexpected problem where the laser beam damaged the liquid crystal material leaving a visible spot on the LCVR and no longer retarded the light, so the system no longer rotated polarisation. 
@@ -289,20 +289,20 @@ Although this alignment procedure could be completed with any laser, for LAG SIM
 The polarisation state of the light was measured to ensure the Pockels cell was behaving as expected by using a linear polariser in a rotation mount as an analyser before the power meter. 
 The laser emission entering the Pockels cell was linearly polarised, with an extinction ratio of 100:1 for the 561 laser. 
 The Glan Taylor polariser theoretically increases the extinction ratio to >\num{100000}:1~\cite{bennett1995handbook}, although because it is attached to the Pockels cell in the factory, this extinction ratio cannot be measured. 
-Light exiting the Pockels cell is elliptically polarised, with the degree of ellipticity depending on the voltage. 
-Finally, the QWP restores the light to linear polarisation, but rotated compared to the input as determined by the voltage over the Pockels cell.
+Light exiting the Pockels cell is elliptically polarised, with the degree of ellipticity determined by the voltage. 
+Finally, the QWP restores the elliptically polarised light to linear polarisation, but rotated compared to the input as determined by the voltage over the Pockels cell.
 The extinction ratio at the output of the QWP was 500:1. 
 
 \subsection{Measuring Pockels cell voltages shows a small difference between wavelengths}
-The voltage across the Pockels cell determines the amount of optical anisotropy in the cell, which in this setup is directly proportional to the polarisation rotation. 
+The voltage across the Pockels cell determines the amount of optical anisotropy in the cell~\cite[\textit{ch. 8}]{hecht2017optics}, which in this setup is directly proportional to the polarisation rotation. 
 The voltages required to control anisotropy are of the order of \SI{200}{\volt}. 
-To achieve these voltages, an amplifier supplied by Conoptics takes a \SIrange{-1}{1}{\volt} input and provides \SI{375}{\volt\/\volt} gain. 
-The amplifier input voltage is generated by a National Instruments Digital to Analog Converter (DAC), which is controlled by a LabVIEW program. 
+To achieve these voltages, an amplifier supplied by Conoptics takes a \SIrange{-1}{1}{\volt} input and provides \SI[per-mode=symbol]{375}{\volt\per\volt} gain. 
+The amplifier input voltage is generated by a National Instruments digital to analog converter (DAC), which is controlled by a LabVIEW program. 
 
 \begin{figure}[htbp!]
 \centering
 \includegraphics[width=1.0\textwidth]{pockels-voltage-vs-rotation}
-\caption[LAG SIM: A Pockels cell is used to rotate the polarisation of laser light for maximum SIM pattern contrast]{When used in combination with a quarter wave plate, the voltage across the Pockels cell is proportional to polarisation rotation for each wavelength of laser light. Though the relationship is slightly different for each wavelength, at low voltages the gradients are similar enough that the~\SI{561}{\nano\metre} voltages can be used when the Optosplit is being used to image multiple channels simultaneously.}
+\caption[LAG SIM: A Pockels cell is used to rotate the polarisation of laser light for maximum SIM pattern contrast]{When used in combination with a quarter wave plate, the voltage across the Pockels cell is proportional to polarisation rotation for each wavelength of laser light. Though the relationship is slightly different for each wavelength, at low voltages the values are similar enough that the~\SI{561}{\nano\metre} voltages can be used when the Optosplit is employed to image multiple channels simultaneously.}
 \label{fig:pockels-voltage-rotation}
 \end{figure}
 
@@ -343,14 +343,14 @@ Specifically, the following sequence of events must take place:
 	\item\label{step:record} Record the image
 \end{enumerate}
 Steps \ref{step:pockels} to \ref{step:record} must be repeated for each of the 9 illumination patterns, and the entire process then repeated for additional colour channels if the Optosplit is not being utilised. 
-For a time series, this entire process must then be repeated for the required number of frames; for a z-stack, the height of the stage must also be adjusted before repeating the process. 
+For a time series, this entire process must then be repeated for the required number of frames; for a z-stack, the distance from the stage to the lens must also be adjusted before repeating the process. 
 
 The original SIM, detailed in~\cite{young2016guide}, used a separate software program for controlling each piece of hardware. 
-This caused a number of problems: firstly, setting up experiments was an complicated process prone to human errors; and secondly, making modifications to the imaging parameters during an imaging session was difficult and time-consuming. 
+This caused a number of problems: firstly, setting up experiments was a complicated process prone to human errors; and secondly, making modifications to the imaging parameters during an imaging session was difficult and time-consuming. 
 When imaging live-cell biology, there is a real impetus to image quickly, as cells are becoming unhealthy and soon dying on the microscope stage. 
 
 Furthermore, the complicated system meant that only one person in the LAG had the knowledge to gather images from the SIM. 
-This meant that any biological experiments which would benefit from SIM required my direct supervision, so that many projects were not able to use the SIM, and I personally had little time for other research aims.
+This meant that any biological experiments which would benefit from SIM required my direct supervision, so that many projects were not able to use the SIM, and that I personally had little time for my other research aims.
 There was a clear need for a new, unified SIM interface, which could be used by non-expert users with minimal training. 
 
 \subsection{A user-friendly LAG SIM interface enables operation by non-expert users}
@@ -361,7 +361,7 @@ Furthermore it makes designing user interfaces a straightforward process, allowi
 This made LabVIEW an ideal candidate for building an accessible program for controlling the LAG SIM.
 
 The LAG SIM interface is shown in Figure~\ref{fig:lagsimLabview}.
-The two key main areas of use are the Live Mode area and the Acquire tab, although for the sake of completeness each tab is detailed in this section. 
+The key functions are located in the Live Mode area and the Acquire tab, although for the sake of completeness each tab is detailed in this section. 
 
 \begin{figure}[p]
 \centering
@@ -393,7 +393,7 @@ This is a number between 0 and 1 which switches off the laser for a fraction of 
 By setting the exposure time and bleach-save ratio as small as possible while still being able to find healthy cells, the level of light the sample is exposed to can be minimised.
 This is especially important in live-cell biology, where excess light can cause phototoxic effects bringing about cell death. 
 
-The illumination pattern used for live mode will usually be a pseudo-widefield mode, which emulates widefield illumination by dithering all three phases of a particular orientation over one exposure time of the camera. 
+The illumination pattern used for live mode will usually be a pseudo-widefield mode, which emulates widefield illumination by dithering all three phases of a SIM pattern over one exposure time of the camera. 
 True epi-illumination is not possible on the LAG SIM due to the spatial mask in the Fourier plane. 
 The user can also choose to preview the SIM pattern by selecting the appropriate radio button; if the stripe pattern is visible, this is a good indication that later reconstruction into a resolution-enhanced image will be successful. 
 If the \SI{1.49}{\numaperture} TIRF lens is used, then selecting the TIRF radio button sets the SLM pattern such that the ±1 diffraction spots hit the TIRF ring on the objective back aperture, leading to TIRF illumination at the sample. 
@@ -404,7 +404,8 @@ The Optosplit is a device on the output port of the microscope which contains tw
 When the filter cubes are removed, and the Optosplit rocker is in the \texttt{OFF} position, the Optosplit has no effect and channels are imaged sequentially, with an appropriate filter for each channel loaded into position by the filter wheel. 
 With Optosplit mode \texttt{ON}, however, the live-mode channel selection radio buttons become checkboxes, so that each colour channel can be switched on and off independently. 
 The Optosplit provides much faster imaging speeds, at the potential cost of cross-talk between colour channels. 
-An example of Optosplit use is presented in Chapter~\ref{chap:ER}. % Should actually move most of this up, and just talk about the user interface here, maybe about assessing bleedthrough from shorter wavelengths to longer ones
+
+% Should actually move most of this up? and just talk about the user interface here, maybe about assessing bleedthrough from shorter wavelengths to longer ones
 
 This upper section of the user interface contains two more important components. 
 A laser status indicator shows which lasers are currently exposing, an important safety feature so that users know it is safe to remove their sample after an imaging session. 
@@ -416,12 +417,12 @@ Once a healthy cell with the required staining has been located from live mode, 
 With the default settings, this will capture a set of 9 raw SIM images following the steps described in Section~\ref{sec:SIMsteps}.
 Additional settings in this tab allow a set of images to be captured for 3D z-stacks, timelapse imaging, and other multi-image acquisitions. 
 
-If the number of z-steps is greater than 1, then the ASI stage will move in the axial direction at the end of every SIM acquisition by the value given in the z-step box. 
-Since the axial resolution of the SIM is \SI{500}{\nano\meter} [check this!!], for a Nyquist-limited z-stack a z-step of \SI{200}{\nano\meter} should be used. 
+If the number of \texttt{z-steps} is greater than 1, then the ASI stage will move in the axial direction at the end of every SIM acquisition by the value given in the \texttt{z-step} box. 
+Since the axial resolution of the SIM is \SI{440}{\nano\meter}, for a Nyquist-limited z-stack a \texttt{z-step} of \SI{200}{\nano\meter} should be used. 
 
-To take a series of images over time, the t-frames should be set to greater than 1.
-For observing fast, dynamic events, the t-delay should be set to \SI{0}{\milli\second}. 
-Timelapse imaging, for example capturing an image every minute for an hour, can be achieved by setting the t-delay to \SI{60}{\second}, which will pause the software for the given amount of time at the end of each acquisition. 
+To take a series of images over time, the \texttt{t-frames} should be set to greater than 1.
+For observing fast, dynamic events, the \texttt{t-delay} should be set to \SI{0}{\milli\second}. 
+Timelapse imaging, for example capturing an image every minute for an hour, can be achieved by setting the \texttt{t-delay} to \SI{60}{\second}, which will pause the software for the given amount of time at the end of each acquisition. 
 
 Multi-channel imaging can be achieved either with or without the Optosplit. 
 If the Optosplit switch is set \texttt{OFF}, and the number of channels is set to more than 1, the filter wheel will rotate the correct filter into position after each channel is captured. 
@@ -437,7 +438,7 @@ Bookmarks are discussed in more detail in Section~\ref{sec:lagsimBookmarks}.
 
 The SIM microscope can be used to capture images in a pseudo-widefield mode, by dithering the SIM pattern as described in Section~\ref{sec:lagsimLive}. 
 This is enabled by ticking the \texttt{Widefield} checkbox. 
-This will enabled imaging with a widefield resolution at \SI{100}{\hertz}. 
+This will enable imaging with widefield resolution at \SI{100}{\hertz}. 
 
 Once the appropriate variables have been set for the acquisition, the total frames is displayed in the \texttt{Total frames} box. 
 This number should be entered into the HCImage camera software, to prepare the camera for a high-speed image acquisition. 
@@ -465,20 +466,20 @@ This is especially useful for imaging a collection of cells over a long period o
 The SIM user can pan around the microscope slide in \texttt{live mode} searching for healthy cells with good fluorescent labelling, and save them to the bookmark table by clicking \texttt{Add bookmark}. 
 The location can be returned to by double-clicking on the table entry, or acquired sequentially and repeatedly in the \texttt{Acquire} tab. 
 
-Furthermore this part of the software contains an option for creating bookmarks in a grid pattern. 
-This can be utilised for imaging large areas, which are then stitched together to form one image, for example the whole mouse brain shown in Figure~\ref{fig:wholebrain}. 
+Furthermore this tab contains an option for creating bookmarks in a grid pattern. 
+This can be utilised for imaging large areas, which are then stitched together to form one large mosaic image, for example the whole mouse brain shown in Figure~\ref{fig:wholebrain}. 
 
 \begin{figure}[p]
 \centering
 \includegraphics[angle=90, width=1.0\textwidth]{whole-brain}
-\caption[LAG SIM: An image of a full mouse brain can be captured as a mosaic of images]{The bookmark mode offered by LAG SIM can be used to create tiled images, such as this 3-colour image of a mouse brain. Scalebar is \SI{500}{\micro\metre}}
+\caption[LAG SIM: An image of a full mouse brain can be captured as a mosaic of images]{The bookmark mode offered by LAG SIM can be used to create tiled images, such as this 3-colour image of a mouse brain. Dissection and staining performed by Sarah F{\"o}rster. Scalebar is \SI{500}{\micro\metre}}
 \label{fig:wholebrain}
 \end{figure}
 
 \subsection{Focus tab controls the autofocus} \label{sec:lagsimFocus}
-Using the grid bookmark function to image large fields of view can fail if the coverglass or microscope stage is not perfectly flat, which is usually the case in all practical experiments. 
+Using the grid bookmark function to image large fields of view can fail if the coverglass or microscope stage is not perfectly flat, which is often the case in practical experiments. 
 To keep the focus locked at the same distance from the sample, the `Lock focus' button begins the autofocus procedure. 
-Assuming the autofocus sensor receives enough reflected signal from the infrared autofocus LED, the sample will be locked a fixed distance from the objective lens. 
+Assuming the autofocus sensor receives enough reflected signal from the infrared autofocus LED, the sample will be locked at a fixed distance from the objective lens. 
 If not, an error message is returned requesting the user to increase the LED power for a stronger signal. 
 The system can also be used to maintain focus over a time period of hours to days, even as the objective lens drifts away from the sample. 
 
@@ -486,15 +487,15 @@ The autofocus is switched off with the `Unlock focus' button, releasing z-contro
 
 \subsection{Pockels tab to find optimal voltages for maximum pattern contrast} 
 The Pockels cell retards one polarisation axis by an amount dependent on the voltage across it. 
-In combination with a quarter wave plate, this allows for linear polarisation rotation necessary for the high pattern contrast required for SIM. 
+In combination with a quarter wave plate, this allows for linear polarisation rotation necessary for the high pattern contrast required for SIM, explained in Section~\ref{sec:lagsim-pockels}. 
 The amount of retardation depends on the wavelength of light, therefore different wavelengths require different voltages to achieve the same polarisation rotation. 
 
-To find the optimum voltage for each wavelength, functionality is built in to the \texttt{Sweep} tab to sweep the voltage from \SIrange{-1}{1}{\volt}, in a number of voltage steps. 
+To find the optimum voltage for each wavelength, functionality is implemented in the \texttt{Sweep} tab to sweep the voltage from \SIrange{-1}{1}{\volt}, in a number of voltage steps. 
 At each voltage, the SIM pattern's phase is swept and pattern contrast can be measured using a diffraction-limited bead sample. 
-Pattern contrast is calculated with a MATLAB script to produce a graph as shown in Figure~\ref{fig:pockels-contrast}a, showing how pattern contrast changes with voltage. 
+Pattern contrast is calculated with a MATLAB script to produce the graph in Figure~\ref{fig:pockels-contrast}, showing how pattern contrast changes with voltage. 
 
 This gives a coarse estimation of the voltage required to achieve maximum pattern contrast. 
-The sweep limits can then be adjusted either side of the coarse estimation to obtain an accurate voltage, shown in Figure~\ref{fig:pockels-contrast}b. 
+The sweep limits can then be adjusted to a small amount either side of the coarse estimation's maximum contrast to obtain a more accurate voltage. 
 
 This process must be repeated for each wavelength, and each rotation of the SIM pattern. 
 Once the process is complete, the optimum voltages can be entered into the table, and will be applied to the Pockels cell during a SIM acquisition. 
@@ -520,18 +521,18 @@ A fine alignment is then performed using the masked patterns, by ensuring the tw
 \label{fig:pinhole-alignment}
 \end{figure}
 
-Finally, the `Piezo Offset' section adjusts the z-position of the stage for each channel to account for chromatic offset. 
-In practice this offset is less than \SI{100}{\nano\meter} and Piezo Offset is only used for maintaining correct focus in TIRF imaging. 
+Finally, the \texttt{Piezo Offset} section adjusts the z-position of the stage for each channel to account for chromatic offset. 
+In practice this offset is less than \SI{100}{\nano\meter} and \texttt{Piezo Offset} is only used for maintaining correct focus in TIRF imaging. 
 
 \subsection{Log tab provides access to an online logbook}
-The LAG SIM control software logs all activity automatically to Labstep, an online laboratory management system. 
+The LAG SIM control software logs all activity automatically to Labstep, an online laboratory management system~\cite{labstep}. 
 
 When a user opens the LAG SIM software, they will be asked to enter their name for the online logbook. 
 When they press \texttt{Start}, the software sends an HTTP request to a Labstep timeline recording the user's name and the start time. 
-Similarly, when the \texttt{Stop \& Close} the software, their name and finish time is logged to the timeline, along with any errors generated by the software during their use. 
+Similarly, when they \texttt{Stop \& Close} the software, their name and finish time is logged to the timeline, along with any errors generated by the software during their use. 
 
 Furthermore, every acquisition is also logged to the timeline. 
-This contains metadata relating to the acquisition, for example number of t-frames, z-steps, laser powers, and exposure times. 
+This contains metadata relating to the acquisition, for example number of \texttt{t-frames}, \texttt{z-steps}, laser powers, and exposure times. 
 This is especially helpful is the user is later unsure what acquisition parameters were used for a particular image. 
 
 The user can also add a customised post to the logbook, for example to record an error with the software. 
@@ -556,12 +557,12 @@ A basic SIM reconstruction algorithm implements the following steps:
 	\item Separate Fourier space images into frequency components
 	\item \label{step:filterPreShift}Weight components in Fourier space by OTF and filter for noise removal
 	\item \label{step:shiftComponents}Shift frequency components into correct position in Fourier space
-	\item Inverse Fourier transform for reconstructed image
+	\item Inverse Fourier transform to the reconstructed image
 \end{enumerate}
 
-Additional steps are often added into the basic algorithm to reduce artefacts overall. 
+Additional steps are often added into the basic algorithm to reduce artefacts. 
 Raw images may be corrected for consistent intensity and contrast across the dataset, and an additional filtering step for noise removal can be applied before the images are separated in Fourier space. 
-Note also that step \ref{step:filterPreShift} can be performed after step \ref{step:shiftComponents}, but this can lead to additional artefacts in the reconstructed image~cite{gustafsson2008three}. 
+Note also that step \ref{step:filterPreShift} can be performed after step \ref{step:shiftComponents}, but this can lead to additional artefacts in the reconstructed image~\cite{gustafsson2008three}. 
 Artefacts can furthermore be suppressed by apodisation before the final inverse Fourier transform~\cite{gustafsson2008three}. 
 
 This basic algorithm will provide resolution enhancement, but does not implement optical sectioning for removing out-of-focus light.
@@ -579,7 +580,7 @@ Shao's algorithm is written in native CUDA code to run on NVidia graphics cards.
 This makes reconstruction very fast - around 1 frame per second on an NVIDIA Quadro 2000. 
 However, native CUDA must be recompiled from source on every new computer it is used on, and furthermore because the software has not been updated, it does not work with the latest version of CUDA. 
 
-The program has no graphics user interface, but is called from the command line. 
+The program has no graphical user interface, but is called from the command line. 
 Since command line calls can be made from most other programming languages, a custom interface was built in MATLAB for passing in reconstruction parameters, and for separating SIM frames for reconstructing more complex datasets such as multi-channel z-stacks. 
 
 The algorithm does not implement OTF attenuation, which is used for optical sectioning.
@@ -595,12 +596,12 @@ Since this implementation is fast becoming obsolete, it is now only installed on
 \subsection{SROS-SIM facilitates optical sectioning}
 Developed by Florian Str\"ohl in the Laser Analytics Group shortly before I arrived, the SROS-SIM program implements both optical sectioning and resolution enhancement. 
 
-SROS-SIM is a MATLAB implementation of the Super Resolution Optical Sectioning algorithm detailed by O'Holleran and Shaw in 2014~\cite{oholleran2014optimized}. 
+SROS-SIM is a MATLAB implementation of the super-resolution optical-sectioning (SROS) algorithm detailed by O'Holleran and Shaw in 2014~\cite{oholleran2014optimized}. 
 Optical sectioning removes out-of-focus light, so that 3D images can be reconstructed, for example of a whole cell with mitochondria labelled.
 
-As a set of MATLAB script and functions, the code can be executed on any computer with a MATLAB license.
+As a set of MATLAB scripts and functions, the code can be executed on any computer with a MATLAB license.
 Therefore the implementation is available for all major desktop operating systems, and furthermore is easy to modify.
-I have made modifications to the original code to perform operations on the GPU, bringing a 20X increase in reconstruction speed. 
+I have made modifications to the original code to perform operations on the graphics processing unit (GPU), bringing a 20X increase in reconstruction speed. 
 % Want to show a table of this??
 
 SROS-SIM has the disadvantage of not being publicly available or published and verified by the community.
@@ -632,7 +633,7 @@ The next section describes the LAG SIM plugin in detail, providing a detailed re
 
 \section{Reconstruction with LAG SIM for artefact-free images} \label{sec:lagsimFiji}
 Setting SIM reconstruction parameters, particularly for noise filtering and optical sectioning, can be something of a black art.
-In LAG SIM, building on the fairSIM plugin, there is a choice of 2 filters, which can be used in combination, 2 filter parameters, 2 apodisation parameters, and 2 attenuation parameters, making a high-dimensional parameter space to optimise over. 
+In LAG SIM, building on the fairSIM plugin, there is a choice of 2 filters, which can be used in combination, 3 filter parameters, 2 apodisation parameters, and 2 attenuation parameters, making a high-dimensional parameter space to optimise over. 
 Selecting appropriate values for these parameters requires understanding of what each is for; setting optimum values requires experience and expert skill.
 
 LAG SIM provides a number of user interfaces to assist with parameter optimisation, as well as a number of other tools for batch reconstruction and quick pseudo-widefield previews of the data. 
@@ -650,19 +651,39 @@ I hope that this provides a useful resource for anyone reconstructing images fro
 
 \subsection{Illumination detection provides user feedback about pattern contrast}
 In order to produce an artefact-free reconstruction, the SIM algorithm requires measurement of the illumination pattern to a sub-pixel accuracy~\cite{muller2016open}. 
-This is necessary for correctly performing the Fourier-space shift detailed in Section\ref{sec:SIM-theory}. 
+This is necessary for correctly performing the Fourier-space shift detailed in Section~\ref{sec:SIM-theory}. 
 
 The LAG SIM reconstruction interface (Figure~\ref{fig:lagsim-fiji-interface}b) allows the user to choose which slice the illumination pattern is measured from. 
-For z-stacks, it is best that the most in-focus slice is used, to get the most accurate measurement. 
+For z-stacks, it is best that the most in-focus slice is used, to obtain the most accurate measurement. 
 Conversely, for a time-series it is best that slice 1 is used, since it will have the least amount of photobleaching. 
 
 Illumination detection with LAG SIM has been designed to require the least amount of user input necessary. 
 The user simply needs to select the objective lens used, and the software will infer the necessary information such as pixel size and numerical aperture. 
 Wavelength can be extracted directly from the filename if the file is saved using the correct naming convention. 
 
+\begin{table}
+\caption[LAG SIM: Resolution improvement for different lenses, wavelengths, and SLM grating patterns]{\label{tab:resolution}The table shows the different resolution improvement} %TODO make better
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Lens &	Laser (nm) &	Emission (nm) & SLM Mode & Resolution improvement \\ \hline
+100X &	488 &	525 &	SIM &	1.78 \\
+100X &	561 &	600 &	SIM &	1.89 \\
+100X &	640 &	676 &	SIM &	1.8 \\
+100X &	488 &	525 &	tSIM &	2.04 \\
+100X &	640 &	676 &	tSIM &	2.01 \\
+60X &	488 &	525 &	SIM &	1.59 \\
+60X &	561 &	600 &	SIM &	1.67 \\
+60X &	640 &	676 &	SIM &	1.61 \\
+60X &	488 &	525 &	tSIM* &	1.78 \\
+60X &	640 &	676 &	tSIM* &	1.76 \\ \hline
+\end{tabular}
+\end{table}
+
 After this process, the software provides feedback to the user about how well the parameters were detected, based on the modulation depth. 
 If modulation contrast is low (<0.5), the software waits for user confirmation that they wish to continue with the reconstruction, and recommends that they need to capture higher quality SIM images. 
 Note that feedback is not provided in batch-reconstruction mode. 
+%TODO add a paragraph on resolution improvement
 
 \subsection{Wiener filtering and apodisation reduces noise, but can introduce artefacts}
 When the Wiener filtering scheme is used for noise removal, the Wiener parameter and apodisation parameters are used in a complementary fashion. 
@@ -671,12 +692,12 @@ Noise filtering is particularly important in SIM due to the non-conventional rel
 A conventional 2D microscope OTF has a peak at 0, and decreases symmetrically, as shown in the widefield Fourier plot in Figure~\ref{fig:wiener-parameter}. 
 As noise is assumed to be constant over all spatial frequencies, this causes a decrease in signal-to-noise ratio at high spatial frequencies. 
 In SIM, a super-resolution image is built up by shifting the OTF in Fourier space. 
-This results in a local maxima in signal-to-noise ratio, which can be seen when a low value is chosen for the Wiener parameter 0. 
+This results in a local maxima in signal-to-noise ratio, which can be seen when a low value is chosen for the Wiener parameter. 
 The extra noise in this region causes swirling hexagonal noise patterns, seen in the contast-enhanced reconstruction for $w=0.01$. 
 
 Although these patterns are simply how noise presents in a SIM image, they can easily be misinterpreted as features. 
 The Wiener filter is a conventional noise filter used in image processing~\cite[\textit{ch. 4}]{brown2012introduction}, which successfully removes hexagonal SIM noise as shown in Figure~\ref{fig:wiener-parameter} for $w=1.0$. 
-The `Wiener parameter' input is able to control how much noise filtering is applied. 
+LAG SIM's `Wiener parameter' input is able to control how much noise filtering is applied. 
 
 
 \begin{figure}[p]
@@ -687,23 +708,21 @@ The `Wiener parameter' input is able to control how much noise filtering is appl
 \label{fig:wiener-parameter}
 \end{figure}
 
-Aggressive noise removal, using high values for the Wiener parameter, can cause ringing in the reconstructed images, clearly visible as side-lobes around the $w=1.0$ reconstruction in Figure~\ref{fig:wiener-parameter}. 
+Aggressive noise removal, using high values for the Wiener parameter, can cause ringing in the reconstructed images, clearly visible as side-lobes around the $w=1.0$ reconstruction in Figure~\ref{fig:wiener-parameter}~\cite{righolt2013image}. 
 To reduce ringing artefacts, the reconstructed image is passed through an apodisation filter. 
 
-Apodisation is a smooth low-pass filter, gradually reducing power in higher spatial frequencies avoiding a sharp cutoff. 
+Apodisation applies a smooth low-pass filter, gradually reducing power in higher spatial frequencies avoiding a sharp cutoff. 
 The radius of the apodising filter in Fourier space is controlled by the `apodisation cutoff' parameter, where a value of 1 corresponds to the cutoff spatial frequency of the objective lens based on its numerical aperture and the emission wavelength of the image. 
 The shape of the apodisation filter is controlled by the `apodisation strength' parameter, where a value of 0 gives a tophat filter, $\frac{1}{\sqrt{2}}$ a triangular filter, and larger values reduce the full-width half maximum. % As shown in figure? 
 %% I THINK I NEED TO SORT OUT APODISATION STUFF WHILE CLEMENS LOOKS AT THE REST OF THE WORK. BECAUSE LOWER a MEANS MORE APODISATION AT THE MOMENT, WHICH CAN ACTUALLY BE SEEN!!! 
 
-The apodisation cutoff should be as large as possible, with a maximum value of 2 for full SIM resolution enhancement. 
+The apodisation cutoff should be set to the same value as the resolution enhancement given in Table~\ref{tab:resolution}, with a maximum value of 2.04 for full SIM resolution enhancement. 
 Smaller cutoff values reduce the radius of the reconstruction in Fourier space, directly reducing resolution; a value of 1 corresponds to widefield resolution. 
-Furthermore, the apodisation strength should be as small as possible whilst still removing ringing artefacts for maximum resolution. 
+The apodisation strength should be as small as possible whilst still removing ringing artefacts for maximum resolution for maximum contrast of high-frequency features.  
 
 \subsection{Richardson-Lucy filtering introduces less artefacts when optical sectioning is not required}
-An alternative filtering scheme for noise removal is the Richardson-Lucy deconvolution~\cite{perez2016optimal}. 
-The Richardson-Lucy filtering scheme has several advantages over Wiener filtering: it guarantees non-negative pixel values, removing the need for an apodisation step; it does not cause ringing in the reconstructed image; and it only takes one parameter in the LAG SIM interface.
-
-% see Perez, Change, Stelzer Scientific reports 2016
+An alternative filtering scheme for noise removal is Richardson-Lucy deconvolution~\cite{perez2016optimal}. 
+The Richardson-Lucy filtering scheme has several advantages over Wiener filtering: it guarantees non-negative pixel values, removing the need for an apodisation step; it does not cause ringing in the reconstructed image; and it only takes one parameter in the LAG SIM interface~\cite{eichstadt2013comparison, perez2016optimal}.
 
 \begin{figure}[p]
 \centering
@@ -728,10 +747,10 @@ Therefore there are in total 4 filtering schemes offered by LAG SIM: Wiener-outp
 
 \subsection{OTF attenuation facilitates resolution-enhanced optical sectioning SIM}
 In conventional widefield microscopy, light from areas above and below the focal plane are captured by the lens, causing out-of-focus light and reducing the axial resolving contrast of the microscope. 
-When observing the 3D widefield OTF, shown in red in Figure~\ref{fig:oholleran-otf} it is clear that this is the case. 
+When observing the 3D widefield OTF, shown in red in Figure~\ref{fig:oholleran-otf}, it is clear why this is the case. 
 The OTF has no support in the axial direction $z$ at low frequencies, which is known as the `missing cone' problem~\cite{sheppard1992significance}. 
 
-In the Laser Analytics Group's SIM setup, the illumination pattern is only projected onto the sample plane; therefore out of focus light does not show the SIM pattern.
+In the Laser Analytics Group's SIM setup, the illumination pattern is only projected onto the sample plane; therefore out-of-focus light does not show the SIM pattern.
 Intuitively, one would think this out-of-focus light can be removed by rejecting any part of the image that does not have the SIM pattern, and only showing the in-focus parts of the image with SIM pattern on them. 
 O'Holleran and Shaw show that this is achieved practically by attenuating certain parts of the OTF during reconstruction~\cite{oholleran2014optimized}.
 
@@ -754,7 +773,7 @@ The width and depth of this passband is controlled in LAG SIM with the parameter
 %The water lens is set up for optical sectioning. 
 
 Out-of-focus light makes creating 3D reconstructions impossible. % 3D reconstruction figure
-Using optical sectioning to remove this light allows 3D reconstructions of the sample to be created, which can reveal information otherwise unobservable, such as whether a particle is located on the inside or outside of a cell membrane. 
+Using optical sectioning to remove this light allows 3D reconstructions of the sample to be created, which can reveal information otherwise unobservable, such as whether a particle is located on the inside or outside of a cell membrane~\cite{teplensky2017temperature}. 
 
 Note that OTF attenuation cannot be used with the Richardson-Lucy output filter. 
 Therefore if optical sectioning is required, it is recommended to use the "RL-in, Wiener-out" filtering scheme. 
@@ -816,7 +835,7 @@ These same registration parameters can then be used for other multi-colour exper
 
 \subsection{Resolution-enhanced optical sectioning of HeLa cells reveals MOF colocalised with endosomes}
 A frequent biological application of microscopy is imaging cultured cells under different treatments or with different genetic modifications. 
-In this particular application, which is described in greater in Chapter~\ref{chap:MOF}, we treated the cells with a metal organic framework (MOF) as a drug delivery system. 
+In this particular application, which Chapter~\ref{chap:MOF} describes in greater detail, we treated the cells with a metal organic framework (MOF) as a drug delivery system. 
 The goal was to observe uptake of the drug into live cells over a period of \SI{24}{\hour}. 
 
 The MOF was naturally fluorescent in the \SI{488}{\nano\metre} excitation channel. 
@@ -860,7 +879,7 @@ A 3D reconstruction is shown in Figure~\ref{fig:recon-mofcell}.
 	\includegraphics[width=\textwidth]{recon-mofcell-3D}
 	\caption{}\label{fig:recon-mofcell-3D}
 \end{subfigure}
-\caption[LAG SIM: 3D reconstruction of ?? cell]{3 colour MOF in cell in 3D. Scalebar in (a) is \SI{20}{\micro\metre}}
+\caption[LAG SIM: 3D reconstruction of HeLa cells]{3 colour MOF in cell in 3D. Cells prepared for imaging by Michelle Teplensky. Scalebar in (a) is \SI{20}{\micro\metre}}
 \label{fig:recon-mofcell}
 \end{figure}
 
@@ -872,7 +891,7 @@ For high resolution, the 100$\times$ oil lens was chosen, although, because we w
 To facilitate simultaneous multi-colour imaging, the Optosplit was employed. 
 Cross-talk between colour channels was minimised by labelling just two organelles per experiment, in the \SI{488}{\nano\metre} and \SI{640}{\nano\metre} excitation channels. 
 
-A time-series of SIM images was acquired at a raw exposure time of SI\SI{10}{\milli\second} per frame. 
+A time-series of SIM images was acquired at a raw exposure time of \SI{10}{\milli\second} per frame. 
 These were reconstructed with the following parameters: \newline
 \begin{tabular}{p{0.5\textwidth}}
 \begin{labelling}[margin=OTF attenuation]
@@ -885,7 +904,7 @@ These were reconstructed with the following parameters: \newline
 \begin{figure}[tbp!]
 \centering
 \includegraphics[width=1.0\textwidth]{recon-er-cell}
-\caption[LAG SIM: Fast, multi-colour imaging of ER in cells reveals co-localisation between lysosomes and ER tubules]{HEK293 cells with ER is coloured in blue, and lysosomes are coloured in orange. Capturing a timelapse utilising the Optosplit and optical sectioning SIM reveals a strong co-localisation between lysosomes and ER tubules. }
+\caption[LAG SIM: Fast, multi-colour imaging of ER in cells reveals co-localisation between lysosomes and ER tubules]{HEK293 cells with ER is coloured in blue, and lysosomes are coloured in orange. Capturing a timelapse utilising the Optosplit and optical sectioning SIM reveals a strong co-localisation between lysosomes and ER tubules. Cells labelled by Meng Lu. }
 \label{fig:recon-er-cell}
 \end{figure}
 % Hessian SIM as an extra denoising step? 
@@ -894,12 +913,12 @@ Work on these observations is ongoing, with a variety of genetic mutations now b
 
 
 \subsection{TIRF imaging of HeLa cells resolves dynamic acting structure on the cell membrane}
-Structure on the cell membrane is difficult to observe in epi-fluorescent microscopy due to out-of-focus light obscuring details on the membrane. 
+Structure on the cell membrane is difficult to observe in epifluorescent microscopy due to out-of-focus light obscuring details on the membrane. 
 LAG SIM's capability to perform TIRF was therefore vital for imaging actin dynamics on the membrane on HeLa cells, seen in Figure~\ref{fig:recon-actin}. 
 
-In this experiment, ring structures in the actin were found to colocalise with K-Ras. 
+In this experiment, ring structures in the actin were found to colocalise with the K-Ras protein. 
 By performing time-lapse imaging, and taking a short video every \SI{10}{\minute}, we were able to observe that these ring structures produce projections of actin which spread through the cell. 
-The bookmarking feature of LAG SIM was used to record the location of a cells cells distributed across the cover glass, so that many cells could be captured in one imaging session. 
+The bookmarking feature of LAG SIM was used to record the location of healthy cells distributed across the cover glass, so that many cells could be captured in one imaging session. 
 
 The 100$\times$ oil lens was chosen for its TIRF capabilities. 
 2-colour TIRF-SIM imaging was performed sequentially at a frame rate of \SI{2}{\hertz}; the concentration of fluorescent molecules was low to ensure the experiment was as physiologically relevant as possible. 
@@ -926,7 +945,7 @@ The following parameters were used for reconstruction: \newline
 	\includegraphics[width=\textwidth]{recon-tirf-actin}
 	\caption{}\label{fig:recon-tirf-actin}
 \end{subfigure}
-\caption[LAG SIM: TIRF imaging of actin in HeLa cells removes out-of-focus light]{(a) shows actin labelled in HeLa cells, where out-of-focus light blurs details in the actin. Utilising TIRF-SIM, shown in (b), enhances resolution and removes out-of-focus light. Scalebar is \SI{10}{\micro\metre}. }
+\caption[LAG SIM: TIRF imaging of actin in HeLa cells removes out-of-focus light]{(a) shows actin labelled in HeLa cells, where out-of-focus light blurs details in the actin. Utilising TIRF-SIM, shown in (b), enhances resolution and removes out-of-focus light. Cells were labelled by Anchal Chandra. Scalebar is \SI{10}{\micro\metre}. }
 \label{fig:recon-actin}
 \end{figure}
 
@@ -936,7 +955,7 @@ Further research into these observations is ongoing.
 \subsection{Resolution-enhanced optical sectioning of brain-slice tissue imaging for measuring the Node of Raniver}
 The versatility of LAG SIM also allows it to perform tissue imaging beyond the diffraction limit. 
 \SI{8}{\micro\metre}-thin slices of mouse brain were labelled to study the myelin sheath of oligodendrocytes. 
-Myelin was labelled in one of two colours, depending on whether the origin of the cell was from the [front or back] of the brain. 
+Myelin was labelled in one of two colours, depending on whether the cell originated from the ventral or dorsal area of the brain. 
 The end of the each myelin sheath was labelled with a 3\textsuperscript{rd} colour to measure the node of Raniver (that is, the gap between two myelin sheaths), to discover whether there is an observable difference between the two oligodendrocyte types related to disease pathology. 
 
 To allow the greatest imaging depth, the lens with the closest refractive index matched to the tissue was chosen; in this case, the 60$\times$ water lens. 
@@ -966,21 +985,21 @@ Although in the end no statistical difference was calculated between the two cel
 \begin{figure}[tbp!]
 \centering
 \includegraphics[width=1.0\textwidth]{recon-brain}
-\caption[LAG SIM: Multi-colour optical sectioning SIM to measure the node of Raniver]{Oligodendrocytes from the dorsal and ventral region of the brain are coloured in magenta and cyan respectively. The end of the myelin sheath is coloured in orange, and can be used to measure the length of the node of Raniver. Optical sectioning SIM was used on \SI{8}{\micro\metre} brain slices. Scalebar is \SI{10}{\micro\metre}. }
+\caption[LAG SIM: Multi-colour optical sectioning SIM to measure the node of Raniver]{Oligodendrocytes from the dorsal and ventral region of the brain are coloured in magenta and cyan respectively. The end of the myelin sheath is coloured in orange, and can be used to measure the length of the node of Raniver. Optical sectioning SIM was used on \SI{8}{\micro\metre} brain slices. Slices were dissected and labelled by Sarah F{\"o}rster. Scalebar is \SI{10}{\micro\metre}. }
 \label{fig:recon-brain}
 \end{figure}
 
 \section{Conclusion}
 LAG SIM has been restored to its fast imaging speed of 11 super-resolution frames per second through the introduction of a Pockels cell for polarisation rotation. 
 The Pockels cell is a robust, future-proof solution to ensure that the SIM illumination is generated with high pattern contrast. 
-With this successfully in place, the other desirable features of LAG SIM could be addressed. 
+With this successfully in place, the other desirable features for LAG SIM could be addressed. 
 
 The instrument can now quickly switch between TIRF imaging, resolution-enhanced SIM imaging and SIM optimised for optical sectioning through a combination of well-designed software and straightforward hardware tweaks. 
 This makes it suited to a wide variety of biological imaging experiments, as presented in the SIM showcase. 
 
-The addition of an Optosplit, made possible by the implementation of the Pockels cell rather than an LCVR, further enhances LAG SIM's fast imaging capability. 
+The addition of an Optosplit, made possible by the implementation of the Pockels cell in lieu of an LCVR, further enhances LAG SIM's fast imaging capability. 
 Rather than requiring the use of a filter wheel to switch between colour channels, 3 colours can be imaged simultaneously. 
-This removes any mechanical movement from the system, reducing the fastest 3-channel acquisition from \SI{470}{\milli\second} to the headline \SI{90}{\milli\second}, a five-fold improvement in frame rate. 
+This removes any mechanical movement from the system, reducing the fastest 3-channel acquisition from \SI{470}{\milli\second} to the headline \SI{90}{\milli\second}, a 5-fold improvement in frame rate. 
 
 Considerable care has been taken to ensure the microscope can be used by non-expert users. 
 The interface is clear and compact, and can be taught to new users in a single imaging session. 

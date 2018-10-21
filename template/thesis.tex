@@ -131,12 +131,15 @@
 
 \listoftables
 
+\renewcommand*{\lstlistlistingname}{List of code snippets}
+\lstlistoflistings
+
 % List of publications:
 \cleardoublepage
 \begin{bibunit}
 \makeatletter \renewcommand\@biblabel[1]{} \makeatother
 \renewcommand{\bibsection}{\addcontentsline{toc}{chapter}{List of publications} \vspace*{3em} \thispagestyle{empty}
-\begin {flushleft} \huge \textbf{List of publications} \end{flushleft} \vspace*{3em}}
+\begin {flushleft} \huge \textbf{List of publications} \end{flushleft} \vspace*{2em}}
 
 \bibliographystyle{unsrt} 
 \nocite{*}
