@@ -117,18 +117,32 @@
 
 \maketitle
 
-\include{Dedication/dedication}
+%\include{Dedication/dedication}
 \include{Declaration/declaration}
 \include{Acknowledgement/acknowledgement}
 \include{Abstract/abstract}
 
 % *********************** Adding TOC and List of Figures ***********************
 
+\setcounter{tocdepth}{3}
 \tableofcontents
 
 \listoffigures
 
 \listoftables
+
+% List of publications:
+\cleardoublepage
+\begin{bibunit}
+\makeatletter \renewcommand\@biblabel[1]{} \makeatother
+\renewcommand{\bibsection}{\addcontentsline{toc}{chapter}{List of publications} \vspace*{3em} \thispagestyle{empty}
+\begin {flushleft} \huge \textbf{List of publications} \end{flushleft} \vspace*{3em}}
+
+\bibliographystyle{unsrt} 
+\nocite{*}
+\def\bibfont{\normalsize}
+\putbib[References/publications]
+\end{bibunit}
 
 % \printnomenclature[space] space can be set as 2em between symbol and description
 %\printnomenclature[3em]
@@ -160,8 +174,9 @@
 % Reference styles: http://sites.stat.psu.edu/~surajit/present/bib.htm
 
 %\bibliographystyle{apalike}
-%\bibliographystyle{unsrt} % Use for unsorted references
-\bibliographystyle{ieeetr}
+\bibliographystyle{unsrt} % Use for unsorted references
+%\bibliographystyle{ieeetr}
+\renewcommand{\bibname}{References}
 %\bibliographystyle{plainnat} % use this to have URLs listed in References
 \cleardoublepage
 \bibliography{References/references} % Path to your References.bib file

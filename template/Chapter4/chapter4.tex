@@ -18,7 +18,7 @@
 \textit{Teplensky et. al, JACS 2017}~\cite{teplensky2017temperature}
 
 \section{Introduction} \label{sec:MOF-intro}
-\subsection{siRNA as a cancer treatment}
+\subsection{siRNA for cancer treatment}
 When the latest statistics find that over half of people born in the UK since 1960 will develop some form of cancer in their lifetime~\cite{ahmad2015trends}, it hardly needs stating that cancer has affected almost everyone in the country in some way. 
 Any successful efforts to discover new treatments for this set of diseases are therefore very welcome by the community. 
 In this chapter, I describe a novel method of delivering therapeutic drugs to cells, utilising the LAG SIM for imaging and FPBioimage for 3D visualisation and analysis. 
@@ -52,7 +52,7 @@ Finally, naked siRNA can be conjugated with other molecules, such as cholesterol
 Collaborators in the Department of Chemical Engineering at Biotechnology in Cambridge University are experts in metal organic frameworks (MOFs), and we therefore worked together to develop a method of drug delivery utilising MOFs.
 
 
-\subsection{MOFs as a delivery vehicle}
+\subsection{MOFs as delivery vehicles}
 MOFs are a group of crystalline materials which self-assemble from a mixture of metal ions and organic linkers to form porous solids. 
 They have a diverse use across many fields; because of their ability to contain other molecules within their pores, they have been applied to catalysis~\cite{ma2009enantioselective, farrusseng2011metal}, ion exchange~\cite{custelcean2007anion, fei2010reversible} and sensors~\cite{kreno2011metal, miller2016metal}. 
 We recently published an application of MOFs for oxygen storage for use in emergency healthcare~\cite{moghadam2018computer}; the details of this work fall outside the scope of this thesis. 
@@ -88,7 +88,7 @@ Microscope setup, image capture and reconstruction, and the subsequent analysis 
 \section{Results and methods} \label{sec:mofmethods}
 
 \subsection{Temperature treatment of MOFs delays the release time} \label{sec:mof-temperature}
-A problem of drug delivery systems that has been noted in the literature is the so-called \textit{burst release effect}~\cite{huang2001importance, }.
+A problem of drug delivery systems that has been noted in the literature is the so-called \textit{burst release effect}~\cite{huang2001importance}.
 This is an undesirable characteristic of delivery systems where high concentrations of the drug are released from the carrier soon after loading, decaying quickly so that after a short time there is no payload left to release. 
 This either leads to toxic levels of drug, or low concentrations which must be applied frequently to fulfil their therapeutic effect~\cite{fu2010drug}. 
 An ideal drug delivery system would release its payload slowly and steadily over an extended period of time, maintaining non-toxic concentrations. 
@@ -190,7 +190,7 @@ The slices in Figure~\ref{fig:calcein-MOF-uptake}, together with their online 3D
 The MOF appears to be taken up by endocytosis, evident from the colocalisation of endosomes with MOFs, seen as white areas in the Figure. 
 To verify this observation, an endocytosis study was performed.
 Inhibitors of various endocytosis pathways were added to the cells, and the fluorescence in the cytoplasm measured after a \SI{24}{\hour} incubation period. 
-Figure~\ref{fig:MOF-endocytosis-study} firstly confirms that MOF uptake is an active process, as reducing the temperature to \SI{4}{\degreeCelsius} causes a significant reduction in cytoplasmic fluorescence. 
+Figure~\ref{fig:endocytosis-study} firstly confirms that MOF uptake is an active process, as reducing the temperature to \SI{4}{\degreeCelsius} causes a significant reduction in cytoplasmic fluorescence. 
 Furthermore, the study shows that \SI{0.3}{\Molar} sucrose also causes a significant reduction in the amount of MOF uptake, implying MOF is endocytosed by the clathrin-mediated pathway. 
 
 \begin{figure}[htbp!]
@@ -335,7 +335,7 @@ Figure~\ref{fig:mito-30m-mof-dca-tpp} shows a similar effect after just \SI{30}{
 After \SI{8}{\hour} of incubation with DCA and TPP both loaded into the MOF, all the mitochondria in Figure~\ref{fig:mito-8h-mof-dca-tpp} resemble the healthy textbook shape. 
 
 To confirm this visual inspection of mitochondrial shape quantitatively, analysis was performed in Cell Profiler~\cite{carpenter2006cellprofiler}.
-Image stacks of 54 cells were captured and reconstructed in two independent imaging sessions with optical-sectioning LAG SIM, and from these images \num{4811} mitochondria were extracted using the \texttt{IdentifyPrimaryObjects} plugin, as shown in Figure~\ref{cell-profiler-segmentation}. 
+Image stacks of 54 cells were captured and reconstructed in two independent imaging sessions with optical-sectioning LAG SIM, and from these images \num{4811} mitochondria were extracted using the \texttt{IdentifyPrimaryObjects} plugin, as shown in Figure~\ref{fig:cell-profiler-segmentation}. 
 The ellipticity of each classified mitochondria was then calculated with the \texttt{MeasureObjectSizeShape} plugin, to produce a long list of mitochondria ellipticity under the different treatment conditions shown in Figure~\ref{fig:mito-SIM-images}. 
 
 \begin{figure}[p]

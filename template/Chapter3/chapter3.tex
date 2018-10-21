@@ -19,7 +19,7 @@
 \textit{Email from Konrad K\"olble, 20-06-2018}
 
 \section{Introduction}
-\subsection{Data Availability} \label{sec:introvisual}
+\subsection{Publishers require new methods of providing research data} \label{sec:introvisual}
 Modern scientific experiments gather data at an ever-increasing rate. 
 This is particularly apparent in 3D microscopy, where techniques such as confocal~\cite{marvin1961microscopy}, optical-sectioning SIM, and light-sheet techniques including selective plane illumination microscopy (SPIM)~\cite{huisken2004optical} generate terabytes of volumetric data per hour. 
 
@@ -43,14 +43,14 @@ The large file size means that the common practice is to temporarily upload data
 Once the large data file has been downloaded, specialist image analysis software must be used to render it, requiring expert skill and experience~\cite{broeke2015image}. 
 
 As a producer of volumetric data, I faced the data sharing issue myself when one of my collaborators moved to Chicago. 
-We had gathered 3D data utilising optical sectioning on the SIM, as described in Chapter~\ref{chap:SIM}, which now required their specialist biological interpretation. 
+We had gathered 3D data utilising optical sectioning on the SIM, as described in Chapter~\ref{chap:LAGSIM}, which now required their specialist biological interpretation. 
 The issue was further complicated since the collaborator had little knowledge of volume rendering software, so could not easily examine the data. 
 
 To solve this, I searched for an online application where I could easily upload 3D data to share immediately with my collaborator. 
 Finding that none existed, I created First Person Bioimage (FPBioimage), my own tool to fulfil these requirements.
 % The development and implementation of FPBioimage is detailed in this chapter. 
 
-\subsection{Volumetric rendering} \label{sec:volumerendering}
+\subsection{Volumetric rendering reveals features inside 3D objects} \label{sec:volumerendering}
 The first demonstration of volumetric rendering was by Pixar in 1987 \cite{smith1987volume}, a year after their aquisition from Lucasfilms by Steve Jobs for \$\num{5000000}.
 For the first time, a full volumetric rendering of a computerised tomography (CT) scan was displayed.
 Pixar was later sold to Disney in 2006 for \$\num{7400000000}~\cite{pixar2007story, pixar2018our}, demonstrating the value of advanced rendering techniques. 
@@ -60,21 +60,21 @@ In geometric rendering, an object is described by one or more geometrical shapes
 To render the object, the surface of the shape is approximated by a mesh of triangular primitives, and the interaction of a virtual light ray with each triangle is calculated.
 
 Volumetric rendering uses a fundamentally different technique.
-A virtual light ray begins at a pixel on the screen, and progresses through a 3D array of voxels, as shown in Figure~\ref{fig:raymarchDiagram}~\cite{tuy1984direct}.
+A virtual light ray begins at a pixel on the screen, and progresses through a 3D array of voxels, as shown in Figure~\ref{fig:raymarch-diagram}~\cite{tuy1984direct}.
 At equally spaced steps along the ray, the value of the voxel is recorded to build up a ray profile~\cite{levoy1988display}.
 
 \begin{figure}[htbp!]
 \centering
 \includegraphics[width=1.0\textwidth]{ray-march-diagram}
 \caption[FPBioimage: Raymarching facilitates volumetric rendering of 3D data]{In a traditional ray marching volumetric renderer, a colourless ray starts at the back of the volume, and picks up colour and transparency at each voxel it passes through. After its journey through the volume, it paints its accumulated colour to the screen pixel it lands on. }
-\label{fig:raymarchDiagram}
+\label{fig:raymarch-diagram}
 \end{figure}
 
 Volumetric rendering allows detail within the volume to be visualised~\cite{drebin1988volume}. 
 By tuning the opacity of each voxel, details which would be invisible in a surface rendering can be seen in context, through the outer voxels of the model. 
 
 The key drawback of volumetric rendering compared to geometric rendering is speed~\cite{dachille1998high}. 
-In the simple volumetric renderer shown in Figure~\ref{fig:raymarchDiagram}, a ray is calculated for each pixel on the screen - \num{2073600} pixels for a 1080p high definition display. 
+In the simple volumetric renderer shown in Figure~\ref{fig:raymarch-diagram}, a ray is calculated for each pixel on the screen - \num{2073600} pixels for a 1080p high definition display. 
 If each ray takes \num{512} samples as it passes through the volume, each rendering of the volume requires \num{1061683200}. 
 
 When rendering a single volumetric image, or even a video which is first rendered then presented at a later time, this is not an issue: the rays can computed in parallel across a cluster of computers, and with some patience the images will build up. 
@@ -84,7 +84,7 @@ The gaming industry has led to a rapid development of devices optimised for perf
 A single graphics processing unit (GPU) contains as many as 2560 individual processing cores~\cite{nvidia1080}, which can be used to calculate volumetric rays simultaneously. 
 Combined with intelligent optimisations to the rendering algorithm, GPUs found in devices ranging from laboratory workstations to smartphones now enable real-time volumetric visualisation on personal computers. 
 
-\subsection{WebGL}
+\subsection{WebGL enables volume rendering in a web browser}
 Since the development of highly parallel GPUs, a handful of free and commercial software has been released which provide volumetric rendering capabilities. 
 Popular programs used in the microscope community include ImageJ~\cite{schindelin2012fiji}, Icy~\cite{de2012icy}, and Imaris~\cite{imaris}; ITK-Snap~\cite{yushkevich2006user}, ParaView~\cite{ayachit2015paraview}, and ImageVis3D~\cite{imagevis3d2015interactive} are also used in the medical community for visualising patient data~\cite{madan2015creating}. 
 These programs provide advanced offline volumetric rendering, and FPBioimage is not designed to replace them; instead, the key feature of FPBioimage is providing rendering on the web, to facilitate easy and interactive sharing of 3D data. 
@@ -149,7 +149,7 @@ For fast development and future-proof compatibility with multiple devices, I cho
 This gives access to an extensive library of functions for creating dynamic 3D scenes, as well as a language for executing code on the graphics card.
 When the software is complete, Unity allows the designer to compile the `game' into compressed HTML/Javascript code to run in a web browser.
 
-\subsection{Fragment shader} \label{sec:shader}
+\subsection{The fragment shader calculates the colour of each screen pixel} \label{sec:shader}
 
 \begin{lstlisting}[language=C,caption={Fragment shader code for volumetric ray marching},label={snip:renderloop},frame=single]
 // Fragment shader
@@ -227,7 +227,7 @@ In the maximum intensity projection mode, the ray checks the mean colour of ever
 Note that mean colour is calculated as the sum of the red, green, and blue colour channels.
 Strictly we should divide by $3$ to calculate the true mean colour value; however, this would mean 2 extra divisions for every loop iteration for every pixel on the screen; removing this step has no effect on the comparison, but gives an improvement in frames rendered per second. 
 
-Before discussing the volumetric ray marching calculation, we should note that in this implementation the ray marches from the screen to the back of the cube - this is the opposite of traditional scheme shown in Figure~\ref{fig:raymarchdiagram}.
+Before discussing the volumetric ray marching calculation, we should note that in this implementation the ray marches from the screen to the back of the cube - this is the opposite of traditional scheme shown in Figure~\ref{fig:raymarch-diagram}.
 The reason for this is, of course, efficiency.
 As a ray progresses from a pixel through the cube, it becomes more and more opaque, denoted by the alpha value of the colour \texttt{ray\char`_col.a}.
 Once the alpha value reaches 1, any voxels further along the ray's path will not be visible, so there is no reason to look up their colour or add their contribution to the ray.
@@ -241,7 +241,7 @@ By looping for \texttt{MAX\char`_STEPS} iterations (which is currently set to 51
 
 There are two additional conditions which must be met for the volume renderer to add a voxel to the ray.
 Firstly, shown in line 38, the ray position must be within the unit cube and behind the clip plane.
-The clip plane can be used to cut open the volumetric model at any angle and position, and is described in more detail in Section~\ref{sec:fpbresults}.
+The clip plane can be used to cut open the volumetric model at any angle and position, and is described in more detail in Section~\ref{sec:fpbResults}.
 Secondly, the voxel's mean colour intensity must fall about the value of \texttt{\char`_Threshold} to contribute to the ray, ensuring that dark voxels around the volume are not visible.
 
 If all the aforementioned conditions are met, then the code in lines 49 - 51 performs the volumetric ray marching step - that is, the colour of the current voxel mixes onto the ray that is passing through it.
@@ -249,7 +249,7 @@ Firstly, the voxel's opacity is adjusted based on the input variable \texttt{\ch
 This new value of alpha is multiplied onto the voxel's colour so that more transparent voxels contribute less intensity to the ray.
 Finally, the adjusted voxel is added to the ray, with its contribution weighted by the current transparency of the ray.
 
-\subsection{Loading 3D data in WebGL} \label{sec:fpbVolumeRendering}
+\subsection{A texture atlas scheme enables efficient loading of 3D data} \label{sec:fpbVolumeRendering}
 To render volumetric images using the graphics card, the volumetric data must be loaded onto the graphics card in an appropriate form.
 WebGL 2.0 provides a \texttt{sample3D} class, which is able to store 3D images and return a voxel colour at a requested 3D coordinate.
 Unfortunately WebGL 1.0 does not have this functionality, and so an alternative scheme based on 2D textures has been devised.
@@ -329,7 +329,7 @@ for (int i=0; i<numSlices; i++){
 
 % Rendering paused when there is no user input. 
 
-\subsection{Movement and control}
+\subsection{Movement provides personal exploration of the data}
 FPBioimage would not be a particularly exciting real-time volumetric renderer if the user only had one view of the data.
 Thanks to the Unity library functions, implementing movement is a straightforward and resource-efficient process.
 
@@ -401,7 +401,7 @@ void FixedUpdate(){
 }
 \end{lstlisting}
 
-\subsection{Bookmarking}
+\subsection{Bookmarking is implemented with a state machine to share perspectives across the world}
 FPBioimage implements a bookmarking function to save a particular view with an annotation.
 The bookmarked view can then be shared with others as a web link, or restored on the same computer at a later time.
 
@@ -442,7 +442,7 @@ When the volume is being loaded, the bookmarking C\# script checks the URL of th
 This puts the bookmarking state machine into State 4, ready to show the bookmark and annotation text as soon as the volumetric model has loaded.
 In this way users can easily share specific views of the data across the globe.
 
-\subsection{Capturing screenshots}
+\subsection{Screenshots can be captured at a higher resolution than the display}
 FPBioimage provides the capture of high resolution screenshots, shown in Snippet~\ref{snip:screenshots}.
 
 When the \texttt{takeScreenshot} function is called, a new \texttt{RenderTexture} is created to save the current view to.
@@ -495,7 +495,7 @@ The FPBioimage software designed in Unity, as detailed in Section~\ref{sec:fpbSo
 In this section, all screenshots and tests were performed in Google Chrome version 58 on the Windows 10 operating system.
 However FPBioimage also runs without issue on any modern web browser, including Mozilla Firefox, Microsoft Edge, and Apple Safari, including mobile versions of these browsers.
 
-\subsection{User interface}
+\subsection{An intuitive interface requires no user training}
 Much care has been taken to ensure FPBioimage is a user-friendly piece of software.
 Many offline software packages already exist for rendering volumetric data; FPBioimage's unique selling point is that it runs in a web browser, to make sharing data with colleagues across the world a simple process.
 For this reason it is important that a non-expert user can simply browse to a website and use the software without any training.
@@ -610,7 +610,7 @@ This begins the process shown in Figure~\ref{fig:bookmarking-state-machine}.
 Creation of a bookmark is shown in Figure~\ref{fig:fpbBookmarkCreation}.
 When a bookmark is created or restored, the URL in the browser bar changes to encode the bookmark as a web link.
 This link can then be shared with other users, by email, text, or on social media, who will see exactly the same view when FPBioimage loads.
-This is demonstrated in Figure~\ref{fig:fpbBookmarkRestoration}, where the shared bookmark is opened on another computer, with a different browser and operating system.
+This is demonstrated in Figure~\ref{fig:fpbBookmarkRecieved}, where the shared bookmark is opened on another computer, with a different browser and operating system.
 
 \begin{figure}[htbp!]
 \centering
@@ -634,9 +634,9 @@ Mentioned briefly in Section~\ref{sec:fpbVolumeRendering}, the clipping plane pr
 The clipping plane's location is controlled with the IJKL keys, where I and K are used to move the clipping plane forward and back, and J and L rotate is around to cut the data at an arbitrary angle.
 Once an interesting cut has been made, the clipping plane can be locked in place with respect to the model by pressing the \textui{Lock Plane} button.
 With the clipping plane locked, the user can move the camera or the model to view the cut volumetric data from a different angle.
-Use of the clipping plane can therefore provide insightful perspectives of the volumetric data that are not possible to obtain with any other method, as shown in Figure~\ref{fig:fpbClippingPlane}.
+Use of the clipping plane can therefore provide insightful perspectives of the volumetric data that are not possible to obtain with any other method, as shown in Figures~\ref{fig:fpbRendering}b, e, h, and i.
 
-\subsection{Performance} \label{sec:fpbPerformance}
+\subsection{Measuring performance reveals compatibility with consumer-grade computers} \label{sec:fpbPerformance}
 Until recently, volume rendering was not possible in real time, and would be calculated given a specific camera perspective in advance to render either a single image or video.
 In 2000, Ray and Silver produced the Race II Engine, designed for dedicated hardware which could render [512$\times$512$\times$512] volumetric images in real time.
 This was achieved by realising the volume rendering algorithm described in Section~\ref{sec:volumerendering} with physical devices, with hundreds of calculations running in parallel to compute all rays at once~\cite{ray2000race}.
@@ -650,7 +650,7 @@ In order to support the full range of users, it was important to devise a scheme
 In the computer games industry, ``performance'' essentially means how many frames are rendered to the screen per second - assuming the graphics card is working at full capacity.
 If the graphics rendering does not require the full capacity of the graphics card, performance can be measured as the percentage of the graphics card's compute capabilities in use.
 In the tests presented in this chapter, performance is given in both frames per second (FPS) and graphics card usage percentage, measured using Windows Task Manager.
-Screenshots of the software under test are shown in Figure~\ref{fig:fpbTestScreenshots}.
+Screenshots of the software under test are shown in Figure~\ref{fig:fpb-quality}.
 
 ``Quality'' is harder to define.
 For a scene of simple 2D geometry quality could be measured by the XY-resolution of the screen, and we would expect performance to decrease as XY-resolution increases.
@@ -759,7 +759,7 @@ Furthermore, thanks to its open-source nature and an easy-to-use JSON interface,
 Finally, for users who want to view volumetric data on their mobile, I have created dedicated Android and iOS apps, which support virtual reality for truly immersive interaction with the data. % and Oculus?  
 Together with FPBioimage, this collection of applications has been branded FPBioimage Suite.
 
-\subsection{Plugins}
+\subsection{Plugins are available for popular image analysis programs}
 After the initial release of FPBioimage, uploading data to share with others was a convoluted process. 
 Users had to download a copy of FPBioimage, install it on their own personal web server, upload a stack of PNG files with a specific naming convention, edit some Javascript on a template webpage, and finally share the web link. 
 This is not an issue for any web developer, but was beyond the ability of many scientists who gather volumetric data. 
@@ -780,7 +780,7 @@ This reduces loading times in four ways: the overhead time associated with each 
 The plugin is distributed as an update site through the FIJI updater, and also through the Icy online plugin repository. 
 This makes it easy to keep up-to-date, so that users get the access to the latest features with as little effort as possible. 
 
-\subsection{OMERO-FPBioimage}
+\subsection{OMERO-FPBioimage integrates volume rendering with organised image repositories}
 OMERO is a web-based platform for managing scientific images~\cite{moore2015omero}. 
 Created by OME, the same team behind Bioformats, it integrates with a number of other software packages to help users upload their imaging data to a remote server, so that it can be accessed from anywhere. 
 Furthermore a web interface makes it easy for OMERO users to share their data with others, allowing them to perform further analysis or even meta-studies on independent image sets.
@@ -802,7 +802,7 @@ Close collaboration with the OMERO team means that OMERO now sends texture atlas
 The viewer has proved popular with OMERO users, finding diverse uses from plant sciences to pathology.
 It has been adopted as OMERO's default volumetric viewer, and is featured prominently on their webpage~\cite{omero2018website}.
 
-\subsection{Mobile Apps}
+\subsection{Mobile apps bring volume rendering to smartphones and virtual reality}
 Since FPBioimage is a web-based application, it will run on any device with a web browser. 
 This includes mobile devices, such as iPhones and Android smartphones, as well as tablet devices such as an iPad. 
 However, mobile browsers have limited access to the device's computational resources, causing long loading times and poor performance, characterised by a low frame rate. 
