@@ -57,7 +57,7 @@ Rather, they have a fast, directed velocity as they flow along ER tubes, but mov
 		\includegraphics[width=1.0\textwidth]{er-directed-flow-cumulative}
 		\caption{} \label{fig:er-directed-flow-cumulative}
 	\end{subfigure}	
-\caption[ER: Single particle tracking reveals directed flow in ER tubules]{(a) shows tracks of single particles in the ER, colour-coded according to the scale in (b) and (c). Fast, directed movement occurs in tubules, and slow movement occurs in nodes. A diffusive model, shown by the black line in (b) and (c) does not fit the distribution of velocities; a much better fit is provided using a model which combines directed and diffusive flow, shown by the dashed line. Graphs were created from n = \num{80563} tracks. } 
+\caption[ER: Single particle tracking reveals directed flow in ER tubules]{(a) shows tracks of single particles in the ER, colour-coded according to the scale in (b) and (c). Fast, directed movement occurs in tubules, and slow movement occurs in nodes. A diffusive model, shown by the black line in (b) and (c) does not fit the distribution of velocities; a much better fit is provided using a model which combines directed and diffusive flow, shown by the dashed line. Cell culture and staining was performed by Edward Avezov, and single particle tracking by David Holcman. Graphs were created from n = \num{80563} tracks. } 
 \label{fig:ER-directed-flow-velocity}
 \end{figure}
 
@@ -77,7 +77,7 @@ Consistent with previous studies~\cite{nehls2000dynamics}, tracking directed flo
 		\includegraphics[width=1.0\textwidth]{er-fret-probe}
 		\caption{} \label{fig:er-fret-probe}
 	\end{subfigure}	
-	\caption[ER: Flow velocity is reduced upon ATP depletion; a FRET probe reveals this is not due to increased crowding]{(a) shows that mean flow velocity decreased 4$\times$ when ATP was depleted from the cell. A FRET probe was used to assess crowding of luminal ER proteins, shown in (b). Although hypoosmotic conditions caused a decrease in crowding and hyperosmotic conditions caused an increase in crowding, due to expansion and contraction of the cell size respectively, depleting ATP did not change crowding of luminal proteins, countering the argument that a decrease in flow velocity is due to crowding of proteins.} 
+	\caption[ER: Flow velocity is reduced upon ATP depletion; a FRET probe reveals this is not due to increased crowding]{(a) shows that mean flow velocity decreased 4$\times$ when ATP was depleted from the cell. A FRET probe was used to assess crowding of luminal ER proteins, shown in (b). Although hypoosmotic conditions caused a decrease in crowding and hyperosmotic conditions caused an increase in crowding, due to expansion and contraction of the cell size respectively, depleting ATP did not change crowding of luminal proteins, countering the argument that a decrease in flow velocity is due to crowding of proteins. Measurements were performed by Edward Avezov. } 
 	\label{fig:er-atp}
 \end{figure}
 
@@ -89,10 +89,10 @@ When depleting ATP, there is no change in lifetime;
 therefore we dismiss the hypothesis that the change in protein mobility is due to increased crowdedness, but relies on an active, ATP-dependent mechanism.
 
 \subsection{Structure of this chapter}
-As part of a collaboration with the authors who first observed directed ER flow, I investigated potential mechanisms for flow. 
-Utilising the unique capabilities of structured illumination microscopy (SIM) and computational analysis, evidence is presented that ER luminal flow is caused by pinching of the ER membrane.
+As part of a collaboration with David Holcman and Edward Avezov, the authors who first observed directed ER flow, I investigated potential mechanisms for flow. 
+Utilising the unique capabilities of structured illumination microscopy (SIM) and computational analysis, evidence is presented in this chapter that ER luminal flow is caused by pinching of the ER membrane.
 
-The Results and Methods section which follows details 3 key contributions which I personally made to the published study:
+The results and methods section which follows details 3 key contributions which I personally made to the published study:
 \begin{enumerate}
 	\item Measuring dynamic network arrangement with SIM imaging and computational analysis
 	\item Imaging tubule pinching with TIRF-SIM and extracting statistics regarding pinching frequency
@@ -100,7 +100,7 @@ The Results and Methods section which follows details 3 key contributions which 
 \end{enumerate}
 
 Conclusions and future work extending the findings presented here are given at the end of the Chapter. 
-Further details of the full study can be found in \textit{Nature Cell Biology}. 
+Further details of the full study can be found in \textit{Nature Cell Biology}~\cite{holcman2018single}. 
 
 \section{Results and methods} \label{sec:ERresults}
 \subsection{High-speed SIM and image analysis reveals a dynamic ER network} \label{sec:ERnetwork}
@@ -108,15 +108,14 @@ Utilising the high-speed imaging capability of the LAG SIM, we  observed that th
 Imaging was performed at a raw frame rate of \SI{99}{\hertz}, corresponding to a reconstructed frame rate of \SI{11}{\hertz}. 
 
 For optimal imaging conditions, COS-7 cells were selected for the investigation. 
-These characteristically flat cells, with a maximum height of \SI{\sim 10}{\micro\meter}, % Check and cite this?
-meant that the whole ER network could be imaged by LAG SIM in TIRF mode, which physically removes out-of-focus light. % Need to mention TIRF in the SIM chapter then. 
-
+These characteristically flat cells, with a height of <\SI{\sim 10}{\micro\meter}, % Check and cite this?
+meant that the whole ER network could be imaged by LAG SIM in TIRF mode, which physically removes out-of-focus light. 
 The ER network was labelled with ER-Tracker\textsuperscript{TM} Green, a fluorescent dye from ThermoFisher excited at \SI{488}{\nano\meter}. 
 This allowed SIM to achieve its highest resolution imaging of \SI{85}{\nano\meter}. 
 
 To verify our observations, and ensure relevance to human pathology, we also used HEK-293 cells labelled with tetramethylrhodamine (TMR) attached to luminal ER proteins with HaloTag® technology. 
 These thicker cells were imaged with optical sectioning LAG SIM, since TIRF only showed small fragments of ER close the coverglass. 
-Images in this chapter are described as COS-7-ERT, COS-7-TMR, and HEK-293-ERT, and HEK-293-TMR to describe COS-7 and HEK-293 cells labelled with ER-Tracker\textsuperscript{TM} Green or TMR. 
+Images in this chapter are described as COS-7-ERT, COS-7-TMR, and HEK-293-ERT, and HEK-293-TMR to describe COS-7 and HEK-293 cells labelled with ER-Tracker\textsuperscript{TM} Green or TMR respectively. 
 
 \begin{figure}[htbp!]
 \centering
@@ -156,8 +155,8 @@ Therefore a single value threshold was not appropriate to generate binary images
 
 Instead a machine learning technique was used to classify ER pixels from background pixels. 
 Using the WEKA Segmentation plugin for ImageJ~\cite{arganda2017trainable}, a set of training data was generated by manually classifying ER pixels and background pixels. 
-The Adaboost algorithm was used to quickly refine the classification, leading to a reliable and automated adaptive thresholding method~\cite{freund1997decision, schapire1999brief}. 
-The output of WEKA Segmentation shown in Figure~\ref{fig:ER-classifier-weka} successfully extracts the ER network even with the unideal imaging properties of HEK-293 cells. 
+The Adaboost algorithm was used to quickly refine the classification~\cite{freund1997decision, schapire1999brief}, leading to a reliable and automated adaptive thresholding method. 
+The output of WEKA Segmentation in Figure~\ref{fig:ER-classifier-weka} successfully extracts the ER network even with the unideal imaging properties of HEK-293 cells. 
 
 \begin{figure}[htbp!]
 	\centering
@@ -204,13 +203,13 @@ However tracking of nodes revealed an average speed of just \SI[separate-uncerta
 Furthermore, we calculated that just \SI[separate-uncertainty=true]{0.14 \pm 0.04}{\percent} of tubules were growing at any given time. 
 We conclude that tubule growth and node movement have a negligible contribution to particles' diffusion and flow velocities. 
 
-Experiments are now underway to understand the biochemistry behind network rearrangement, which is described in more detail in the Future Work Section~\ref{sec:ERfuture}. 
+%Experiments are now underway to understand the biochemistry behind network rearrangement, which is described in more detail in the Future Work Section~\ref{sec:ERfuture}. 
 
 \subsection{Active tubule pinching correlates with luminal flow velocity}
 The motion of luminal proteins suggested the possibility of nanoperistalsis-like propulsion~\cite{nadeem2014mathematical}, attainable by tubule contractions. 
 Using the LAG SIM in TIRF mode, we obtained images at \SI{11}{\hertz}, with a resolution of \SI{85}{\nano\metre}, and were able to observe pinching of the tubule. 
 
-ER tubules are \SIrange{60}{100}{\nano\metre} [cite!] in width, so observing pinching requires a microscope that can image beyond the diffraction limit. 
+ER tubules are \SIrange{60}{100}{\nano\metre} in width, so observing pinching requires a microscope that can image beyond the diffraction limit~\cite{lippincott1989rapid}. 
 When ER tubules pinch, their width decreases to below the resolution limit of SIM; however this can still be observed as a decrease in intensity, confirmed by the simulation shown in Figures~\ref{fig:er-pinching}a-f. 
 
 \begin{figure}[tbp]
@@ -308,13 +307,13 @@ The program will accept any binary network image as an input, and will perform t
 Dynamics are modelled in the network at a particle level. 
 Each particle which is spawned in the network has a physics script attached to it controlling its diffusive motion and its flow velocity when in the vicinity of a pinch. 
 
-Diffusive motion was modelled as Brownian motion. \cite{einstein1905molekularkinetischen}
+Diffusive motion was modelled as Brownian motion~\cite{einstein1905molekularkinetischen}.
 After travelling a random distance, sampled from a distributed centred on the mean free path, particles randomly change direction as though collided into by an invisible particle~\cite{lucretius1631}. 
 Diffusion properties are set in the simulation with two of either mean free path $\delta$, time between collisions $\tau$, mean velocity $v$, or the diffusion coefficient $D$, related by $D=\frac{\delta^2}{2\tau}=\frac{v\delta}{2}$~\cite[\textit{ch. 19}]{fishbane1998physics}. 
 
 Pinching of the ER tubules simulated a force on particles in the vicinity of the pinch point. 
 As the tubule contracts, this force acts away from the pinch, in a direction along the tubule, and decays exponentially over time. 
-When the pinch point relaxes, the force acts in the opposite direction. 
+When the pinch point relaxes, the force acts in the opposite direction, sucking particles towards the pinch point. 
 The magnitude of the force is an adjustable parameter, to control overall energy in the system. 
 
 Inelastic collisions were modelled with the NVIDIA PhysX engine~\cite{nvidia2008physx}. 
@@ -357,7 +356,7 @@ Pinching dynamics allow particles are able to travel greater distances in the ne
 
 Furthermore, particle motion with ER pinching results in homogeneous mixing in a shorter space of time. 
 After \SI{30}{\second} of simulation with pinching, the middle section of the graph is 84\% mixed - where mixing percentage is measured as the sum of the second- and third-most abundant particle colour in an area divided by 2$\times$the most abundant particle colour. 
-Under pure Brownian motion, however, the middle section is only 36\% mixed; and the edge sections even less so. 
+At the same timepoint under pure Brownian motion, however, the middle section is only 36\% mixed; and the edge sections even less so. 
 Figure~\ref{fig:mixing-over-time-graph} shows how mixing in the middle section develops over time; pinching allows mixing to occur 3$\times$ faster than diffusive motion alone. 
 Overall, particles are mixed faster with ER pinching. 
 
@@ -376,7 +375,7 @@ Parameters were tuned to ensure the same average particle speed in the two mixin
 A plot of a single particle's trajectory through the network is shown in Figure~\ref{fig:ER-simulation-magic-particle}, which is consistent with the experimental data in Figure~\ref{fig:er-directed-flow-velocity}. 
 
 Understanding the reason for ER pinching allows us to associate diseases with ER malfunction. 
-In cells with long projections, such as motor neurons, transporting luminal protein to remote parts of the cell quickly could be vital for correct operation. 
+In cells with long projections, such as motor neurons, transporting luminal protein to remote parts of the cell quickly could be vital for healthy cellular function. 
 
 \section{Conclusion} 
 In the \textit{Nature Cell Biology} paper, we present evidence that the movement of proteins in the ER is not diffusive, but also has an ATP-dependent directed-flow component~\cite{holcman2018single}.
@@ -393,11 +392,11 @@ Using the NVIDIA PhysX engine to perform simulations of proteins moving in the E
 Tuning the simulation to ensure the same average particle speed in both the pinching and Brownian motion schemes to ensure a fair comparison showed that mixing occurs up to 3$\times$ faster in a network with pinching.
 Pinching therefore reduces the time taken for proteins to reach remote areas of the network, such as by the cell membrane. 
 
-Since ER is found in most eukaryotic cells, it is unsurprising that its malfunction is associated with a range of diseases. 
+Since ER is found in most eukaryotic cells, it is unsurprising that its malfunction is associated with a wide range of diseases. 
 By contributing to the community's fundamental understanding of ER mechanisms, we advance our capability for finding cures. 
 
 \section{Future research} \label{sec:ERfuture}
-The dynamic rearrangement of the ER network has been observed by several groups [cite cite cite]. 
+The dynamic rearrangement of the ER network has been observed by several groups~\cite{nixon2016increased, pendin2011balancing, yamanaka2018er}. 
 Furthermore is it now known that ER exhibits strong contact with all other organelles. 
 Nevertheless, the mechanisms for network rearrangement are not well understood. 
 

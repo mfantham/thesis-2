@@ -125,25 +125,25 @@ A line profile through the OTF of an ideal lens in Figure~\ref{fig:microscope-OT
 In a practical set-up, noise further limits the resolvable contrast at high frequencies, such that signal-to-noise ratio decreases as spatial frequency increases. 
 
 \begin{figure}[tbp]
-\centering
+\vspace{-6pt} \centering
 \begin{subfigure}[b]{0.49\textwidth}
-	\includegraphics[width=\textwidth]{microscope-OTF}
+	\includegraphics[width=\textwidth]{microscope-OTF}\vspace*{-16pt}
 	\caption{}\label{fig:microscope-OTF}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.49\textwidth}
-	\includegraphics[width=\textwidth]{sim-OTF-peaks}
+	\includegraphics[width=\textwidth]{sim-OTF-peaks}\vspace*{-16pt}
 	\caption{}\label{fig:OTF-sim-peaks}
-\end{subfigure}
+\end{subfigure} \vspace{-22pt}
 
 ~\newline
 \begin{subfigure}[b]{0.49\textwidth}
-	\includegraphics[width=\textwidth]{wiener-no-apo}
+	\includegraphics[width=\textwidth]{wiener-no-apo}\vspace*{-16pt}
 	\caption{}\label{fig:wiener-no-apo}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.49\textwidth}
-	\includegraphics[width=\textwidth]{wiener-plus-apo}
+	\includegraphics[width=\textwidth]{wiener-plus-apo}\vspace*{-16pt}
 	\caption{}\label{fig:wiener-plus-apo}
 \end{subfigure}
 
@@ -541,7 +541,7 @@ The online Labstep logbook can be opened by clicking the \texttt{Open logbook} b
 \begin{figure}[htbp!]
 \centering
 \includegraphics[width=1.0\textwidth]{labstep-timeline}
-\caption[LAG SIM: Logging user activity with Labstep allows any problems to be identified and fixed quickly]{User activity is automatically logged to an online logbook hosted on Labstep to identify and fix any problems quickly. This figure shows Miranda logged onto the SIM at 09:00, acquired 2 images, then logged off.} % oops, haven't got her logging off or acquiring 2 images!!! 
+\caption[LAG SIM: Logging user activity with Labstep allows any problems to be identified and fixed quickly]{User activity is automatically logged to an online logbook hosted on Labstep to identify and fix any problems quickly. This figure shows Miranda logged onto the SIM at 09:00, acquired 2 images - a SIM z-stack then a 1000-frame widefield video - then logged off.}
 \label{fig:labstepTimeline}
 \end{figure}
 
@@ -661,29 +661,32 @@ Illumination detection with LAG SIM has been designed to require the least amoun
 The user simply needs to select the objective lens used, and the software will infer the necessary information such as pixel size and numerical aperture. 
 Wavelength can be extracted directly from the filename if the file is saved using the correct naming convention. 
 
-\begin{table}
-\caption[LAG SIM: Resolution improvement for different lenses, wavelengths, and SLM grating patterns]{\label{tab:resolution}The table shows the different resolution improvement} %TODO make better
+\begin{table}[h!]
+\caption[LAG SIM: Resolution improvement for different lenses, wavelengths, and SLM grating patterns]{\label{tab:resolution}The table shows the resolution enhancement factors for each combination of lens, laser, and SLM mode available for the LAG SIM. When the 100X lens is used in TIRF mode, the full 2$\times$ resolution improvement can be achieved. Note that the 60X ``tSIM*'' mode uses the same SLM patterns as 100X tSIM, but because the 60X lens is not designed for TIRF this does not create to total internal reflection at the coverglass. } 
 \centering
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 Lens &	Laser (nm) &	Emission (nm) & SLM Mode & Resolution improvement \\ \hline
-100X &	488 &	525 &	SIM &	1.78 \\
-100X &	561 &	600 &	SIM &	1.89 \\
-100X &	640 &	676 &	SIM &	1.8 \\
-100X &	488 &	525 &	tSIM &	2.04 \\
-100X &	640 &	676 &	tSIM &	2.01 \\
 60X &	488 &	525 &	SIM &	1.59 \\
 60X &	561 &	600 &	SIM &	1.67 \\
 60X &	640 &	676 &	SIM &	1.61 \\
 60X &	488 &	525 &	tSIM* &	1.78 \\
-60X &	640 &	676 &	tSIM* &	1.76 \\ \hline
+60X &	640 &	676 &	tSIM* &	1.76 \\
+100X &	488 &	525 &	SIM &	1.78 \\
+100X &	561 &	600 &	SIM &	1.89 \\
+100X &	640 &	676 &	SIM &	1.8 \\
+100X &	488 &	525 &	tSIM &	2.04 \\
+100X &	640 &	676 &	tSIM &	2.01 \\ \hline
 \end{tabular}
 \end{table}
 
-After this process, the software provides feedback to the user about how well the parameters were detected, based on the modulation depth. 
-If modulation contrast is low (<0.5), the software waits for user confirmation that they wish to continue with the reconstruction, and recommends that they need to capture higher quality SIM images. 
+After this process, the software provides feedback to the user about how well the parameters were detected, based on the modulation depth and the pattern locations in Fourier space.
+LAG SIM has well-defined resolution enhancement factors based on the period of the SLM grating patterns, shown in Table~\ref{tab:resolution}. 
+The resolution enhancement factor is calculated as $1 + \dfrac{t}{O_r}$, where $O_r$ is the radius of the lens' OTF for the given emission wavelength and $t$ is the spatial frequency of the illumination pattern. 
+If the detected pattern parameters do not correspond to the expected resolution enhancement factor for a given lens, wavelength, and SLM mode combination then a warning is presented to the user. 
+ 
+If the Fourier space position is correct but modulation contrast is low (<0.5), the software waits for user confirmation that they wish to continue with the reconstruction, and recommends that they need to capture higher quality SIM images. 
 Note that feedback is not provided in batch-reconstruction mode. 
-%TODO add a paragraph on resolution improvement
 
 \subsection{Wiener filtering and apodisation reduces noise, but can introduce artefacts}
 When the Wiener filtering scheme is used for noise removal, the Wiener parameter and apodisation parameters are used in a complementary fashion. 
