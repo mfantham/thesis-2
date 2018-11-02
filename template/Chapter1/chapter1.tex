@@ -14,20 +14,21 @@
 \section{Breaking the diffraction limit reveals structure below 200\,nm}
 Our understanding of the biology of life is limited to what we can observe. 
 Naked human vision is limited to a spatial resolution on the order of \textasciitilde\SI{100}{\micro\metre}~\cite{devalois1990spatial}.
-The invention of high power microscopes, often attributed to van Leeuwenhoek in 1660~\cite{van1800select}, and pioneering experiments by Robert Hooke~\cite{hooke1667micrographia} and Swammerdam~\cite{swammerdam1758book} around the same time, revealed that the building blocks of life are invisible to the naked human eye. 
+The invention of high power microscopes, often attributed to van Leeuwenhoek in 1660~\cite{van1800select}, and pioneering experiments by Robert Hooke~\cite{hooke1667micrographia} and Swammerdam~\cite{swammerdam1758book} around the same time, revealed phenomena previously invisible to the naked human eye. 
 
-Lens technology continuously improved through the 17\textsuperscript{th} and 18\textsuperscript{th} Centuries~\cite{dollond1753xiv, daumas1972scientific}, revealing smaller and smaller objects, until in 1873 Abbe showed that the diffraction of light as it passes through a lens places a fundamental limit on the size of objects which can be resolved~\cite{abbe1873beitrage}. The famous Abbe diffraction limit, shown in Equation~\ref{eq:abbe}, states that the minimum separation distance, $d$, at which two objects can be resolved decreases with the wavelength of light, $\lambda$, but increases with the lens' acceptance angle, $\alpha$, and refractive index of the medium between the lens and the object, $n$. The wavelength range of visible light is \SIrange[range-phrase=--]{400}{700}{\nano\metre}, and the maximum acceptance angle of a lens approaches \SI{90}{\degree}. The refractive index of air is $1.0$, although special immersion oils can be used to increase $n$ to \textasciitilde\num{1.5}. Using Equation~\ref{eq:abbe}, we then calculate that the maximum resolution of a microscope lens is \textasciitilde\SI{200}{\nano\metre}. 
+Lens technology continuously improved through the 17\textsuperscript{th} and 18\textsuperscript{th} Centuries~\cite{dollond1753xiv, daumas1972scientific}, revealing smaller and smaller objects, until in 1873 Abbe showed that the diffraction of light as it passes through a lens places a fundamental limit on the size of objects which can be resolved~\cite{abbe1873beitrage}. The famous Abbe diffraction limit, given in Equation~\ref{eq:abbe}, states that the minimum separation distance, $d$, at which two objects can be resolved decreases with the wavelength of light, $\lambda$, but increases with the lens' acceptance angle, $\alpha$, and refractive index of the medium between the lens and the object, $n$. The wavelength range of visible light is \SIrange[range-phrase=--]{400}{700}{\nano\metre}, and the maximum acceptance angle of a lens approaches \SI{90}{\degree}. The refractive index of air is $1.0$, although special immersion oils can be used to increase $n$ to \textasciitilde\num{1.5}. Using Equation~\ref{eq:abbe}, we then calculate that the maximum resolution of a microscope lens is \textasciitilde\SI{200}{\nano\metre}. 
 
 \begin{equation} \label{eq:abbe}
 d = \frac{\lambda}{2n\sin\left (\alpha  \right )}\end{equation}
 
-A number of technologies which are not based on optics exist to greatly surpass the resolution of optical microscopes, including transmission electron microscopy and scanning electron microscopy~\cite{reinhold1931configuration, wells2006early, reimer2013transmission}.
-However due to sample preparation requiring a combination of freezing, fixation or a toxic staining~\cite{kuo2007electron}, as well as leathal minimum electron doses~\cite{de2016live}, these techniques are not compatible with live cell biology.
+A number of technologies which are not based on visible light exist to greatly surpass the resolution of optical microscopes, including transmission electron microscopy and scanning electron microscopy~\cite{reinhold1931configuration, wells2006early, reimer2013transmission}.
+However these techniques use a minimum electron dose which is lethal to cells~\cite{de2016live}, and require sample preparation whicih includes a combination of freezing, fixation or toxic staining~\cite{kuo2007electron}.
+Electron microscopy techniques are therefore incompatible with live cell biology.
 
 Furthermore, the invention of fluorescent labelling gives optical microscopy a distinct advantage over any other microscopy technique in terms of specificity. 
 Sophisticated biochemistry, based on antibody chemistry, genetic expression, and other biotechnologies, can be used to label specific cellular compartments or organelles with fluorescent molecules~\cite{day2014fluorescent}. 
 When these fluorescent molecules are illuminated with a certain wavelength of light, they absorb photons, exciting electrons to a higher electronic energy state~\cite[\textit{ch. 1}]{lakowicz2007principles}. 
-The electrons lose some energy through so-called vibrational states, then as the electron falls back to the ground electronic state photons are emitted at a red-shifted wavelength - where the wavelength shift is proportional to the energy lost through the vibrational states, as per the Plank-Einstein relation $E=hf=hc/\lambda$~\cite[\textit{ch. 39}]{halliday2010principles}. 
+The electrons lose some energy through so-called vibrational states, then as the electron falls back to the ground electronic state photons are emitted at a red-shifted wavelength - where the wavelength shift is proportional to the energy lost through the vibrational states, as per the Plank-Einstein relation $E=h\nu=hc/\lambda$~\cite[\textit{ch. 39}]{halliday2010principles}. 
 
 Fluorescent labelling has a number of unique applications. 
 Firstly, since the light used to excite fluorescence is blocked by filters before it reaches the observer, only fluorescence emission light is seen through the microscope~\cite{ploem1967use}. 
@@ -36,16 +37,19 @@ Furthermore the specificity of labelling means that other parts of the cell whic
 Finally, if two or more fluorescent labels are used with non-overlapping fluorescent spectra, then imaging in multiple channels can be used for colocalisation studies, for example to confirm that a certain protein interacts with a certain organelle~\cite{dunn2011practical}. 
 
 The unique advantages of florescent labelling have motivated researchers in the last two decades to invent optical methods to image at resolutions below the diffraction limit~\cite{cornea2014fluorescence}.
-Whilst it remains impossible to capture an individual image beyond the diffraction limit, digital cameras and intensive computational reconstruction has enabled techniques which sacrifice temporal resolution for enhanced spatial resolution.
+Whilst it remains impossible to capture an individual image beyond the diffraction limit, digital cameras and intensive computational reconstruction have enabled techniques which sacrifice temporal resolution for enhanced spatial resolution.
 This is the principle behind techniques based on Photoactivated Localisation Microscopy (PALM)~\cite{betzig2006imaging} and Stochastic Optical Reconstruction Microscopy (STORM)~\cite{rust2006sub}: in each image, only a small fraction (<\SI{1}{\percent}) of fluorophores are emitting light.
-Assuming that two adjacent fluorophores do not emit simultaneously, the centre of the diffraction pattern is calculated as the true location of the molecule; when this is applied to a dataset of \num{1000}+ images, a super-resolution image is constructed. 
+Assuming that two adjacent fluorophores do not emit simultaneously, the centre of the diffraction pattern is calculated as the true location of the molecule; when this is applied to a dataset of \num{1000}+ images, a super-resolution image can be constructed. 
 
-STORM is able to achieve a spatial resolution of \textasciitilde\SIrange[range-phrase=--]{10}{20}{\nano\metre}; however it takes around \SIrange[range-phrase=--]{1}{5}{\minute} to generate such an image~\cite{heilemann2008subdiffraction}.
+STORM is able to achieve a spatial resolution of \textasciitilde\SIrange[range-phrase=--]{10}{20}{\nano\metre}; however it takes around \SIrange[range-phrase=--]{1}{5}{\minute} of imaging to capture the data for a single reconstructed STORM image~\cite{heilemann2008subdiffraction}.
 Dynamic events in live cell biology cannot be captured, and so a faster technique must be used for such experiments. 
 
-Structured illumination microscopy (SIM), as refined for super-resolution by Gustafsson, utilises 9 raw images to reconstruct a resolution-enhanced image up to twice the diffraction limit of the lens~\cite{gustafsson2000surpassing}.
+Structured illumination microscopy (SIM) can produce a resolution-enhanced image beyond the diffraction limt with just 9 raw images~\cite{gustafsson2000surpassing}.
 Using state-of-the-art lenses and cameras, this can produce images with a spatial resolution of <\SI{100}{\nano\metre}, at a video rate of \SI{11}{\hertz}~\cite{young2016guide}.  
 This microscopy technique is described in detail in Chapter~\ref{chap:LAGSIM}. 
+
+% Probably need to add in a whole subsection about 3D data... ! 
+\texttt{TODO: Introduce 3D microscopy properly}
 
 Furthermore many modern microscopy techniques, including SIM, confocal~\cite{white1987evaluation, marvin1961microscopy}, optical projection tomography (OPT)~\cite{sharpe2002optical}, and single plane illumination microscopy (SPIM)~\cite{huisken2004optical}, are able to capture information inside the biological sample, creating a 3-dimensional (3D) volumetric dataset. 
 A new tool for visualising the data produced by such microscopes is presented in Chapter~\ref{chap:FPB}. 
@@ -53,11 +57,11 @@ A new tool for visualising the data produced by such microscopes is presented in
 
 \section{Cell biology for microscopy}
 The tools described in Chapters~\ref{chap:LAGSIM} and \ref{chap:FPB} of this document have valuable applications in cell biology, which are detailed in Chapters~\ref{chap:MOF} and \ref{chap:ER}.
-Since this thesis covers a broad range of themes, from engineering through computer science to biology, this section is included to provide a basic understanding of cell biology necessary for appreciating the findings detailed in the application chapters. 
+Since this thesis covers a broad range of themes, from engineering through computer science to biology, this section is included to provide a background of cell biology necessary for appreciating the findings detailed in the application chapters. 
 
 \subsection{Labelling organelles to visualise cell location}
 Figure~\ref{fig:animal-cell} shows a generic animal cell~\cite{wikicell}. 
-Highlighted in colour are 8 organelles which are utilised in this thesis. 
+Highlighted in colour are 8 organelles which are investigated in work presented in this thesis. 
 
 \begin{figure}[htbp!]
 \centering
@@ -90,11 +94,11 @@ Highlighted in colour are 8 organelles which are utilised in this thesis.
 Each of the organelles highlighted in Figure~\ref{fig:animal-cell} can be labelled with a fluorescent marker.
 Fluorescent labelling can provide a variety of information about the cell, depending on the function of the organelles of interest~\cite{day2014fluorescent}. 
 
-The cell nucleus contains DNA, the genetic encoding for life~\cite{alberts2002molecular}, and can be visualised under a microscope by labelling with DAPI or SiR-DNA~\cite{kapuscinski1995dapi, lukinavivcius2015sir}. 
-Labelling the nucleus provides an easy method of automated cell counting, or an easy method for locating cells if it is not obvious from other labels~\cite{porter1980use}. 
+The cell nucleus contains DNA, the genetic code of life~\cite{alberts2002molecular}, and can be visualised under a microscope by labelling with dyes such as DAPI or SiR-DNA~\cite{kapuscinski1995dapi, lukinavivcius2015sir}. 
+Labelling the nucleus provides an easy method of automated cell counting, or an easy method for locating cells if it is not clear from other labels~\cite{porter1980use}. 
 
 The contents of the cell are contained by the cell membrane, which acts as a barrier between the contents of the cell and extra-cellular space~\cite[\textit{ch. 1}]{alberts2013essential}. 
-Membrane proteins can be specifically labelled to visualise the outline of cells, to confirm whether another fluorescent object is located inside or outside the cell~\cite{yano2009tag, lee2011fluorescent, chamma2017optimized}. 
+Membrane proteins can be specifically labelled to visualise the outline of cells, to confirm whether another fluorescent object is located inside or outside of the cell~\cite{yano2009tag, lee2011fluorescent, chamma2017optimized}. 
 
 \subsection{Labelling membrane structures to observe endocytosis}
 The cell can import useful raw materials into the cell through a process called endocytosis~\cite{alberts2002molecular}. 
@@ -103,13 +107,13 @@ Once inside the cell, there are many pathways for processing the endocytosed con
 A typical pathway, shown in Figure~\ref{fig:endocytosis-pathway} imports contents into small vesicles called early endosomes, which are selectively sorted to either recycle the contents to the cell membrane or develop into late endosomes. 
 Late endosomes have an acidic environment, about pH\,\num{5.5}, and begin hydrolytic digestion of their contents~\cite{geisow1984ph}. 
 Late endosomes mature into lysosomes with a more acidic environment and enzymes to further break down their contents~\cite{alberts2002molecular}. 
-Labelling endosomes or lysosomes alongside other objects can be used for colocalisation studies, as performed in Chapter~\ref{chap:MOF}, which show whether another fluorescent substance is contained within the organelle or is free to move in the cytosol~\cite{pike2017quantifying}. 
+Labelling endosomes or lysosomes alongside other objects can be used for colocalisation studies, as performed in Chapter~\ref{chap:MOF}, which show whether another fluorescent substance is contained within the organelle or is moving freely in the cytosol~\cite{pike2017quantifying}. 
 
 \begin{figure}[htbp!]
 \centering
 \includegraphics[width=1.0\textwidth]{endocytosis-pathway}
 \captionsetup{singlelinecheck=off}
-\caption[Introduction: Cells import external contents through endocytosis]{A typical endocytosis pathway, adapted from ~\cite{alberts2002molecular} shows the formation of various organelles, each of which contains a different environment for ingestion and processing of the external contents. Other endocytosis pathways also occur, for example to pass the contents to ER or release it directly into the cytosol. }
+\caption[Introduction: Cells import external contents through endocytosis]{A typical endocytosis pathway shows the formation of various organelles, each of which contains a different environment for ingestion and processing of the external contents. Other endocytosis pathways also occur, for example to pass the contents to ER or release it directly into the cytosol. Figure adapted from ~\cite{alberts2002molecular}. } % Check chapter I adapted this from? 
 \label{fig:endocytosis-pathway}
 \end{figure}
 
@@ -132,7 +136,7 @@ This solution is so dense that the cytosol behaves as a water-based gel rather t
 
 \subsection{Labelling the cytoskeleton reveals cellular structure}
 The cellular cytoskeleton is composed of long, fine protein filaments forming a system of girders, ropes, and motors to give the cell mechanical strength, control its shape, and drive movement~\cite{alberts2013essential}.
-Shown in Figure~\ref{fig:cytoskeleton}, there are three types of filament: microtubules, actin, and intermediate filaments. 
+There are three types of filament: microtubules, actin, and intermediate filaments, as seen in Figure~\ref{fig:cytoskeleton}. 
 Labelling these components with fluorescent markers provides a clear visualisation of the cell boundary, and shows strong colocalisation between filaments and other organelles~\cite{melkov2017regulation}. 
 They are also often used as test samples to assess the performance of a microscope, for example determining resolution by measuring the minimum resolvable separation distance between two fibres~\cite{dyba2003immunofluorescence, wegel2016imaging}. 
 
@@ -143,7 +147,8 @@ They are also often used as test samples to assess the performance of a microsco
 \label{fig:cytoskeleton}
 \end{figure}
 
-\section{Structure of this document}
+\section{Structure of this thesis}
+%TODO reword all of this
 
 \subsection{Chapter contents for quick reference}
 Since October 2015, I have been working in the Laser Analytics Group building tools and applying them to answer biological questions. 
@@ -163,17 +168,5 @@ Computational analysis is used to understand and interpret experimental results,
 Each chapter begins with its own detailed introduction to the topic, including background information and a review of relevant literature. 
 
 Finally, a concluding Chapter~\ref{chap:conclusion} highlights the key discoveries and contributions made as part of this work.
-
-\subsection{Aims of this document}
-As a body of work, this document serves at least three purposes. 
-
-Foremost, it is a document of evidence that I have designed and conducted my own research experiments, and have reached the level required for Doctor of Philosophy. 
-
-Secondly, it is provided as a resource to researchers continuing my work in the Laser Analytics Group. 
-Development and use of the tools is described in detail, which should allow for their continued evolution as new technology becomes available. 
-
-Finally, this document provides a memento to myself of my PhD experience. 
-I am proud of what I have achieved alongside my collaborators, and have included some of my favourite quotes at the start of each chapter; these simply serve as a reminder to myself that others appreciate my hard work and that the effort has undoubtedly been worth it. 
-
 
 % Nomenclature command could be useful. 

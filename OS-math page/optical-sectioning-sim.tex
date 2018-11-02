@@ -1,0 +1,112 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[makeroom]{cancel}
+\usepackage[latin1]{inputenc}
+\usepackage[left=37mm,right=30mm,top=35mm,bottom=30mm]{geometry}
+
+% Preamble:
+\usepackage{mathtools}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+
+\begin{document}
+\section*{Square-law detector}
+\begin{equation*}
+I_1 = W(1+m\cos(tx)), I_2 = W(1+m\cos(tx+\frac{2\pi}{3})), I_2 = W(1+m\cos(tx-\frac{2\pi}{3}))
+\end{equation*}
+\begin{equation*}
+I_r^2 = (I_1 - I_2)^2 + (I_1 - I_3)^2 + (I_2 - I_3)^2
+\end{equation*}
+\begin{align*}
+=W^2m^2\Bigg(\left(\cos(tx)-\cos(tx+\frac{2\pi}{3})\right)^2&+\left(\cos(tx)-\cos(tx-\frac{2\pi}{3})\right)^2+\\&\left(\cos(tx+\frac{2\pi}{3})-\cos(tx-\frac{2\pi}{3})\right)^2\Bigg)
+\end{align*}
+\begin{align*}
+=& W^2m^2\Big(2\cos^2(tx) + 2\cos^2(tx+\frac{2\pi}{3}) + 2\cos^2(tx-\frac{2\pi}{3}) 
+ \\& - 2\cos(tx)\cos(tx+\frac{2\pi}{3}) - 2\cos(tx)\cos(tx-\frac{2\pi}{3}) - 2\cos(tx+\frac{2\pi}{3})\cos(tx-\frac{2\pi}{3})\Big)
+\end{align*}
+
+\textit{Using double angle formulae on $\cos^2$ and $\cos(A)\cos(B)$ terms:}
+
+\begin{align*}
+= W^2m^2\Big(3 + \cos(2tx) &+ \cos(2tx+\frac{4\pi}{3}) + \cos(2tx-\frac{4\pi}{3})
+- \cos(2tx+\frac{2\pi}{3}) \\&- \cos(-\frac{2\pi}{3}) - \cos(2tx-\frac{2\pi}{3}) - \cos(\frac{2\pi}{3}) -\cos(2tx) - cos(0)\Big)
+\end{align*}
+
+\textit{Noting $\cos(x+\phi) = \cos(x+2n\pi\phi), n\in \mathbb{Z}$:}
+
+\begin{align*}
+= W^2m^2(3 + 0.5 + 0.5 - 1)
+\end{align*}
+\begin{align*}
+= 3W^2m^2
+\end{align*}
+
+or
+
+\begin{align*}
+I_r = \sqrt3Wm
+\end{align*}
+
+
+\textit{Signal of out in-focus plane is directly proportional to modulation depth.}
+
+\newpage
+
+\section*{Homodyne detector}
+\begin{equation*}
+I_1 = W(1+m\cos(tx)), I_2 = W(1+m\cos(tx+\frac{2\pi}{3})), I_2 = W(1+m\cos(tx-\frac{2\pi}{3}))
+\end{equation*}
+\begin{equation*}
+I_r = \abs{I_1 + I_2 \exp\left(\frac{2\pi j}{3}\right) + I_3 \exp\left(-\frac{2\pi j}{3}\right)}
+\end{equation*}
+\begin{align*}
+= W &\abs{(1 + \exp\left(\frac{2\pi j}{3}\right) + \exp\left(-\frac{2\pi j}{3}\right)} \\
+& + Wm \abs{\left(\cos(tx) + \cos(tx+\frac{2\pi}{3})(-0.5 + \frac{\sqrt3j}{2}) + \cos(tx-\frac{2\pi}{3})(-0.5 - \frac{\sqrt3j}{2}) \right)}
+\end{align*}
+
+\textit{Noting $\abs{(1 + \exp\left(\frac{2\pi j}{3}\right) + \exp\left(-\frac{2\pi j}{3}\right)}=0$:}
+
+\begin{align*}
+= Wm \abs{\left(\cos(tx) + \cos(tx+\frac{2\pi}{3})(-0.5 + \frac{\sqrt3j}{2}) + \cos(tx-\frac{2\pi}{3})(-0.5 - \frac{\sqrt3j}{2}) \right)}
+\end{align*}
+\begin{align*}
+= Wm \Bigg\lvert\cos(tx) - &0.5\left(\cos(tx+\frac{2\pi}{3})+(\cos(tx-\frac{2\pi}{3})\right) \\ &+ \frac{\sqrt3j}{2}\left(\cos(tx+\frac{2\pi}{3})-(\cos(tx-\frac{2\pi}{3})\right)\Bigg\rvert
+\end{align*}
+
+\textit{Using double angle formulae for $2\cos(A)\cos(B)$ and $2\sin(A)\sin(B)$:}
+
+\begin{equation*}
+= Wm \abs{\cos(tx) - \left(\cos(tx)\cos(\frac{2\pi}{3})\right) + \sqrt3j\left(\cos(tx)\cos(\frac{2\pi}{3})\right)}
+\end{equation*}
+\begin{equation*}
+= Wm \abs{\cos(tx) + 0.5\cos(tx) - \frac{3j}{2}\sin(tx)}
+\end{equation*}
+\begin{equation*}
+= \frac{3}{2}Wm \abs{\cos(tx)-j\sin(tx)}
+\end{equation*}
+\begin{equation*}
+I_r = \frac{3}{2}Wm
+\end{equation*}
+
+\textit{Which is the same result as for square law detection, albeit a different scaling factor}
+
+\newpage
+\section*{Example}
+
+
+\end{document}
