@@ -13,14 +13,14 @@
     \graphicspath{{Chapter4/Figs/Vector/}{Chapter4/Figs/}}
 \fi
 
-``One of the most exciting developments in recent porous-materials science''
-
-\textit{Teplensky et. al, JACS 2017}~\cite{teplensky2017temperature}
+%``One of the most exciting developments in recent porous-materials science''
+%
+%textit{Teplensky et. al, JACS 2017}~\cite{teplensky2017temperature}
 
 \section{Introduction} \label{sec:MOF-intro}
 \subsection{siRNA for cancer treatment}
 When the latest statistics find that over half of people born in the UK since 1960 will develop some form of cancer in their lifetime~\cite{ahmad2015trends}, it hardly needs stating that cancer has affected almost everyone in the country in some way. 
-Any successful efforts to discover new treatments for this set of diseases are therefore very welcome by the community. 
+Any successful efforts to discover new treatments for this set of diseases therefore have a significant impact reducing suffering and extending life expectancy~\cite{hesketh2012betrayed}. 
 In this chapter, I describe a novel method of delivering therapeutic drugs to cells, utilising the LAG SIM for imaging and FPBioimage for 3D visualisation and analysis. 
 
 The availability of the human genome sequence~\cite{venter2001sequence, bentley2008accurate} provides new opportunities for using DNA and other nucleic acids to target specific genes for therapeutic treatment. 
@@ -28,11 +28,11 @@ One such form of gene manipulation is RNA interference (RNAi)~\cite{fire1998pote
 RNAi prevents the expression of certain genes by degrading messenger RNA (mRNA) after transcription, thus preventing translation~\cite{hannon2002rna}. 
 RNAi can be performed with small interfering RNA (siRNA)~\cite{hamilton1999species, elbashir2001duplexes}, which silences mRNA molecules by cleavage of the mRNA strand into two pieces. 
 
-From a molecular biology perspective cancer is a highly complex disease, requiring around five independent events to occur for a malignant tumour to develop~\cite[\textit{ch. 9}]{murray1993cell}. 
+From a molecular biology perspective cancer is a highly complex disease, requiring the accumulation of around five independent genetic events for a malignant tumour to develop~\cite[\textit{ch. 9}]{murray1993cell}, \cite[\textit{ch. 6}]{knowles2005introduction}. 
 However if a specific gene, or set of genes, can be linked to causing cancer in a given cell type, then appropriate siRNA can be synthesised to silence that gene~\cite{dorsett2004sirnas}. 
 The siRNA will be 100\% complementary to the gene sequence it is targeting, providing very high specificity. 
 This means that, assuming the siRNA is inside the cell, it can prevent the cancer without other side effects. 
-If the siRNA is inside a cell where, for some reason, the mRNA does not transcribe the cancer-causing gene, the siRNA will have nothing to bind to, and will simply degrade~\cite{dorsett2004sirnas}.
+If the siRNA is inside a cell where the mRNA does not transcribe the cancer-causing gene, the siRNA will have nothing to bind to, and will simply degrade~\cite{dorsett2004sirnas}.
 
 There are two difficulties with this potential treatment method. 
 Firstly, discovery of cancer-causing oncogenes is not trivial; though some cancers, such as retinoblastoma, are caused by mutations in just the \textit{RB1} gene~\cite{chial2008tumor}, usually cancer is a multistep process where a series of genetics mutations collectively reduce the function of tumor-suppressor genes~\cite[\textit{ch. 9}]{murray1993cell}\cite[\textit{ch. 24}]{lodish1999molecular}. 
@@ -40,7 +40,7 @@ Nevertheless, it has now been 2 decades since the invention of siRNA, with billi
 
 The other issue with gene silencing as a treatment method is that siRNA is degraded by enzymes in extracellular space~\cite{dorsett2004sirnas}.
 Intuitively this makes sense - it would be dangerous for the body to allow arbitrary pieces of nucleic acid to enter the cell, since, as described, it can affect the cell's ability to correctly express genes. 
-To allow siRNA to act as a treatment, we therefore require a system to protect the siRNA in extra-cellular space which can also enter the cells. 
+To allow siRNA to act as a treatment, we therefore require a system which both protects the siRNA in extra-cellular space and also allows it enter cells. 
 This process is known as delivery~\cite{tiwari2012drug}.
 
 The literature describes several methods under investigation for use as an siRNA delivery agent.
@@ -80,7 +80,7 @@ The first experiment looks at whether drug release over time can be controlled b
 
 The second experiment investigates MOF loaded with siRNA, for use as a cancer therapeutic.
  
-The third describes MOFs loaded with DCA and a mitochondira-targetting cofactor, a drug combination designed to destroy cancerous cells. 
+The third describes MOFs loaded with DCA and a mitochondria-targetting cofactor, a drug combination designed to destroy cancerous cells. 
 
 In all experiments, synthesis of the MOFs and culturing of cell lines was performed by collaborators Michelle Teplensky (\textit{MT}) and Salame Haddad (\textit{SH}). 
 Microscope setup, image capture and reconstruction, and the subsequent analysis was performed by me. 
@@ -421,7 +421,7 @@ LAG SIM's fast imaging speed allows a large number of cells to be imaged in a si
 This firstly has the advantage that cells do not spend long on the microscope stage, where non-optimal conditions can cause apoptosis of cells, but rather cells can be left in the incubator for most of a 24-hour time course study. 
 Secondly, meaningful statistics can be gathered when a large number of cells are imaged, allowing visual observations to be rendered as statistically significant results.
 
-Overall this chapter has demonstrated the LAG SIM's capability for facilitating hypothesis-driven research supporting and confirming measurements from other techniques and providing visualisation to develop pioneering treatments in the fight against cancer. 
+Overall this chapter has demonstrated the LAG SIM's capability for facilitating hypothesis-driven research supporting and confirming measurements from other techniques and providing visualisation to develop new treatments in the fight against cancer. 
 
 \section{Future work}
 Using MOFs as a drug delivery vehicle has been demonstrated as an effective treatment for cultured HEK-293 cells. 
@@ -431,4 +431,4 @@ Work is now underway to apply the siRNA-MOF treatment to mice, to observe the ef
 This chapter has presented just 3 MOFs, NU-901, NU-1000, and UiO-66, which have desirable properties for use as a drug delivery vehicle. 
 However our previous work has shown that due to the tens-of-thousands of MOF structures possible, selecting the perfect MOF is non-trivial~\cite{moghadam2018computer}. 
 To address this I have built an online tool for screening a database of MOFs to select the one most-suited to a given application~\cite{moghadam2018computer}. 
-Though the tool, accessible at \url{https://aam.ceb.cam.ac.uk/mof-explorer/}, is currently set up for optimising gas storage solutions, adding biologically relevant axes such as toxicity and payload release time could reveal an even better MOF for drug delivery than those already investigated. 
+Though the tool, accessible at \url{https://aam.ceb.cam.ac.uk/mof-explorer/}, currently displays properties useful for optimising gas storage solutions, adding biologically relevant axes such as toxicity and payload release time could reveal an even better MOF for drug delivery than those already investigated. 

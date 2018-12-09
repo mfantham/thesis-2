@@ -48,11 +48,28 @@ Structured illumination microscopy (SIM) can produce a resolution-enhanced image
 Using state-of-the-art lenses and cameras, this can produce images with a spatial resolution of <\SI{100}{\nano\metre}, at a video rate of \SI{11}{\hertz}~\cite{young2016guide}.  
 This microscopy technique is described in detail in Chapter~\ref{chap:LAGSIM}. 
 
-% Probably need to add in a whole subsection about 3D data... ! 
-\texttt{TODO: Introduce 3D microscopy properly}
+\section{Microscopy in 3D provides a deeper biological understanding}
+Capturing 2-dimensional images of microscopic biology has enhanced our understanding of life and disease, enabling development of new medicines and diagnosis techniques. % cite
+However human biology is made up of inherently 3-dimensional (3D) structures, from the sub-cellular scale to the full body. 
 
-Furthermore many modern microscopy techniques, including SIM, confocal~\cite{white1987evaluation, marvin1961microscopy}, optical projection tomography (OPT)~\cite{sharpe2002optical}, and single plane illumination microscopy (SPIM)~\cite{huisken2004optical}, are able to capture information inside the biological sample, creating a 3-dimensional (3D) volumetric dataset. 
-A new tool for visualising the data produced by such microscopes is presented in Chapter~\ref{chap:FPB}. 
+Other fields of medicine have shown the advantages offered by capturing 3D information; for example, compare a 2D x-ray image with a 3D Computed Tomography (CT) dataset. 
+Whilst the former can be used for detecting breaks in bones or confirming the presence of foreign objects in the body~\cite{markose2009three}, the extra information provided by 3D data significantly improves diagnosis and treatment planning in ocology and trauma by accurately modelling tumours~\cite{zhang2013thin} or fractures~\cite{rangarajan2013three}. 
+
+In widefield epifluorescent microscopy, out-of-focus light makes 3D reconstructions impossible.
+To accurately represent fluorescent objects in 3 dimensions, an optical section must be captured - that is, a clear image deep in the sample without out-of-focus light. %cite
+Several optical sections can then be gathered at a number of depths to build up a 3-dimensional dataset. 
+
+Several modern microscopy techniques are able to perform optical sectioning. 
+Confocal microscopy is a point-scanning technique which uses a pinhole in the emission path to remove out-of-focus light, building up an optically-sectioned image pixel-by-pixel~\cite{white1987evaluation, marvin1961microscopy}. 
+Single plane illumination microscopy (SPIM) uses one objective to generate a thin sheet of light in the sample which is imaged by a second orthogonal objective, providing optical sectioning physically by not generating out-of-focus light in the first place~\cite{huisken2004optical}. 
+Optical projection tomography (OPT) can be thought of as the optical analogue of x-ray computerised tomography, capturing images at several rotations of the sample and uses an inverse Radon transform to reconstruct a 3-dimension dataset~\cite{sharpe2002optical}. 
+Structured illumination microscopy (SIM) uses pattered illumination light to computationally remove out-of-focus light, which can also provide resolution enhancement, detailed in Chapter~\ref{chap:LAGSIM}. 
+3D-STORM uses optical astigmatism to achieve a 3D localisation accuracy of \SIrange{20}{30}{\nano\metre}, producing 3D super-resolution datasets~\cite{huang2008three}. 
+
+Resolving microscopic biology in 3D reveals structures and events that would otherwise be invisible; for example, observing the development of zebrafish embryo from 64 cells to \num{20000} cells~\cite{keller2008reconstruction}, or the 3D interaction of mitochondria with microtubules~\cite{huang2016ultra}. 
+Presenting and publishing these information-rich datasets in an informative way presents a challenge to authors, who are restricted to showing 2D slices or projections of the data or videos from one perspective. 
+If readers were able to interact directly with the 3D volume they  would gain a deeper understanding of the volumetric arrangement of structures. 
+To address this problem, a new web-based tool for visualising volumetric 3D data is presented in Chapter~\ref{chap:FPB}. 
 
 
 \section{Cell biology for microscopy}
@@ -148,9 +165,8 @@ They are also often used as test samples to assess the performance of a microsco
 \end{figure}
 
 \section{Structure of this thesis}
-%TODO reword all of this
+%TODO reword all of this, to "be more specific and state some of the outcomes, e.g. what was the discovery of ER"
 
-\subsection{Chapter contents for quick reference}
 Since October 2015, I have been working in the Laser Analytics Group building tools and applying them to answer biological questions. 
 
 Chapter~\ref{chap:LAGSIM} describes the development of LAG SIM, a versatile, user-friendly structured illumination microscope. 

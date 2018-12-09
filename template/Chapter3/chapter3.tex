@@ -14,9 +14,9 @@
     \graphicspath{{Chapter3/Figs/Vector/}{Chapter3/Figs/}}
 \fi
 
-``Marcus, hats off; your FPBioimage really rolls.''
-
-\textit{Email from Konrad K\"olble, 20-06-2018}
+%``Marcus, hats off; your FPBioimage really rolls.''
+%
+%\textit{Email from Konrad K\"olble, 20-06-2018}
 
 \section{Introduction}
 \subsection{Publishers require new methods of providing research data} \label{sec:introvisual}
@@ -37,9 +37,8 @@ Repositories specifically designed for this type of data are emerging, such as t
 Many authors therefore simply make a statement that their data is "available upon reasonable request". 
 % Can I find more references for this?  
 
-In my experience, authors are very willing to accommodate requests for such data. 
-However, receiving and examining 3D volumetric data is not trivial. 
-The large file size means that the common practice is to temporarily upload data to a Dropbox file repository, and share a link to the repository through an email. 
+Upon such requests, however, receiving and examining 3D volumetric data is not trivial. 
+The large file size means that the common practice is to temporarily upload data to a file storage repository, and share a link to the repository through an email. 
 Once the large data file has been downloaded, specialist image analysis software must be used to render it, requiring expert skill and experience~\cite{broeke2015image}. 
 
 As a producer of volumetric data, I faced the data sharing issue myself when one of my collaborators moved to Chicago. 
@@ -51,9 +50,9 @@ Finding that none existed, I created First Person Bioimage (FPBioimage), my own 
 % The development and implementation of FPBioimage is detailed in this chapter. 
 
 \subsection{Volumetric rendering reveals features inside 3D objects} \label{sec:volumerendering}
-The first demonstration of volumetric rendering was by Pixar in 1987 \cite{smith1987volume}, a year after their aquisition from Lucasfilms by Steve Jobs for \$\num{5000000}.
+The first demonstration of volumetric rendering was by Pixar in 1987 \cite{smith1987volume}, a year after their aquisition from Lucasfilms by Steve Jobs for \$5\,million.
 For the first time, a full volumetric rendering of a computerised tomography (CT) scan was displayed.
-Pixar was later sold to Disney in 2006 for \$\num{7400000000}~\cite{pixar2007story, pixar2018our}, demonstrating the value of advanced rendering techniques. 
+Pixar was later sold to Disney in 2006 for \$7.4\,billion~\cite{pixar2007story, pixar2018our}, demonstrating the value of advanced rendering techniques. 
 
 At SIGGRAPH '88 Alvy Ray Smith clarified the difference between between volumetric rendering and traditional, geometric rendering~\cite{siggraph1988panel}.
 In geometric rendering, an object is described by one or more geometrical shapes, such as a collection of spheres and cubes.
@@ -75,8 +74,8 @@ Volumetric rendering allows detail within the volume to be visualised~\cite{dreb
 By tuning the opacity of each voxel, details which would be invisible in a surface rendering can be seen in context, through the outer voxels of the model. 
 
 The key drawback of volumetric rendering compared to geometric rendering is speed~\cite{dachille1998high}. 
-In the simple volumetric renderer shown in Figure~\ref{fig:raymarch-diagram}, a ray is calculated for each pixel on the screen - \num{2073600} pixels for a 1080p high definition display. 
-If each ray takes \num{512} samples as it passes through the volume, each rendering of the volume requires \num{1061683200} voxel calculations. 
+In the simple volumetric renderer shown in Figure~\ref{fig:raymarch-diagram}, a ray is calculated for each pixel on the screen - 2$\times$\smaller[0.76]{10\textsuperscript{6}} pixels for a 1080p high definition display. 
+If each ray takes \num{512} samples as it passes through the volume, each rendering of the volume requires over 1$\times$\smaller[0.76]{10\textsuperscript{6}} voxel calculations. 
 
 When rendering a single volumetric image, or even a video which is first rendered then presented at a later time, this is not an issue: the rays can computed in parallel across a cluster of computers, and with some patience the images will build up. 
 However, until recently displaying volumetric data at video rate in real time required specialised hardware optimised solely for volumetric rendering~\cite{ray2000resample}. 
@@ -90,7 +89,7 @@ Since the development of highly parallel GPUs, a handful of free and commercial 
 Popular software used in the microscope community includes ImageJ~\cite{schindelin2012fiji}, Icy~\cite{de2012icy}, and Imaris~\cite{imaris}; ITK-Snap~\cite{yushkevich2006user}, ParaView~\cite{ayachit2015paraview}, and ImageVis3D~\cite{imagevis3d2015interactive} are also used in the medical community for visualising patient data~\cite{madan2015creating}. 
 These programs provide advanced offline volumetric rendering, and FPBioimage is not designed to replace them; instead, the key feature of FPBioimage is providing rendering on the web, to facilitate easy and interactive sharing of 3D data. 
 
-The internet was originally designed to display static static information, limiting web browsers' access to computational resources~\cite{leiner2009brief}.
+The internet was originally designed to display static information, limiting web browsers' access to computational resources~\cite{leiner2009brief}.
 However the relatively recent invention and widespread adoption of the Web Graphics Library (WebGL) now provides access to a GPU's processing power directly from the web browser~\cite{khronos2009webgl}. 
 This means that three-dimensional effects on webpages can be rendered to the screen in real time.
 
@@ -112,7 +111,7 @@ Figure~\ref{fig:caniusethis-webgl} shows that the support of WebGL is now widesp
 \includegraphics[width=1.0\textwidth]{caniusethis-webgl2}
 \caption{} \label{fig:caniusethis-webgl2}
 \end{subfigure}
-\caption[FPBioimage: WebGL is supported by 92.79\% of users browsing the web]{Screenshots taken from \url{https://caniuse.com}\cite{caniuse}. (a) shows that FPBioimage, which is percentage built with WebGL, is supported by the web browsers of 92.79\% of UK users. Although WebGL 2.0 makes 3D programming easier, (b) shows that support would drop to 47.33\% of users.  }
+\caption[FPBioimage: WebGL is supported by 92.79\% of users browsing the web]{Screenshots taken from \url{https://caniuse.com}\cite{caniuse}. (a) shows that FPBioimage, which is built with WebGL, is supported by the web browsers of 93\% of UK users. Although WebGL 2.0 makes 3D programming easier, (b) shows that support would drop to 47\% of users.  }
 \label{fig:caniusethis}
 \end{figure}
 
@@ -130,7 +129,7 @@ After gathering user feedback, a full list of desired features was compiled.
 
 \begin{enumerate}
 	\item Rendering options for more advanced users
-	\item Ability to cut the data open at arbitrary angles and positions (sometimes known as \textit{reslicing})
+	\item Ability to cut volumetric data open at arbitrary angles and positions (sometimes known as \textit{reslicing})
 	\item Offer high resolution screenshots of the data
 	\item Ability to save a particular view as a bookmark, and share that exact view with others
 \end{enumerate}
@@ -152,6 +151,7 @@ When the software is complete, Unity allows the designer to compile the `game' i
 
 \subsection{The fragment shader calculates the colour of each screen pixel efficiently} \label{sec:shader}
 
+\begin{lstfloat}
 \begin{lstlisting}[language=C,caption={Fragment shader code for volumetric ray marching},label={snip:renderloop},frame=single]
 // Fragment shader
 float4 frag(frag_input i) : COLOR
@@ -216,6 +216,7 @@ float4 frag(frag_input i) : COLOR
     return ray_col;
 }
 \end{lstlisting}
+\end{lstfloat}
 
 FPBioimage uses a ray marching technique similar to that presented in Section~\ref{sec:volumerendering}.
 The main ray marching loop implementing this is shown in lines Snippet~\ref{snip:renderloop}, based on NVIDIA's ``Render to 3D Textre'' guide~\cite{nvidia2008guide}.
@@ -223,7 +224,7 @@ This loop is part of the `fragment shader', which means it runs for every pixel 
 It is therefore the most important loop in the whole program for efficiency, and any efforts to increase the speed at which this loop executes will be amplified by the number of pixels.
 We will now examine the loop, and the efficiency modifications which have been made compared to traditional ray marching.
 
-We should first read lines 43 and 50, and note that there are two render modes shown: a maximum intensity projection (\texttt{\char`_RenderMode == 0}) and the volumetric ray marching mode (\texttt{\char`_RenderMode == 1}) discussed in section \ref{sec:volumerendering}.
+Lines 43 and 50 show that there are two different modes of rendering: a maximum intensity projection (\texttt{\char`_RenderMode == 0}) and the volumetric ray marching mode (\texttt{\char`_RenderMode == 1}) discussed in section \ref{sec:volumerendering}.
 In the maximum intensity projection mode, the ray checks the mean colour of every voxel it passes through, and paints the colour of the voxel with the largest `mean color' to the screen pixel.
 Note that mean colour is calculated as the sum of the red, green, and blue colour channels.
 Strictly we should divide by $3$ to calculate the true mean colour value; however, this would mean 2 extra divisions for every loop iteration for every pixel on the screen; removing this step has no effect on the comparison, but gives an improvement in frames rendered per second. 
@@ -258,9 +259,9 @@ The simplest way to picture volumetric imaging data is as a z-stack of 2D image 
 One option to obtain a voxel colour at a given $xyz$-coordinate would be to store all 2D image slices, and look up the $xy$ value of the appropriate slice based on the $z$-coordinate.
 This is conceptually simple, but inefficient to implement on a graphics card, as each slice must be sent to the graphics card individually, which is not only slow but adds a significant memory overhead to the graphics card loading process.
 Instead, I devised a scheme where slices are stored on a large 2D texture atlas in a grid pattern.
-Then, a voxel's $z$-coordinate corresponds to a specific slice on the grid, and the $xy$ components can be added to the bottom-left coordinates of that slice to get the $xyz$-coordinate voxel colour.
+Then, a voxel's $z$-coordinate corresponds to a specific slice on the grid, and the $xy$ components can be added to the bottom-left coordinates of that slice to obtain the $xyz$-coordinate voxel colour.
 
-A restriction of WebGL 1.0 is a maximum texutre size of 4096$\times$4096.
+A restriction of WebGL 1.0 is a maximum texture size of 4096$\times$4096.
 Using the atlas technique, this would support a maximum voxel resolution of 256$\times$256$\times$256.
 This was found to be inadequate for most researchers' data, so a target of 512$\times$512$\times$512 was set.
 In order to meet the requirements of WebGL 1.0, this requires 8 2D texture atlases of size 4096$\times$4096.
@@ -269,6 +270,7 @@ The 8 texture atlases are filled according to the pseudo-code shown in Snippet~\
 The code uses a mixture of the modulo operator (\%) and division (/) to determine (a) which atlas to place each volume image slice in, and (b) the location in that image where the slice should be located.
 Complementary code runs in the WebGL rendering code to read a particular voxel's colour given an $xyz$-coordinate.
 
+\begin{lstfloat}
 \begin{lstlisting}[language=java,caption={Java code for 3D texture atlas arrangement},label={snip:textureloading}]
 int sliceWidth = volumeImage.width;
 int sliceHeight = volumeImage.height;
@@ -318,6 +320,7 @@ for (int i=0; i<numSlices; i++){
 	copySubImageToAtlas(sliceTexture, atlasArray[atlasNumber], xStartPixel, yStartPixel);
 }
 \end{lstlisting}
+\end{lstfloat}
 
 % Should I add some paragraphs here about XY and Z resolution? Probably should.
 %subsection{Rendering optimisation}
@@ -338,6 +341,7 @@ This is achieved in Unity by mapping the volume rendering shader described in Se
 The cube is then linked to both the arrow keys and to the mouse to provide intuitive manipulation of the volume, as shown in Snippet~\ref{snip:cuberotation}.
 For data whose combination of $xyz$ resolution and $xyz$ voxel size describes a cuboid, the $xyz$ scale of the rendering cube can be adjusted to ensure distortion-free visualisation.
 
+\begin{lstfloat}
 \begin{lstlisting}[language={[Sharp]c}, label={snip:cuberotation}, caption={C\# code using built-in Unity functions to rotate the rendered volumetric data.}]
 void FixedUpdate () {
 	// This code is attached to the rendering cube, and called once per frame
@@ -364,6 +368,7 @@ void FixedUpdate () {
 	}
 }
 \end{lstlisting}
+\end{lstfloat}
 
 The `FP' in FPBioimage stands for `First Person,' and refers to the control the user has over the scene's camera.
 Rather than just viewing the rotatable render cube from one perspective, as in common in offline volumetric renderers~\cite{schindelin2012fiji, de2012icy, imaris}, FPBioimage also allows the user to change the position and look-direction of the camera.
@@ -372,6 +377,7 @@ The \texttt{H1} axis is mapped to the A and D keys, and the \texttt{Z1} axis to 
 This, combined with the functionality of using the mouse to change the camera's look-direction, will make control of the camera very familiar to anyone who has played first person perspective computer games.
 Moving the camera allows the user to create the type of dynamic fly-bys sometimes seen in publication videos in real time, providing a highly immersive visualisation of the data.
 
+\begin{lstfloat}
 \begin{lstlisting}[language={[Sharp]c}, label={sec:cameramovement}, caption={C\# code using built-in Unity functions for moving the camera in a first-person manner.}]
 void FixedUpdate(){
 	// Translation
@@ -400,6 +406,7 @@ void FixedUpdate(){
 	}
 }
 \end{lstlisting}
+\end{lstfloat}
 
 \subsection{Bookmarking is implemented with a state machine to share perspectives across the world}
 FPBioimage implements a bookmarking function to save a particular view with an annotation.
@@ -429,12 +436,14 @@ Unity provides the function \texttt{ExternalEval(string jscode)} to complete thi
 Once the bookmark has been encoded, it is saved to the web browser as shown in lines 1 and 2 of Snippet~\ref{snip:savingbookmark}.
 The bookmark is saved to Local Storage with a unique prefix followed by the bookmark's number, so that it can be restored at a later time.
 
+\begin{lstfloat}
 \begin{lstlisting}[language={[Sharp]c}, label={snip:savingbookmark}, caption={C\#-JavaScript interface code for interacting with the browser's local storage to save and share bookmarks.}]
 string evalMe = "localStorage.setItem('fpb-" + variables.fpbJSON.uniqueName + "-bookmark" + bookmarkNumber + "', '" + bookmarkString64ToSave + "');";
 Application.ExternalEval (evalMe);
 evalMe = "history.replaceState(null, null, '?b=" + bookmarkString64ToSave + "');";
 Application.ExternalEval (evalMe);
 \end{lstlisting}
+\end{lstfloat}
 
 Lines 3 and 4 of Snippet~\ref{snip:savingbookmark} shows how the base-64 bookmark string is appended to the base url in the web browser using the JavaScript function \texttt{replaceState}.
 The user can then simply copy the URL and send it to a friend or colleague to open on their own computer.
@@ -454,6 +463,7 @@ The new render texture is converted to a PNG-encoded byte stream, and then offer
 \texttt{download.js} provides a single function \texttt{download(data, strFileName, strMimeType)}, which is called from Unity using the C\#-JavaScript interface function \texttt{ExternalCall}.
 This is shown in line 32 of Snippet~\ref{snip:screenshots}.
 
+\begin{lstfloat}
 \begin{lstlisting}[language={[Sharp]c}, label={snip:screenshots}, caption={C\# code for capturing a high-resolution screenshot and presenting it to the user as a download.}]
 public void takeSreenshot(bool hiRes){
 	if (hiRes) {
@@ -489,6 +499,7 @@ public void takeSreenshot(bool hiRes){
 	Application.ExternalCall ("download", "data:image/png;base64," + System.Convert.ToBase64String (bytes), "Screenshot " + System.DateTime.Now.ToString ("yyyy-MM-dd") + " at " + System.DateTime.Now.ToString ("HH.mm.ss") + ".png", "image/png");
 }
 \end{lstlisting}
+\end{lstfloat}
 
 \section{Results and discussion} \label{sec:fpbResults}
 The FPBioimage software, designed in Unity as detailed in Section~\ref{sec:fpbSoftwareDesign}, was compiled into JavaScript to run in a web browser.
@@ -526,12 +537,12 @@ To access more advanced rendering features, Figure~\ref{fig:FPBpanels} shows a p
 The user is presented with 3 rendering parameters: \textui{Opacity}, \textui{Intensity}, and \textui{Cutoff}.
 Matching these parameters up to the volume rendering code described in Section~\ref{sec:fpbVolumeRendering}, it is easy to see how each parameter modifies the presentation of the data.
 
-\begin{figure}[htbp!]
+\begin{sidewaysfigure}[p]
 \centering
-\includegraphics[width=1.0\textwidth]{fpb-sliders-examples}
+\includegraphics[width=\textwidth]{fpb-sliders-examples} % If possible separate caption onto new page? 
 \caption[FPBioimage: Advanced rendering features provide unique views of volumetric data]{(a–c): Four-colour OPT data of a mouse embryo. (d–f): MRI data of a human head. (g–i): two-colour light-sheet microscopy data of a drosophila embryo. FPBioimage's built-in transparency feature has been used to render (c) and (f), revealing data within the volume; the cutting tool has been used for (c), (f), (h) and (i), removing outer voxels from the data; and h shows a bookmark in creation, which can be shared with other users. Reproduced from \cite{fantham2017new}. Raw data provided by: (a–c), J. McGinty~\cite{sharpe2002optical}; (d–f), Stanford Volume Data Archive~\cite{levoy1988volume}; (g–i), P. Keller~\cite{chhetri2015whole}. }
 \label{fig:fpbRendering}
-\end{figure}
+\end{sidewaysfigure}
 
 Lowering the \textui{Opacity} value means that each voxel contributes less alpha to the ray marching through it; consequently, the volumetric data becomes more transparent.
 This makes features inside the model visible through the outer voxels, as shown in Figure~\ref{fig:fpbRendering}.
@@ -551,12 +562,12 @@ These include \textui{Max. Intensity}, which renders a maximum intensity project
 Furthermore the \textui{Iso-surface} projection reveals only voxels within a certain percentage of the \textui{Cutoff} voxel value.
 Screenshots of the various \textui{Projection} methods rendering a mouse embryo head are shown in Figure~\ref{fig:fpbProjections}.
 
-\begin{figure}[htbp!]
+\begin{sidewaysfigure}[p]
 \centering
-\includegraphics[width=1.0\textwidth]{fpb-projections}
+\includegraphics[width=\textwidth]{fpb-projections}
 \caption[FPBioimage: Four projection methods highlight different details in volumetric data]{First Person Bioimage offers 4 different types of volumetric projection. (a) shows a maximum intensity projection, (b) a volumetric ray marching projection, (c) a variation on the volumetric ray marching projection, with alpha calculated from RGB voxel values, and (d) an iso-surface projection. Data is of a mouse embryo head captured with `OPTiSPIM', provided by Jim Swoger~\cite{mayer2014optispim}. }
 \label{fig:fpbProjections}
-\end{figure}
+\end{sidewaysfigure}
 
 Further down the right-hand UI tab are two UI buttons for capturing screenshots.
 The first, \textui{Take shot}, captures a screenshot at the current resolution of the drawing canvas.
@@ -708,31 +719,12 @@ Top & 3D workstation & 2048 & 768 & 8X & 9 & 97\% \\
 As expected, the table shows that as the quality settings are increased in value, performance decreases. 
 To choose the most useful preset values, the visual impact of the quality settings was compared to the performance trade-off. 
 
-\begin{figure}[htbp!]
+\begin{sidewaysfigure}[p]
 \centering
-\begin{subfigure}[b]{0.49\textwidth}
-\includegraphics[width=1.0\textwidth]{performance1}
-\caption{} \label{fig:performance1}
-\end{subfigure}
-\hfill
-\begin{subfigure}[b]{0.49\textwidth}
-\includegraphics[width=1.0\textwidth]{performance2}
-\caption{} \label{fig:performance2}
-\end{subfigure}
-
-~\newline
-\begin{subfigure}[b]{0.49\textwidth}
-\includegraphics[width=1.0\textwidth]{performance3}
-\caption{} \label{fig:performance3}
-\end{subfigure}
-\hfill
-\begin{subfigure}[b]{0.49\textwidth}
-\includegraphics[width=1.0\textwidth]{performance4}
-\caption{} \label{fig:performance4}
-\end{subfigure}
+\includegraphics[width=\textwidth]{fpb-performance}
 \caption[FPBioimage: Adjustable quality settings allow FPBioimage to be used on a range of devices]{The figure shows FPBioimage rendering with different quality presets: (a) Low; (b) Medium; (c) High; and (d) Top. The highest quality levels are designed for use on a high-end desktop computer; lower quality settings are provided to allow FPBioiamge to run on mobile devices. Performance was measured using frames per second (FPS) and graphics card percentage usage, shown on the screenshots. Results from these tests are presented in Table~\ref{tab:fpbPerformance}. The CT scan of a human head is from the Stanford Volumetric Data Archive~\cite{levoy1988volume}. }
 \label{fig:fpb-quality}
-\end{figure}
+\end{sidewaysfigure}
 
 As XY-resolution is increased, performance decreases dramatically. 
 This is because the number of pixels being rendered increases with the square of the XY-resolution number. 
@@ -844,7 +836,7 @@ However all other volume rendering programs have a complicated array of settings
 With a focus on ease-of-use from its conception, FPBioimage provides an interface that anyone can use, even non-expert users. 
 
 Furthermore, because FPBioimage is designed to run on the web, or on devices with limited computational resources, the rendering algorithms have been optimised such that full-quality volume rendering can be performed in real time. 
-This real-time performance has not been seen in any other software, even though they do not have such restrictions. 
+This real-time performance has not been seen in other software. 
 Indeed, the ease-of-use coupled with high performance have generated many requests that FPBioimage could be used as the default volumetric viewer in other image analysis software~\cite{twitter2018fantm}. 
 
 In combination with the ImageJ, FIJI, or Icy plugins, scientists collecting volume data can share it with anyone in the world in one click. 
