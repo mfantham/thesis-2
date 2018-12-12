@@ -515,7 +515,7 @@ The contrast measurement was repeated around each peak to find the optimal contr
 \end{subfigure}
 \caption[LAG SIM: Measurements of a bead sample reveal the ideal Pockels cell voltages for maximum pattern contrast]{(a) shows the pattern contrast, measured on a \SI{100}{\nano\metre} bead sample, as the voltage was swept from \SIrange{-375}{375}{\volt} to find the voltage which gave maximum contrast. The process was repeated for each rotation of the sinusoidal SIM pattern, and for each wavelength of light. (b) shows that rotating polarisation leads to high pattern contrast for all rotations and wavelengths. Furthermore, since the required voltage to achieve a given rotation is similar for all wavelengths, using the \SI{561}{\nano\metre} voltages allows imaging multiple channels simultaneously whilst maintaining a high pattern contrast.}
 \label{fig:pockels-contrast-figures}
-\end{figure}
+\end{figure} 
 
 The optimal pattern contrast measurement was repeated for each pattern orientation at each wavelength, as shown in Figure~\ref{fig:pockels-optimal}. 
 
@@ -910,7 +910,7 @@ LAG SIM has well-defined resolution enhancement factors based on the period of t
 The resolution enhancement factor is calculated as $1 + \dfrac{t}{O_r}$, where $O_r$ is the radius of the lens' OTF for the given emission wavelength and $t$ is the spatial frequency of the illumination pattern. 
 If the detected pattern parameters do not correspond to the expected resolution enhancement factor for a given lens, wavelength, and SLM mode combination, then a warning is presented to the user. 
  
-If the delta peak Fourier space position are correct but modulation contrast is low (<0.5), the software waits for user confirmation that they wish to continue with the reconstruction, and recommends that they need to capture higher quality SIM images. 
+If the delta peaks' Fourier-space positions are correct but modulation contrast is low (<0.5), the software waits for user confirmation that they wish to continue with the reconstruction, and recommends that they need to capture higher quality SIM images. 
 Note that feedback is not provided in batch-reconstruction mode. 
 
 \subsection{Wiener filtering and apodisation reduces noise, but can introduce artefacts}
@@ -925,7 +925,7 @@ The extra noise in this region causes swirling hexagonal noise patterns, seen in
 
 Although these patterns are simply how noise presents in a SIM image, they can easily be misinterpreted as features. 
 The Wiener filter is a conventional noise filter used in image processing~\cite[\textit{ch. 4}]{brown2012introduction}, which successfully removes hexagonal SIM noise as shown in Figure~\ref{fig:wiener-parameter} for $w=1.0$. 
-LAG SIM's `Wiener parameter' input is able to control how much noise filtering is applied. 
+The amount of noise filtering can be controlled by the user through LAG SIM's `Wiener parameter' input. 
 
 
 \begin{figure}[p]
@@ -941,16 +941,15 @@ To reduce ringing artefacts, the reconstructed image is passed through an apodis
 
 Apodisation applies a smooth low-pass filter, gradually reducing power in higher spatial frequencies avoiding a sharp cutoff. 
 The radius of the apodising filter in Fourier space is controlled by the `apodisation cutoff' parameter, where a value of 1 corresponds to the cutoff spatial frequency of the objective lens based on its numerical aperture and the emission wavelength of the image. 
-The shape of the apodisation filter is controlled by the `apodisation strength' parameter, where a value of 0 gives a tophat filter, $\frac{1}{\sqrt{2}}$ a triangular filter, and larger values reduce the full-width half maximum. % As shown in figure? 
-%% I THINK I NEED TO SORT OUT APODISATION STUFF WHILE CLEMENS LOOKS AT THE REST OF THE WORK. BECAUSE LOWER a MEANS MORE APODISATION AT THE MOMENT, WHICH CAN ACTUALLY BE SEEN!!! 
+The shape of the apodisation filter is controlled by the `apodisation strength' parameter, where a value of 0 gives a tophat filter, $\frac{1}{\sqrt{2}}$ a triangular filter, and larger values further reduce the full-width half maximum. 
 
 The apodisation cutoff should be set to the same value as the resolution enhancement given in Table~\ref{tab:resolution}, with a maximum value of 2.04 for full SIM resolution enhancement. 
 Smaller cutoff values reduce the radius of the reconstruction in Fourier space, directly reducing resolution; a value of 1 corresponds to widefield resolution. 
 The apodisation strength should be as small as possible whilst still removing ringing artefacts for maximum resolution for maximum contrast of high-frequency features.  
 
-\subsection{Richardson-Lucy filtering introduces less artefacts when optical sectioning is not required}
+\subsection{Richardson-Lucy filtering introduces less artefacts when optical sectioning is not required} \label{sec:RL-filter}
 An alternative filtering scheme for noise removal is Richardson-Lucy deconvolution~\cite{perez2016optimal}. 
-The Richardson-Lucy filtering scheme has several advantages over Wiener filtering: it guarantees non-negative pixel values, removing the need for an apodisation step; it does not cause ringing in the reconstructed image; and it only takes one parameter in the LAG SIM interface~\cite{eichstadt2013comparison, perez2016optimal}.
+The Richardson-Lucy filtering scheme has several advantages over Wiener filtering: it guarantees non-negative pixel values, removing the need for an apodisation step; it does not cause ringing in the reconstructed image; and it only requires one parameter to control the level of noise removal, simplifying the reconstruction process for the LAG SIM user~\cite{eichstadt2013comparison, perez2016optimal}.
 
 \begin{figure}[p]
 \centering
@@ -960,8 +959,8 @@ The Richardson-Lucy filtering scheme has several advantages over Wiener filterin
 \end{figure}
 
 Richardson-Lucy deconvolution is an iterative process, where each iteration of the algorithm converges on the maximum likelihood solution of an image corrupted with Poisson noise~\cite{richardson1972bayesian, lucy1974iterative}. 
-The number of iterations is set in LAG SIM by the user.
-More iterations leads to a narrower point spread function, and thus higher perceived resolution, but can also lead noise amplification, which can cause a speckle pattern to appear in the reconstructed image.  
+The number of iterations is set by the user in LAG SIM.
+More iterations result in a narrower point spread function, and thus higher perceived resolution; but can also lead to noise amplification, causing speckle patterns to appear in the reconstructed image.  
 
 Row 1 in Figure~\ref{fig:rl-filtering} shows Richardson-Lucy deconvolution applied to the input images before conventional SIM reconstruction through the Wiener filter. 
 This pre-filtering is effective at removing hexagonal SIM artefacts, since less noise is shifted and boosted in Fourier space.
@@ -989,7 +988,7 @@ In structured illumination microscopy, however, this information can be recovere
 \begin{figure}[htbp!]
 \centering
 \includegraphics[width=1.0\textwidth]{oholleran-otf-attenuation}
-\caption[LAG SIM: OTF attenuation]{By suppressing the OTF in areas where it does not have axial support, out-of-focus light is removed. The in-focus light at these spatial frequencies can still be reconstructed as a result of the shifted OTF from SIM reconstruction. Adapted from~\cite{oholleran2014optimized}. }
+\caption[LAG SIM: OTF attenuation removes out of focus light]{A widefield OTF, shown in red, does not have axial support at low lateral frequencies, leading to out-of-focus light in widefield images. Applying the red weighting as a Fourier-space filter removes this out-of-focus light; however in conventional epi-fluorescent microscopy, this would also remove low-frequency spatial information. The Fourier-space shifting inherent to SIM reconstruction recovers the attenuated information, as shown by the blue line, providing support at low lateral frequencies. When the shifted components are filtered by the blue weighting, which removes their own out-of-focus light, an optically-sectioned resolution-enhanced image can be reconstructed.  Adapted from~\cite{oholleran2014optimized}. }
 \label{fig:oholleran-otf}
 \end{figure}
 
@@ -1007,26 +1006,35 @@ Note that OTF attenuation cannot be used with the Richardson-Lucy output filter.
 Therefore if optical sectioning is required, it is recommended to use the "RL-in, Wiener-out" filtering scheme. 
 
 
-\section{Results and Discussion: SIM showcase} \label{sec:sim-showcase}
+\section{Results and Discussion} \label{sec:sim-showcase}
 LAG SIM has been designed to be a versatile and user-friendly microscope, providing high-speed multi-colour imaging surpassing the diffraction limit with optical sectioning provided computationally or with TIRF. 
 With a number of useful automations, LAG SIM can be used to create timelapse videos, 3D reconstructions, large mosaic images, and for unsupervised imaging of multiple cells at different locations around the coverslip. 
 As a result, the microscope can and has found applications in a wide variety of biological investigations.
 
-This section presents a small selection of experiments utilising a range of LAG SIM's capabilities. 
+Two such investigations are discussed in detail in Chapters~\ref{chap:MOF} and \ref{chap:ER}. 
+This section, however, presents a brief overview of a diverse selection of experiments demonstrating a wide range of LAG SIM's capabilities. 
 Acquisition and reconstruction methods are provided as a resource for researchers interested in conducting similar experiments with the microscope. 
 
 \subsection{Multicolour beads for chromatic alignment}
-For any multicolour SIM experiments, a slide of multicolour subdiffraction beads can be used for measuring and correcting chromatic offset, and allows aberrations to be minimised. 
+For any multicolour SIM experiments, small chromatic offsets between colour channels shown in Figure~\ref{fig:recon-beads-unaligned} require that image registration is performed. 
+A slide of multicolour subdiffraction beads can be used for measuring and correcting chromatic offset, since the well-defined points of light have the same spatial distribution in each colour channel. 
 
-If an appropriate slide is not available, one can be produced as follows: 
+For effective registration, the correct density of beads is required, and the beads should be well separated. 
+A dense region of beads will form a homogeneous layer across the microscope slide, without well-defined bead coordinates, so cannot be used for registration. 
+Conversely if the density of beads is too low then too few beads per field-of-view reduces the accuracy of registration. 
+
+A slide or Labtek\texttrademark\ well with an appropriate density of beads can be prepared as follows: 
 \begin{enumerate}
 	\item Sonicate \SI{0.1}{\micro\metre} beads for \SI{10}{\minute}
-	\item Dilute beads 1:10 in distilled water, producing a suspension of density \SI{1.8e-10}{particles\per\milli\litre}. 
+	\item Dilute beads 1:10 in distilled water, producing a\SI{1.8e10}{particles\per\milli\litre} suspension density
 	\item Dispense \SI{20}{\micro\litre} of the diluted beads onto a coverglass, or \SI{50}{\micro\litre} into an 8-well Labtek
 	\item Wait for the solution to dry, about \SI{2}{\hour}
 	\item Add mounting medium: immersion oil for use with the 100$\times$ oil lens, or water for use with the 60$\times$ water lens. 
-	\item Mount the coverglass on a glass slide, or replace the lid on the Labtek and seal with Parafilm to prevent spillages
+	\item Mount the coverglass on a glass slide, or replace the lid on the Labtek\texttrademark\ and seal with Parafilm\texttrademark\  to prevent spillages
 \end{enumerate}
+
+Following this protocol produces a bead sample with about 100 particles per field-of-view. 
+The sonication step means that beads are well spread out, so that individual beads can be accurately localised. 
 
 \begin{figure}[p]
 \centering
@@ -1043,7 +1051,7 @@ If an appropriate slide is not available, one can be produced as follows:
 \label{fig:recon-beads}
 \end{figure}
 
-When the beads slide is viewed on the microscope, aberrations can be minimised by adjusting the correction collar on the objective lens and observing the point-spread function of individual beads. 
+When the bead sample is viewed on the microscope, aberrations can be minimised by adjusting the correction collar on the objective lens and observing the point-spread function of individual beads. 
 For minimal aberrations, the point-spread function should be symmetrical when defocussing above and below the bead layer. 
 
 To measure chromatic offset, a multi-colour acquisition should be performed with the same settings as the subsequent biological experiment. 
@@ -1063,11 +1071,29 @@ These same registration parameters can then be used for other multi-colour exper
 
 \subsection{Resolution-enhanced optical sectioning of HeLa cells reveals MOF colocalised with endosomes}
 A frequent biological application of microscopy is imaging cultured cells under different treatments or with different genetic modifications. 
-In this particular application, which Chapter~\ref{chap:MOF} describes in greater detail, we treated the cells with a metal organic framework (MOF) as a drug delivery system. 
-The goal was to observe uptake of the drug into live cells over a period of \SI{24}{\hour}. 
+In this particular application, which Chapter~\ref{chap:MOF} describes in much greater detail, we treated the cells with a metal organic framework (MOF) as a drug delivery system. 
+The goal was to observe the uptake of the drug into live cells over a period of \SI{24}{\hour}. 
 
-The MOF was naturally fluorescent in the \SI{488}{\nano\metre} excitation channel. 
-Endosomes were labelled with CellLight Early Endosomes-RFP BacMam 2.0, and the nucleus was labelled with HCS NuclearMask™ Deep Red Stain to visualise the cell. 
+The MOF was loaded with calcein, which is fluorescent in the \SI{488}{\nano\metre} excitation channel. 
+Endosomes were labelled with CellLight Early Endosomes-RFP BacMam 2.0, which also stains the cell membrane. The nucleus was labelled with HCS NuclearMask™ Deep Red Stain to visualise the cell. 
+The LAG SIM's laser lines, \SI{488}{\nano\metre}, \SI{561}{\nano\metre}, and \SI{640}{\nano\metre} could then be used to excite fluorescence for the MOFs, endosomes, and nucleus respectively. 
+
+Widefield images had shown MOF located at the cell membrane; however a lack of optical sectioning meant that conclusions could not be drawn from these images about whether the MOF was inside or outside the cell.
+One microscopy technique often used to provide optical sectioning is confocal imaging; this was unsuitable for this experiment for several reasons. 
+
+Firstly, confocal microscopy has a resolution limit of \SI{200}{\nano\metre}.
+The MOF used in this experiment forms crystalline structures on the order of \SI{100}{\nano\metre}, so a high resolution was required to accurately capture their location. 
+
+Secondly, acquiring a z-stack of confocal images to produce a 3D model of the cell, which is necessary for determining if the MOF is within the cell membrane, is a slow process, taking [?\SI{5}{\minute} per cell].  % in 3 colours? 
+Since the cells could only survive on the microscope stage for \SI{2}{\hour}, this limited the number of cells which could be captured per imaging session.
+
+The LAG SIM was able to address both these issues. 
+It provides optical sectioning with resolution enhancement, resolving the MOFs and accurately determining their location. 
+
+Since there were no dynamic events, raw images were captured at a frame rate of \SI{200}{\milli\second} per frame.
+This relatively long exposure time ensured high signal-to-noise ratio.
+Images were captured at z-resolution... 
+The filter wheel was used to minimise cross-talk between channels. i.e. no Optosplit. 
 
 To ensure MOF had entered the cell, rather than sitting on the cell membrane, it was necessary to view the cells in 3D. 
 The 60$\times$ water lens was selected, and operated in optical sectioning SIM mode. 
@@ -1075,11 +1101,19 @@ A z-stack of 3-colour SIM images was captured using the filter wheel, with a z-s
 Since fast dynamics were not observed, a \SI{200}{\milli\second} exposure time was used per raw frame, to ensure a high signal-to-noise ratio. 
 
 The z-stack was reconstructed by utilising OTF attenuation for optical sectioning. 
-The following parameters were used for the LAG SIM Fiji plugin:\newline
+The full-width half-maximum and depth of the attenuation Gaussian (which is shown in red in Figure~\ref{fig:oholleran-otf}) were set to 1.2 and 0.995 respectively. These values generally work well to remove out-of-focus light from reconstructed images without introducing artefacts. 
+
+Since OTF attenuation was applied, the Richardson-Lucy filter could not be used on the output stage of the reconstruction; however 5 Richardson-Lucy iterations were applied to the input data to prevent noise-boosting in the reconstruction process, as described in Section~\ref{sec:RL-filter}. 
+The Wiener parameter was set to the relatively low value of 0.03 because of the high signal-to-noise ratio of the raw data. 
+The apodisation cutoff was set to 1.6 for the \SI{488}{\nano\metre} and \SI{640}{\nano\metre} channels, and 1.67 for the \SI{561}{\nano\metre} channel, since this is the proportion of resolution enhancement provided in 60X optical-sectioning SIM, listed in Table~\ref{tab:resolution}. 
+Finally the attenuation strength was set to 0.8, to ensure that the OTF of the reconstructed image has the same shape as a conventional OTF, which prevents ringing artefacts. 
+
+The parameters required for the LAG SIM Fiji plugin are summarised as follows:
+\newline
 \begin{tabular}{p{0.5\textwidth}p{0.5\textwidth}}
 \begin{labelling}[margin={Attenuation strength}]
 	\item[Filter] RL in, Wiener out
-	\item[Wiener parameter] 0.05
+	\item[Wiener parameter] 0.03
 	\item[Apodiation cutoff] 1.7
 	\item[Apodiation strength] 0.8
 \end{labelling} &
@@ -1111,16 +1145,33 @@ A 3D reconstruction is shown in Figure~\ref{fig:recon-mofcell}.
 \label{fig:recon-mofcell}
 \end{figure}
 
+The reconstructed slice in Figure~\ref{fig:recon-mofcell-2D} shows that these parameters produce an optically-sectioned image without artefacts. 
+This MOF appears to be located within the cell membrane. 
+However without the 3D reconstruction enabled by optical sectioning, reliable conclusions cannot be drawn about whether the MOF is actually inside the cell or is sitting on the cell membrane. 
+
+The 3D projection shown in Figure~\ref{fig:recon-mofcell-3D} confirms that the MOF is indeed inside the cell.
+Furthermore, the white areas show colocalisation between the MOF and the endosome, implying that the MOF is taken up by the cell through an endocytosis pathway. 
+
+This experiment highlights the LAG SIM's capability of imaging live cells in the 3D by utilising optical sectioning, and also providing resolution enhancement over other techniques. 
+Details of the experiment are presented in Chapter~\ref{chap:MOF}, including timelapse imaging for observing uptake over a \SI{24}{\hour} period, as well as similar experiments delivering therapeutic drugs to cells with different MOFs. 
+
 \subsection{Fast, multicolour imaging of HEK-293 cells reveals dynamic colocalisation between ER and lysosomes}
 During experiments on the dynamics of endoplasmic reticulum (ER), which are detailed in Chapter~\ref{chap:ER}, we observed a strong interaction between ER and other organelles, including lysosomes and tubulin. 
 To develop a deeper understanding of these relationships, we required fast, high-resolution imaging of live cells in multiple colour channels simultaneously. 
+
+To resolve the shape of lysosomes and the fine network structure of ER requires a microscope capable of resolving structures smaller than \SI{100}{\nano\metre}. 
+Whilst some super-resolution techniques are able to resolve structures as small as \SI{20}{\nano\metre}, such as STORM and STED, they do not have the imaging speed required to observe fast dynamic events such as ER tubule growth. 
+LAG SIM is able to provide resolution beyond \SI{100}{\nano\metre}, at 11\,frames per second, suitable for imaging these organelle dynamics. 
 
 For high resolution, the 100$\times$ oil lens was chosen, although, because we were looking deeper than \SI{100}{\nano\metre} into the cell, it was not operated in TIRF mode. 
 To facilitate simultaneous multi-colour imaging, the Optosplit was employed. 
 Cross-talk between colour channels was minimised by labelling just two organelles per experiment, in the \SI{488}{\nano\metre} and \SI{640}{\nano\metre} excitation channels. 
 
-A time-series of SIM images was acquired at a raw exposure time of \SI{10}{\milli\second} per frame. 
-These were reconstructed with the following parameters: \newline
+A time-series of SIM images was acquired at a raw exposure time of \SI{10}{\milli\second} per frame, which equates to a reconstructed image rate of \SI{11}{\hertz}. 
+Since optical sectioniong was not required, the Richard-Lucy filter was used on both the raw images and for the reconstruction output stage, as described in Section~\ref{sec:RL-filter}. 
+Richardson-Lucy filtering was performed with 5 iterations, which Figure~\ref{fig:rl-filtering} shows gives a good balance of noise suppression without noise amplification, leading to artefact-free images. 
+The parameters required for the LAG SIM Fiji plugin are summarised as follows:
+\newline
 \begin{tabular}{p{0.5\textwidth}}
 \begin{labelling}[margin=OTF attenuation]
 	\item[Filter] RL in, RL out
@@ -1135,14 +1186,23 @@ These were reconstructed with the following parameters: \newline
 \caption[LAG SIM: Fast, multi-colour imaging of ER in cells reveals co-localisation between lysosomes and ER tubules]{HEK293 cells with ER is coloured in blue, and lysosomes are coloured in orange. Capturing a timelapse utilising the Optosplit and optical sectioning SIM reveals a strong co-localisation between lysosomes and ER tubules. Cells labelled by Meng Lu. }
 \label{fig:recon-er-cell}
 \end{figure}
-% Hessian SIM as an extra denoising step? 
 
+A frame of the reconstructed time series is shown in Figure~\ref{fig:recon-er-cell}, demonstrating artefact-free SIM imaging of ER and lysosomes. 
 Work on these observations is ongoing, with a variety of genetic mutations now being applied to cell lines to observe differences in organelle interaction. 
+% Something a bit more interesting too? 
 
-
-\subsection{TIRF imaging of HeLa cells resolves dynamic acting structure on the cell membrane}
+\subsection{TIRF imaging of HeLa cells resolves dynamic actin structure on the cell membrane}
 Structure on the cell membrane is difficult to observe in epifluorescent microscopy due to out-of-focus light obscuring details on the membrane. 
-LAG SIM's capability to perform TIRF was therefore vital for imaging actin dynamics on the membrane on HeLa cells, seen in Figure~\ref{fig:recon-actin}. 
+Figure~\ref{fig:widefield-actin} shows HeLa cells with labelled actin. 
+The out-of-focus light from areas above the imaging plane make it difficult to distinguish individual structures, particularly in areas with a high density of filaments. 
+
+The aim of this experiment was to image the formation and growth of actin in the cell membrane. 
+A microscope with TIRF capability was therefore required to capture fluorescence only from actin at the cell membrane. 
+Furthermore a resolution beyond the diffraction limit was required to image individual actin filaments in dense areas. 
+LAG SIM was chosen for its fast, high-resolution TIRF-SIM capability. 
+
+To image in TIRF at the highest resolution, the 100X  lens was used and actin was labelled with [???] for imaging in the \SI{488}{\nano\metre} channel, giving a resolution of \SI{80}{\nano\metre}. 
+To capture the development of a large number of cells over a long time period, LAG SIM's bookmarking feature was used to store the position of cells as described in Section~\ref{sec:lagsimBookmarks}. 
 
 In this experiment, ring structures in the actin were found to colocalise with the K-Ras protein. 
 By performing time-lapse imaging, and taking a short video every \SI{10}{\minute}, we were able to observe that these ring structures produce projections of actin which spread through the cell. 
@@ -1150,7 +1210,11 @@ The bookmarking feature of LAG SIM was used to record the location of healthy ce
 
 The 100$\times$ oil lens was chosen for its TIRF capabilities. 
 2-colour TIRF-SIM imaging was performed sequentially at a frame rate of \SI{2}{\hertz}; the concentration of fluorescent molecules was low to ensure the experiment was as physiologically relevant as possible. 
-The following parameters were used for reconstruction: \newline
+
+
+Out-of-focus light is physically removed by TIRF, so optical sectioning was not required as part of the SIM reconstruction process.
+Richardson-Lucy filtering was used on both the input data and in the reconstruction output stage with 5 iterations to remove noise without introducing artefacts, as described in Section~\ref{sec:RL-filter}.
+The parameters entered into the LAG SIM Fiji plugin are summarised as follows: \newline 
 \begin{tabular}{p{0.5\textwidth}}
 \begin{labelling}[margin=OTF attenuation]
 	\item[Filter] RL in, RL out
@@ -1158,8 +1222,6 @@ The following parameters were used for reconstruction: \newline
 	\item[OTF attenuation] false
 \end{labelling}
 \end{tabular}
-
- %so Hessian de-noising was performed in MATLAB after the reconstruction. 
 
 \begin{figure}[tbp!]
 \centering
@@ -1177,6 +1239,7 @@ The following parameters were used for reconstruction: \newline
 \label{fig:recon-actin}
 \end{figure}
 
+The reconstructed TIRF-SIM image in Figure~\ref{fig:recon-tirf-actin} ... 
 Further research into these observations is ongoing. 
 
 
