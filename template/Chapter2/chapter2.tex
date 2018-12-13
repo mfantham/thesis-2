@@ -1050,6 +1050,7 @@ The sonication step means that beads are well spread out, so that individual bea
 \caption[LAG SIM: Multicolour alignment beads are used for correcting chromatic offset]{A small chromatic offset between the three SIM colour channels can be seen in (a). When the offset is corrected, as in (b), the beads appear white; the offset parameters can then be used to correct other multi-colour images captured during the same imaging session.  } 
 \label{fig:recon-beads}
 \end{figure}
+\afterpage{\clearpage}
 
 When the bead sample is viewed on the microscope, aberrations can be minimised by adjusting the correction collar on the objective lens and observing the point-spread function of individual beads. 
 For minimal aberrations, the point-spread function should be symmetrical when defocussing above and below the bead layer. 
@@ -1144,6 +1145,7 @@ A 3D reconstruction is shown in Figure~\ref{fig:recon-mofcell}.
 \caption[LAG SIM: 3D reconstruction of HeLa cells]{3 colour MOF in cell in 3D. Cells prepared for imaging by Michelle Teplensky. Scalebar in (a) is \SI{20}{\micro\metre}}
 \label{fig:recon-mofcell}
 \end{figure}
+\afterpage{\clearpage}
 
 The reconstructed slice in Figure~\ref{fig:recon-mofcell-2D} shows that these parameters produce an optically-sectioned image without artefacts. 
 This MOF appears to be located within the cell membrane. 
@@ -1186,6 +1188,7 @@ The parameters required for the LAG SIM Fiji plugin are summarised as follows:
 \caption[LAG SIM: Fast, multi-colour imaging of ER in cells reveals co-localisation between lysosomes and ER tubules]{HEK293 cells with ER is coloured in blue, and lysosomes are coloured in orange. Capturing a timelapse utilising the Optosplit and optical sectioning SIM reveals a strong co-localisation between lysosomes and ER tubules. Cells labelled by Meng Lu. }
 \label{fig:recon-er-cell}
 \end{figure}
+\afterpage{\clearpage}
 
 A frame of the reconstructed time series is shown in Figure~\ref{fig:recon-er-cell}, demonstrating artefact-free SIM imaging of ER and lysosomes. 
 Work on these observations is ongoing, with a variety of genetic mutations now being applied to cell lines to observe differences in organelle interaction. 
@@ -1238,16 +1241,42 @@ The parameters entered into the LAG SIM Fiji plugin are summarised as follows: \
 \caption[LAG SIM: TIRF imaging of actin in HeLa cells removes out-of-focus light]{(a) shows actin labelled in HeLa cells, where out-of-focus light blurs details in the actin. Utilising TIRF-SIM, shown in (b), enhances resolution and removes out-of-focus light. Cells were labelled by Anchal Chandra. Scalebar is \SI{10}{\micro\metre}. }
 \label{fig:recon-actin}
 \end{figure}
+\afterpage{\clearpage}
 
-The reconstructed TIRF-SIM image in Figure~\ref{fig:recon-tirf-actin} ... 
-Further research into these observations is ongoing. 
+The reconstructed TIRF-SIM image in Figure~\ref{fig:recon-tirf-actin} shows actin at 3 stages of development and growth: (i) forming a dense cluster; (ii) the cluster becomes a ring structures; (iii) actin filaments grow from the ring. %TODO write more of this!
+
+Work is currently ongoing to optimise the labelling of the KRas protein, which is thought to [SOMETHING TO DO WITH ACTIN!]. 
+It is hypothesised that KRas will be colocalised with the ring structures from which actin filaments grow. 
+LAG SIM's unique combination of high-speed, high resolution, multi-colour TIRF imaging make it one of the only instruments in the world that can capture these events to test the hypothesis. 
 
 
 \subsection{Resolution-enhanced optical sectioning of brain-slice tissue imaging for measuring the Node of Ranvier}
-The versatility of LAG SIM also allows it to perform tissue imaging beyond the diffraction limit. 
+Neurons in the brain communicate at junctions known as synapses, which are formed where an axon from one neuron meets a dendrite from another. 
+The axons form long, thin projections, and can be compared to electrical wires carrying signals across the brain to control bodily functions such as sensing, movement, and conciousness. 
+
+Axons are coated in a fatty sheath known as myelin, which ensures fast communication without interference from other neurons' signals.
+%TODO more background on myelin/neurons
+
+The examples presented in this section so far have shown data of cultured cells which form a single layer on the microscope slide, and do not stack on top of each other. 
+However, the versatility of LAG SIM also allows it to perform tissue imaging beyond the diffraction limit. 
+
+Imaging deep in tissue is a notorious challenge in microscopy for two main reasons. 
+Firstly multiple layers of fluorescent cells cause significant out-of-focus light, which obscures details in the focal plane.
+Secondly, scattering of photons as the light passes through multiple refractive index changes means that it becomes more and more difficult to focus light the deeper into the tissue one tries to observe. 
+Both these issues are particularly problematic in SIM, as the out-of-focus light degrades the modulation contrast of the sinusoidal illumination pattern, and scattering of photons as they travel to the focal plane leads to less of the pattern-generating interference, as shown in Figure~\ref{fig:tissue-illumination}. 
+
+\begin{figure}[htbp!]
+\centering
+\includegraphics[width=1.0\textwidth]{tissue-illumination}
+\caption[LAG SIM: Imaging in tissue degrades the SIM pattern]{Imaging in tissue. Interference not so good due to scattering of photons. Also, out-of-focus fluorescence from cells above and below the focal plane degrade the modulation contrast. Due to these restrictions, LAG SIM can only image about \SI{10}{\micro\metre} into thick samples. }
+\label{fig:tissue-illumination}
+\end{figure}
+
+Nevertheless, it has been found that LAG SIM can imaging up to \SI{10}{\micro\metre} into tissue without degradation of the reconstructed images. 
+
 \SI{8}{\micro\metre}-thin slices of mouse brain were labelled to study the myelin sheath of oligodendrocytes. 
 Myelin was labelled in one of two colours, depending on whether the cell originated from the ventral or dorsal area of the brain. 
-The end of the each myelin sheath was labelled with a 3\textsuperscript{rd} colour to measure the node of Ranvier (that is, the gap between two myelin sheaths), to discover whether there is an observable difference between the two oligodendrocyte types related to disease pathology. 
+The end of the each myelin sheath was labelled with a 3\textsuperscript{rd} colour to measure the length of the node of Ranvier (that is, the gap between two myelin sheaths), to discover whether there is an observable difference between the two oligodendrocyte types related to disease pathology. 
 
 To allow the greatest imaging depth, the lens with the closest refractive index matched to the tissue was chosen; in this case, the 60$\times$ water lens. 
 A greater penetration depth could be achieved with a lens better matched to the tissue's refractive index, for example a silicon-oil immersion lens with a refractive index of \num{1.406}, if one is available. 
@@ -1279,13 +1308,14 @@ Although in the end no statistical difference was calculated between the two cel
 \caption[LAG SIM: Multi-colour optical sectioning SIM to measure the node of Ranvier]{Oligodendrocytes from the dorsal and ventral region of the brain are coloured in magenta and cyan respectively. The end of the myelin sheath is coloured in orange, and can be used to measure the length of the node of Ranvier. Optical sectioning SIM was used on \SI{8}{\micro\metre} brain slices. Slices were dissected and labelled by Sarah F{\"o}rster. Scalebar is \SI{10}{\micro\metre}. }
 \label{fig:recon-brain}
 \end{figure}
+\afterpage{\clearpage}
 
 \section{Conclusion}
 LAG SIM has been restored to its fast imaging speed of 11 super-resolution frames per second through the introduction of a Pockels cell for polarisation rotation. 
 The Pockels cell is a robust, future-proof solution to ensure that the SIM illumination is generated with high pattern contrast. 
 With this successfully in place, the other desirable features for LAG SIM could be addressed. 
 
-The instrument can now quickly switch between TIRF imaging, resolution-enhanced SIM imaging and SIM optimised for optical sectioning through a combination of well-designed software and straightforward hardware tweaks. 
+The instrument can now quickly switch between TIRF imaging, resolution-enhanced SIM imaging and SIM optimised for optical sectioning using user-friendly software which interacts seamlessly with the new hardware. 
 This makes it suited to a wide variety of biological imaging experiments, as presented in the SIM showcase. 
 
 The addition of an Optosplit, made possible by the implementation of the Pockels cell in lieu of an LCVR, further enhances LAG SIM's fast imaging capability. 
@@ -1300,5 +1330,5 @@ Finally, the LAG SIM Fiji plugin complements the easy-to-use microscope to help 
 As shown throughout this chapter, reconstruction is a complicated process involving complex mathematics and optical engineering. 
 LAG SIM simplifies this process, so that a user can go from hypothesis to result without the need for a full-time SIM expert. 
 
-In addition to the SIM showcase presented here, Chapters~\ref{chap:MOF} and \ref{chap:ER} detail two successful experiments facilitated by LAG SIM. 
+In addition to the biological investigations presented here, Chapters~\ref{chap:MOF} and \ref{chap:ER} describe in detail two successful experiments facilitated by LAG SIM. 
 Before that, however, Chapter~\ref{chap:FPB} reveals FPBioimage, a user-friendly tool for visualising and sharing 3D volumetric data, such as those obtained through optical sectioning on the LAG SIM. 
