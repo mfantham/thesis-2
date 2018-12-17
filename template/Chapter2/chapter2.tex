@@ -452,9 +452,9 @@ For fast and reliable polarisation rotation, facilitating \SI{11}{\hertz} SIM im
 Similarly to the LCVR, a Pockels cell provides voltage-controlled retardation of one polarisation axis which, in combination with a quarter-wave plate, creates rotation of linear polarisation~\cite[\textit{ch. 8}]{hecht2017optics}.
 The level of retardation is controlled by a voltage across the Pockels cell, restoring polarisation rotation to the LAG SIM with no mechanical movement. 
 
-\subsection{Pockels cell alignment procedure}
+\subsection{Pockels cell alignment procedure} \label{sec:alignment-procedure}
 To use the Pockels cell as a polarisation rotator, light entering the cell must be linearly polarised and aligned at \SI{45}{\degree} to the fast axis of the device. 
-The Pockels cell from Conoptics Inc. was delivered with a Glan Taylor polariser appropriately aligned in the factory. 
+The Pockels cell from Conoptics Inc. was delivered with a Glan-Taylor polariser appropriately aligned in the factory. 
 
 To align the Pockels cell to the rest of the system, the following procedure was devised, with the voltage across the Pockels cell set to \SI{0}{\volt}: % Shown in figure?
 \begin{enumerate}
@@ -462,15 +462,25 @@ To align the Pockels cell to the rest of the system, the following procedure was
 	\item Coarsely align so that the beam passes through the centre of the Pockels cell
 	\item Using a power meter after the Pockels cell, rotate the cell until power is maximised
 	\item Adjust the tip-tilt of the Pockels cell, maximising power again
-	\item Insert the quarter-wave plate (QWP) into the beam path mounted in a rotation mount 
-	\item With the power meter after the QWP, rotate the QWP until power is maximised
+	\item Insert a linear polariser between the Pockels cell and power meter, and rotate until power is maximised
+	\item Insert the quarter-wave plate (QWP) into the beam path mounted in a rotation mount between the Pockels cell and linear polariser
+	\item With the power meter after the QWP, rotate the QWP until power is maximised, as shown in Figure~\ref{fig:alignment-photo}
+	\item Remove the linear polariser
 \end{enumerate}
 
 Although this alignment procedure could be completed with any laser, for LAG SIM it is best to use the 561 laser, as this is the closest to the centre wavelength of the achromatic quarter-wave plate. 
 
+\begin{figure}[htbp!]
+\centering
+\includegraphics[width=1.0\textwidth]{alignment-photo}
+\caption[LAG SIM: Alignment with the 561\,nm laser]{The photo shows the LAG SIM beam path during alignment of the Pockels cell. A power meter is used in combination with a linear polariser to measure the polarisation rotation of the beam after retardation of one polarisation axis by the Pockels cell and quarter wave plate. Alignment is performed as per the protocol described in Section~\ref{sec:alignment-procedure}. Also visible are the spatial light modulator and spatial mask, which are used in combination to generate the sinusoidal illumination pattern.}
+\label{fig:alignment-photo}
+\end{figure}
+
+
 The polarisation state of the light was measured to ensure the Pockels cell was behaving as expected by using a linear polariser in a rotation mount as an analyser before the power meter. 
 The laser emission entering the Pockels cell was linearly polarised, with an extinction ratio of 100:1 for the 561 laser. 
-The Glan Taylor polariser theoretically increases the extinction ratio to >\num{100000}:1~\cite{bennett1995handbook}, although because it is attached to the Pockels cell in the factory, this extinction ratio cannot be measured. 
+The Glan-Taylor polariser theoretically increases the extinction ratio to >\num{100000}:1~\cite{bennett1995handbook}, although because it is attached to the Pockels cell in the factory, as seen in Figure~\ref{fig:alignment-photo} this extinction ratio cannot be measured. 
 Light exiting the Pockels cell is elliptically polarised, with the degree of ellipticity determined by the voltage. 
 Finally, the QWP restores the elliptically polarised light to linear polarisation, but rotated compared to the input as determined by the voltage over the Pockels cell.
 The extinction ratio at the output of the QWP was 500:1. 
@@ -1016,14 +1026,14 @@ This section, however, presents a brief overview of a diverse selection of exper
 Acquisition and reconstruction methods are provided as a resource for researchers interested in conducting similar experiments with the microscope. 
 
 \subsection{Multicolour beads for chromatic alignment}
-For any multicolour SIM experiments, small chromatic offsets between colour channels shown in Figure~\ref{fig:recon-beads-unaligned} require that image registration is performed. 
-A slide of multicolour subdiffraction beads can be used for measuring and correcting chromatic offset, since the well-defined points of light have the same spatial distribution in each colour channel. 
+For multicolour SIM experiments, small chromatic offsets between colour channels, shown in Figure~\ref{fig:recon-beads-unaligned}, require that image registration is performed. 
+A slide of multicolour sub-diffraction beads can be used for measuring and correcting chromatic offset, because the well-defined points of light have the same spatial distribution in each colour channel. 
 
 For effective registration, the correct density of beads is required, and the beads should be well separated. 
 A dense region of beads will form a homogeneous layer across the microscope slide, without well-defined bead coordinates, so cannot be used for registration. 
 Conversely if the density of beads is too low then too few beads per field-of-view reduces the accuracy of registration. 
 
-A slide or Labtek\texttrademark\ well with an appropriate density of beads can be prepared as follows: 
+A microscope slide or Labtek\texttrademark\ well with an appropriate density of beads can be prepared as follows: 
 \begin{enumerate}
 	\item Sonicate \SI{0.1}{\micro\metre} beads for \SI{10}{\minute}
 	\item Dilute beads 1:10 in distilled water, producing a\SI{1.8e10}{particles\per\milli\litre} suspension density
@@ -1052,11 +1062,15 @@ The sonication step means that beads are well spread out, so that individual bea
 \end{figure}
 \afterpage{\clearpage}
 
-When the bead sample is viewed on the microscope, aberrations can be minimised by adjusting the correction collar on the objective lens and observing the point-spread function of individual beads. 
+Before capturing images, the bead sample can also be used for minimising spherical aberrations introduced by temperature changes and refractive index mismatches. 
+When the bead sample is viewed on the microscope, adjusting the correction collar on the objective lens will change the shape of each bead's point-spread function. 
 For minimal aberrations, the point-spread function should be symmetrical when defocussing above and below the bead layer. 
 
-To measure chromatic offset, a multi-colour acquisition should be performed with the same settings as the subsequent biological experiment. 
-Reconstruction in LAG SIM for Fiji should then be performed with the following suggested parameters: \newline
+To measure chromatic offset, a multi-colour SIM acquisition should be captured in the same colour channels as the subsequent biological experiment. 
+The single layer of beads will not have contribution from out-of-focus light, and should also have a high signal-to-noise ratio. 
+Therefore the SIM reconstruction process does not require OTF attenuation for optical sectioning, so the Richardson-Lucy filter is recommended on the output stage of the reconstruction process. 
+Section~\ref{sec:RL-filter} shows that 5 iterations of filtering reduce noise without introducing artefacts.
+The suggested parameters to enter into the LAG SIM Fiji plugin are summarised as follows: \newline
 \begin{tabular}{p{0.5\textwidth}}
 \begin{labelling}[margin=OTF attenuation]
 	\item[Filter] RL in, RL out
@@ -1066,46 +1080,48 @@ Reconstruction in LAG SIM for Fiji should then be performed with the following s
 \end{tabular}
 
 After reconstruction, there will be some chromatic offset between each channel, as shown in Figure~\ref{fig:recon-beads-unaligned}. 
-After registration and correction, Figure~\ref{fig:recon-beads-registered} shows that an RGB colour map will produce white beads. 
+After registration and correction, Figure~\ref{fig:recon-beads-registered} shows that a red-green-blue (RGB) colour map will produce white beads. 
 These same registration parameters can then be used for other multi-colour experiments in the same imaging session. 
 
 
 \subsection{Resolution-enhanced optical sectioning of HeLa cells reveals MOF colocalised with endosomes}
-A frequent biological application of microscopy is imaging cultured cells under different treatments or with different genetic modifications. 
-In this particular application, which Chapter~\ref{chap:MOF} describes in much greater detail, we treated the cells with a metal organic framework (MOF) as a drug delivery system. 
-The goal was to observe the uptake of the drug into live cells over a period of \SI{24}{\hour}. 
+A frequent biological application of microscopy is imaging cultured cells under different treatments or with different genetic modifications~\cite{white1987evaluation, specht2017critical, wang2017analysis}.
 
-The MOF was loaded with calcein, which is fluorescent in the \SI{488}{\nano\metre} excitation channel. 
-Endosomes were labelled with CellLight Early Endosomes-RFP BacMam 2.0, which also stains the cell membrane. The nucleus was labelled with HCS NuclearMask™ Deep Red Stain to visualise the cell. 
-The LAG SIM's laser lines, \SI{488}{\nano\metre}, \SI{561}{\nano\metre}, and \SI{640}{\nano\metre} could then be used to excite fluorescence for the MOFs, endosomes, and nucleus respectively. 
+Collaborators in the department had been developing a drug delivery system based on metal organic frameworks (MOFs), and wanted to observe the treatment to ensure MOFs were taken up by cells for delivery of their payload. 
+In this particular application, which Chapter~\ref{chap:MOF} describes in much greater detail, calcein was loaded into the porous structure of crystalline MOFs as a model drug.
+This MOF treatment was incubated with HeLa cells for \SI{24}{\hour}, and uptake over time was captured with microscopy.
 
-Widefield images had shown MOF located at the cell membrane; however a lack of optical sectioning meant that conclusions could not be drawn from these images about whether the MOF was inside or outside the cell.
+Widefield images had shown MOF located at the cell membrane; however widefield's inherent lack of optical sectioning meant that conclusions could not be drawn from these images about whether the MOF was inside or outside the cell~\cite{orellana2015amorphous}.
+
 One microscopy technique often used to provide optical sectioning is confocal imaging; this was unsuitable for this experiment for several reasons. 
-
 Firstly, confocal microscopy has a resolution limit of \SI{200}{\nano\metre}.
 The MOF used in this experiment forms crystalline structures on the order of \SI{100}{\nano\metre}, so a high resolution was required to accurately capture their location. 
-
-Secondly, acquiring a z-stack of confocal images to produce a 3D model of the cell, which is necessary for determining if the MOF is within the cell membrane, is a slow process, taking [?\SI{5}{\minute} per cell].  % in 3 colours? 
+Secondly, acquiring a z-stack of confocal images to produce a 3D model of the cell, which is necessary for determining if the MOF is within the cell membrane, is a slow process, with a 3-channel acquisition taking at least \SI{5}{\minute} per cell~\cite{jonkman2015any}.
 Since the cells could only survive on the microscope stage for \SI{2}{\hour}, this limited the number of cells which could be captured per imaging session.
 
 The LAG SIM was able to address both these issues. 
 It provides optical sectioning with resolution enhancement, resolving the MOFs and accurately determining their location. 
+It is also able to capture images faster, requiring just 9 images per plane, rather than point-scanning which takes longer to capture the same amount of florescence emission light~\cite{jonkman2015any}. 
 
-Since there were no dynamic events, raw images were captured at a frame rate of \SI{200}{\milli\second} per frame.
-This relatively long exposure time ensured high signal-to-noise ratio.
-Images were captured at z-resolution... 
-The filter wheel was used to minimise cross-talk between channels. i.e. no Optosplit. 
+To observe uptake using the laser lines available on the LAG SIM, the following labelling scheme was designed:
+calcein, which naturally is fluorescent when illuminated with \SI{488}{\nano\metre} excitation light, was used as the model drug loaded into the MOFs; 
+endosomes were labelled with CellLight Early Endosomes-RFP BacMam 2.0; and the nucleus was labelled with HCS NuclearMask™ Deep Red Stain to visualise the cell. 
+The LAG SIM's laser lines, \SI{488}{\nano\metre}, \SI{561}{\nano\metre}, and \SI{640}{\nano\metre}, could then be used to excite fluorescence for the MOFs, endosomes, and nucleus respectively. 
 
-To ensure MOF had entered the cell, rather than sitting on the cell membrane, it was necessary to view the cells in 3D. 
-The 60$\times$ water lens was selected, and operated in optical sectioning SIM mode. 
-A z-stack of 3-colour SIM images was captured using the filter wheel, with a z-step of \SI{0.2}{\micro\metre} between each plane. 
 Since fast dynamics were not observed, a \SI{200}{\milli\second} exposure time was used per raw frame, to ensure a high signal-to-noise ratio. 
+This relatively long exposure time ensured high signal-to-noise ratio.
+Similarly, to minimise cross-talk between imaging channels the Optosplit was not employed and filtering was performed by filters in the filter wheel. 
 
-The z-stack was reconstructed by utilising OTF attenuation for optical sectioning. 
-The full-width half-maximum and depth of the attenuation Gaussian (which is shown in red in Figure~\ref{fig:oholleran-otf}) were set to 1.2 and 0.995 respectively. These values generally work well to remove out-of-focus light from reconstructed images without introducing artefacts. 
+To determine whether MOF had entered the cell or was simply sitting on the cell membrane, it was necessary to view the cells in 3D. 
+The 60$\times$ water lens was selected, and operated in optical sectioning SIM mode.  
+Images were captured at every \SI{200}{\nano\metre} in the axial direction, to build up a Nyquist-limited z-stack. 
+
+To provide optical sectioning the z-stack was reconstructed in the LAG SIM Fiji plugin with OTF attenuation. 
+The full-width half-maximum and depth of the attenuation Gaussian, defined in Section~\ref{sec:LAGSIM-OTF-attenuation}, were set to 1.2 and 0.995 respectively.
+These values generally work well to remove out-of-focus light from reconstructed images without introducing artefacts. 
 
 Since OTF attenuation was applied, the Richardson-Lucy filter could not be used on the output stage of the reconstruction; however 5 Richardson-Lucy iterations were applied to the input data to prevent noise-boosting in the reconstruction process, as described in Section~\ref{sec:RL-filter}. 
-The Wiener parameter was set to the relatively low value of 0.03 because of the high signal-to-noise ratio of the raw data. 
+The Wiener parameter was set to the relatively low value of 0.03 by virtue of the high signal-to-noise ratio of the raw data. 
 The apodisation cutoff was set to 1.6 for the \SI{488}{\nano\metre} and \SI{640}{\nano\metre} channels, and 1.67 for the \SI{561}{\nano\metre} channel, since this is the proportion of resolution enhancement provided in 60X optical-sectioning SIM, listed in Table~\ref{tab:resolution}. 
 Finally the attenuation strength was set to 0.8, to ensure that the OTF of the reconstructed image has the same shape as a conventional OTF, which prevents ringing artefacts. 
 
@@ -1115,7 +1131,7 @@ The parameters required for the LAG SIM Fiji plugin are summarised as follows:
 \begin{labelling}[margin={Attenuation strength}]
 	\item[Filter] RL in, Wiener out
 	\item[Wiener parameter] 0.03
-	\item[Apodiation cutoff] 1.7
+	\item[Apodiation cutoff] 1.6
 	\item[Apodiation strength] 0.8
 \end{labelling} &
 \begin{labelling}[margin={Attenuation strength}]
@@ -1123,12 +1139,8 @@ The parameters required for the LAG SIM Fiji plugin are summarised as follows:
 	\item[OTF attenuation] true
 	\item[Attenuation FWHM] 1.2
 	\item[Attenuation strength] 0.995 
-\end{labelling} % NEED TO CHECK THESE!!!
-\end{tabular}
-
-Images were captured at time points of \SI{30}{\minute}, \SI{1}{\hour}, \SI{2}{\hour}, \SI{6}{\hour}, \SI{8}{\hour} and \SI{24}{\hour} after application of the MOF, to observe that the cells were indeed able to take up MOF.
-Although an Okolab incubation stage was used to maintain a \SI{5}{\percent} CO\textsubscript{2}, \SI{37}{\degreeCelsius} environment for the cells, they did not survive on the microscope stage over the full \SI{24}{\hour} period, so were returned to the lab incubator between imaging; therefore, different cells were imaged at each time point. 
-A 3D reconstruction is shown in Figure~\ref{fig:recon-mofcell}. 
+\end{labelling}
+\end{tabular} 
 
 \begin{figure}[tbp!]
 \centering
@@ -1142,22 +1154,27 @@ A 3D reconstruction is shown in Figure~\ref{fig:recon-mofcell}.
 	\includegraphics[width=\textwidth]{recon-mofcell-3D}
 	\caption{}\label{fig:recon-mofcell-3D}
 \end{subfigure}
-\caption[LAG SIM: 3D reconstruction of HeLa cells]{3 colour MOF in cell in 3D. Cells prepared for imaging by Michelle Teplensky. Scalebar in (a) is \SI{20}{\micro\metre}}
+\caption[LAG SIM: 3D reconstruction of HeLa cells]{(a) shows a 3-colour SIM reconstruction overlayed on a brightfield image of a cell, with MOF coloured in green, endosomes coloured in magenta and the nucleus coloured in cyan. MOF can be seen located within the cell boundary, and white spots showing colocalisation between green and magneta imply that MOF is taken into cells through an endosytosis pathway. (b) shows another cell with the same colour scheme as a 3D projection, confirming that MOF is truly located within the cell and is not simply sitting on the cell membrane. The 3D data set is available to explore interactively at \url{https://fpb.ceb.cam.ac.uk/MOF}. Cells were prepared for imaging by Michelle Teplensky. Scalebar in (a) is \SI{20}{\micro\metre}. }
 \label{fig:recon-mofcell}
 \end{figure}
 \afterpage{\clearpage}
 
-The reconstructed slice in Figure~\ref{fig:recon-mofcell-2D} shows that these parameters produce an optically-sectioned image without artefacts. 
-This MOF appears to be located within the cell membrane. 
-However without the 3D reconstruction enabled by optical sectioning, reliable conclusions cannot be drawn about whether the MOF is actually inside the cell or is sitting on the cell membrane. 
+Figure~\ref{fig:recon-mofcell-2D} shows a 3-colour reconstructed SIM image overlaid on a brightfield image, revealing green MOF particles within the magenta cell boundary. 
+Furthermore, white spots in the image show colocalisation between green and magenta, implying that MOF has been taken up into the cell through an endocytosis pathway and is localised within endosomes. 
 
-The 3D projection shown in Figure~\ref{fig:recon-mofcell-3D} confirms that the MOF is indeed inside the cell.
-Furthermore, the white areas show colocalisation between the MOF and the endosome, implying that the MOF is taken up by the cell through an endocytosis pathway. 
+To confirm that MOF is truly within the cell boundary and is not sitting on top of the cell requires the 3D reconstructions provided by optical sectioning SIM. 
+Figure~\ref{fig:recon-mofcell-3D} indeed verifies this.
+Whilst some MOF is on the outside of the cell boundary, other fragments of MOF have been endocytosed into the cell. 
+White areas of the image again verify MOF colocalised with endosomes. 
 
-This experiment highlights the LAG SIM's capability of imaging live cells in the 3D by utilising optical sectioning, and also providing resolution enhancement over other techniques. 
+The 3D projection shown in Figure~\ref{fig:recon-mofcell-3D} highlights an issue with presenting 3D data on a static 2D medium. 
+It is difficult for the reader to understand the orientation and perspective of the data.
+For this reason the 3D dataset is also available to explore interactively in a web browser at \url{https://fpb.ceb.cam.ac.uk/MOF}, using the new tool FPBioimage detailed in Chapter~\ref{chap:FPB}. 
+
+This drug-delivery experiment highlights the LAG SIM's capability of imaging live cells in the 3D by utilising optical sectioning, and also providing resolution enhancement over other techniques. 
 Details of the experiment are presented in Chapter~\ref{chap:MOF}, including timelapse imaging for observing uptake over a \SI{24}{\hour} period, as well as similar experiments delivering therapeutic drugs to cells with different MOFs. 
 
-\subsection{Fast, multicolour imaging of HEK-293 cells reveals dynamic colocalisation between ER and lysosomes}
+\subsection{Fast, multicolour imaging of COS-7 cells reveals dynamic colocalisation between ER and lysosomes}
 During experiments on the dynamics of endoplasmic reticulum (ER), which are detailed in Chapter~\ref{chap:ER}, we observed a strong interaction between ER and other organelles, including lysosomes and tubulin. 
 To develop a deeper understanding of these relationships, we required fast, high-resolution imaging of live cells in multiple colour channels simultaneously. 
 
@@ -1185,35 +1202,37 @@ The parameters required for the LAG SIM Fiji plugin are summarised as follows:
 \begin{figure}[tbp!]
 \centering
 \includegraphics[width=1.0\textwidth]{recon-er-cell}
-\caption[LAG SIM: Fast, multi-colour imaging of ER in cells reveals co-localisation between lysosomes and ER tubules]{HEK293 cells with ER is coloured in blue, and lysosomes are coloured in orange. Capturing a timelapse utilising the Optosplit and optical sectioning SIM reveals a strong co-localisation between lysosomes and ER tubules. Cells labelled by Meng Lu. }
+\caption[LAG SIM: Fast, multi-colour imaging of ER in cells reveals co-localisation between lysosomes and ER tubules]{COS-7 cells with ER is coloured in red, and lysosomes are coloured in cyan. Capturing a timelapse utilising the Optosplit and optical sectioning SIM reveals a dynamic colocalisation between lysosomes and ER tubules, where lysosomes appear to pull the ER network to rearrange connections. Cells were cultured and labelled by Meng Lu. Scalebar is \SI{10}{\micro\metre}. }
 \label{fig:recon-er-cell}
 \end{figure}
 \afterpage{\clearpage}
 
 A frame of the reconstructed time series is shown in Figure~\ref{fig:recon-er-cell}, demonstrating artefact-free SIM imaging of ER and lysosomes. 
-Work on these observations is ongoing, with a variety of genetic mutations now being applied to cell lines to observe differences in organelle interaction. 
-% Something a bit more interesting too? 
+The figure shows lysosomes in cyan colocalised with ER in red. 
+The timelapse video reveals a highly dynamic restructuring of the ER, which appears to be regulated by lysosome movement. 
+Lysosomes located on the end of ER branches pull the ER into new shapes, and help attach it to other parts of the organelle to rearrange the network connections. 
 
-\subsection{TIRF imaging of HeLa cells resolves dynamic actin structure on the cell membrane}
-Structure on the cell membrane is difficult to observe in epifluorescent microscopy due to out-of-focus light obscuring details on the membrane. 
-Figure~\ref{fig:widefield-actin} shows HeLa cells with labelled actin. 
-The out-of-focus light from areas above the imaging plane make it difficult to distinguish individual structures, particularly in areas with a high density of filaments. 
+Work on these observations is ongoing, with a variety of genetic mutations now being applied to cell lines to understand the biochemistry of these organelle interactions. 
 
-The aim of this experiment was to image the formation and growth of actin in the cell membrane. 
-A microscope with TIRF capability was therefore required to capture fluorescence only from actin at the cell membrane. 
+\subsection{TIRF imaging of MEF cells resolves dynamic actin structure on the cell membrane}
+Structure on the cell membrane is difficult to observe in epifluorescent microscopy due to out-of-focus light obscuring details in the focal plane. 
+This is demonstrated in Figure~\ref{fig:widefield-actin}, a widefield image of mouse embryonic fibroblast (MEF) cells with fluorescently labelled actin coloured in cyan and the protein KRAS in orange. 
+Out-of-focus light from areas above the imaging plane make it difficult to distinguish individual actin structures, particularly in areas with a high density of filaments.
+The out-of-focus light is even more problematic in the protein channel, producing a bright background blur in the focal plane so that the local distribution of protein cannot be determined. 
+
+As described in Section~\ref{sec:cytoskeleton}, actin is a component of a cell's cytoskeleton, responsible for maintaining the rigid shape of the cell~\cite{alberts2013essential}. 
+The KRAS gene and the associated KRAS protein control cell proliferation~\cite{zimmermann2013small} and are involved in the early stages of many signal transduction pathways~\cite{downward2003targeting, kranenburg2005kras}. 
+The aim of this experiment was to image the formation and growth of actin in the cell membrane and understand its dependence of the KRAS protein. 
+
+To perform this task required a microscope with TIRF capability to capture fluorescence only from proteins located at the cell membrane. 
 Furthermore a resolution beyond the diffraction limit was required to image individual actin filaments in dense areas. 
 LAG SIM was chosen for its fast, high-resolution TIRF-SIM capability. 
 
-To image in TIRF at the highest resolution, the 100X  lens was used and actin was labelled with [???] for imaging in the \SI{488}{\nano\metre} channel, giving a resolution of \SI{80}{\nano\metre}. 
-To capture the development of a large number of cells over a long time period, LAG SIM's bookmarking feature was used to store the position of cells as described in Section~\ref{sec:lagsimBookmarks}. 
-
-In this experiment, ring structures in the actin were found to colocalise with the K-Ras protein. 
-By performing time-lapse imaging, and taking a short video every \SI{10}{\minute}, we were able to observe that these ring structures produce projections of actin which spread through the cell. 
-The bookmarking feature of LAG SIM was used to record the location of healthy cells distributed across the cover glass, so that many cells could be captured in one imaging session. 
-
-The 100$\times$ oil lens was chosen for its TIRF capabilities. 
-2-colour TIRF-SIM imaging was performed sequentially at a frame rate of \SI{2}{\hertz}; the concentration of fluorescent molecules was low to ensure the experiment was as physiologically relevant as possible. 
-
+To image in TIRF at the highest resolution, the 100X  lens was used. 
+KRAS protein and actin were labelled with fluorescent probes with emission wavelengths of \SI{488}{\nano\metre} and \SI{640}{\nano\metre} respectively. 
+ 
+To capture the development of a large number of cells over a long time period, LAG SIM's bookmarking feature was used to store the position of cells as described in Section~\ref{sec:lagsimBookmarks}.
+This way time lapse imaging of the actin growth could be recorded for many cells.
 
 Out-of-focus light is physically removed by TIRF, so optical sectioning was not required as part of the SIM reconstruction process.
 Richardson-Lucy filtering was used on both the input data and in the reconstruction output stage with 5 iterations to remove noise without introducing artefacts, as described in Section~\ref{sec:RL-filter}.
@@ -1228,47 +1247,76 @@ The parameters entered into the LAG SIM Fiji plugin are summarised as follows: \
 
 \begin{figure}[tbp!]
 \centering
-\begin{subfigure}[b]{0.7\textwidth}
-	\includegraphics[width=\textwidth]{widefield-actin}
+\begin{subfigure}[b]{0.85\textwidth}
+	\includegraphics[width=\textwidth]{actin-kras-wf}
 	\caption{}\label{fig:widefield-actin}
 \end{subfigure}
 
 ~\newline
-\begin{subfigure}[b]{0.7\textwidth}
-	\includegraphics[width=\textwidth]{recon-tirf-actin}
+\begin{subfigure}[b]{0.85\textwidth}
+	\includegraphics[width=\textwidth]{actin-kras-sim}
 	\caption{}\label{fig:recon-tirf-actin}
 \end{subfigure}
-\caption[LAG SIM: TIRF imaging of actin in HeLa cells removes out-of-focus light]{(a) shows actin labelled in HeLa cells, where out-of-focus light blurs details in the actin. Utilising TIRF-SIM, shown in (b), enhances resolution and removes out-of-focus light. Cells were labelled by Anchal Chandra. Scalebar is \SI{10}{\micro\metre}. }
+\caption[LAG SIM: TIRF imaging of actin in MEF cells removes out-of-focus light]{(a) shows actin labelled in MEF cells, where out-of-focus light blurs details in the actin. Utilising TIRF-SIM, shown in (b), enhances resolution and removes out-of-focus light. Inset images show various stages of actin development, with a dense cluster of actin (inset in red box) forming into a ring structure (inset in green box) which acts as a source for new filament growth (inset in purple box). Cells were prepared for imaging by Anchal Chandra. Scalebars are \SI{10}{\micro\metre} long, and inset images are \SI{3.2}{\micro\metre} squares.}
 \label{fig:recon-actin}
 \end{figure}
 \afterpage{\clearpage}
 
-The reconstructed TIRF-SIM image in Figure~\ref{fig:recon-tirf-actin} shows actin at 3 stages of development and growth: (i) forming a dense cluster; (ii) the cluster becomes a ring structures; (iii) actin filaments grow from the ring. %TODO write more of this!
+A reconstructed TIRF-SIM image in Figure~\ref{fig:recon-tirf-actin}. 
+In contrast to the widefield image, individual clusters of protein can now be clearly identified, with the out-of-focus background light removed. 
+Furthermore the structure of individual actin filaments can now be clearly resolved.
 
-Work is currently ongoing to optimise the labelling of the KRas protein, which is thought to [SOMETHING TO DO WITH ACTIN!]. 
-It is hypothesised that KRas will be colocalised with the ring structures from which actin filaments grow. 
+During these experiments 3 distinct phases of actin development were observed, shown in Figure~\ref{fig:recon-tirf-actin}'s coloured boxes.
+The red box shows an early stage of development, with KRAS protein colocalised with a dense area of the actin label. 
+As time progresses, the actin forms a ring structure, seen in the green inset box. 
+Finally long actin filaments begin to grow out of the ring structure, as shown in the purple box.
+
+Work is currently ongoing to optimise the labelling of the KRAS protein.
+Under the current labelling scheme only one frame of the \SI{488}{\nano\metre} channel could be captured before photobleaching of the fluorescent label reduced the signal-to-noise ratio so that artefact-free SIM reconstruction could no longer be performed. 
+Various fluorescent probes are now under investigation to design a scheme where the KRAS protein can be imaged for the full time-lapse duration. 
+It is hypothesised that KRAS protein will be colocalised with the ring structures as it forms and as the actin filaments grow from it.
 LAG SIM's unique combination of high-speed, high resolution, multi-colour TIRF imaging make it one of the only instruments in the world that can capture these events to test the hypothesis. 
 
 
 \subsection{Resolution-enhanced optical sectioning of brain-slice tissue imaging for measuring the Node of Ranvier}
-Neurons in the brain communicate at junctions known as synapses, which are formed where an axon from one neuron meets a dendrite from another. 
-The axons form long, thin projections, and can be compared to electrical wires carrying signals across the brain to control bodily functions such as sensing, movement, and conciousness. 
+Neurons in the brain communicate at junctions known as synapses, which are formed where an axon from one neuron meets a dendrite from another~\cite{hall1992introduction}. 
+The axons, coloured yellow in Figure~\ref{fig:neuron-diagram} form long, thin projections, and can be compared to electrical wires carrying signals across the brain to control bodily functions such as sensing, movement, and conciousness. 
 
-Axons are coated in a fatty sheath known as myelin, which ensures fast communication without interference from other neurons' signals.
-%TODO more background on myelin/neurons
+Figure~\ref{fig:neuron-diagram} shows axons coated in a fatty sheath known as myelin~\cite{hall1992introduction}.
+This protects the axon from interference with other nearby axons, and increases the transmission speed of electrical signals as action potentials jump from one gap in the myelin sheath - known as a Node of Ranvier - to the next in a process called Saltatory conduction~\cite{tasaki1939electro}.
+Diseases which cause injury to the myelin sheath are associated with motor neuron disorders such as multiple sclerosis and leukodystrophy~\cite{suzuki2001demyelinating}. 
 
-The examples presented in this section so far have shown data of cultured cells which form a single layer on the microscope slide, and do not stack on top of each other. 
+\begin{figure}[htbp!]
+\centering
+\includegraphics[width=1.0\textwidth]{neuron-diagram}
+\caption[LAG SIM: Diagram of a neuron]{Diagram of a neuron,  adapted from Wikipedia~\cite{wikineuron}. A neuron, coloured in yellow, has long wire-like projections called axons. Axons are covered by a fatty coating known as the myelin sheath, which protects it from interference from neighbouring axons and increases the transmission speed of signals. The myelin sheath is part of a different brain cell type called an oligodendrocyte, shown here in blue. The gap between two myelin sheaths is known as the Node of Ranvier. }
+\label{fig:neuron-diagram}
+\end{figure}
+
+The myelin sheath is not part of the neuron cell, but is rather a component of another type of brain cell call an oligodendrocyte, shown in blue in Figure~\ref{fig:neuron-diagram}~\cite{hammond2012cellular}. 
+Oligodendrocytes are created from cell-linage parent cells called oligodendrocyte progenitor cells (OPCs), which themselves are derived from embryonic stem cells~\cite{goldman2015make}. 
+In mouse models two developmentally distinct OPC populations exist: a first wave of OPCs arise from precursors in the ventral part of the brain at day 15 of embryo development; then a second wave of OPCs from dorsal precursors develop from birth~\cite{kessaris2006competing}. 
+Collaborators have shown that when one of these waves of OPCs is genetically suppressed mice are still able to develop to maturity, but have significant difficulties with fine motor control. 
+
+It was hypothesised that a physiological difference in the myelin sheath would be visible between oligodendrocytes derived from ventral OPCs and those derived from dorsal OPCs. 
+
+A fluorescent labelling scheme was devised by collaborators to distinguish between ventrally- and dorsally-derived oligodendrocytes. 
+Also, the Node of Ranvier was made visible by labelling the end of myelin sheaths in a third colour; the distance between two adjacent labels was therefore the length of the Node of Ranvier. 
+The collaborators were interested to find whether there was a difference in this length for the two oligodendrocyte lineages. 
+
+The SIM examples presented in this results section so far have shown data of cultured cells which form a single layer on the microscope slide, and do not stack on top of each other. 
 However, the versatility of LAG SIM also allows it to perform tissue imaging beyond the diffraction limit. 
 
-Imaging deep in tissue is a notorious challenge in microscopy for two main reasons. 
+Imaging deep in tissue is a notorious challenge in microscopy for two main reasons~\cite{wimmer2010high}. 
 Firstly multiple layers of fluorescent cells cause significant out-of-focus light, which obscures details in the focal plane.
-Secondly, scattering of photons as the light passes through multiple refractive index changes means that it becomes more and more difficult to focus light the deeper into the tissue one tries to observe. 
+Secondly, scattering of photons as the light passes through multiple refractive index changes means that it becomes more and more difficult to focus light the deeper into the tissue one tries to observe~\cite{jacques2013optical}. 
 Both these issues are particularly problematic in SIM, as the out-of-focus light degrades the modulation contrast of the sinusoidal illumination pattern, and scattering of photons as they travel to the focal plane leads to less of the pattern-generating interference, as shown in Figure~\ref{fig:tissue-illumination}. 
 
 \begin{figure}[htbp!]
 \centering
 \includegraphics[width=1.0\textwidth]{tissue-illumination}
-\caption[LAG SIM: Imaging in tissue degrades the SIM pattern]{Imaging in tissue. Interference not so good due to scattering of photons. Also, out-of-focus fluorescence from cells above and below the focal plane degrade the modulation contrast. Due to these restrictions, LAG SIM can only image about \SI{10}{\micro\metre} into thick samples. }
+\caption[LAG SIM: Imaging in tissue degrades the SIM pattern]{A false-colour diagram of SIM imaging in thick tissue samples. 
+As light passes through tissue, scattering of photons causes the wavefront to become distorted. When the two beams meet at the focal plane, distortion of the wavefronts means that the sinusoidal interference pattern is degraded. Moreover, out-of-focus light from fluorescence above and below the focal plane further reduces the modulation contrast of the interference pattern. Due to these effects, LAG SIM can only produce reliable images about \SI{10}{\micro\metre} into thick samples. Note that the diagram is not to scale, and that the green and yellow beams come from the same laser source but false-colour has been used for clarity. }
 \label{fig:tissue-illumination}
 \end{figure}
 
@@ -1283,12 +1331,17 @@ A greater penetration depth could be achieved with a lens better matched to the 
 A z-stack was captured with a step-size of \SI{0.2}{\micro\metre}, to build up a 3D image. 
 Cells were fixed, so a raw frame exposure time of \SI{200}{\milli\second} was used to ensure a high signal-to-noise ratio. 
 
-To reconstruct the slices, the following parameters were used in the LAG SIM Fiji plugin:\newline
+To remove out-of-focus light in the reconstructed SIM images, OTF attenuation was used in the LAG SIM Fiji plugin. 
+An attenuation FWHM of 1.2 and an attenuation strength of 0.995 was chosen, which Section~\ref{sec:LAGSIM-OTF-attenuation} shows provides optical sectioning without introducing artefacts. 
+Richardson-Lucy filtering was applied to the input images to suppress noise, and a Wiener parameter of 0.1 was chosen for output filtering. 
+Table~\ref{tab:resolution} shows that the resolution enhancement provided by the 60X lens in optical sectioning mode is 1.59 to 1.67 - however relatively weak pattern modulation contrast lead to high-frequency artefacts in reconstructed images, so an apodisation cutoff of 1.5 was chosen to suppress artefacts as much as possible, with an attenuation strength of 0.8 to approximate the shape of a widefield OTF. 
+
+The reconstruction parameters entered into the LAG SIM Fiji plugin are summarised as follows:\newline
 \begin{tabular}{p{0.5\textwidth}p{0.5\textwidth}}
 \begin{labelling}[margin={Attenuation strength}]
 	\item[Filter] RL in, Wiener out
-	\item[Wiener parameter] 0.05
-	\item[Apodiation cutoff] 1.7
+	\item[Wiener parameter] 0.1
+	\item[Apodiation cutoff] 1.5
 	\item[Apodiation strength] 0.8
 \end{labelling} &
 \begin{labelling}[margin={Attenuation strength}]
@@ -1296,19 +1349,33 @@ To reconstruct the slices, the following parameters were used in the LAG SIM Fij
 	\item[OTF attenuation] true
 	\item[Attenuation FWHM] 1.2
 	\item[Attenuation strength] 0.995 
-\end{labelling} % NEED TO CHECK THESE!!!
+\end{labelling}
 \end{tabular}
-
-Furthermore, the bookmarking function of LAG SIM was used to create a mosaic pattern, allowing reconstruction of a full brain slice in a single tiled image, as shown in Figure~\ref{fig:wholebrain}. 
-Although in the end no statistical difference was calculated between the two cell types, this experiment demonstrated LAG SIM's ability to image tissue samples. 
 
 \begin{figure}[tbp!]
 \centering
 \includegraphics[width=1.0\textwidth]{recon-brain}
-\caption[LAG SIM: Multi-colour optical sectioning SIM to measure the node of Ranvier]{Oligodendrocytes from the dorsal and ventral region of the brain are coloured in magenta and cyan respectively. The end of the myelin sheath is coloured in orange, and can be used to measure the length of the node of Ranvier. Optical sectioning SIM was used on \SI{8}{\micro\metre} brain slices. Slices were dissected and labelled by Sarah F{\"o}rster. Scalebar is \SI{10}{\micro\metre}. }
+\caption[LAG SIM: Multi-colour optical sectioning SIM to measure the node of Ranvier]{Dorsally-derived and ventrally-derived oligodendrocytes are coloured in magenta and cyan respectively. The end of the myelin sheath is coloured in orange, and can be used to measure the length of the Node of Ranvier. Optical sectioning SIM was used on \SI{8}{\micro\metre} brain slices. Slices were dissected and labelled by Sarah F{\"o}rster. Scalebar is \SI{10}{\micro\metre}. }
 \label{fig:recon-brain}
 \end{figure}
 \afterpage{\clearpage}
+
+Figure~\ref{fig:recon-brain} shows a slice of a reconstructed z-stack. 
+Orange dots marking the ends of myelin sheaths are located either on dorsally-derived oligodendrocytes, shown in magenta, or on ventrally-derived oligodendrocytes, shown in cyan. 
+The length of the Node of Ranvier is measured as the distance between two adjacent orange markers.
+Lengths were measured automatically with a script in the image analysis suite Icy~\cite{de2012icy}, and assigned to ``dorsally-derived'' or ``ventrally-derived'' based on the colour of the oligodendrocyte they were located on. 
+
+The signal-to-noise ratio in the reconstructed images is notably poor for the oligodendrocyte channels, and artefacts have been introduced by the SIM algorithm despite optimal reconstruction parameters. 
+This can be explained by a high 3D density of oligodendrocytes, causing lots of out-of-focus light in the focal plane which reduces the modulation contrast of the SIM illumination pattern. 
+As derived in Section~\ref{sec:SIM-theory}, pattern contrast is directly proportional to signal-to-noise ratio for the high-frequency components in reconstructed SIM images, so excessive background light severely affects the ability to produce clear SIM images. 
+
+In contrast to the oligodendrocyte channel, the orange Node of Ranvier channel has a low density of fluorescent markers. 
+The SIM pattern modulation contrast is therefore not degraded by out-of-focus light, leading to artefact-free SIM reconstructions with a high signal-to-noise ratio. 
+This allows accurate length measurements of the Node of Ranvier. 
+Since length was the important measurement for this experiment, and the oligodendrocyte type could still be determined despite the substandard reconstruction, the images were sufficient for testing the hypothesis that dorsally-derived oligodendrocytes have a different Node of Ranvier length from ventrally-derived oligodendrocytes. 
+
+Upon analysis of the data a statistically-significant difference was not calculated, suggesting that there is no difference in the Node of Ranvier length between the two oligodendrocyte types and that the movement problems observed at the organism level must arise from another characteristic of the cells, or a more complicated combination of properties. 
+Nevertheless, this experiment has shown the versatility of the LAG SIM instrument and its ability to image tissue samples as well as cultured cells. 
 
 \section{Conclusion}
 LAG SIM has been restored to its fast imaging speed of 11 super-resolution frames per second through the introduction of a Pockels cell for polarisation rotation. 
