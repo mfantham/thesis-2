@@ -14,66 +14,71 @@
     \graphicspath{{Chapter6/Figs/Vector/}{Chapter6/Figs/}}
 \fi
 
-This document has detailed the development of two tools, LAG SIM and FPBioimage, and demonstrated their application to answering biological questions about utilising MOFs for drug delivery and discovering a new mechanism for luminal ER transport. 
+This thesis has detailed the development of two tools, LAG SIM and FPBioimage, and demonstrated their application to answering biological questions about utilising MOFs for drug delivery and discovering a new mechanism for luminal ER transport. 
 
-% Super-resolution microscopy is a valuable tool. Paragraph.
+Optical microscopy has provided us with knowledge of the biology of life through its unique capability of observing living systems that are invisible to the naked eye. 
+The last two decades have seen a number of techniques developed which surpass the diffraction limit of light, allowing new observations to further develop our understanding. 
+This vital contribution was recognised with a Nobel prize in 2014 awarded to PALM/STORM and STED, two techniques which can resolve features as small as \SI{20}{\nano\metre}. 
 
-% Trade-off between different microscopy techniques. Paragraph or 2
+Of course, circumventing this physical limit is not without compromise, and for these techniques temporal resolution is sacrificed for the gain in spatial resolution. 
+Whilst a diffraction-limited widefield microscope can capture videos at 100 frames per second, a STORM image takes \SI{5}{\minute} for each frame to achieve its 10$\times$ resolution enhancement. 
+This is not useful for observing fast dynamic events taking place within living cells. 
 
-% Where does SIM fit in? 
+Structured illumination microscopy (SIM) provides generates at twice the resolution of widefield images, requiring 9 raw images to achieve this. 
+This compromise between ultimate resolution and ultimate speed gives SIM a unique capability to capture dynamic sub-cellular events. 
+Furthermore SIM can provide optical sectioning, necessary for acquisitions to be reconstructed in 3D 
 
-Chapter 2 described LAG SIM, a versatile and user-friendly structured illumination microscope, capable of imaging in multiple colours at \SI{11}{\hertz} with a resolution of \SI{85}{\nano\metre}. 
+Chapter 2 described LAG SIM, a versatile and user-friendly structured illumination microscope, capable of imaging at \SI{11}{\hertz} with a resolution of \SI{80}{\nano\metre}. 
+The microscope provides optical sectioning, either physically removing out-of-focus light with TIRF illumination, or computationally by attenuation of the OTF as part of the SIM reconstruction process. 
+Use of an Optosplit before the camera enables simultaneous 3-colour imaging, allowing dynamic interactions of organelles to be studied without any sacrifice of either spatial or temporal resolution.
 
-% Super-resolution microscopes can be hard to use. 
-% LAG SIM tries to make this easy for non-expert users. 
+Super-resolution microscopes can be difficult to use.
+There is often a steep learning curve for new users simply to acquire images. 
+Even once the raw data has been captured, reconstructing it into super-resolved images usually requires expert skill and practice. 
 
-Data can be captured and reconstructed with minimal training, allowing the microscope to be used for a wide variety of biological investigations. 
+LAG SIM has been designed to be operated by non-expert users. 
+The LabVIEW interface makes capturing time-lapses, z-stacks, bookmarked cells, and large field-of-view mosaics a simple process, with the complicated synchronisation of hardware completely hidden from the user. 
+Furthermore, the SIM reconstruction process has been simplified with an ImageJ plugin specifically designed for the LAG SIM, including a tool for finding optimal parameters for artefact-free reconstruction, and another for completing batch reconstruction jobs. 
 
-% SIM has been shown to be a highly versatile technique.
+LAG SIM's unique advantages over widefield microscopes, combined with its ease-of-use, have lead to a wide variety of biological investigations performed with the instrument. 
+Chapter 2 included a showcase of experiments selected to show the range of applications for which LAG SIM is suited. 
+Suggested parameters for the LAG SIM ImageJ plugin have been provided alongside each reconstruction as a resource to future users seeking to answer their own biological questions. 
 
-The SIM showcase presents several short case-study experiments, and can be used as a resource for new users deciding on the optimal set-up to answer their biological question. 
-
-% SIM shows it's able to capture beautiful 3D data sets. 
-
-% Sharing these sets is a common problem in the microscopy community. Images look crap as 2D projections. Videos only give the perspective the producer wants you to see. 
+The optical sectioning capability of LAG SIM allows extraordinary 3D datasets to be constructed, revealing information that cannot be observed in 2D slices. 
+Sharing this data with collaborators around the world, however, is not a trivial tasks.
+Large file sizes and complicated or expensive software make sharing 3D data a notorious problem in the microscopy community. 
 
 Chapter 3 presented my new volumetric rendering program, FPBioimage, with the unique selling point that it runs in a web browser.
+This allows remote users to explore the data interactively, viewing it from any perspective and utilising a number of advanced rendering features such as transparency and cutting planes. 
+Personal exploration provides an immersive experience, giving users a much clearer understanding of the data than a 2D projection or pre-recorded video can provide. 
 
-% Of course, works with other data. 
-% Find diverse applications. 
+FPBioimage was designed with user-friendly operation as the first priority, not only for those viewing the data but also for researchers who need to share their own volumetric data. 
+In combination with a suite of plugins and mobile apps built to complement the main tool, FPBioimage has made sharing and publishing 3D volumetric data a one-click process.  
 
-% An issue with current 3D visualisation tools is that they're difficult to use. 
-% FPBioimage is fast. And easy to use. Noice. 
-
-In combination with a suite of additional software built to complement the main tool, FPBioimage makes sharing and publishing 3D volumetric data a one-click process.  
+FPBioimage is not restricted to the field of microscopy, and enables 
+web-based rendering of any volumetric data. 
+The tools has found use in a diverse range of applications, including for medical imaging data and computer-generated 3D simulations. 
 
 With a focus on creating a tool that is intuitive and easy to use, all researchers around the world can now immediately view their colleagues experimental results, even when separated by thousands of miles. 
 
-% These two tools found a use in Chapter 4. 
+Chapter 4 detailed an application of these two tools, LAG SIM and FPBioimage, for novel cancer treatments, demonstrating their capacity for facilitating hypothesis-driven research. 
 
-% Delivering drugs to cells is difficult. They break down in extracellular space. 
+A problem of some potentially therapeutic drugs, such as siRNA or DCA, is their breakdown in extra-cellular medium. 
+This either means that drugs are not viable for use as a medicine, or that treatments require high doses of the drug which leads to unwelcome side effects. 
+To allow these drugs to arrive inside the cell without degradation, they can be delivered inside carrier molecules. 
+The large pore size of metal organic frameworks (MOFs) makes them an ideal candidate for such a drug delivery system. 
 
-% We used SIM. With optical sectioning. 
+Using optical sectioning SIM, Chapter 4 showed that these MOF complexes are successfully endocytosed by the cell, and can therefore be used as effective drug delivery systems, with the potential of treating a wide range of cancers. 
+All volumetric imaging data collected as part of the study was published online with FPBioimage, as an example of how the tool can be used to allow others to examine the data and confirm the findings themselves. 
 
-Chapter 4 showed an application of these two tools for novel cancer treatments, demonstrating their capacity for facilitating hypothesis-driven research. 
-The large pore size of metal organic frameworks allows them to be loaded with drugs which would otherwise be degraded in extracellular space, for example siRNA or DCA. 
-We showed that these MOF complexes are successfully endocytosed by the cell, and can therefore be used as effective drug delivery systems, with the potential of treating a wide range of cancers. 
+One of LAG SIM's unique capabilities is fast, multi-colour TIRF microscopy in high resolution. 
+This was utilised in Chapter 5 to reveal a new phenomenon in the endoplasmic reticulum (ER) for transporting proteins around the cell. 
 
-% Futhermore published all the data in 3D online. 
+Collaborators had observed directed laminar flow in the ER.
+Acquisitions made on LAG SIM at \SI{11}{\hertz} with \SI{80}{\nano\metre} resolution revealed pinching of the ER membrane which correlates with luminal flow speed. 
 
-
-% One of LAG SIM's unique capabilites is multicolour TIRF SIM. 
-% This property found a use in Chapter 5. 
-
-% Luminal flow had been observed by collaborators. 
-Chapter 5's utilisation of fast, high resolution TIRF SIM revealed a new phenomenon in the endoplasmic reticulum, presenting evidence for tubule pinching as a method of generating directed, non-diffusive flow. 
-
-% Brand new discovery about fundamental function of cells. 
-
-A computational model revealed that pinching reduces the time taken for molecules to travel through the network up to 3$\times$ compared to Brownian particle motion. 
+This new discovery was investigated further using a computational model, which showed that pinching reduces the time taken for molecules to travel through the network up to 3$\times$ compared to Brownian particle motion. 
 This contribution to the community's fundamental understanding of cell biology will further assist the effort to find cures for the wide range of diseases associated with ER malfunction.
-
-% As part of this, saw even more exciting new discoveries about dynamic organelle interactions. Investigations ongoing.  
 
 My past three years work, presented in this document as a resource to those who require the tools to answer their own biological questions, has already had a meaningful impact on the community's knowledge and understanding.
 This is evidenced by publications in several well-respected journals~\cite{teplensky2017temperature, fantham2017new, moghadam2018computer, holcman2018single, lautenschlager2018c}. 
