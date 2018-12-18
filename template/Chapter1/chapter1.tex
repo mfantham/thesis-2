@@ -38,7 +38,7 @@ Finally, if two or more fluorescent labels are used with non-overlapping fluores
 
 The unique advantages of florescent labelling have motivated researchers in the last two decades to invent optical methods to image at resolutions below the diffraction limit~\cite{cornea2014fluorescence}.
 Whilst it remains impossible to capture an individual image beyond the diffraction limit, digital cameras and intensive computational reconstruction have enabled techniques which sacrifice temporal resolution for enhanced spatial resolution.
-This is the principle behind techniques based on Photoactivated Localisation Microscopy (PALM)~\cite{betzig2006imaging} and Stochastic Optical Reconstruction Microscopy (STORM)~\cite{rust2006sub}: in each image, only a small fraction (<\SI{1}{\percent}) of fluorophores are emitting light.
+This is the principle behind techniques based on photoactivated localisation microscopy (PALM)~\cite{betzig2006imaging} and stochastic optical reconstruction microscopy (STORM)~\cite{rust2006sub}: in each image, only a small fraction (<\SI{1}{\percent}) of fluorophores are emitting light.
 Assuming that two adjacent fluorophores do not emit simultaneously, the centre of the diffraction pattern is calculated as the true location of the molecule; when this is applied to a dataset of \num{1000}+ images, a super-resolution image can be constructed. 
 
 STORM is able to achieve a spatial resolution of \textasciitilde\SIrange[range-phrase=--]{10}{20}{\nano\metre}; however it takes around \SIrange[range-phrase=--]{1}{5}{\minute} of imaging to capture the data for a single reconstructed STORM image~\cite{heilemann2008subdiffraction}.
@@ -52,7 +52,7 @@ This microscopy technique is described in detail in Chapter~\ref{chap:LAGSIM}.
 Capturing 2-dimensional images of microscopic biology has enhanced our understanding of life and disease, enabling development of new medicines and diagnosis techniques. % cite
 However human biology is made up of inherently 3-dimensional (3D) structures, from the sub-cellular scale to the full body. 
 
-Other fields of medicine have shown the advantages offered by capturing 3D information; for example, compare a 2D x-ray image with a 3D Computed Tomography (CT) dataset. 
+Other fields of medicine have shown the advantages offered by capturing 3D information; for example, compare a 2D x-ray image with a 3D computed tomography (CT) dataset. 
 Whilst the former can be used for detecting breaks in bones or confirming the presence of foreign objects in the body~\cite{markose2009three}, the extra information provided by 3D data significantly improves diagnosis and treatment planning in ocology and trauma by accurately modelling tumours~\cite{zhang2013thin} or fractures~\cite{rangarajan2013three}. 
 
 In widefield epifluorescent microscopy, out-of-focus light makes 3D reconstructions impossible.
@@ -164,25 +164,39 @@ They are also often used as test samples to assess the performance of a microsco
 \label{fig:cytoskeleton}
 \end{figure}
 
-\section{Structure of this thesis}
-%TODO reword all of this, to "be more specific and state some of the outcomes, e.g. what was the discovery of ER"
-
+\section{Aims and structure of this thesis}
 Since October 2015, I have been working in the Laser Analytics Group building tools and applying them to answer biological questions. 
 
-Chapter~\ref{chap:LAGSIM} describes the development of LAG SIM, a versatile, user-friendly structured illumination microscope. 
-As well as the methods of hardware and software development, reconstruction theory is also discussed and a showcase of images is provided as a reference for capturing high-quality images. 
+Chapter~\ref{chap:LAGSIM} describes the development a structured illumination microscope. 
+SIM is a microscopy technique which generates images in the niche between STORM/STED, which provide \SI{20}{\nano\metre} resolution but take \SI{5}{\minute} or more per acquisition; and widefield microscopy, which can image at 100\,frames per second but at a diffraction limited resolution of about \SI{200}{\nano\metre}. 
+The Laser Analytics Group's SIM (LAG SIM) achieves \SI{80}{\nano\metre} resolution at 11\,frames per second. 
 
-Chapter~\ref{chap:FPB} presents FPBioimage, an online tool for sharing and publishing 3D volumetric data. 
-Created for sharing reconstructed SIM data with a collaborator in Chicago, the chapter describes the development of the software, and presents a wide assortment of data from different 3D imaging technologies highlighting the unique features of the tool. 
+As a relatively new invention, super-resolution microscopes are often difficult to use and require expert skill to achieve their optimal performance. 
+An important aim for LAG SIM was that any research should be able to use it, with minimal training required for capturing and reconstructing SIM data. 
+In Chapter 2, a showcase of reconstructed SIM data from a wide variety of experiments is provided as a reference for capturing high-quality images. 
 
-Chapter~\ref{chap:MOF} demonstrates the capability of LAG SIM for facilitating hypothesis-driven research, introducing the use of metal organic frameworks as drug delivery vehicles for treating cancer. 
+Many questions in biology can only be answered by observing the specimen in 3D.
+LAG SIM is able to capture 3D data using a capability known as optical sectioning.
+Whilst this data is information-rich and exciting to explore in detail, transferring it for remote colleagues to evaluate is problematic due to large file sizes, and complicated and expensive analysis software. 
+
+To address this issue, Chapter~\ref{chap:FPB} presents FPBioimage, an online tool for sharing and publishing 3D volumetric data. 
+A key aim again was that the software was easy to operate, so that non-expert users could effortlessly view or share data from and to anywhere in the world. 
+The chapter describes the development of the software, and presents a wide assortment of data from different 3D imaging technologies highlighting the unique features of the tool. 
+
+Chapter~\ref{chap:MOF} demonstrates the capability of LAG SIM for facilitating hypothesis-driven research, introducing the use of metal organic frameworks (MOFs) as drug delivery vehicles for treating cancer. 
+Many potentially therapeutic drugs degrade quickly in extra-cellular media, either making them unsuitable for use as medicines or requiring a high dosage with unwelcome side-effects. 
+Model drugs, including small-interfering ribonucleic acid (siRNA) and dichloroacetic acid (DCA), were loaded into the porous structure of MOFs, with the aim of protecting the contents for delivery into cells. 
+
+The LAG SIM was used to image the uptake of the treatment over a time period of 24-hours, and 3-dimensional images have been published online with FPBioimage to allow other researchers to explore the data themselves and verify the results. 
 Three biological experiments are described showing various therapeutic effects offered by this newly developed technology. 
 
-Chapter~\ref{chap:ER} utilises the fast, high-resolution imaging provided by LAG SIM to present pioneering discoveries about the endoplasmic reticulum. 
-Computational analysis is used to understand and interpret experimental results, and compelling evidence is shown which advances the understanding of fundamental cell biology. 
+Chapter~\ref{chap:ER} utilises the fast, high-resolution imaging provided by LAG SIM to present pioneering discoveries about the endoplasmic reticulum (ER). 
+It has recently been discovered that proteins within the ER move with directly flow, rather than diffusive motion which was previously assumed. 
+Working in collaboration with the researchers who first discovered this phenomenon, LAG SIM's unique spatio-temporal resolution was utilised with the aim of finding the origin of directed luminal flow. 
+
+High-speed videos revealed the ER membrane pinching at a high frequency, which was hypothesised to cause a peristaltic flow. 
+Computational analysis is presented to understand and interpret experimental results, and compelling evidence is shown which advances the understanding of fundamental cell biology. 
 
 Each chapter begins with its own detailed introduction to the topic, including background information and a review of relevant literature. 
 
 Finally, a concluding Chapter~\ref{chap:conclusion} highlights the key discoveries and contributions made as part of this work.
-
-% Nomenclature command could be useful. 

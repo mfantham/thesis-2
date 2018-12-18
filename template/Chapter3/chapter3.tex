@@ -111,7 +111,7 @@ Figure~\ref{fig:caniusethis-webgl} shows that the support of WebGL is now widesp
 \includegraphics[width=1.0\textwidth]{caniusethis-webgl2}
 \caption{} \label{fig:caniusethis-webgl2}
 \end{subfigure}
-\caption[FPBioimage: WebGL is supported by 92.79\% of users browsing the web]{Screenshots taken from \url{https://caniuse.com}\cite{caniuse}. (a) shows that FPBioimage, which is built with WebGL, is supported by the web browsers of 93\% of UK users. Although WebGL 2.0 makes 3D programming easier, (b) shows that support would drop to 47\% of users.  }
+\caption[FPBioimage: WebGL is supported by 93\% of users browsing the web]{Screenshots taken from \url{https://caniuse.com}\cite{caniuse}. (a) shows that FPBioimage, which is built with WebGL, is supported by the web browsers of 93\% of UK users. Although WebGL 2.0 makes 3D programming easier, (b) shows that support would drop to 47\% of users.  }
 \label{fig:caniusethis}
 \end{figure}
 
@@ -147,7 +147,7 @@ The primary requirement of FPBioimage was that it must run in a web browser.
 As mentioned in Section~\ref{sec:introvisual}, offline visualisation tools are already available, so the distinguishable feature of this software was the ability to share and publish volumetric data online.
 For fast development and future-proof compatibility with multiple devices, I chose to develop the software in a game engine called Unity~\cite{unity}.
 This gives access to an extensive library of functions for creating dynamic 3D scenes, as well as a language for executing code on the graphics card.
-When the software is complete, Unity allows the designer to compile the `game' into compressed HTML/Javascript code to run in a web browser.
+When the software is complete, Unity allows the designer to compile the `game' into compressed HTML/JavaScript code to run in a web browser.
 
 \subsection{The fragment shader calculates the colour of each screen pixel efficiently} \label{sec:shader}
 
@@ -431,7 +431,7 @@ State 4 & This state simply checks that the volumetric model has loaded, to ensu
 \end{figure}
 
 Internally, the bookmarks are encoded as JavaScript Object Notation (JSON) strings, converted to a base-64 string, and then saved to the web browser's `Local Storage'.
-Saving to Local Storage requires the C\# program to interface with the web browser through Javascript.
+Saving to Local Storage requires the C\# program to interface with the web browser through JavaScript.
 Unity provides the function \texttt{ExternalEval(string jscode)} to complete this task, where \texttt{jscode} is a string containing the JavaScript code to be executed.
 Once the bookmark has been encoded, it is saved to the web browser as shown in lines 1 and 2 of Snippet~\ref{snip:savingbookmark}.
 The bookmark is saved to Local Storage with a unique prefix followed by the bookmark's number, so that it can be restored at a later time.
@@ -459,7 +459,7 @@ The size of this can be set either by the current pixel size of the main camera 
 In this way screenshots at a higher resolution than the current view can be created.
 This is advantageous, as the user can view the volumetric data in a small window for fast performance, but then take a screenshot at a higher resolution for presentation and publication.
 
-The new render texture is converted to a PNG-encoded byte stream, and then offered to the user as a download through the Javascript library \texttt{download.js}.
+The new render texture is converted to a PNG-encoded byte stream, and then offered to the user as a download through the JavaScript library \texttt{download.js}.
 \texttt{download.js} provides a single function \texttt{download(data, strFileName, strMimeType)}, which is called from Unity using the C\#-JavaScript interface function \texttt{ExternalCall}.
 This is shown in line 32 of Snippet~\ref{snip:screenshots}.
 
@@ -515,7 +515,7 @@ At the same time as being immediately accessible to new users, the software also
 \begin{figure}[htbp!]
 \centering
 \includegraphics[width=1.0\textwidth]{fpb-start-screen}
-\caption[FPBioimage: Users are presented with a simple interface which is intuitive to use]{When a user opens an FPBioimage webpage, the data will be downloaded and the user will be presented with the simple interface shown. The model can be interacted with intuitively by clicking and dragging with the mouse, or finger on a touchscreen. The data shows a C. Elegans embryo captured by single plane illumination microscopy (SPIM), provided by Hari Shroff~\cite{kumar2014dual}. }
+\caption[FPBioimage: Users are presented with a simple interface which is intuitive to use]{When a user opens an FPBioimage webpage, the data will be downloaded and the user will be presented with the simple interface shown. The model can be interacted with intuitively by clicking and dragging with the mouse, or finger on a touchscreen. The data shows a \textit{C. elegans} embryo captured by single plane illumination microscopy (SPIM), provided by Hari Shroff~\cite{kumar2014dual}. }
 \label{fig:FPBhome}
 \end{figure}
 
@@ -595,7 +595,6 @@ The final two buttons in the right-hand UI tab are toggle buttons, labelled \tex
 \textui{FP mode} toggles on the First Person mouse control that gives FPBioimage its full name.
 In this mode the user can use the mouse to look around, in a way that is familiar to anyone who has played a first-person perspective game.
 This can provide dramatic and immersive flights through the data controlled by the user, revealing much more information than can be provided on a pre-recorded video.
-First Person control is shown in Supplementary Video 1 included with this document.
 
 At all times (except when creating a bookmark), the user can use the WASD keys to move around, as shown when the \textui{Keyboard} button is active.
 Pressing the \textui{Keyboard} button brings up a full list of controls, presented in Figure~\ref{fig:fpbMenu}.
@@ -604,7 +603,7 @@ Every rendering option is available through a keyboard shortcut, for complete mo
 \begin{figure}[tbp!]
 \centering
 \includegraphics[width=1.0\textwidth]{fpb-menu}
-\caption[FPBioimage: Keyboard controls allow FPBioimage to be used without a mouse]{All rendering options in FPBioimage can be controlled by the keyboard, for mouse-free operation. The teapot in the background is the widely available Utah teapot created by Martin Newell~\cite{torrence2006martin}. }
+\caption[FPBioimage: Keyboard controls provide shortcuts to all FPBioimage functions, allowing mouse-free operation]{All rendering options in FPBioimage can be controlled by the keyboard, for mouse-free operation. The teapot in the background is the widely available Utah teapot created by Martin Newell~\cite{torrence2006martin}. }
 \label{fig:fpbMenu}
 \end{figure}
 
@@ -652,7 +651,7 @@ Use of the clipping plane can therefore provide insightful perspectives of the v
 Until recently, volume rendering was not possible in real time, and would be calculated for a specific camera perspective in advance of presentation to render either a single image or video.
 In 2000, Ray and Silver produced the Race II Engine, designed with dedicated hardware to render [512$\times$512$\times$512] volumetric images in real time.
 This was achieved by realising the volume rendering algorithm described in Section~\ref{sec:volumerendering} with physical devices, with hundreds of calculations running in parallel to compute all rays at once~\cite{ray2000race}.
-Today, top-end graphics cards are able to perform the same calculations in real time on a Graphics Processing Unit (GPU), a highly parallelised device optimised for computing lighting models~\cite{lindholm2008nvidia}.
+Today, top-end graphics cards are able to perform the same calculations in real time on a graphics processing unit (GPU), a highly parallelised device optimised for computing lighting models~\cite{lindholm2008nvidia}.
 
 A primary aim of FPBioimage was that it should be user-friendly, with a particular focus on ease-of-use for non-expert users viewing data.
 It was therefore expected that a majority of users would not have access to expensive, high-performance graphics cards required for rendering volumetric data in real time at full resolution.
@@ -796,7 +795,7 @@ Close collaboration with the OMERO team means that OMERO now sends texture atlas
 The viewer has proved popular with OMERO users, finding diverse uses from plant sciences to pathology~\cite{fleur2018fpbioimage}.
 It has been adopted as OMERO's default volumetric viewer, and is featured prominently on their webpage~\cite{omero2018website}.
 
-\subsection{Mobile apps bring volume rendering to smartphones and virtual reality}
+\subsection{Mobile apps bring volumetric rendering to smartphones with virtual reality}
 Since FPBioimage is a web-based application, it will run on any device with a web browser. 
 This includes mobile devices, such as iPhones and Android smartphones, as well as tablet devices such as an iPad. 
 However, mobile browsers have limited access to the device's computational resources, causing long loading times and poor performance, characterised by a low frame rate. 
