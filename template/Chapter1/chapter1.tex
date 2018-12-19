@@ -13,7 +13,7 @@
 
 \section{Breaking the diffraction limit reveals structure below 200\,nm}
 Our understanding of the biology of life is limited to what we can observe. 
-Naked human vision is limited to a spatial resolution on the order of \textasciitilde\SI{100}{\micro\metre}~\cite{devalois1990spatial}.
+Naked human vision is limited to a spatial resolution on the order of \SI{100}{\micro\metre}~\cite{devalois1990spatial}.
 The invention of high power microscopes, often attributed to van Leeuwenhoek in 1660~\cite{van1800select}, and pioneering experiments by Robert Hooke~\cite{hooke1667micrographia} and Swammerdam~\cite{swammerdam1758book} around the same time, revealed phenomena previously invisible to the naked human eye. 
 
 Lens technology continuously improved through the 17\textsuperscript{th} and 18\textsuperscript{th} Centuries~\cite{dollond1753xiv, daumas1972scientific}, revealing smaller and smaller objects, until in 1873 Abbe showed that the diffraction of light as it passes through a lens places a fundamental limit on the size of objects which can be resolved~\cite{abbe1873beitrage}. The famous Abbe diffraction limit, given in Equation~\ref{eq:abbe}, states that the minimum separation distance, $d$, at which two objects can be resolved decreases with the wavelength of light, $\lambda$, but increases with the lens' acceptance angle, $\alpha$, and refractive index of the medium between the lens and the object, $n$. The wavelength range of visible light is \SIrange[range-phrase=--]{400}{700}{\nano\metre}, and the maximum acceptance angle of a lens approaches \SI{90}{\degree}. The refractive index of air is $1.0$, although special immersion oils can be used to increase $n$ to \textasciitilde\num{1.5}. Using Equation~\ref{eq:abbe}, we then calculate that the maximum resolution of a microscope lens is \textasciitilde\SI{200}{\nano\metre}. 
@@ -22,7 +22,7 @@ Lens technology continuously improved through the 17\textsuperscript{th} and 18\
 d = \frac{\lambda}{2n\sin\left (\alpha  \right )}\end{equation}
 
 A number of technologies which are not based on visible light exist to greatly surpass the resolution of optical microscopes, including transmission electron microscopy and scanning electron microscopy~\cite{reinhold1931configuration, wells2006early, reimer2013transmission}.
-However these techniques use a minimum electron dose which is lethal to cells~\cite{de2016live}, and require sample preparation whicih includes a combination of freezing, fixation or toxic staining~\cite{kuo2007electron}.
+However these techniques use a minimum electron dose which is lethal to cells~\cite{de2016live}, and require sample preparation which includes a combination of freezing, fixation or toxic staining~\cite{kuo2007electron}.
 Electron microscopy techniques are therefore incompatible with live cell biology.
 
 Furthermore, the invention of fluorescent labelling gives optical microscopy a distinct advantage over any other microscopy technique in terms of specificity. 
@@ -59,10 +59,10 @@ In widefield epifluorescent microscopy, out-of-focus light makes 3D reconstructi
 To accurately represent fluorescent objects in 3 dimensions, an optical section must be captured - that is, a clear image deep in the sample without out-of-focus light. %cite
 Several optical sections can then be gathered at a number of depths to build up a 3-dimensional dataset. 
 
-Several modern microscopy techniques are able to perform optical sectioning. 
+A number of modern microscopy techniques are able to perform optical sectioning. 
 Confocal microscopy is a point-scanning technique which uses a pinhole in the emission path to remove out-of-focus light, building up an optically-sectioned image pixel-by-pixel~\cite{white1987evaluation, marvin1961microscopy}. 
 Single plane illumination microscopy (SPIM) uses one objective to generate a thin sheet of light in the sample which is imaged by a second orthogonal objective, providing optical sectioning physically by not generating out-of-focus light in the first place~\cite{huisken2004optical}. 
-Optical projection tomography (OPT) can be thought of as the optical analogue of x-ray computerised tomography, capturing images at several rotations of the sample and uses an inverse Radon transform to reconstruct a 3-dimension dataset~\cite{sharpe2002optical}. 
+Optical projection tomography (OPT) can be thought of as the optical analogue of x-ray computerised tomography, capturing images at several rotations of the sample and using the inverse Radon transform to reconstruct a 3-dimension dataset~\cite{sharpe2002optical}. 
 Structured illumination microscopy (SIM) uses pattered illumination light to computationally remove out-of-focus light, which can also provide resolution enhancement, detailed in Chapter~\ref{chap:LAGSIM}. 
 3D-STORM uses optical astigmatism to achieve a 3D localisation accuracy of \SIrange{20}{30}{\nano\metre}, producing 3D super-resolution datasets~\cite{huang2008three}. 
 
@@ -78,7 +78,7 @@ Since this thesis covers a broad range of themes, from engineering through compu
 
 \subsection{Labelling organelles to visualise cell location}
 Figure~\ref{fig:animal-cell} shows a generic animal cell~\cite{wikicell}. 
-Highlighted in colour are 8 organelles which are investigated in work presented in this thesis. 
+Highlighted in colour are 8 organelles which are investigated in work presented throughout this thesis. 
 
 \begin{figure}[htbp!]
 \centering
@@ -118,19 +118,19 @@ The contents of the cell are contained by the cell membrane, which acts as a bar
 Membrane proteins can be specifically labelled to visualise the outline of cells, to confirm whether another fluorescent object is located inside or outside of the cell~\cite{yano2009tag, lee2011fluorescent, chamma2017optimized}. 
 
 \subsection{Labelling membrane structures to observe endocytosis}
-The cell can import useful raw materials into the cell through a process called endocytosis~\cite{alberts2002molecular}. 
+The cell can import useful raw materials through the membrane by a process called endocytosis~\cite{alberts2002molecular}. 
 To enter the cell, an intracellular compartment is created from the plasma membrane to contain the foreign material.
 Once inside the cell, there are many pathways for processing the endocytosed contents~\cite{marsh2001endocytosis, marsh1999structural, mcmahon2011molecular}. 
-A typical pathway, shown in Figure~\ref{fig:endocytosis-pathway} imports contents into small vesicles called early endosomes, which are selectively sorted to either recycle the contents to the cell membrane or develop into late endosomes. 
+A typical pathway, shown in Figure~\ref{fig:endocytosis-pathway}, imports contents into small vesicles called early endosomes, which are selectively sorted to either recycle the contents to the cell membrane or develop into late endosomes. 
 Late endosomes have an acidic environment, about pH\,\num{5.5}, and begin hydrolytic digestion of their contents~\cite{geisow1984ph}. 
-Late endosomes mature into lysosomes with a more acidic environment and enzymes to further break down their contents~\cite{alberts2002molecular}. 
+Late endosomes mature into lysosomes with a more acidic environment and enzymes which further break down their contents~\cite{alberts2002molecular}. 
 Labelling endosomes or lysosomes alongside other objects can be used for colocalisation studies, as performed in Chapter~\ref{chap:MOF}, which show whether another fluorescent substance is contained within the organelle or is moving freely in the cytosol~\cite{pike2017quantifying}. 
 
-\begin{figure}[htbp!]
+\begin{figure}[!b]
 \centering
 \includegraphics[width=1.0\textwidth]{endocytosis-pathway}
 \captionsetup{singlelinecheck=off}
-\caption[Introduction: Cells import external contents through endocytosis]{A typical endocytosis pathway shows the formation of various organelles, each of which contains a different environment for ingestion and processing of the external contents. Other endocytosis pathways also occur, for example to pass the contents to ER or release it directly into the cytosol. Figure adapted from ~\cite{alberts2002molecular}. } % Check chapter I adapted this from? 
+\caption[Introduction: Cells import external contents through endocytosis]{A typical endocytosis pathway shows the formation of various organelles, each of which contains a different environment for ingestion and processing of the external contents. Other endocytosis pathways also occur, for example to pass the contents to ER or release it directly into the cytosol. Figure adapted from ~\cite{alberts2002molecular}. } 
 \label{fig:endocytosis-pathway}
 \end{figure}
 
@@ -145,13 +145,14 @@ This process, known as the Krebs cycle, consumes oxygen and produces carbon diox
 Furthermore, mitochondria are responsible for triggering apoptosis - that is, controlled cell death~\cite{murray1993cell}. 
 
 In cancerous cells the Krebs cycle is bypassed, and ATP is produced by a more direct process known as glycolysis~\cite{warburg1930uber}. 
-By avoiding the Krebs cycle, cancer cells stop the mitochondria from triggering apoptosis, such that the cells become immortal and reproduce to form tumours~\cite{murray1993cell}. 
+By avoiding the Krebs cycle, cancer cells stop the mitochondria from triggering apoptosis, such that the cells become immortal and continuously
+ reproduce to form tumours~\cite{murray1993cell}. 
 Chapter~\ref{chap:MOF} uses fluorescently labelled  mitochondria to assess their interaction with a drug designed to restart the Krebs cycle in cancerous cells. 
 
 All the organelles discussed so far are located in the cytosol, a crowded solution of many different types of molecules filling the volume of the cell~\cite{goodsell1991inside}. 
 This solution is so dense that the cytosol behaves as a water-based gel rather than a liquid~\cite{alberts2013essential}. 
 
-\subsection{Labelling the cytoskeleton reveals cellular structure} \label{sec:cytoskeleton}
+\subsection{Labelling the cytoskeleton shows cellular structure} \label{sec:cytoskeleton}
 The cellular cytoskeleton is composed of long, fine protein filaments forming a system of girders, ropes, and motors to give the cell mechanical strength, control its shape, and drive movement~\cite{alberts2013essential}.
 There are three types of filament: microtubules, actin, and intermediate filaments, as seen in Figure~\ref{fig:cytoskeleton}. 
 Labelling these components with fluorescent markers provides a clear visualisation of the cell boundary, and shows strong colocalisation between filaments and other organelles~\cite{melkov2017regulation}. 
@@ -168,16 +169,16 @@ They are also often used as test samples to assess the performance of a microsco
 Since October 2015, I have been working in the Laser Analytics Group building tools and applying them to answer biological questions. 
 
 Chapter~\ref{chap:LAGSIM} describes the development a structured illumination microscope. 
-SIM is a microscopy technique which generates images in the niche between STORM/STED, which provide \SI{20}{\nano\metre} resolution but take \SI{5}{\minute} or more per acquisition; and widefield microscopy, which can image at 100\,frames per second but at a diffraction limited resolution of about \SI{200}{\nano\metre}. 
+SIM is a microscopy technique which generates images in the niche between STORM, which provides \SI{20}{\nano\metre} resolution but takes \SI{5}{\minute} or more per acquisition; and widefield microscopy, which can image at 100\,frames per second but at a diffraction limited resolution of about \SI{200}{\nano\metre}. 
 The Laser Analytics Group's SIM (LAG SIM) achieves \SI{80}{\nano\metre} resolution at 11\,frames per second. 
 
 As a relatively new invention, super-resolution microscopes are often difficult to use and require expert skill to achieve their optimal performance. 
-An important aim for LAG SIM was that any research should be able to use it, with minimal training required for capturing and reconstructing SIM data. 
+An important aim for LAG SIM was that any researcher should be able to use it, with minimal training required for capturing and reconstructing SIM data. 
 In Chapter 2, a showcase of reconstructed SIM data from a wide variety of experiments is provided as a reference for capturing high-quality images. 
 
 Many questions in biology can only be answered by observing the specimen in 3D.
 LAG SIM is able to capture 3D data using a capability known as optical sectioning.
-Whilst this data is information-rich and exciting to explore in detail, transferring it for remote colleagues to evaluate is problematic due to large file sizes, and complicated and expensive analysis software. 
+Whilst this data is information-rich and exciting to explore in detail, transferring it for remote colleagues to evaluate is problematic due to large file sizes and complicated, expensive analysis software. 
 
 To address this issue, Chapter~\ref{chap:FPB} presents FPBioimage, an online tool for sharing and publishing 3D volumetric data. 
 A key aim again was that the software was easy to operate, so that non-expert users could effortlessly view or share data from and to anywhere in the world. 
@@ -188,13 +189,13 @@ Many potentially therapeutic drugs degrade quickly in extra-cellular media, eith
 Model drugs, including small-interfering ribonucleic acid (siRNA) and dichloroacetic acid (DCA), were loaded into the porous structure of MOFs, with the aim of protecting the contents for delivery into cells. 
 
 The LAG SIM was used to image the uptake of the treatment over a time period of 24-hours, and 3-dimensional images have been published online with FPBioimage to allow other researchers to explore the data themselves and verify the results. 
-Three biological experiments are described showing various therapeutic effects offered by this newly developed technology. 
+Three biological experiments are described showing the therapeutic effects offered by this newly-developed technology. 
 
 Chapter~\ref{chap:ER} utilises the fast, high-resolution imaging provided by LAG SIM to present pioneering discoveries about the endoplasmic reticulum (ER). 
-It has recently been discovered that proteins within the ER move with directly flow, rather than diffusive motion which was previously assumed. 
+It has recently been discovered that proteins within the ER move with directed flow, rather than diffusive motion which was previously assumed. 
 Working in collaboration with the researchers who first discovered this phenomenon, LAG SIM's unique spatio-temporal resolution was utilised with the aim of finding the origin of directed luminal flow. 
 
-High-speed videos revealed the ER membrane pinching at a high frequency, which was hypothesised to cause a peristaltic flow. 
+High-speed videos reveal the ER membrane pinching at a high frequency, which was hypothesised to cause a peristaltic flow. 
 Computational analysis is presented to understand and interpret experimental results, and compelling evidence is shown which advances the understanding of fundamental cell biology. 
 
 Each chapter begins with its own detailed introduction to the topic, including background information and a review of relevant literature. 

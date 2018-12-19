@@ -21,13 +21,13 @@
 \section{Introduction}
 \subsection{Publishers require new methods of providing research data} \label{sec:introvisual}
 Modern scientific experiments gather data at an ever-increasing rate. 
-This is particularly apparent in 3D microscopy, where techniques such as confocal~\cite{marvin1961microscopy}, optical-sectioning SIM, and light-sheet techniques including selective plane illumination microscopy (SPIM)~\cite{huisken2004optical} generate terabytes of volumetric data per hour. 
+This is particularly apparent in 3D microscopy, where techniques such as confocal~\cite{marvin1961microscopy}, optical-sectioning SIM, and light-sheet methods including selective plane illumination microscopy (SPIM)~\cite{huisken2004optical} generate terabytes of volumetric data per hour. 
 
 Popular scientific journals require authors to make data available for reproducibility and further analysis. 
 All \textit{Nature} journals, for example, require ``the availability of the minimal dataset that would be necessary to interpret, replicate and build upon the methods or findings reported''~\cite{naturedata}; similarly \textit{Science} mandate that large data sets must be deposited in public repositories and made available at the time of publication~\cite{sciencedata}.
 Furthermore the FAIR Guiding Principles for scientific data management and stewardship recommend ``Findability, Accessibility, Interoperability, and Reusability'' for all published data~\cite{wilkinson2016fair}, which currently requires an urgent improvement to the infrastructure which supports this. 
 
-To give readers of a scientific publication a deeper understanding of 3D data, many authors present supplementary fly-through videos showing the data from a variety of perspectives, including from within the volume~\cite{legant2016high, fu2016imaging, chhetri2015whole, huang2016ultra}. 
+To give readers of a scientific publication a deeper understanding of 3D data, many authors present supplementary fly-through videos showing the data from a variety of perspectives, including from within the volume~\cite{huang2016ultra, legant2016high, fu2016imaging, chhetri2015whole}. 
 Whilst this provides significantly more information than static 2D images can provide, the reader is nevertheless unable to interact with the data themselves. 
 They are therefore restricted to just the perspective provided by the author, with no opportunity for personal exploration or analysis.
 To describe the data as open access should require a link to the volumetric data set so that readers can download it and examine it themselves. 
@@ -37,7 +37,7 @@ Repositories specifically designed for this type of data are emerging, such as t
 Many authors therefore simply make a statement that their data is "available upon reasonable request". 
 % Can I find more references for this?  
 
-Upon such requests, however, receiving and examining 3D volumetric data is not trivial. 
+After making such a request, however, receiving and examining 3D volumetric data is not trivial. 
 The large file size means that the common practice is to temporarily upload data to a file storage repository, and share a link to the repository through an email. 
 Once the large data file has been downloaded, specialist image analysis software must be used to render it, requiring expert skill and experience~\cite{broeke2015image}. 
 
@@ -99,7 +99,7 @@ The API provides a limited number of simple functions which are optimised for ru
 
 Figure~\ref{fig:caniusethis-webgl} shows that the support of WebGL is now widespread~\cite{caniuse}, available through HTML5 provided by all modern web browsers.
 
-\begin{figure}[htb!]
+\begin{figure}[b!]
 \centering
 \begin{subfigure}[b]{1.0\textwidth}
 \includegraphics[width=1.0\textwidth]{caniusethis-webgl}
@@ -219,7 +219,7 @@ float4 frag(frag_input i) : COLOR
 \end{lstfloat}
 
 FPBioimage uses a ray marching technique similar to that presented in Section~\ref{sec:volumerendering}.
-The main ray marching loop implementing this is shown in lines Snippet~\ref{snip:renderloop}, based on NVIDIA's ``Render to 3D Textre'' guide~\cite{nvidia2008guide}.
+The main ray marching loop implementing this is shown in lines Snippet~\ref{snip:renderloop}, based on Nvidia's ``Render to 3D Texture'' guide~\cite{nvidia2008guide}.
 This loop is part of the `fragment shader', which means it runs for every pixel rendered on the display.
 It is therefore the most important loop in the whole program for efficiency, and any efforts to increase the speed at which this loop executes will be amplified by the number of pixels.
 We will now examine the loop, and the efficiency modifications which have been made compared to traditional ray marching.
@@ -227,9 +227,9 @@ We will now examine the loop, and the efficiency modifications which have been m
 Lines 43 and 50 show that there are two different modes of rendering: a maximum intensity projection (\texttt{\char`_RenderMode == 0}) and the volumetric ray marching mode (\texttt{\char`_RenderMode == 1}) discussed in section \ref{sec:volumerendering}.
 In the maximum intensity projection mode, the ray checks the mean colour of every voxel it passes through, and paints the colour of the voxel with the largest `mean color' to the screen pixel.
 Note that mean colour is calculated as the sum of the red, green, and blue colour channels.
-Strictly we should divide by $3$ to calculate the true mean colour value; however, this would mean 2 extra divisions for every loop iteration for every pixel on the screen; removing this step has no effect on the comparison, but gives an improvement in frames rendered per second. 
+Strictly we should divide by $3$ to calculate the true mean colour value; however, this would require 2 extra divisions for every loop iteration for every pixel on the screen; removing this step has no effect on the comparison, but gives an improvement in frames rendered per second. 
 
-Before discussing the volumetric ray marching calculation, we should note that in this implementation the ray marches from the screen to the back of the cube - this is the opposite of traditional scheme shown in Figure~\ref{fig:raymarch-diagram}.
+Before discussing the volumetric ray marching calculation, we should note that in this implementation the ray marches from the screen to the back of the cube - this is the opposite of traditional schemes shown in Figure~\ref{fig:raymarch-diagram}.
 The reason for this is, of course, efficiency.
 As a ray progresses from a pixel through the cube, it becomes more and more opaque, denoted by the alpha value of the colour \texttt{ray\char`_col.a}.
 Once the alpha value reaches 1, any voxels further along the ray's path will not be visible, so there is no reason to look up their colour or add their contribution to the ray; line 50's second condition is that \texttt{ray\char`_col.a < 1.0f} to implement this behaviour.
@@ -238,14 +238,14 @@ Note that in most programming languages we would break out of the loop at this p
 The requirement to have a constant number of iterations also explains the very first condition in the loop on line 29.
 The variable \texttt{k\char`_Steps} sets the depth resolution of the volume.
 We might expect the \texttt{for} loop to finish when \texttt{k < k\char`_Steps}, but this would set the depth resolution as a constant, removing the option to increase it for powerful machines or decrease it for mobile devices.
-By looping for \texttt{MAX\char`_STEPS} iterations (which is currently set to 512, but could be increased as hardware improves in the future) but performing no calculations if the loop variables \texttt{k} is greater than \texttt{k\char`_STEPS}, we can set the depth resolution to any integer from 0 to \texttt{MAX\char`_STEPS} and gain a performance benefit for low resolutions.
+By looping for \texttt{MAX\char`_STEPS} iterations (which is currently set to 512, but could be increased as hardware improves in the future) but performing no calculations if the loop variable \texttt{k} is greater than \texttt{k\char`_STEPS}, we can set the depth resolution to any integer from 0 to \texttt{MAX\char`_STEPS} and gain a performance benefit for low resolutions.
 
 There are two additional conditions which must be met for the volume renderer to add a voxel to the ray.
 Firstly, shown in lines 34 to 38, the ray position must be within the unit cube and behind the clip plane.
 The clip plane can be used to cut open the volumetric model at any angle and position, and is described in more detail in Section~\ref{sec:fpbResults}.
-Secondly, the voxel's mean colour intensity must be above the value of \texttt{\char`_Threshold} to contribute to the ray, ensuring that dark voxels around the volume are not visible.
+Secondly, lines 43 and 50 show the voxel's mean colour intensity must be above the value of \texttt{\char`_Threshold} to contribute to the ray, ensuring that dark voxels around the volume are not visible.
 
-If all the aforementioned conditions are met, then the code in lines 49 - 51 performs the volumetric ray marching step - that is, the colour of the current voxel mixes onto the ray that is passing through it.
+If all the aforementioned conditions are met, then the code in lines 52 - 54 performs the volumetric ray marching step - that is, the colour of the current voxel mixes onto the ray that is passing through it.
 Firstly, the voxel's opacity is adjusted based on the input variable \texttt{\char`_Opacity}, which allows the volume to be rendered with transparency.
 This new value of alpha is multiplied onto the voxel's colour so that more transparent voxels contribute less intensity to the ray.
 Finally, the adjusted voxel is added to the ray, with its contribution weighted by the current transparency of the ray.
@@ -267,7 +267,7 @@ This was found to be inadequate for most researchers' data, so a target of 512$\
 In order to meet the requirements of WebGL 1.0, this requires 8 2D texture atlases of size 4096$\times$4096.
 
 The 8 texture atlases are filled according to the pseudo-code shown in Snippet~\ref{snip:textureloading}.
-The code uses a mixture of the modulo operator (\%) and division (/) to determine (a) which atlas to place each volume image slice in, and (b) the location in that image where the slice should be located.
+The code uses a mixture of the modulo operator (\%) and division (/) to determine (a) which atlas to place each volume image slice in, and (b) the location in that atlas where the slice should be located.
 Complementary code runs in the WebGL rendering code to read a particular voxel's colour given an $xyz$-coordinate.
 
 \begin{lstfloat}
@@ -342,7 +342,7 @@ The cube is then linked to both the arrow keys and to the mouse to provide intui
 For data whose combination of $xyz$ resolution and $xyz$ voxel size describes a cuboid, the $xyz$ scale of the rendering cube can be adjusted to ensure distortion-free visualisation.
 
 \begin{lstfloat}
-\begin{lstlisting}[language={[Sharp]c}, label={snip:cuberotation}, caption={C\# code using built-in Unity functions to rotate the rendered volumetric data.}]
+\begin{lstlisting}[language={[Sharp]c}, label={snip:cuberotation}, caption={C\# code using built-in Unity functions for rotating the rendered volumetric data}]
 void FixedUpdate () {
 	// This code is attached to the rendering cube, and called once per frame
 
@@ -371,14 +371,14 @@ void FixedUpdate () {
 \end{lstfloat}
 
 The `FP' in FPBioimage stands for `First Person,' and refers to the control the user has over the scene's camera.
-Rather than just viewing the rotatable render cube from one perspective, as in common in offline volumetric renderers~\cite{schindelin2012fiji, de2012icy, imaris}, FPBioimage also allows the user to change the position and look-direction of the camera.
+Rather than just viewing the rotatable render cube from one perspective, as is common in offline volumetric renderers~\cite{schindelin2012fiji, de2012icy, imaris}, FPBioimage also allows the user to change the position and look-direction of the camera.
 This is implemented as shown in Snippet~\ref{sec:cameramovement}.
 The \texttt{H1} axis is mapped to the A and D keys, and the \texttt{Z1} axis to the W and S keys.
-This, combined with the functionality of using the mouse to change the camera's look-direction, will make control of the camera very familiar to anyone who has played first person perspective computer games.
-Moving the camera allows the user to create the type of dynamic fly-bys sometimes seen in publication videos in real time, providing a highly immersive visualisation of the data.
+This, combined with the functionality of using the mouse to change the camera's look-direction, will make control of the camera very familiar to anyone who has played first-person perspective computer games.
+Moving the camera allows the user to create in real time the type of dynamic fly-bys sometimes seen in publication videos, providing a highly immersive visualisation of the data.
 
 \begin{lstfloat}
-\begin{lstlisting}[language={[Sharp]c}, label={sec:cameramovement}, caption={C\# code using built-in Unity functions for moving the camera in a first-person manner.}]
+\begin{lstlisting}[language={[Sharp]c}, label={sec:cameramovement}, caption={C\# code using built-in Unity functions for moving the camera in a first-person manner}]
 void FixedUpdate(){
 	// Translation
 	transform.position += Input.GetAxis ("V1") * Camera.main.transform.up * Time.deltaTime;
@@ -420,7 +420,7 @@ State 0 & The default state, where all states eventually return to. Nothing rega
 State 1 & The bookmarking textbox pops up requesting the user to enter a number key to save the new bookmark in that position. Pressing a number key will take the user to the next stage of bookmark creation; pressing `Escape' will close the textbox and return to the default state. \\
 State 2 & The user can enter a text annotation into the text box. Pressing `Escape' will immediately close the textbox and return to the default state; pressing `Return' (also known as `Enter') will save the bookmark as described below and move to State 3. Note that an empty annotation is accepted. \\
 State 3 & This state displays information or annotation text. If arriving from State 2, it will show a confirmation message; if arriving from State 4, it will show the annotation text saved alongside the bookmark being restored. \\
-State 4 & This state simply checks that the volumetric model has loaded, to ensure no error is thrown if trying to restore a bookmark on an uninitialised volume. The state machine continues to wait in State 4 if the volume is loading, so any requested bookmark will be loaded immediately when the volume is ready. \\
+State 4 & This state simply checks that the volumetric model has loaded, to ensure no error is thrown if trying to restore a bookmark on an uninitialised volume. The state machine continues to wait in State 4 while the volume is loading, so any requested bookmark will be loaded immediately when the volume is ready. \\
 \end{tabular}
 
 \begin{figure}[htbp!]
@@ -437,7 +437,7 @@ Once the bookmark has been encoded, it is saved to the web browser as shown in l
 The bookmark is saved to Local Storage with a unique prefix followed by the bookmark's number, so that it can be restored at a later time.
 
 \begin{lstfloat}
-\begin{lstlisting}[language={[Sharp]c}, label={snip:savingbookmark}, caption={C\#-JavaScript interface code for interacting with the browser's local storage to save and share bookmarks.}]
+\begin{lstlisting}[language={[Sharp]c}, label={snip:savingbookmark}, caption={C\#-JavaScript interface code for interacting with the browser's local storage to save and share bookmarks}]
 string evalMe = "localStorage.setItem('fpb-" + variables.fpbJSON.uniqueName + "-bookmark" + bookmarkNumber + "', '" + bookmarkString64ToSave + "');";
 Application.ExternalEval (evalMe);
 evalMe = "history.replaceState(null, null, '?b=" + bookmarkString64ToSave + "');";
@@ -447,7 +447,7 @@ Application.ExternalEval (evalMe);
 
 Lines 3 and 4 of Snippet~\ref{snip:savingbookmark} shows how the base-64 bookmark string is appended to the base url in the web browser using the JavaScript function \texttt{replaceState}.
 The user can then simply copy the URL and send it to a friend or colleague to open on their own computer.
-When the volume is being loaded, the bookmarking C\# script checks the URL of the webpage its running on, and if it finds a "\texttt{?b=}" in the URL string it will begin restoring the bookmark.
+When the volume is being loaded, the bookmarking C\# script checks the URL of the webpage it is running on, and if it finds a "\texttt{?b=}" in the URL string it will begin restoring the bookmark.
 This puts the bookmarking state machine into State 4, ready to show the bookmark and annotation text as soon as the volumetric model has loaded.
 In this way users can easily share specific views of the data across the globe.
 
@@ -464,7 +464,7 @@ The new render texture is converted to a PNG-encoded byte stream, and then offer
 This is shown in line 32 of Snippet~\ref{snip:screenshots}.
 
 \begin{lstfloat}
-\begin{lstlisting}[language={[Sharp]c}, label={snip:screenshots}, caption={C\# code for capturing a high-resolution screenshot and presenting it to the user as a download.}]
+\begin{lstlisting}[language={[Sharp]c}, label={snip:screenshots}, caption={C\# code for capturing a high-resolution screenshot and presenting it to the user as a download}]
 public void takeSreenshot(bool hiRes){
 	if (hiRes) {
 		bool wOK = int.TryParse (wRes.text, out ssWidth);
@@ -572,7 +572,7 @@ Screenshots of the various \textui{Projection} methods rendering a mouse embryo 
 Further down the right-hand UI tab are two UI buttons for capturing screenshots.
 The first, \textui{Take shot}, captures a screenshot at the current resolution of the drawing canvas.
 Perhaps more usefully, the \textui{High resolution} screenshot button captures a screenshot at the resolution defined in the two text boxes below.
-This allows the user to capture screenshots at a higher resolution than their display, in case high resolution images are required for presentation or publication.
+This allows the user to capture screenshots at a higher resolution than their display, in case high-resolution images are required for presentation or publication.
 The advantage of this is exemplified in Figure~\ref{fig:fpbScreenshots}.
 
 \begin{figure}[htbp!]
@@ -642,14 +642,14 @@ This is demonstrated in Figure~\ref{fig:fpbBookmarkRecieved}, where the shared b
 
 Finally, at the bottom of the left-hand UI tab are the UI buttons for the clipping plane.
 Mentioned briefly in Section~\ref{sec:fpbVolumeRendering}, the clipping plane prevents voxels that are behind it from being rendered, revealing voxels inside the volumetric data that are otherwise obscured.
-The clipping plane's location is controlled with the IJKL keys, where I and K are used to move the clipping plane forward and back, and J and L rotate is around to cut the data at an arbitrary angle.
+The clipping plane's location is controlled with the IJKL keys, where I and K are used to move the clipping plane forward and back, and J and L rotate it around to cut the data at an arbitrary angle.
 Once an interesting cut has been made, the clipping plane can be locked in place with respect to the model by pressing the \textui{Lock Plane} button.
 With the clipping plane locked, the user can move the camera or the model to view the cut volumetric data from a different angle.
 Use of the clipping plane can therefore provide insightful perspectives of the volumetric data that are not possible to obtain with any other method, as shown in Figures~\ref{fig:fpbRendering}b, e, h, and i.
 
-\subsection{Measuring performance reveals compatibility with consumer-grade computers} \label{sec:fpbPerformance}
+\subsection{Measuring performance demonstrates compatibility with consumer-grade computers} \label{sec:fpbPerformance}
 Until recently, volume rendering was not possible in real time, and would be calculated for a specific camera perspective in advance of presentation to render either a single image or video.
-In 2000, Ray and Silver produced the Race II Engine, designed with dedicated hardware to render [512$\times$512$\times$512] volumetric images in real time.
+In 2000, Ray and Silver produced the Race II Engine, designed with dedicated hardware to render 512$\times$512$\times$512 volumetric images in real time.
 This was achieved by realising the volume rendering algorithm described in Section~\ref{sec:volumerendering} with physical devices, with hundreds of calculations running in parallel to compute all rays at once~\cite{ray2000race}.
 Today, top-end graphics cards are able to perform the same calculations in real time on a graphics processing unit (GPU), a highly parallelised device optimised for computing lighting models~\cite{lindholm2008nvidia}.
 
@@ -689,27 +689,27 @@ A table of quality against performance for different combinations of the three q
 \hline
 
 \multicolumn{7}{|c|}{\textbf{Z-resolution test}} \\ \hline
-\multicolumn{2}{|c|}{-} & 450 & 64 & 1X & 60 & 15\% \\
-\multicolumn{2}{|c|}{-} & 450 & 256 & 1X & 60 & 21\% \\
-\multicolumn{2}{|c|}{-} & 450 & 512 & 1X & 60 & 30\% \\
-\multicolumn{2}{|c|}{-} & 450 & 768 & 1X & 60 & 39\% \\
+\multicolumn{2}{|c|}{-} & 450 & 64 & 1$\times$ & 60 & 15\% \\
+\multicolumn{2}{|c|}{-} & 450 & 256 & 1$\times$ & 60 & 21\% \\
+\multicolumn{2}{|c|}{-} & 450 & 512 & 1$\times$ & 60 & 30\% \\
+\multicolumn{2}{|c|}{-} & 450 & 768 & 1$\times$ & 60 & 39\% \\
  & & & & & & \\
 \hline
 
 \multicolumn{7}{|c|}{\textbf{Interpolation test}} \\ \hline
-\multicolumn{2}{|c|}{-} & 768 & 256 & 1X & 60 & 40\% \\
-\multicolumn{2}{|c|}{-} & 768 & 256 & 2X & 60 & 49\% \\
-\multicolumn{2}{|c|}{-} & 768 & 256 & 8X & 54 & 83\% \\
+\multicolumn{2}{|c|}{-} & 768 & 256 & 1$\times$ & 60 & 40\% \\
+\multicolumn{2}{|c|}{-} & 768 & 256 & 2$\times$ & 60 & 49\% \\
+\multicolumn{2}{|c|}{-} & 768 & 256 & 8$\times$ & 54 & 83\% \\
  & & & & & & \\
 \hline
 
 \multicolumn{7}{|c|}{\textbf{Preset values}} \\ \hline
-Very low & Old laptop & 256 & 64 & 1X & 60 & 11\% \\
-Low & Mobile & 400 & 100 & 1X & 60 & 15\% \\
-Medium & Laptop & 450 & 150 & 1X & 60 & 18\% \\
-High & Desktop & 768 & 350 & 1X & 60 & 49\% \\
-Very high & Graphics card & 1024 & 500 & 2X & 38 & 87\% \\
-Top & 3D workstation & 2048 & 768 & 8X & 9 & 97\% \\
+Very low & Old laptop & 256 & 64 & 1$\times$ & 60 & 11\% \\
+Low & Mobile & 400 & 100 & 1$\times$ & 60 & 15\% \\
+Medium & Laptop & 450 & 150 & 1$\times$ & 60 & 18\% \\
+High & Desktop & 768 & 350 & 1$\times$ & 60 & 49\% \\
+Very high & Graphics card & 1024 & 500 & 2$\times$ & 38 & 87\% \\
+Top & 3D workstation & 2048 & 768 & 8$\times$ & 9 & 97\% \\
 \hline
 
 \end{tabular}
@@ -727,7 +727,7 @@ To choose the most useful preset values, the visual impact of the quality settin
 
 As XY-resolution is increased, performance decreases dramatically. 
 This is because the number of pixels being rendered increases with the square of the XY-resolution number. 
-It is interesting that XY-resolution does not have such a dramatic effect on the perceived visual quality, as shown in Figure~\ref{fig:fpb-quality}. 
+It is interesting that XY-resolution does not have such a dramatic effect on the perceived visual quality, as seen in Figure~\ref{fig:fpbScreenshots}. 
 Since there is little visual quality gain for a relatively large performance impact, XY-resolution is kept to moderate values even for the higher quality presets. 
 
 Compared to the performance impact of XY-resolution, Z-resolution has a relatively small impact. 
@@ -736,9 +736,9 @@ As shown in Figure~\ref{fig:fpb-quality}, however, Z-resolution has a considerab
 For an equivalent impact on performance, an increase in Z-resolution gives better visual quality than an increase in XY-resolution; therefore providing high Z-resolution is prioritised for the presets. 
 
 Interpolation of voxels has a big impact on visual quality, removing the staircase effect shown in Figure~\ref{fig:fpb-quality}, but also has a big impact on performance. 
-When 2X interpolation is used, two voxels from the 2-nearest Z-planes to the marching ray's current position are averaged (weighted by distance) to smooth the appearance of the volume. 
+When 2$\times$ interpolation is used, two voxels from the 2-nearest Z-planes to the marching ray's current position are averaged (weighted by distance) to smooth the appearance of the volume. 
 This requires an extra texture lookup at every z-step for every screen pixel, causing a significant performance impact particularly at high XY- or Z-resolutions. 
-In 8X interpolation, the 8-nearest voxels to the marching ray's position are used, requiring 8 texture lookups at every z-step. 
+In 8$\times$ interpolation, the 8-nearest voxels to the marching ray's position are used, requiring 8 texture lookups at every z-step. 
 The extra texture lookups explains the high impact on performance of interpolation. 
 
 The `Top' preset setting sets all quality variables to maximum, and the user is warned that this setting is `risky' because it can crash the web browser!
@@ -748,8 +748,8 @@ However, on dedicated graphics workstations where the GPU is able to render \SI{
 \section{FPBioimage Suite}
 FPBioimage is a volumetric renderer designed to be used in a web browser. 
 However, to assist users uploading their 3D data to share on the internet, plugins are available for the open-source image analysis platforms ImageJ, FIJI, and Icy. 
-Furthermore, thanks to its open-source nature and an easy-to-use JSON interface, other groups have been able to integrate FPBioimage into their own software packages, for example OMERO-FPBioimage. 
-Finally, for users who want to view volumetric data on their mobile, I have created dedicated Android and iOS apps, which support virtual reality for truly immersive interaction with the data. % and Oculus?  
+Furthermore, thanks to its open-source nature and an easy-to-use JSON interface, other groups have been able to integrate FPBioimage into their own software packages, for example OMERO-FPBioimage~\cite{omero2018website}. 
+Finally, for users who want to view volumetric data on their mobile device, I have created dedicated Android and iOS apps, which support virtual reality for truly immersive interaction with the data. % and Oculus?  
 Together with FPBioimage, this collection of applications has been branded FPBioimage Suite.
 
 \subsection{Plugins are available for popular image analysis programs}
@@ -795,7 +795,7 @@ Close collaboration with the OMERO team means that OMERO now sends texture atlas
 The viewer has proved popular with OMERO users, finding diverse uses from plant sciences to pathology~\cite{fleur2018fpbioimage}.
 It has been adopted as OMERO's default volumetric viewer, and is featured prominently on their webpage~\cite{omero2018website}.
 
-\subsection{Mobile apps bring volumetric rendering to smartphones with virtual reality}
+\subsection{Mobile apps bring volumetric rendering to smartphones with virtual reality support}
 Since FPBioimage is a web-based application, it will run on any device with a web browser. 
 This includes mobile devices, such as iPhones and Android smartphones, as well as tablet devices such as an iPad. 
 However, mobile browsers have limited access to the device's computational resources, causing long loading times and poor performance, characterised by a low frame rate. 
@@ -810,7 +810,7 @@ Since the mobile app uses the same rendering algorithm (presented in Section~\re
 \begin{figure}[htbp!]
 \centering
 \includegraphics[width=1.0\textwidth]{fpb-android}
-\caption[FPBioimage: The FPBioimage mobile app provides volumetric rendering in virtual reality]{FPBioimage has native apps for Android and iOS. The photo shows a split-screen stereo view, which can be used in conjunction with Google Cardboard\cite{cardboard} to support virtual reality. Data from~\cite{sharpe2002optical}. } % 
+\caption[FPBioimage: The FPBioimage mobile app provides volumetric rendering in virtual reality]{FPBioimage has native apps for Android and iOS. The photo shows a split-screen stereo view, which can be used in conjunction with Google Cardboard~\cite{cardboard} to support virtual reality. Mouse embryo volume data from~\cite{sharpe2002optical}. } % 
 \label{fig:fpbMobile}
 \end{figure}
 
@@ -819,7 +819,7 @@ Users can intuitively rotate the model by touching and dragging.
 Users can also zoom in and out by a two-finger pinch, and move around the model using two fingers and dragging. 
 As with the web app, the quality can be changed to accommodate a range of mobile chipsets, and the usual rendering options of opacity, intensity and cutoff are available, along with the various projection methods.  
 
-Running on mobile brings one more advantage, thanks to the low-cost virtual reality (VR) device Google Cardboard\cite{cardboard}. 
+Running on mobile brings one more advantage, thanks to the low-cost virtual reality (VR) device Google Cardboard~\cite{cardboard}. 
 This is a VR viewer - originally made of cardboard but now available in more robust plastic models~\cite{get2018cardboard} - which utilises a smartphone's high-resolution screen and precise accelerometer to provide a low-cost VR experience. 
 The user simply has to open their data in the mobile app, click the "Start VR" button, and put their phone into their Cardboard viewer. 
 This option allows users to view their data in VR, providing a truly immersive experience and giving a perspective of the data not possible through any other means. 

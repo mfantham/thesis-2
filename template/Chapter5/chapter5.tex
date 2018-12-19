@@ -24,7 +24,7 @@ The endoplasmic reticulum (ER) is an interconnected network of tubular pipes and
 Its function includes the biogenesis of membrane and secretory proteins, and delivery of these functional solutes throughout the cell~\cite{dyson1978cell}.
 Since the ER network extends to the cell periphery, molecules can be transported to distant sites in the cell.
 
-When demand is greater than capacity of ER to fold proteins, ER stress can occur~\cite{oakes2015role}.
+When demand is greater than the capacity of ER to fold proteins, ER stress can occur~\cite{oakes2015role}.
 ER stress can also be caused by proteins that cannot properly fold inside the ER~\cite{rao2004misfolded}.
 A number of signal transduction proteins in the cell monitor proteins secreted by the ER, and if an imbalance is detected the ER stress response begins~\cite{oakes2015role}.
 
@@ -41,7 +41,7 @@ It has been shown with fluorescence recovery after photo-bleaching (FRAP) that p
 More recently, we have shown with single particle tracking that molecules in the ER do not move with diffusive motion~\cite{holcman2018single}. 
 Rather, they have a fast, directed velocity as they flow along ER tubes, but move with slow, diffusive motion at nodes where 3 or more tubes connect, as shown in Figure~\ref{fig:er-directed-flow-velocity}. 
 
-\begin{figure}[htbp!]
+\begin{figure}[p]
 \centering
 	\begin{subfigure}[b]{0.4\textwidth}
 		\includegraphics[width=1.0\textwidth]{er-directed-flow}
@@ -66,7 +66,7 @@ This is particularly convincing in the cumulative frequency distribution shown i
 
 Consistent with previous studies~\cite{nehls2000dynamics}, tracking directed flow revealed that depleting ATP causes a 4$\times$ decrease in mean flow velocity, shown in Figure~\ref{fig:er-atp-depletion}. 
 
-\begin{figure}[htbp!]
+\begin{figure}[p]
 	\centering
 	\begin{subfigure}[b]{0.3\textwidth}
 		\includegraphics[width=1.0\textwidth]{er-atp-depletion}
@@ -108,10 +108,10 @@ Utilising the high-speed imaging capability of the LAG SIM, we  observed that th
 Imaging was performed at a raw frame rate of \SI{99}{\hertz}, corresponding to a reconstructed frame rate of \SI{11}{\hertz}. 
 
 For optimal imaging conditions, COS-7 cells were selected for the investigation. 
-These characteristically flat cells, with a height of <\SI{\sim 10}{\micro\meter}, % Check and cite this?
+These characteristically flat cells, with a height of <\SI{10}{\micro\meter}, 
 meant that the whole ER network could be imaged by LAG SIM in TIRF mode, which physically removes out-of-focus light. 
 The ER network was labelled with ER-Tracker\textsuperscript{TM} Green, a fluorescent dye from ThermoFisher excited at \SI{488}{\nano\meter}. 
-This allowed SIM to achieve its highest resolution imaging of \SI{85}{\nano\meter}. 
+This allowed SIM to achieve its highest resolution imaging of \SI{80}{\nano\meter}. 
 
 To verify our observations, and ensure relevance to human pathology, we also used HEK-293 cells labelled with tetramethylrhodamine (TMR) attached to luminal ER proteins with HaloTag® technology. 
 These thicker cells were imaged with optical sectioning LAG SIM, since TIRF only showed small fragments of ER close the coverglass. 
@@ -131,7 +131,7 @@ Images in this chapter are described as COS-7-ERT, COS-7-TMR, and HEK-293-ERT, a
 	\includegraphics[width=\textwidth]{er-rearrangement-3}
 	\caption{}\label{fig:er-rearrangement-3}
 \end{subfigure}
-\caption[ER: Growing and shrinking tubules show the ER network is a state of dynamic equilibrium]{The ER network is in a state of dynamic equilibrium, with a small number of nodes being created and destroyed at any given time to cause network rearrangement. Images are of COS-7-ERT; scalebar is \SI{1}{\micro\metre}. } 
+\caption[ER: Growing and shrinking tubules show the ER network is in a state of dynamic equilibrium]{The ER network is in a state of dynamic equilibrium, with a small number of nodes being created and destroyed at any given time to cause network rearrangement. Images are of COS-7-ERT; scalebar is \SI{1}{\micro\metre}. } 
 \label{fig:ER-rearrangement}
 \end{figure}
 
@@ -144,13 +144,13 @@ To draw statistics describing the network from the images, the following steps w
 \begin{enumerate}
 	\item Generate a binary image of the network for each frame
 	\item Skeletonise the network, making it one pixel wide
-	\item Classify nodes, endpoints, and tubes with MATLAB \texttt{bwmorph} functions
+	\item Classify nodes, endpoints, and tubes with MATLAB's \texttt{bwmorph} functions
 	\item Extract statistics from labelled binary image stacks
 \end{enumerate}
 
 A common method for generating a binary image is thresholding, where all pixels with a value above a certain threshold are classified as \texttt{true} and all those with values below the threshold are assigned \texttt{false}. 
 Whilst this scheme was effective at differentiating ER from background in the thin COS-7 cells, non-uniform background light in HEK-293 cells, visible in Figure~\ref{fig:er-classifier-recon-561}, meant that a simple binary threshold produced the poor network extraction shown in Figure~\ref{fig:ER-classifier-threshold}. 
-Furthermore, the binary threshold required for each image set varies depending on exposure time, laser power, and expression of the fluorescent label that particular cell. 
+Furthermore, the binary threshold required for each image set varies depending on exposure time, laser power, and expression level of the fluorescent label that particular cell. 
 Therefore a single value threshold was not appropriate to generate binary images. 
 
 Instead a machine learning technique was used to classify ER pixels from background pixels. 
@@ -187,7 +187,7 @@ The output of Weka Segmentation in Figure~\ref{fig:ER-classifier-weka} successfu
 After binary images were skeletonised, a classified network map, as shown in Figure~\ref{fig:er-classified-network}, was generated with MATLAB for every frame of every image set. 
 From this, various statistics could be extracted, including tubule length distribution, tip growth rate, and node movement. 
 
-The distribution of tubule lengths, shown at at various time points in Figure~\ref{fig:er-tubule-timepoints}, does not change over time. 
+The distribution of tubule lengths, shown at various time points in Figure~\ref{fig:er-tubule-timepoints}, does not change over time. 
 This shows that the ER is in a dynamic equilibrium. 
 Although there are local changes in structure and connectivity, the overall network properties do not change. 
 
@@ -207,7 +207,7 @@ We conclude that tubule growth and node movement have a negligible contribution 
 
 \subsection{Active tubule pinching correlates with luminal flow velocity}
 The motion of luminal proteins suggested the possibility of nanoperistalsis-like propulsion~\cite{nadeem2014mathematical}, attainable by tubule contractions. 
-Using the LAG SIM in TIRF mode, we obtained images at \SI{11}{\hertz}, with a resolution of \SI{85}{\nano\metre}, and were able to observe pinching of the tubule. 
+Using the LAG SIM in TIRF mode, we obtained images at \SI{11}{\hertz}, with a resolution of \SI{80}{\nano\metre}, and were able to observe pinching of the tubule. 
 
 ER tubules are \SIrange{60}{100}{\nano\metre} in width, so observing pinching requires a microscope that can image beyond the diffraction limit~\cite{lippincott1989rapid}. 
 When ER tubules pinch, their width decreases to below the resolution limit of SIM; however this can still be observed as a decrease in intensity, confirmed by the simulation shown in Figures~\ref{fig:er-pinching}a-f. 
@@ -292,12 +292,12 @@ Furthermore, 3D images of a fixed ER network, obtained using optical sectioning 
 This is available to view interactively with FPBioimage, at \url{https://fpb.ceb.cam.ac.uk/ER}. 
 Despite tubules' size being at the resolution limit of SIM, the evidence from the different experiments presented here provide confidence that pinching is not an imaging artefact. 
 
-\subsection{Graphical simulation shows pinching accelerations luminal mixing}
+\subsection{Graphical simulation shows pinching accelerates luminal mixing}
 In order to visualise the concept of luminal flow, and to understand its purpose, I wrote a 2D Unity program modelling an ER network with labelled proteins. 
 
 An ER network was automatically modelled with the following steps:
 \begin{enumerate}
-	\item Create binary image of network, with method outlined in Section~\ref{sec:ERnetwork}
+	\item Create binary image of ER network, with method outlined in Section~\ref{sec:ERnetwork}
 	\item Create a collision boundary from binary image with an edge-tracing algorithm
 	\item Create a simplified skeleton network from binary image
 	\item Spawn `pinch points' on the skeleton, aligned with the skeleton direction and the width of the network at that point
@@ -317,7 +317,7 @@ When the pinch point relaxes, the force acts in the opposite direction, sucking 
 The magnitude of the force is an adjustable parameter, to control overall energy in the system. 
 
 Inelastic collisions were modelled with the Nvidia PhysX engine~\cite{nvidia2008physx}. 
-Coefficient of restitution can be adjusted for each material, such that a collision with the ER membrane is different to a particle-particle collisions. 
+Coefficient of restitution can be adjusted for each material, such that a collision with the ER membrane is different to a particle-particle collision. 
 
 \begin{figure}[t!]
 	\centering
@@ -366,7 +366,7 @@ Particles gain enough speed from a pinch to move away from its influence when th
 \begin{figure}[htbp!]
 	\centering
 	\includegraphics[width=\textwidth]{er-simulation-magic-particle}
-	\caption[ER simulation: The simulated model shows similar particle velocity tracks to experimental data]{A single particle was tracked in the simulation, and its velocity recorded using the same colour scale as Figure~\ref{fig:ER-directed-flow-velocity}. The simulated model is in good agreement with experimental data. }
+	\caption[ER simulation: The simulated model shows similar particle velocity tracks to experimental data]{A single particle was tracked in the simulation, and its velocity recorded using the same colour scale as Figure~\ref{fig:ER-directed-flow-velocity}, where red shows fast particle velocity and blue slow velocity. The simulated model is in good agreement with experimental data. }
 	\label{fig:ER-simulation-magic-particle}
 \end{figure}
 
@@ -379,9 +379,9 @@ In cells with long projections, such as motor neurons, transporting luminal prot
 
 \section{Conclusion} 
 In~\cite{holcman2018single}, we present evidence that the movement of proteins in the ER is not diffusive, but also has an ATP-dependent directed-flow component.
-By utilising the fast high-resolution imaging capabilities of LAG SIM, as well as computational simulation and analysis, this chapter has suggested that contraction of ER tubes is responsible for luminal flow. 
+By utilising the fast high-resolution imaging capabilities of LAG SIM, as well as computational simulation and analysis, this chapter has suggested that contraction of ER tubules is responsible for luminal flow. 
 
-Imaging at \SI{11}{\hertz} with \SI{85}{\nano\metre} resolution revealed ER networks in a dynamic equilibrium, constantly growing, shrinking, and rearranging. 
+Imaging at \SI{11}{\hertz} with \SI{80}{\nano\metre} resolution revealed ER networks in a dynamic equilibrium, constantly growing, shrinking, and rearranging. 
 Network analysis and tracking showed that this is not responsible for flow, however.
 
 The capacity of ER to undergo reversible contractions was revealed when high laser power was used to image ER labelled with TMR, which caused blebbing in the network.
@@ -389,7 +389,7 @@ Rapid tubule pinching was revealed when re-examining individual segments of ER c
 The size and speed of the pinching phenomenon means that high-speed TIRF-SIM is currently the only technique able to visualise these events. 
 
 Using the Nvidia PhysX engine to perform simulations of proteins moving in the ER provided insight into the advantages of active flow over diffusion.
-Tuning the simulation to ensure the same average particle speed in both the pinching and Brownian motion schemes to ensure a fair comparison showed that mixing occurs up to 3$\times$ faster in a network with pinching.
+Tuning the simulation to maintain the same average particle speed in both the pinching and Brownian motion schemes, ensuring a fair comparison, showed that mixing occurs up to 3$\times$ faster in a network with pinching.
 Pinching therefore reduces the time taken for proteins to reach remote areas of the network, such as by the cell membrane. 
 
 Since ER is found in most eukaryotic cells, it is unsurprising that its malfunction is associated with a wide range of diseases. 
