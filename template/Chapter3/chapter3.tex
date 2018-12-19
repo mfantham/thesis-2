@@ -408,7 +408,7 @@ void FixedUpdate(){
 \end{lstlisting}
 \end{lstfloat}
 
-\subsection{Bookmarking is implemented with a state machine to share perspectives across the world}
+\subsection[Bookmarking is implemented with a state machine to share perspectives across the world]{Bookmarking is implemented with a state machine to share\\ perspectives across the world}
 FPBioimage implements a bookmarking function to save a particular view with an annotation.
 The bookmarked view can then be shared with others as a web link, or restored on the same computer at a later time.
 
@@ -451,7 +451,7 @@ When the volume is being loaded, the bookmarking C\# script checks the URL of th
 This puts the bookmarking state machine into State 4, ready to show the bookmark and annotation text as soon as the volumetric model has loaded.
 In this way users can easily share specific views of the data across the globe.
 
-\subsection{Screenshots can be captured at a higher resolution than the display}
+\subsection[Screenshots can be captured at a higher resolution than the display]{Screenshots can be captured at a higher resolution than the\\ display}
 FPBioimage provides the capture of high resolution screenshots, shown in Snippet~\ref{snip:screenshots}.
 
 When the \texttt{takeScreenshot} function is called, a new \texttt{RenderTexture} is created to save the current view to.
@@ -647,7 +647,7 @@ Once an interesting cut has been made, the clipping plane can be locked in place
 With the clipping plane locked, the user can move the camera or the model to view the cut volumetric data from a different angle.
 Use of the clipping plane can therefore provide insightful perspectives of the volumetric data that are not possible to obtain with any other method, as shown in Figures~\ref{fig:fpbRendering}b, e, h, and i.
 
-\subsection{Measuring performance demonstrates compatibility with consumer-grade computers} \label{sec:fpbPerformance}
+\subsection[Measuring performance demonstrates compatibility with consumer-grade computers]{Measuring performance demonstrates compatibility with\\ consumer-grade computers} \label{sec:fpbPerformance}
 Until recently, volume rendering was not possible in real time, and would be calculated for a specific camera perspective in advance of presentation to render either a single image or video.
 In 2000, Ray and Silver produced the Race II Engine, designed with dedicated hardware to render 512$\times$512$\times$512 volumetric images in real time.
 This was achieved by realising the volume rendering algorithm described in Section~\ref{sec:volumerendering} with physical devices, with hundreds of calculations running in parallel to compute all rays at once~\cite{ray2000race}.
@@ -773,7 +773,7 @@ This reduces loading times in four ways: the overhead time associated with each 
 The plugin is distributed as an ``update site'' through the FIJI updater, and also through the Icy online plugin repository. 
 This makes it easy to keep up-to-date, so that users get the access to the latest features with as little effort as possible. 
 
-\subsection{OMERO-FPBioimage integrates volume rendering with organised image repositories}
+\subsection[OMERO-FPBioimage integrates volume rendering with organised image repositories]{OMERO-FPBioimage integrates volume rendering with\\ organised image repositories}
 OMERO is a web-based platform for managing scientific images~\cite{moore2015omero}. 
 Created by OME, the same team behind Bioformats, it integrates with a number of other software packages to help users upload their imaging data to a remote server, so that it can be accessed from anywhere. 
 Furthermore a web interface makes it easy for OMERO users to share their data with others, allowing them to perform further analysis or even meta-studies on independent image sets~\cite{williams2017image}.
@@ -795,7 +795,7 @@ Close collaboration with the OMERO team means that OMERO now sends texture atlas
 The viewer has proved popular with OMERO users, finding diverse uses from plant sciences to pathology~\cite{fleur2018fpbioimage}.
 It has been adopted as OMERO's default volumetric viewer, and is featured prominently on their webpage~\cite{omero2018website}.
 
-\subsection{Mobile apps bring volumetric rendering to smartphones with virtual reality support}
+\subsection[Mobile apps bring volumetric rendering to smartphones with virtual reality support]{Mobile apps bring volumetric rendering to smartphones with\\ virtual reality support}
 Since FPBioimage is a web-based application, it will run on any device with a web browser. 
 This includes mobile devices, such as iPhones and Android smartphones, as well as tablet devices such as an iPad. 
 However, mobile browsers have limited access to the device's computational resources, causing long loading times and poor performance, characterised by a low frame rate. 

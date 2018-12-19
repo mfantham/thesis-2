@@ -502,18 +502,7 @@ Two useful properties of the Pockels cell are evident.
 Firstly, the Pockels cell is able to provide a full \SI{360}{\degree} polarisation rotation, more than adequate for the \SI{\pm60}{\degree} required to align polarisation with the SIM pattern orientations. 
 Secondly, to achieve a given rotation a similar voltage is required for all wavelengths. 
 
-To measure pattern contrast at a given voltage, images of sub-diffraction beads were recorded under sinusoidal SIM illumination. 
-Beads located in a trough of the pattern were dark; conversely beads lying in a peak were bright. 
-At each voltage step the phase of the illumination pattern was swept so that, at some point during the phase sweep, each bead passed through a peak and a trough. 
-Calculating the difference between the maximum and minimum brightness for each bead provides a measure of pattern contrast for a given voltage. 
-
-To calculate the voltages required to achieve maximum pattern contrast at each wavelength and orientation, a LabVIEW program was written to sweep the Pockels cell voltage in steps of \SI{25}{\volt}. 
-Pattern contrast was measured at each voltage, shown in Figure~\ref{fig:pockels-contrast}. 
-Each orientation of the illumination pattern has a different voltage which gives a peak contrast. 
-The optimal pattern contrast measurement was repeated for each pattern orientation at each wavelength, as shown in Figure~\ref{fig:pockels-optimal}. 
-%The contrast measurement was repeated around each peak to find the optimal contrast voltage to the nearest \SI{1}{\volt}, shown inset on Figure~\ref{fig:pockels-contrast}. 
-
-\begin{figure}[htbp!] 
+\begin{figure}[p!] 
 \centering
 \begin{subfigure}[b]{\textwidth}
 	\includegraphics[width=1.0\textwidth]{pockels-contrast}
@@ -526,6 +515,18 @@ The optimal pattern contrast measurement was repeated for each pattern orientati
 \caption[LAG SIM: Measurements of a bead sample reveal the optimal Pockels cell voltages for maximum pattern contrast]{(a) shows the pattern contrast, measured on a \SI{100}{\nano\metre} bead sample, as the voltage was swept from \SIrange{-375}{375}{\volt} to find the voltage which gave maximum contrast. The process was repeated for each rotation of the sinusoidal SIM pattern, and for each wavelength of light. (b) shows that rotating polarisation leads to high pattern contrast for all rotations and wavelengths. Furthermore, since the required voltage to achieve a given rotation is similar for all wavelengths, using the \SI{561}{\nano\metre} voltages allows for imaging multiple channels simultaneously whilst maintaining a high pattern contrast.}
 \label{fig:pockels-contrast-figures}
 \end{figure} 
+\afterpage{\clearpage}
+
+To measure pattern contrast at a given voltage, images of sub-diffraction beads were recorded under sinusoidal SIM illumination. 
+Beads located in a trough of the pattern were dark; conversely beads lying in a peak were bright. 
+At each voltage step the phase of the illumination pattern was swept so that, at some point during the phase sweep, each bead passed through a peak and a trough. 
+Calculating the difference between the maximum and minimum brightness for each bead provides a measure of pattern contrast for a given voltage. 
+
+To calculate the voltages required to achieve maximum pattern contrast at each wavelength and orientation, a LabVIEW program was written to sweep the Pockels cell voltage in steps of \SI{25}{\volt}. 
+Pattern contrast was measured at each voltage, shown in Figure~\ref{fig:pockels-contrast}. 
+Each orientation of the illumination pattern has a different voltage which gives a peak contrast. 
+The optimal pattern contrast measurement was repeated for each pattern orientation at each wavelength, as shown in Figure~\ref{fig:pockels-optimal}. 
+%The contrast measurement was repeated around each peak to find the optimal contrast voltage to the nearest \SI{1}{\volt}, shown inset on Figure~\ref{fig:pockels-contrast}. 
 
 Without polarisation rotation, optimum pattern contrast cannot be achieved, and is almost at a minimum for the \SI{120}{\degree} pattern orientation. 
 Performing SIM without polarisation rotation would introduce significant artefacts in the reconstruction, as low modulation contrast translates into low signal-to-noise ratio of high frequency components, as described in Section~\ref{sec:SIM-theory}.
@@ -537,6 +538,7 @@ This corresponds to a high modulation depth $m$ in Equation~\ref{eq:matrix-solve
 Furthermore, because the voltages to achieve a given polarisation rotation are similar for all wavelengths, the polarisation of all three laser wavelengths can be rotated simultaneously using the \SI{561}{\nano\metre} optimal voltages. 
 Figure~\ref{fig:pockels-optimal} shows that a high pattern contrast is still maintained for each wavelength in this scheme. 
 This facilitates use of the Optosplit for simultaneous 3-channel SIM imaging, providing multi-colour resolution enhancement over 6$\times$ faster than capturing channels separately and switching emission filters with a filter wheel. 
+
 
 \section{LabVIEW hardware control} \label{sec:labview}
 \subsection{Control requirements for SIM imaging} \label{sec:SIMsteps}
@@ -695,7 +697,7 @@ The system can also be used to maintain focus over a time period of hours to day
 
 The autofocus is switched off with the `Unlock focus' button, releasing z-control back to the user. 
 
-\subsection{Pockels tab to find optimal voltages for maximum pattern contrast} 
+\subsection[Pockels tab to find optimal voltages for maximum pattern contrast]{Pockels tab to find optimal voltages for maximum pattern\\ contrast} 
 The Pockels cell retards one polarisation axis by an amount dependent on the voltage across it. 
 In combination with a quarter wave plate, this allows for linear polarisation rotation necessary for the high pattern contrast required for SIM, explained in Section~\ref{sec:lagsim-pockels}. 
 The amount of retardation depends on the wavelength of light, therefore different wavelengths require different voltages to achieve the same polarisation rotation. 
@@ -711,7 +713,7 @@ This process must be repeated for each wavelength, and each rotation of the SIM 
 Once the process is complete, the optimum voltages can be entered into the table, and will be applied to the Pockels cell during a SIM acquisition. 
 
 
-\subsection{Debug tab contains alignment options and other advanced features}
+\subsection[Debug tab contains alignment options and other advanced features]{Debug tab contains alignment options and other advanced\\ features}
 A number of advanced user options are contained in the \texttt{Debug} tab. 
 These extend the functionality of the microscope for non-conventional uses including alignment. 
 
@@ -757,7 +759,7 @@ The online Labstep logbook can be opened by clicking the \texttt{Open logbook} b
 
 Online logging benefits both the microscope user and the developer, allowing problems to be identified and fixed promptly. 
 
-
+\clearpage
 \section{A comparison of reconstruction algorithms reveals their pros and cons} \label{sec:recon}
 Once SIM data is collected, it requires reconstruction to either enhance the resolution, remove out-of-focus light, or a mixture of both.
 
@@ -842,6 +844,7 @@ This means that it is free, open source, and stays up-to-date for all users.
 
 The next section describes the LAG SIM plugin in detail, providing a detailed resource to anyone reconstructing LAG SIM data in the future.
 
+
 \section{Reconstruction with LAG SIM for artefact-free images} \label{sec:lagsimFiji}
 
 \subsection{The LAG SIM ImageJ interface simplifies parameter-finding for non-expert users}
@@ -854,7 +857,7 @@ Selecting appropriate values for these parameters requires understanding what ea
 LAG SIM provides a number of tools designed to assist with common SIM reconstruction tasks, reducing the time required between acquisition and analysis of the data.
 The tools are accessed through the ImageJ menu shown in Figure~\ref{fig:lagsim-fiji-interface}a. 
 
-\begin{figure}[htbp!]
+\begin{figure}[b!]
 	\centering
 		\includegraphics[width=1.0\textwidth]{lagsim-fiji}	
 	\caption[LAG SIM: A Fiji interface makes artefact-free reconstruction quick and simple for non-expert users]{The LAG SIM FIJI/ImageJ user interface, utilising the fairSIM reconstruction algorithm, is specifically designed for the LAG SIM to make artefact-free reconstruction quick and straightforward. (a) shows the main LAG SIM menu, with the many reconstruction and SIMcheck tools created; (b) shows the quick parameter tester, for finding the optimal reconstruction parameters; and (c) shows the main reconstruction interface, facilitating batch reconstruction. } 
@@ -881,7 +884,7 @@ Progress and estimated finish time are displayed to the user, allowing them to r
 The LAG SIM plugin makes SIM reconstruction a much less time-consuming task than with other reconstruction algorithms, and the convenient ``Parameter chooser'' enables non-expert users to create artefact-free SIM reconstructions. 
 
 
-\subsection{Illumination detection provides user feedback about pattern modulation contrast}\label{sec:LAGSIM-illumination-detection}
+\subsection{\sloppy Illumination detection provides user feedback about pattern modulation contrast}\label{sec:LAGSIM-illumination-detection}
 In order to produce an artefact-free reconstruction, the SIM algorithm requires measurement of the illumination pattern to a sub-pixel accuracy~\cite{muller2016open}. 
 This is necessary for correctly performing the Fourier-space shift detailed in Section~\ref{sec:SIM-theory}. 
 
@@ -998,13 +1001,11 @@ In structured illumination microscopy, however, this information can be recovere
 \caption[LAG SIM: OTF attenuation as part of the SIM reconstruction process removes out of focus light]{A widefield OTF, shown in red, does not have axial support at low lateral frequencies, leading to out-of-focus light in widefield images. Applying the red weighting as a Fourier-space filter removes this out-of-focus light; however in conventional epifluorescent microscopy, this would also remove low-frequency spatial information. The Fourier-space shifting inherent to SIM reconstruction recovers the attenuated information, as shown by the blue line, providing support at low lateral frequencies. When the shifted components are filtered by the blue weighting, which removes their own out-of-focus light, an optically-sectioned resolution-enhanced image can be reconstructed.  Adapted from~\cite{oholleran2014optimized}. }
 \label{fig:oholleran-otf}
 \end{figure}
+\afterpage{\clearpage}
 
 Figure~\ref{fig:oholleran-otf} shows which parts of the OTF should be attenuated to achieve optical sectioning with no loss of resolution. 
 The optical sectioning is controlled by a Gaussian notch in the first-order passbands, shown in blue, and a complementary Gaussian in the zero-order passband, shown in red. 
 The width and depth of this passband is controlled in LAG SIM with the parameters `Attenuation FWHM' and `Attenuation strength' respectively.
-
-% Does optical sectioning in this way sacrafice resolution? Well, it sort of depends how far out we push the spots. 
-%The water lens is set up for optical sectioning. 
 
 Out-of-focus light makes creating 3D reconstructions impossible. % 3D reconstruction figure
 Using optical sectioning to remove this light allows 3D reconstructions of the sample to be created, which can reveal information otherwise unobservable, such as whether a particle is located on the inside or outside of a cell membrane~\cite{teplensky2017temperature}. 
@@ -1171,7 +1172,7 @@ For this reason the 3D dataset is also available to explore interactively in a w
 This drug-delivery experiment highlights the LAG SIM's capability of imaging live cells in 3D by utilising optical sectioning, and also providing resolution enhancement over other techniques. 
 Details of the experiment are presented in Chapter~\ref{chap:MOF}, including timelapse imaging for observing uptake over a \SI{24}{\hour} period, as well as similar experiments delivering therapeutic drugs to cells with different MOFs. 
 
-\subsection{Fast, multicolour imaging of COS-7 cells reveals dynamic colocalisation between ER and lysosomes}
+\subsection[Fast, multicolour imaging of COS-7 cells reveals dynamic colocalisation between ER and lysosomes]{Fast, multicolour imaging of COS-7 cells reveals dynamic\\ colocalisation between ER and lysosomes}
 During experiments on the dynamics of endoplasmic reticulum (ER), which are detailed in Chapter~\ref{chap:ER}, we observed a strong interaction between ER and other organelles, including lysosomes and tubulin. 
 To develop a deeper understanding of these relationships, we required fast, high-resolution imaging of live cells in multiple colour channels simultaneously. 
 
@@ -1275,7 +1276,7 @@ It is hypothesised that KRAS protein will be colocalised with the ring structure
 LAG SIM's unique combination of high-speed, high resolution, multi-colour TIRF imaging make it one of the only instruments in the world that can capture these events to test the hypothesis. 
 
 
-\subsection{Resolution-enhanced optical sectioning of brain-slice tissue imaging for measuring the Node of Ranvier}
+\subsection[Resolution-enhanced optical sectioning of brain-slice tissue imaging for measuring the Node of Ranvier]{Resolution-enhanced optical sectioning of brain-slice tissue\\ imaging for measuring the Node of Ranvier}
 Neurons in the brain communicate at junctions known as synapses, which are formed where an axon from one neuron meets a dendrite from another~\cite{hall1992introduction}. 
 The axons, coloured yellow in Figure~\ref{fig:neuron-diagram}, form long, thin projections, and can be compared to electrical wires carrying signals across the brain to control bodily functions such as sensing, movement, and conciousness. 
 
@@ -1289,6 +1290,7 @@ Diseases which cause injury to the myelin sheath are associated with motor neuro
 \caption[LAG SIM: Diagram of a neuron showing an axon protected by the myelin sheath]{Diagram of a neuron, adapted from Wikipedia~\cite{wikineuron}. A neuron, coloured in yellow, has long wire-like projections called axons. Axons are covered by a fatty coating known as the myelin sheath, which protects it from interference from neighbouring axons and increases the transmission speed of signals. The myelin sheath is part of a different brain cell type called an oligodendrocyte, shown here in blue. The gap between two myelin sheaths is known as the Node of Ranvier. }
 \label{fig:neuron-diagram}
 \end{figure}
+\afterpage{\clearpage}
 
 The myelin sheath is not part of the neuron cell, but is rather a component of another type of brain cell called an oligodendrocyte, shown in blue in Figure~\ref{fig:neuron-diagram}~\cite{hammond2012cellular}. 
 Oligodendrocytes are created from cell-linage parent cells called oligodendrocyte progenitor cells (OPCs), which themselves are derived from embryonic stem cells~\cite{goldman2015make}. 
