@@ -41,7 +41,7 @@ It has been shown with fluorescence recovery after photo-bleaching (FRAP) that p
 More recently, we have shown with single particle tracking that molecules in the ER do not move with diffusive motion~\cite{holcman2018single}. 
 Rather, they have a fast, directed velocity as they flow along ER tubes, but move with slow, diffusive motion at nodes where 3 or more tubes connect, as shown in Figure~\ref{fig:er-directed-flow-velocity}. 
 
-\begin{figure}[p]
+\begin{figure}[b!]
 \centering
 	\begin{subfigure}[b]{0.4\textwidth}
 		\includegraphics[width=1.0\textwidth]{er-directed-flow}
@@ -66,7 +66,7 @@ This is particularly convincing in the cumulative frequency distribution shown i
 
 Consistent with previous studies~\cite{nehls2000dynamics}, tracking directed flow revealed that depleting ATP causes a 4$\times$ decrease in mean flow velocity, shown in Figure~\ref{fig:er-atp-depletion}. 
 
-\begin{figure}[p]
+\begin{figure}[t!]
 	\centering
 	\begin{subfigure}[b]{0.3\textwidth}
 		\includegraphics[width=1.0\textwidth]{er-atp-depletion}
@@ -92,7 +92,6 @@ therefore we dismiss the hypothesis that the change in protein mobility is due t
 As part of a collaboration with David Holcman and Edward Avezov, the authors who first observed directed ER flow, I investigated potential mechanisms for flow. 
 Utilising the unique capabilities of structured illumination microscopy (SIM) and computational analysis, evidence is presented in this chapter that ER luminal flow is caused by pinching of the ER membrane.
 
-\newpage
 The results and methods section which follows details 3 key contributions which I personally made to the published study:
 \begin{enumerate}
 	\item Measuring dynamic network arrangement with SIM imaging and computational analysis
@@ -118,7 +117,7 @@ To verify our observations, and ensure relevance to human pathology, we also use
 These thicker cells were imaged with optical sectioning LAG SIM, since TIRF only showed small fragments of ER close the coverglass. 
 Images in this chapter are described as COS-7-ERT, COS-7-TMR, and HEK-293-ERT, and HEK-293-TMR to describe COS-7 and HEK-293 cells labelled with ER-Tracker\textsuperscript{TM} Green or TMR respectively. 
 
-\begin{figure}[htbp!]
+\begin{figure}[b!]
 \centering
 \begin{subfigure}[b]{0.325\textwidth}
 	\includegraphics[width=\textwidth]{er-rearrangement-1}
@@ -265,7 +264,7 @@ Counting the number of pinches in each tube over time gave the mean frequency of
 Figure~\ref{fig:pinching-atp-depletion} shows that when ATP was depleted, the frequency decreased 3.9$\times$, to \SI[separate-uncertainty=true]{0.44 \pm 0.41}{pinches\per\second}. 
 This decrease in pinching frequency is very similar to the velocity decrease observed with single particle tracking in Figure~\ref{fig:er-atp-depletion}, suggesting that there is a strong link between tubule pinching and directed motion in the ER. 
 
-\begin{figure}[htbp!]
+\begin{figure}[b!]
 \centering
 \begin{subfigure}[b]{0.325\textwidth}
 	\includegraphics[width=\textwidth]{er-blebbing-1}
@@ -293,7 +292,6 @@ Furthermore, 3D images of a fixed ER network, obtained using optical sectioning 
 This is available to view interactively with FPBioimage, at \url{https://fpb.ceb.cam.ac.uk/ER}. 
 Despite tubules' size being at the resolution limit of SIM, the evidence from the different experiments presented here provide confidence that pinching is not an imaging artefact. 
 
-\newpage
 \subsection{Graphical simulation shows pinching accelerates luminal mixing}
 In order to visualise the concept of luminal flow, and to understand its purpose, I wrote a 2D Unity program modelling an ER network with labelled proteins. 
 
