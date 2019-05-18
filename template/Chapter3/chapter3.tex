@@ -20,44 +20,43 @@
 
 \section{Introduction}
 \subsection{Publishers require new methods of providing research data} \label{sec:introvisual}
-Modern scientific experiments gather data at an ever-increasing rate. 
-This is particularly apparent in 3D microscopy, where techniques such as confocal~\cite{marvin1961microscopy}, optical-sectioning SIM, and light-sheet methods including selective plane illumination microscopy (SPIM)~\cite{huisken2004optical} generate terabytes of volumetric data per hour. 
+Modern scientific experiments gather data at an ever-increasing rate.
+This is particularly apparent in 3D microscopy, where techniques such as confocal~\cite{marvin1961microscopy}, optical-sectioning SIM, and light-sheet methods including selective plane illumination microscopy (SPIM)~\cite{huisken2004optical} generate terabytes of volumetric data per hour.
 
-Popular scientific journals require authors to make data available for reproducibility and further analysis. 
+Reputable scientific journals require authors to make data available for reproducibility and further analysis.
 All \textit{Nature} journals, for example, require ``the availability of the minimal dataset that would be necessary to interpret, replicate and build upon the methods or findings reported''~\cite{naturedata}; similarly \textit{Science} mandate that large data sets must be deposited in public repositories and made available at the time of publication~\cite{sciencedata}.
-Furthermore the FAIR Guiding Principles for scientific data management and stewardship recommend ``Findability, Accessibility, Interoperability, and Reusability'' for all published data~\cite{wilkinson2016fair}, which currently requires an urgent improvement to the infrastructure which supports this. 
+Furthermore the FAIR Guiding Principles for scientific data management and stewardship recommend ``Findability, Accessibility, Interoperability, and Reusability'' for all published data~\cite{wilkinson2016fair}, which currently requires an urgent improvement to the infrastructure which supports this.
 
-To give readers of a scientific publication a deeper understanding of 3D data, many authors present supplementary fly-through videos showing the data from a variety of perspectives, including from within the volume~\cite{huang2016ultra, legant2016high, fu2016imaging, chhetri2015whole}. 
-Whilst this provides significantly more information than static 2D images can provide, the reader is nevertheless unable to interact with the data themselves. 
+To give readers of a scientific publication a deeper understanding of 3D data, many authors present supplementary fly-through videos showing the data from a variety of perspectives, including from within the volume~\cite{huang2016ultra, legant2016high, fu2016imaging, chhetri2015whole}.
+Whilst this provides significantly more information than static 2D images can provide, the reader is nevertheless unable to interact with the data themselves.
 They are therefore restricted to just the perspective provided by the author, with no opportunity for personal exploration or analysis.
-To describe the data as open access should require a link to the volumetric data set so that readers can download it and examine it themselves. 
+To describe the data as open access should require a link to the volumetric data set so that readers can download it and examine it themselves.
 
-It is perhaps understandable, however, that most published work does not contain links to full volumetric data sets; hosting and maintaining such large volumes of data online incurs prohibitively expensive costs. 
-Repositories specifically designed for this type of data are emerging, such as the Image Data Resource (IDR) from OMERO~\cite{williams2017image}, but have not been widely adopted. 
-Many authors therefore simply make a statement that their data is "available upon reasonable request". 
-% Can I find more references for this?  
+It is perhaps understandable, however, that most published work does not contain links to full volumetric data sets; hosting and maintaining such large volumes of data online incurs prohibitively expensive costs.
+Repositories specifically designed for this type of data are emerging, such as the Image Data Resource (IDR) from OMERO~\cite{williams2017image}, but have not been widely adopted.
+Many authors therefore simply make a statement that their data is ``available upon reasonable request''.
 
-After making such a request, however, receiving and examining 3D volumetric data is not trivial. 
-The large file size means that the common practice is to temporarily upload data to a file storage repository, and share a link to the repository through an email. 
-Once the large data file has been downloaded, specialist image analysis software must be used to render it, requiring expert skill and experience~\cite{broeke2015image}. 
+After making such a request, however, receiving and examining 3D volumetric data is not trivial.
+The large file size means that the common practice is to temporarily upload data to a file storage repository, and share a link to the repository through an email.
+Once the large data file has been downloaded, specialist image analysis software must be used to render it, requiring expert skill and experience~\cite{broeke2015image}.
 
-As a producer of volumetric data, I faced the data sharing issue myself when one of my collaborators moved to Chicago. 
-We had gathered 3D data utilising optical sectioning on the LAG SIM, as described in Chapter~\ref{chap:LAGSIM}, which now required their specialist biological interpretation. 
-The issue was further complicated since the collaborator had little knowledge of volume rendering software, so could not easily examine the data. 
+As a producer of volumetric data, I faced the data sharing issue myself when one of my collaborators moved to Chicago.
+We had gathered 3D data utilising optical sectioning on the LAG SIM, as described in Chapter~\ref{chap:LAGSIM}, which now required their specialist biological interpretation.
+The issue was further complicated since the collaborator had little knowledge of volume rendering software, so could not easily examine the data.
 
-To solve this, I searched for an online application where I could easily upload 3D data to share immediately with my collaborator. 
+To solve this, I searched for an online application where I could easily upload 3D data to share immediately with my collaborator.
 Finding that none existed, I created First Person Bioimage (FPBioimage), my own tool to fulfil these requirements.
-% The development and implementation of FPBioimage is detailed in this chapter. 
+% The development and implementation of FPBioimage is detailed in this chapter.
 
 \subsection{Volumetric rendering reveals features inside 3D objects} \label{sec:volumerendering}
 The first demonstration of volumetric rendering was by Pixar in 1987 \cite{smith1987volume}, a year after their aquisition from Lucasfilms by Steve Jobs for \$5\,million.
 For the first time, a full volumetric rendering of a computerised tomography (CT) scan was displayed.
-Pixar was later sold to Disney in 2006 for \$7.4\,billion~\cite{pixar2007story, pixar2018our}, demonstrating the value of advanced rendering techniques. 
+Pixar was later sold to Disney in 2006 for \$7.4\,billion~\cite{pixar2007story, pixar2018our}, demonstrating the value of advanced rendering techniques.
 
 At SIGGRAPH '88 Alvy Ray Smith clarified the difference between between volumetric rendering and traditional, geometric rendering~\cite{siggraph1988panel}.
 In geometric rendering, an object is described by one or more geometrical shapes, such as a collection of spheres and cubes.
-To render the object, the surface of the shape is approximated by a mesh of triangular primitives, and the interaction of a virtual light ray with each triangle is calculated~\cite{buss20033d}. 
-%TODO check this last citation - ie find another one... 
+To render the object, the surface of the shape is approximated by a mesh of triangular primitives, and the interaction of a virtual light ray with each triangle is calculated~\cite{buss20033d}.
+%TODO check this last citation - ie find another one...
 
 Volumetric rendering uses a fundamentally different technique.
 A virtual light ray, aimed at a pixel on the screen, progresses through a 3D array of voxels, as shown in Figure~\ref{fig:raymarch-diagram}~\cite{tuy1984direct}.
@@ -70,32 +69,32 @@ At equally spaced steps along the ray, the value of the voxel is recorded to bui
 \label{fig:raymarch-diagram}
 \end{figure}
 
-Volumetric rendering allows detail within the volume to be visualised~\cite{drebin1988volume}. 
-By tuning the opacity of each voxel, details which would be invisible in a surface rendering can be seen in context, through the outer voxels of the model. 
+Volumetric rendering allows detail within the volume to be visualised~\cite{drebin1988volume}.
+By tuning the opacity of each voxel, details which would be invisible in a surface rendering can be seen in context, through the outer voxels of the model.
 
-The key drawback of volumetric rendering compared to geometric rendering is speed~\cite{dachille1998high}. 
-In the simple volumetric renderer shown in Figure~\ref{fig:raymarch-diagram}, a ray is calculated for each pixel on the screen - 2$\times$\smaller[0.76]{10\textsuperscript{6}} pixels for a 1080p high definition display. 
-If each ray takes \num{512} samples as it passes through the volume, each rendering of the volume requires over 1$\times$\smaller[0.76]{10\textsuperscript{6}} voxel calculations. 
+The key drawback of volumetric rendering compared to geometric rendering is speed~\cite{dachille1998high}.
+In the simple volumetric renderer shown in Figure~\ref{fig:raymarch-diagram}, a ray is calculated for each pixel on the screen - 2$\times$\smaller[0.76]{10\textsuperscript{6}} pixels for a 1080p high definition display.
+If each ray takes \num{512} samples as it passes through the volume, each rendering of the volume requires over 1$\times$\smaller[0.76]{10\textsuperscript{9}} voxel calculations.
 
-When rendering a single volumetric image, or even a video which is first rendered then presented at a later time, this is not an issue: the rays can computed in parallel across a cluster of computers, and with some patience the images will build up. 
-However, until recently displaying volumetric data at video rate in real time required specialised hardware optimised solely for volumetric rendering~\cite{ray2000resample}. 
+When rendering a single volumetric image, or even a video which is first rendered then presented at a later time, this is not an issue: the rays can computed in parallel across a cluster of computers, and with some patience the images will build up.
+However, until recently displaying volumetric data at video rate in real time required specialised hardware optimised solely for volumetric rendering~\cite{ray2000resample}.
 
-The gaming industry has led to a rapid development of devices optimised for performing thousands of simple calculations in parallel. 
-A single graphics processing unit (GPU) contains as many as 2560 individual processing cores~\cite{nvidia1080}, which can be used to calculate volumetric rays simultaneously. 
-Combined with intelligent optimisations to the rendering algorithm, GPUs found in devices ranging from laboratory workstations to smartphones now enable real-time volumetric visualisation on personal computers. 
+The gaming industry has led to a rapid development of devices optimised for performing thousands of simple calculations in parallel.
+A single graphics processing unit (GPU) contains as many as 2560 individual processing cores~\cite{nvidia1080}, which can be used to calculate volumetric rays simultaneously.
+Combined with intelligent optimisations to the rendering algorithm, GPUs found in devices ranging from laboratory workstations to smartphones now enable real-time volumetric visualisation on personal computers.
 
 \subsection{WebGL enables volume rendering in a web browser}
 Since the development of highly parallel GPUs, a handful of free and commercial programs have been released which provide volumetric rendering capabilities.
-Popular software used in the microscope community includes ImageJ~\cite{schindelin2012fiji}, Icy~\cite{de2012icy}, and Imaris~\cite{imaris}; ITK-Snap~\cite{yushkevich2006user}, ParaView~\cite{ayachit2015paraview}, and ImageVis3D~\cite{imagevis3d2015interactive} are also used in the medical community for visualising patient data~\cite{madan2015creating}. 
-These programs provide advanced offline volumetric rendering, and FPBioimage is not designed to replace them; instead, the key feature of FPBioimage is providing rendering on the web, to facilitate easy and interactive sharing of 3D data. 
+Popular software used in the microscope community includes ImageJ~\cite{schindelin2012fiji}, Icy~\cite{de2012icy}, and Imaris~\cite{imaris}; ITK-Snap~\cite{yushkevich2006user}, ParaView~\cite{ayachit2015paraview}, and ImageVis3D~\cite{imagevis3d2015interactive} are also used in the medical community for visualising patient data~\cite{madan2015creating}.
+These programs provide advanced offline volumetric rendering, and FPBioimage is not designed to replace them; instead, the key feature of FPBioimage is providing rendering on the web, to facilitate easy and interactive sharing of 3D data.
 
 The internet was originally designed to display static information, limiting web browsers' access to computational resources~\cite{leiner2009brief}.
-However the relatively recent invention and widespread adoption of the Web Graphics Library (WebGL) now provides access to a GPU's processing power directly from the web browser~\cite{khronos2009webgl}. 
+However the relatively recent invention and widespread adoption of the Web Graphics Library (WebGL) now provides access to a GPU's processing power directly from the web browser~\cite{khronos2009webgl}.
 This means that three-dimensional effects on webpages can be rendered to the screen in real time.
 
 In technical terms, WebGL exposes the \texttt{OpenGL ES 2.0} feature set \cite{khronos2009webgl}.
 This is a shader-based application programming interface (API).
-The API provides a limited number of simple functions which are optimised for running on GPUs in parallel. 
+The API provides a limited number of simple functions which are optimised for running on GPUs in parallel.
 
 Figure~\ref{fig:caniusethis-webgl} shows that the support of WebGL is now widespread~\cite{caniuse}, available through HTML5 provided by all modern web browsers.
 
@@ -116,16 +115,16 @@ Figure~\ref{fig:caniusethis-webgl} shows that the support of WebGL is now widesp
 \end{figure}
 
 A more modern version, WebGL 2.0, exposes the \texttt{OpenGL ES 3.0} API, which makes programming for 3D much easier~\cite{webgl2}.
-However, at the time FPBioimage was published, support for WebGL 2.0 was highly limited. 
+However, at the time FPBioimage was published, support for WebGL 2.0 was highly limited.
 Even at this time of writing, Figure~\ref{fig:caniusethis-webgl2} shows that WebGL 2.0 is only supported by third-party browsers, and cannot be used in Microsoft's Edge or Apple's Safari, limiting it to just \SI{47.33}{\percent} of UK web users~\cite{caniuse}.
 
 To maintain maximum compatibility, volumetric rendering in FPBioimage is implemented entirely in WebGL 1.0.
 Various strategies for overcoming this restriction are detailed in Section~\ref{sec:shader}.
 
-\subsection{Aims for FPBioimage} 
-The primary goal for FPBioimage was to create an easy-to-use web application for visualising volumetric data in a web browser; therefore a requirement was set that it must run without requiring any other plugins or downloads, in order that viewing data was a simple one-click process. 
+\subsection{Aims for FPBioimage}
+The primary goal for FPBioimage was to create an easy-to-use web application for visualising volumetric data in a web browser; therefore a requirement was set that it must run without requiring any other plugins or downloads, in order that viewing data was a simple one-click process.
 
-After gathering user feedback, a full list of desired features was compiled. 
+After gathering user feedback, a full list of desired features was compiled.
 
 \begin{enumerate}
 	\item Rendering options for more advanced users
@@ -134,11 +133,11 @@ After gathering user feedback, a full list of desired features was compiled.
 	\item Ability to save a particular view as a bookmark, and share that exact view with others
 \end{enumerate}
 
-For researchers sharing their own generated 3D data, more easy-to-use tools were proposed. 
-These had to be compatible with popular image analysis programs, and facilitate fast sharing of volumetric data. 
+For researchers sharing their own generated 3D data, more easy-to-use tools were proposed.
+These had to be compatible with popular image analysis programs, and facilitate fast sharing of volumetric data.
 
-From the first prototype FPBioimage was designed to be user-friendly. 
-The program had to be intuitive so that a user could visualise their data without any training. 
+From the first prototype FPBioimage was designed to be user-friendly.
+The program had to be intuitive so that a user could visualise their data without any training.
 
 \section{Method: software design} \label{sec:fpbSoftwareDesign}
 This section describes, through the use of diagrams and code snippets, the method by which the volumetric visualisation software was developed.
@@ -227,7 +226,7 @@ We will now examine the loop, and the efficiency modifications which have been m
 Lines 43 and 50 show that there are two different modes of rendering: a maximum intensity projection (\texttt{\char`_RenderMode == 0}) and the volumetric ray marching mode (\texttt{\char`_RenderMode == 1}) discussed in section \ref{sec:volumerendering}.
 In the maximum intensity projection mode, the ray checks the mean colour of every voxel it passes through, and paints the colour of the voxel with the largest `mean color' to the screen pixel.
 Note that mean colour is calculated as the sum of the red, green, and blue colour channels.
-Strictly we should divide by $3$ to calculate the true mean colour value; however, this would require 2 extra divisions for every loop iteration for every pixel on the screen; removing this step has no effect on the comparison, but gives an improvement in frames rendered per second. 
+Strictly we should divide by $3$ to calculate the true mean colour value; however, this would require 2 extra divisions for every loop iteration for every pixel on the screen; removing this step has no effect on the comparison, but gives an improvement in frames rendered per second.
 
 Before discussing the volumetric ray marching calculation, we should note that in this implementation the ray marches from the screen to the back of the cube - this is the opposite of traditional schemes shown in Figure~\ref{fig:raymarch-diagram}.
 The reason for this is, of course, efficiency.
@@ -267,7 +266,7 @@ This was found to be inadequate for most researchers' data, so a target of 512$\
 In order to meet the requirements of WebGL 1.0, this requires 8 2D texture atlases of size 4096$\times$4096.
 
 The 8 texture atlases are filled according to the pseudo-code shown in Snippet~\ref{snip:textureloading}.
-The code uses a mixture of the modulo operator (\%) and division (/) to determine (a) which atlas to place each volume image slice in, and (b) the location in that atlas where the slice should be located.
+The code uses a mixture of the modulo operator (\%) and division (/) to determine (a) which atlas to place each volume image slice in, and (b) the location in that atlas where the slice should be placed.
 Complementary code runs in the WebGL rendering code to read a particular voxel's colour given an $xyz$-coordinate.
 
 \begin{lstfloat}
@@ -324,13 +323,13 @@ for (int i=0; i<numSlices; i++){
 
 % Should I add some paragraphs here about XY and Z resolution? Probably should.
 %subsection{Rendering optimisation}
-% XY resolution can be adjusted cleverly. 
+% XY resolution can be adjusted cleverly.
 
 % Z resolution can also be adjusted
 
 % Interpolation
 
-% Rendering paused when there is no user input. 
+% Rendering paused when there is no user input.
 
 \subsection{Movement provides personal exploration of the data}
 FPBioimage would not be a particularly exciting real-time volumetric renderer if the user only had one view of the data.
@@ -342,8 +341,8 @@ The cube is then linked to both the arrow keys and to the mouse to provide intui
 For data whose combination of $xyz$ resolution and $xyz$ voxel size describes a cuboid, the $xyz$ scale of the rendering cube can be adjusted to ensure distortion-free visualisation.
 
 \begin{lstfloat}
-\begin{lstlisting}[language={[Sharp]c}, label={snip:cuberotation}, caption={C\# code using built-in Unity functions for rotating the rendered volumetric data}]
-void FixedUpdate () {
+\begin{lstlisting}[language={[Sharp]c}, label={snip:cuberotation}, caption={C\# code using built-in Unity functions for rotating the volumetric data}]
+void Update () {
 	// This code is attached to the rendering cube, and called once per frame
 
 	// Keyboard arrow control
@@ -379,7 +378,7 @@ Moving the camera allows the user to create in real time the type of dynamic fly
 
 \begin{lstfloat}
 \begin{lstlisting}[language={[Sharp]c}, label={sec:cameramovement}, caption={C\# code using built-in Unity functions for moving the camera in a first-person manner}]
-void FixedUpdate(){
+void Update(){
 	// Translation
 	transform.position += Input.GetAxis ("V1") * Camera.main.transform.up * Time.deltaTime;
 	transform.position += Input.GetAxis ("H1") * Camera.main.transform.right * Time.deltaTime;
@@ -504,7 +503,7 @@ public void takeSreenshot(bool hiRes){
 \section{Results and discussion} \label{sec:fpbResults}
 The FPBioimage software, designed in Unity as detailed in Section~\ref{sec:fpbSoftwareDesign}, was compiled into JavaScript to run in a web browser.
 In this section, all screenshots and tests were performed in Google Chrome version 58 on the Windows 10 operating system.
-However FPBioimage also runs flawlessly on any modern web browser, including Mozilla Firefox, Microsoft Edge, and Apple Safari, including mobile versions of these browsers.
+However FPBioimage also runs flawlessly on any modern web browser, including Mozilla Firefox, Microsoft Edge, and Apple Safari, and also mobile versions of these browsers.
 
 \subsection{An intuitive interface requires no user training}
 Great care has been taken to ensure FPBioimage is a user-friendly piece of software.
@@ -529,7 +528,7 @@ This creates a natural interaction with the data that requires no additional ins
 \begin{figure}[htbp!]
 \centering
 \includegraphics[width=1.0\textwidth]{fpb-side-panels}
-\caption[FPBioimage: Side panels provide more advanced rendering options]{Clicking on the side panel arrows slides in advanced rendering options, clipping plane options, quality options, and bookmark and sharing options. Data from~\cite{kumar2014dual}. } % 
+\caption[FPBioimage: Side panels provide more advanced rendering options]{Clicking on the side panel arrows slides in advanced rendering options, clipping plane options, quality options, and bookmark and sharing options. Data from~\cite{kumar2014dual}. } %
 \label{fig:FPBpanels}
 \end{figure}
 
@@ -539,7 +538,7 @@ Matching these parameters up to the volume rendering code described in Section~\
 
 \begin{sidewaysfigure}[p]
 \centering
-\includegraphics[width=\textwidth]{fpb-sliders-examples} % If possible separate caption onto new page? 
+\includegraphics[width=\textwidth]{fpb-sliders-examples} % If possible separate caption onto new page?
 \caption[FPBioimage: Advanced rendering features provide unique views of volumetric data]{(a–c): Four-colour OPT data of a mouse embryo. (d–f): MRI data of a human head. (g–i): two-colour light-sheet microscopy data of a drosophila embryo. FPBioimage's built-in transparency feature has been used to render (c) and (f), revealing data within the volume; the cutting tool has been used for (c), (f), (h) and (i), removing outer voxels from the data; and h shows a bookmark in creation, which can be shared with other users. Reproduced from \cite{fantham2017new}. Raw data provided by: (a–c), J. McGinty~\cite{sharpe2002optical}; (d–f), Stanford Volume Data Archive~\cite{levoy1988volume}; (g–i), P. Keller~\cite{chhetri2015whole}. }
 \label{fig:fpbRendering}
 \end{sidewaysfigure}
@@ -669,7 +668,7 @@ For our volumetric data, however, we also have a Z-resolution, defined by the nu
 Furthermore visual quality is improved if, instead of just taking the nearest voxel to the tip of the marching ray, interpolation is performed between either the 2- or 8-closest voxels.
 
 The three quality parameters can be adjusted as user inputs, or preset values can be selected.
-A table of quality against performance for different combinations of the three quality metrics, and for the preset values, is shown in Table~\ref{tab:fpbPerformance}. 
+A table of quality against performance for different combinations of the three quality metrics, and for the preset values, is shown in Table~\ref{tab:fpbPerformance}.
 
 \begin{table}
 \caption[FPBioimage: Adjustable quality settings allow high performance on consumer-grade computers]{\label{tab:fpbPerformance}The table shows how performance, measured by FPS and GPU percentage use, is affected by the FPBioimage quality settings. This test was performed on a midrange laptop, which cost £580 in 2017, with the following specification: 2-core i5-7200U\,@\SI{2.50}{\giga\hertz}, \SI{8}{\giga\byte} RAM, NVIDIA GeForce GTX 1050 with \SI{4}{\giga\byte} graphics RAM.}
@@ -715,8 +714,8 @@ Top & 3D workstation & 2048 & 768 & 8$\times$ & 9 & 97\% \\
 \end{tabular}
 \end{table}
 
-As expected, the table shows that as the quality settings are increased in value, performance decreases. 
-To choose the most useful preset values, the visual impact of the quality settings was compared to the performance trade-off. 
+As expected, the table shows that as the quality settings are increased in value, performance decreases.
+To choose the most useful preset values, the visual impact of the quality settings was compared to the performance trade-off.
 
 \begin{sidewaysfigure}[p]
 \centering
@@ -725,61 +724,61 @@ To choose the most useful preset values, the visual impact of the quality settin
 \label{fig:fpb-quality}
 \end{sidewaysfigure}
 
-As XY-resolution is increased, performance decreases dramatically. 
-This is because the number of pixels being rendered increases with the square of the XY-resolution number. 
-It is interesting that XY-resolution does not have such a dramatic effect on the perceived visual quality, as seen in Figure~\ref{fig:fpbScreenshots}. 
-Since there is little visual quality gain for a relatively large performance impact, XY-resolution is kept to moderate values even for the higher quality presets. 
+As XY-resolution is increased, performance decreases dramatically.
+This is because the number of pixels being rendered increases with the square of the XY-resolution number.
+It is interesting that XY-resolution does not have such a dramatic effect on the perceived visual quality, as seen in Figure~\ref{fig:fpbScreenshots}.
+Since there is little visual quality gain for a relatively large performance impact, XY-resolution is kept to moderate values even for the higher quality presets.
 
-Compared to the performance impact of XY-resolution, Z-resolution has a relatively small impact. 
-From a Z-resolution of \SIrange{256}{768}{steps} the GPU use increases linearly. 
-As shown in Figure~\ref{fig:fpb-quality}, however, Z-resolution has a considerable impact on visual quality of 3D images. 
-For an equivalent impact on performance, an increase in Z-resolution gives better visual quality than an increase in XY-resolution; therefore providing high Z-resolution is prioritised for the presets. 
+Compared to the performance impact of XY-resolution, Z-resolution has a relatively small impact.
+From a Z-resolution of \SIrange{256}{768}{steps} the GPU use increases linearly.
+As shown in Figure~\ref{fig:fpb-quality}, however, Z-resolution has a considerable impact on visual quality of 3D images.
+For an equivalent impact on performance, an increase in Z-resolution gives better visual quality than an increase in XY-resolution; therefore providing high Z-resolution is prioritised for the presets.
 
-Interpolation of voxels has a big impact on visual quality, removing the staircase effect shown in Figure~\ref{fig:fpb-quality}, but also has a big impact on performance. 
-When 2$\times$ interpolation is used, two voxels from the 2-nearest Z-planes to the marching ray's current position are averaged (weighted by distance) to smooth the appearance of the volume. 
-This requires an extra texture lookup at every z-step for every screen pixel, causing a significant performance impact particularly at high XY- or Z-resolutions. 
-In 8$\times$ interpolation, the 8-nearest voxels to the marching ray's position are used, requiring 8 texture lookups at every z-step. 
-The extra texture lookups explains the high impact on performance of interpolation. 
+Interpolation of voxels has a big impact on visual quality, removing the staircase effect shown in Figure~\ref{fig:fpb-quality}, but also has a big impact on performance.
+When 2$\times$ interpolation is used, two voxels from the 2-nearest Z-planes to the marching ray's current position are averaged (weighted by distance) to smooth the appearance of the volume.
+This requires an extra texture lookup at every z-step for every screen pixel, causing a significant performance impact particularly at high XY- or Z-resolutions.
+In 8$\times$ interpolation, the 8-nearest voxels to the marching ray's position are used, requiring 8 texture lookups at every z-step.
+The extra texture lookups explains the high impact on performance of interpolation.
 
 The `Top' preset setting sets all quality variables to maximum, and the user is warned that this setting is `risky' because it can crash the web browser!
-This is an impractical setting on most personal machines - Table~\ref{tab:fpbPerformance} shows that the GPU is working at full capacity, and only rendering \SI{9}{FPS}. 
-However, on dedicated graphics workstations where the GPU is able to render \SI{60}{FPS} at top quality a fly-through video for publication can be recorded in real-time. 
+This is an impractical setting on most personal machines - Table~\ref{tab:fpbPerformance} shows that the GPU is working at full capacity, and only rendering \SI{9}{FPS}.
+However, on dedicated graphics workstations where the GPU is able to render \SI{60}{FPS} at top quality a fly-through video for publication can be recorded in real-time.
 
 \section{FPBioimage Suite}
-FPBioimage is a volumetric renderer designed to be used in a web browser. 
-However, to assist users uploading their 3D data to share on the internet, plugins are available for the open-source image analysis platforms ImageJ, FIJI, and Icy. 
-Furthermore, thanks to its open-source nature and an easy-to-use JSON interface, other groups have been able to integrate FPBioimage into their own software packages, for example OMERO-FPBioimage~\cite{omero2018website}. 
-Finally, for users who want to view volumetric data on their mobile device, I have created dedicated Android and iOS apps, which support virtual reality for truly immersive interaction with the data. % and Oculus?  
+FPBioimage is a volumetric renderer designed to be used in a web browser.
+However, to assist users uploading their 3D data to share on the internet, plugins are available for the open-source image analysis platforms ImageJ, FIJI, and Icy.
+Furthermore, thanks to its open-source nature and an easy-to-use JSON interface, other groups have been able to integrate FPBioimage into their own software packages, for example OMERO-FPBioimage~\cite{omero2018website}.
+Finally, for users who want to view volumetric data on their mobile device, I have created dedicated Android and iOS apps, which support virtual reality for truly immersive interaction with the data. % and Oculus?
 Together with FPBioimage, this collection of applications has been branded FPBioimage Suite.
 
 \subsection{Plugins are available for popular image analysis programs}
-After the initial release of FPBioimage~\cite{fantham2017new}, uploading data to share with others was a convoluted process. 
-Users had to download a copy of FPBioimage, install it on their own personal web server, upload a stack of PNG files with a specific naming convention, edit some JavaScript on a template webpage, and finally share the web link. 
-This is not an issue for any web developer, but was beyond the ability of many scientists who gather volumetric data. 
+After the initial release of FPBioimage~\cite{fantham2017new}, uploading data to share with others was a convoluted process.
+Users had to download a copy of FPBioimage, install it on their own personal web server, upload a stack of PNG files with a specific naming convention, edit some JavaScript on a template webpage, and finally share the web link.
+This is not an issue for any web developer, but was beyond the ability of many scientists who gather volumetric data.
 Whilst many users enjoyed viewing data with FPBioimage, very few used it to share their own data.
 
-In order to simplify the upload process, I created the FPBioimage Helper plugin for the popular open-source image analysis programs ImageJ, FIJI, and Icy. 
-These programs all support volumetric image data in a wide variety of formats thanks to OME Bioformats~\cite{linkert2010metadata}. 
-Users simply have to open their 3D data in the program, click one button, and the plugin will output a web link that the researcher can share with others. 
+In order to simplify the upload process, I created the FPBioimage Helper plugin for the popular open-source image analysis programs ImageJ, FIJI, and Icy.
+These programs all support volumetric image data in a wide variety of formats thanks to OME Bioformats~\cite{linkert2010metadata}.
+Users simply have to open their 3D data in the program, click one button, and the plugin will output a web link that the researcher can share with others.
 
 By default, FPBioimage Helper will upload a simple webpage displaying the data to an Amazon Web Services (AWS) site.
-If the user would prefer to host their data on a private web server, for example to implement password protection or use their own website template, they can choose not to upload the data but simply save the formatted images and website to their local machine for their own purpose. 
+If the user would prefer to host their data on a private web server, for example to implement password protection or use their own website template, they can choose not to upload the data but simply save the formatted images and website to their local machine for their own purpose.
 
 Using the plugin, rather than manually uploading PNG image slices, also provides faster download times for those viewing the data.
-Instead of saving every plane as a separate PNG file, the plugin arranges images into texture atlases as described in Section~\ref{sec:fpbVolumeRendering}. 
-A line of JSON (\texttt{'atlasMode': true}) tells FPBioimage to expect atlases, rather than individual image slices, reducing the number of downloads to 8. 
-This reduces loading times in four ways: the overhead time associated with each download is reduced from number-of-slices to just 8; overall download size is smaller, because the PNG compression algorithm is able to exploit more informational redundancy~\cite[\textit{ch. 1}]{jayaraman2011digital}; the 8 texture atlases can be downloaded in parallel; and FPBioimage can skip the step of arranging slices into texture atlases, since it can send the downloaded atlases directly to the graphics card. 
+Instead of saving every plane as a separate PNG file, the plugin arranges images into texture atlases as described in Section~\ref{sec:fpbVolumeRendering}.
+A line of JSON (\texttt{'atlasMode': true}) tells FPBioimage to expect atlases, rather than individual image slices, reducing the number of downloads to 8.
+This reduces loading times in four ways: the overhead time associated with each download is reduced from number-of-slices to just 8; overall download size is smaller, because the PNG compression algorithm is able to exploit more informational redundancy~\cite[\textit{ch. 1}]{jayaraman2011digital}; the 8 texture atlases can be downloaded in parallel; and FPBioimage can skip the step of arranging slices into texture atlases, since it can send the downloaded atlases directly to the graphics card.
 
-The plugin is distributed as an ``update site'' through the FIJI updater, and also through the Icy online plugin repository. 
-This makes it easy to keep up-to-date, so that users get the access to the latest features with as little effort as possible. 
+The plugin is distributed as an ``update site'' through the FIJI updater, and also through the Icy online plugin repository.
+This makes it easy to keep up-to-date, so that users get the access to the latest features with as little effort as possible.
 
 \subsection[OMERO-FPBioimage integrates volume rendering with organised image repositories]{OMERO-FPBioimage integrates volume rendering with\\ organised image repositories}
-OMERO is a web-based platform for managing scientific images~\cite{moore2015omero}. 
-Created by OME, the same team behind Bioformats, it integrates with a number of other software packages to help users upload their imaging data to a remote server, so that it can be accessed from anywhere. 
+OMERO is a web-based platform for managing scientific images~\cite{moore2015omero}.
+Created by OME, the same team behind Bioformats, it integrates with a number of other software packages to help users upload their imaging data to a remote server, so that it can be accessed from anywhere.
 Furthermore a web interface makes it easy for OMERO users to share their data with others, allowing them to perform further analysis or even meta-studies on independent image sets~\cite{williams2017image}.
 
-After reading about FPBioimage in \textit{Nature Photonics}, an OMERO user noticed that the two programs have similar goals, and suggested integrating FPBioimage into OMERO as the default volume renderer~\cite{ehrenfeuchter2017comment}. 
-Thanks to FPBioimage's clear documentation and simple JSON interface, the OMERO team were able to incorporate an FPBioimage viewer into their software before any contact with me. 
+After reading about FPBioimage in \textit{Nature Photonics}, an OMERO user noticed that the two programs have similar goals, and suggested integrating FPBioimage into OMERO as the default volume renderer~\cite{ehrenfeuchter2017comment}.
+Thanks to FPBioimage's clear documentation and simple JSON interface, the OMERO team were able to incorporate an FPBioimage viewer into their software before any contact with me.
 
 \begin{figure}[htbp!]
 \centering
@@ -788,72 +787,72 @@ Thanks to FPBioimage's clear documentation and simple JSON interface, the OMERO 
 \label{fig:fpbOMERO}
 \end{figure}
 
-If a user opens a volumetric image in OMERO, an option appears in the viewer options to open in FPBioimage, as shown in Figure~\ref{fig:fpbOMERO}. 
-When selecting this option, the OMERO server quickly creates a static webpage with an FPBioimage viewer and the relevant JSON to load the data into FPBioimage. 
-Close collaboration with the OMERO team means that OMERO now sends texture atlases directly to FPBioimage, reducing loading time for users. 
+If a user opens a volumetric image in OMERO, an option appears in the viewer options to open in FPBioimage, as shown in Figure~\ref{fig:fpbOMERO}.
+When selecting this option, the OMERO server quickly creates a static webpage with an FPBioimage viewer and the relevant JSON to load the data into FPBioimage.
+Close collaboration with the OMERO team means that OMERO now sends texture atlases directly to FPBioimage, reducing loading time for users.
 
 The viewer has proved popular with OMERO users, finding diverse uses from plant sciences to pathology~\cite{fleur2018fpbioimage}.
 It has been adopted as OMERO's default volumetric viewer, and is featured prominently on their webpage~\cite{omero2018website}.
 
 \subsection[Mobile apps bring volumetric rendering to smartphones with virtual reality support]{Mobile apps bring volumetric rendering to smartphones with\\ virtual reality support}
-Since FPBioimage is a web-based application, it will run on any device with a web browser. 
-This includes mobile devices, such as iPhones and Android smartphones, as well as tablet devices such as an iPad. 
-However, mobile browsers have limited access to the device's computational resources, causing long loading times and poor performance, characterised by a low frame rate. 
+Since FPBioimage is a web-based application, it will run on any device with a web browser.
+This includes mobile devices, such as iPhones and Android smartphones, as well as tablet devices such as an iPad.
+However, mobile browsers have limited access to the device's computational resources, causing long loading times and poor performance, characterised by a low frame rate.
 
-To allow FPBioimage to run on mobiles with full performance, native apps were compiled for the Android and iOS operating systems, which are available through their respective app stores. 
-Since mobiles usually only run one app at a time, the app has full access to all the computational and graphics processing capability of the device. 
+To allow FPBioimage to run on mobiles with full performance, native apps were compiled for the Android and iOS operating systems, which are available through their respective app stores.
+Since mobiles usually only run one app at a time, the app has full access to all the computational and graphics processing capability of the device.
 
-For the mobile apps, a universal linking scheme has been devised. 
-This means that if a user visits a website with an FPBioimage viewer on it, they will get the option to open the data in a native app on their phone instead of in the mobile browser. 
-Since the mobile app uses the same rendering algorithm (presented in Section~\ref{sec:fpbVolumeRendering}) as the online app, the visualisation will be exactly the same. 
+For the mobile apps, a universal linking scheme has been devised.
+This means that if a user visits a website with an FPBioimage viewer on it, they will get the option to open the data in a native app on their phone instead of in the mobile browser.
+Since the mobile app uses the same rendering algorithm (presented in Section~\ref{sec:fpbVolumeRendering}) as the online app, the visualisation will be exactly the same.
 
 \begin{figure}[t!]
 \centering
 \includegraphics[width=1.0\textwidth]{fpb-android}
-\caption[FPBioimage: The FPBioimage mobile app provides volumetric rendering in virtual reality]{FPBioimage has native apps for Android and iOS. The photo shows a split-screen stereo view, which can be used in conjunction with Google Cardboard~\cite{cardboard} to support virtual reality. Mouse embryo volume data from~\cite{sharpe2002optical}. } % 
+\caption[FPBioimage: The FPBioimage mobile app provides volumetric rendering in virtual reality]{FPBioimage has native apps for Android and iOS. The photo shows a split-screen stereo view, which can be used in conjunction with Google Cardboard~\cite{cardboard} to support virtual reality. Mouse embryo volume data from~\cite{sharpe2002optical}. } %
 \label{fig:fpbMobile}
 \end{figure}
 
-As part of the port to mobile, a new focus was put on FPBioimage touch controls. 
-Users can intuitively rotate the model by touching and dragging. 
-Users can also zoom in and out by a two-finger pinch, and move around the model using two fingers and dragging. 
-As with the web app, the quality can be changed to accommodate a range of mobile chipsets, and the usual rendering options of opacity, intensity and cutoff are available, along with the various projection methods.  
+As part of the port to mobile, a new focus was put on FPBioimage touch controls.
+Users can intuitively rotate the model by touching and dragging.
+Users can also zoom in and out by a two-finger pinch, and move around the model using two fingers and dragging.
+As with the web app, the quality can be changed to accommodate a range of mobile chipsets, and the usual rendering options of opacity, intensity and cutoff are available, along with the various projection methods.
 
-Running on mobile brings one more advantage, thanks to the low-cost virtual reality (VR) device Google Cardboard~\cite{cardboard}. 
-This is a VR viewer - originally made of cardboard but now available in more robust plastic models~\cite{get2018cardboard} - which utilises a smartphone's high-resolution screen and precise accelerometer to provide a low-cost VR experience. 
-The user simply has to open their data in the mobile app, click the "Start VR" button, and put their phone into their Cardboard viewer. 
-This option allows users to view their data in VR, providing a truly immersive experience and giving a perspective of the data not possible through any other means. 
+Running on mobile brings one more advantage, thanks to the low-cost virtual reality (VR) device Google Cardboard~\cite{cardboard}.
+This is a VR viewer - originally made of cardboard but now available in more robust plastic models~\cite{get2018cardboard} - which utilises a smartphone's high-resolution screen and precise accelerometer to provide a low-cost VR experience.
+The user simply has to open their data in the mobile app, click the "Start VR" button, and put their phone into their Cardboard viewer.
+This option allows users to view their data in VR, providing a truly immersive experience and giving a perspective of the data not possible through any other means.
 
-%Oculus rift?? :( 
+%Oculus rift?? :(
 
 
 \section{Conclusion} % Replaces the `examples of use' section
-As an online volumetric rendering program, FPBioimage has a wide range of uses which have not been possible before. 
+As an online volumetric rendering program, FPBioimage has a wide range of uses which have not been possible before.
 
-As a volumetric renderer, FPBioimage offers a number of volumetric rendering modes found in most offline volume visualisation software, including composite ray marching and maximum intensity projections. 
+As a volumetric renderer, FPBioimage offers a number of volumetric rendering modes found in most offline volume visualisation software, including composite ray marching and maximum intensity projections.
 However all other volume rendering programs have a complicated array of settings for changing transparency and colour maps, and no option for adjusting quality.
-With a focus on ease-of-use from its conception, FPBioimage provides an interface that anyone can use, even non-expert users. 
+With a focus on ease-of-use from its conception, FPBioimage provides an interface that anyone can use, even non-expert users.
 
-Furthermore, because FPBioimage is designed to run on the web, or on devices with limited computational resources, the rendering algorithms have been optimised such that full-quality volume rendering can be performed in real time. 
-This real-time performance has not been seen in other software. 
-Indeed, the ease-of-use coupled with high performance have generated many requests that FPBioimage could be used as the default volumetric viewer in other image analysis software~\cite{twitter2018fantm}. 
+Furthermore, because FPBioimage is designed to run on the web, or on devices with limited computational resources, the rendering algorithms have been optimised such that full-quality volume rendering can be performed in real time.
+This real-time performance has not been seen in other software.
+Indeed, the ease-of-use coupled with high performance have generated many requests that FPBioimage could be used as the default volumetric viewer in other image analysis software~\cite{twitter2018fantm}.
 
-In combination with the ImageJ, FIJI, or Icy plugins, scientists collecting volume data can share it with anyone in the world in one click. 
-Data is uploaded to a public repository hosted on Amazon Web Services, at a permanent link, or can be uploaded to a private server for password protection. 
-This allows researchers to get unprecedented instant feedback from international collaborators. 
+In combination with the ImageJ, FIJI, or Icy plugins, scientists collecting volume data can share it with anyone in the world in one click.
+Data is uploaded to a public repository hosted on Amazon Web Services, at a permanent link, or can be uploaded to a private server for password protection.
+This allows researchers to get unprecedented instant feedback from international collaborators.
 
 \begin{figure}[htbp!]
 \centering
 \includegraphics[width=1.0\textwidth]{fpb-liveslides}
-\caption[FPBioimage: LiveSlides in Powerpoint brings interactive FPBioimage rendering to presentations]{Using the Powerpoint plugin LiveSlides, FPBioimage can be embedded in a presentation, bringing an interactive dynamic to explaining volumetric data. Data from~\cite{kumar2014dual}. } % 
+\caption[FPBioimage: LiveSlides in Powerpoint brings interactive FPBioimage rendering to presentations]{Using the Powerpoint plugin LiveSlides, FPBioimage can be embedded in a presentation, bringing an interactive dynamic to explaining volumetric data. Data from~\cite{kumar2014dual}. } %
 \label{fig:fpb-liveslides}
 \end{figure}
 
-Researchers can embed FPBioimage in a presentation by utilising a slideshow plugin such as LiveSlides~\cite{liveslides}, as shown in Figure~\ref{fig:fpb-liveslides}. 
-This allows an interactive flight through the data whilst talking about it, bringing a new dynamic to presentations and allowing detailed responses to questions which are not possible with a pre-recorded video. 
+Researchers can embed FPBioimage in a presentation by utilising a slideshow plugin such as LiveSlides~\cite{liveslides}, as shown in Figure~\ref{fig:fpb-liveslides}.
+This allows an interactive flight through the data whilst talking about it, bringing a new dynamic to presentations and allowing detailed responses to questions which are not possible with a pre-recorded video.
 
-Finally, for sharing volumetric data with the wider community FPBioimage can be used as a publication tool. 
+Finally, for sharing volumetric data with the wider community FPBioimage can be used as a publication tool.
 A whole set of 3D images can be uploaded, such that readers can explore for themselves the findings of an experiment~\cite{teplensky2017temperature}.
-It is hoped that journals will adopt FPBioimage as a dynamic viewer for online publications, so that readers can interact with data alongside the text. 
+It is hoped that journals will adopt FPBioimage as a dynamic viewer for online publications, so that readers can interact with data alongside the text.
 
-FPBioimage makes sharing of volumetric data with anyone in the world a one-click operation, and introduces a new paradigm for publishing 3D image data. 
+FPBioimage makes sharing of volumetric data with anyone in the world a one-click operation, and introduces a new paradigm for publishing 3D image data.
