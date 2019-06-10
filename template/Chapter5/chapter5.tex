@@ -153,6 +153,9 @@ Whilst this scheme was effective at differentiating ER from background in the th
 Furthermore, the binary threshold required for each image set varies depending on exposure time, laser power, and expression level of the fluorescent label in that particular cell.
 Therefore a single value threshold was not appropriate to generate binary images.
 
+Binary morphology was was also considered as a classification technique, where opening and closing operations were performed with line segments and disks respectively. 
+Due to the variety of line segment lengths and shapes, however, a repeatable set of operations could not be devised, and structuring elements required time-consuming fine tuning for each image set. 
+
 \begin{figure}[p!]
 	\centering
 	\begin{subfigure}[b]{0.325\textwidth}
@@ -175,7 +178,7 @@ Therefore a single value threshold was not appropriate to generate binary images
 		\includegraphics[width=1.0\textwidth]{er-classified-network}
 		\caption{} \label{fig:er-classified-network}
 	\end{subfigure}
-	\caption[ER: Weka segmentation allows the ER network to be extracted from a non-uniform background]{(a) shows the background of ER images is not uniform in some images. A simple threshold for separating ER from the background, shown in (b), does not work well on HEK-293 cells due to the variations in background intensity. A machine learning technique, implemented with the Weka segmentation plugin for ImageJ, identifies the ER and background more reliably, as shown in (b). A MATLAB script was applied to the binary image to classify ER tubes, nodes, and end-points, labelled in (d) as blue, green, and red respectively. Tracking of nodes and endpoints, and analysis of tubule length distribution, could then be performed on the network. Images are of HEK-293-ERT; scalebar is \SI{5}{\micro\metre}. }
+	\caption[ER: Weka segmentation allows the ER network to be extracted from a non-uniform background]{(a) shows a SIM reconstruction of ER where the background is not uniform and honeycomb artefacts have appeared, as described in Section~\ref{sec:sim-artefacts}. A simple threshold for separating ER from the background, shown in (b), does not work well on HEK-293 cells due to the variations in background intensity. A machine learning technique, implemented with the Weka segmentation plugin for ImageJ, identifies the ER and background more reliably, as shown in (b). A MATLAB script was applied to the binary image to classify ER tubes, nodes, and end-points, labelled in (d) as blue, green, and red respectively. Tracking of nodes and endpoints, and analysis of tubule length distribution, could then be performed on the network. Images are of HEK-293-ERT; scalebar is \SI{5}{\micro\metre}. }
 	\label{fig:ER-classifier}
 \end{figure}
 
@@ -278,13 +281,13 @@ This decrease in pinching frequency is very similar to the velocity decrease obs
 	\includegraphics[width=\textwidth]{er-blebbing-3}
 	\caption{}\label{fig:er-blebbing-3}
 \end{subfigure}
-\caption[ER: Phototoxicity confirms the ability of ER to undergo reversible pinching]{When the cell shown in (a) is strongly perturbed from normal conditions, for example by phototoxicity or calcium manipulation, extreme pinching causes blebbing in the ER. (b) shows the cell after imaging for \SI{30}{\second} with \SI{95}{\milli\watt} \SI{561}{\nano\metre} laser light. When the perturbation is removed, the ER recovers its normal shape; (c) shows the same cell after \SI{10}{\minute} of recovery time. This experiment confirms the ability of ER to undergo reversible pinching. }
+\caption[ER: Phototoxicity confirms the ability of ER to undergo reversible pinching]{When the cell shown in (a) is strongly perturbed from normal conditions, for example by phototoxicity or calcium manipulation, extreme pinching causes blebbing in the ER. (b) shows the cell after imaging for \SI{30}{\second} with \SI{50}{\watt\per\cm\squared} \SI{561}{\nano\metre} laser light. When the perturbation is removed, the ER recovers its normal shape; (c) shows the same cell after \SI{10}{\minute} of recovery time. This experiment confirms the ability of ER to undergo reversible pinching. }
 \label{fig:ER-blebbing}
 \end{figure}
 
 Further evidence for tubule pinching was gathered when the cell was artificially placed under excessive stress.
 Whilst acquiring time series videos of the ER on the LAG SIM, we occasionally observed a reversible blebbing behaviour of the ER.
-This phenomenon, shown in Figure~\ref{fig:ER-blebbing}, was particularly evident when imaging samples labelled with TMR fluorescent dye with the \SI{561}{\nano\meter} laser power set to \SI{95}{\milli\watt} or more. %, equivalent to [?? at the sample].
+This phenomenon, shown in Figure~\ref{fig:ER-blebbing}, was particularly evident when imaging samples labelled with TMR fluorescent dye with the \SI{561}{\nano\meter} laser power set to \SI{95}{\milli\watt} or more, equivalent to \SI{50}{\watt\per\cm\squared} at the sample.
 The same behaviour was observed when calcium manipulation~\cite{subramanian1997calcium} was performed on the cell.
 Notably, the ER recovers its original shape after the stress is removed, demonstrating the ability of ER tubules to undergo reversible pinching.
 
@@ -366,13 +369,13 @@ Particles gain enough speed from a pinch to move away from its influence when th
 \begin{figure}[t!]
 	\centering
 	\includegraphics[width=\textwidth]{er-simulation-magic-particle}
-	\caption[ER simulation: The simulated model shows similar particle velocity tracks to experimental data]{A single particle was tracked in the simulation, and its velocity recorded using the same colour scale as Figure~\ref{fig:ER-directed-flow-velocity}, where red shows fast particle velocity and blue slow velocity. The simulated model is in good agreement with experimental data. }
+	\caption[ER simulation: The simulated model shows similar particle velocity tracks to experimental data]{A single particle was tracked in the simulation, and its velocity recorded using the same colour scale as Figure~\ref{fig:ER-directed-flow-velocity}, where red shows fast particle velocity and blue slow velocity. The simulated model is in good agreement with experimental data, with fast directed movement along tubules and slower Brownian motion at junctions. Colour bar from slow (blue) to fast (red). }
 	\label{fig:ER-simulation-magic-particle}
 \end{figure}
 
 To prevent too much energy being added to the network from multiple pinching events, collisions were inelastic and drag was added at network junctions to slow the particles.
 Parameters were tuned to ensure the same average particle speed in the two mixing scenarios for a fair comparison.
-A plot of a single particle's trajectory through the network is shown in Figure~\ref{fig:ER-simulation-magic-particle}, which is consistent with the experimental data in Figure~\ref{fig:er-directed-flow-velocity}.
+A plot of a single particle's trajectory through the network is shown in Figure~\ref{fig:ER-simulation-magic-particle}, which is consistent with the experimental data in Figure~\ref{fig:er-directed-flow-velocity}, showing fast directed movement along tubules and slower Brownian motion at junctions.
 
 Understanding the reason for ER pinching allows us to associate diseases with ER malfunction.
 In cells with long projections, such as motor neurons, transporting luminal protein to remote parts of the cell quickly could be vital for healthy cellular function.
@@ -391,6 +394,7 @@ The size and speed of the pinching phenomenon means that high-speed TIRF-SIM is 
 Using the Nvidia PhysX engine to perform simulations of proteins moving in the ER provided insight into the advantages of active flow over diffusion.
 Tuning the simulation to maintain the same average particle speed in both the pinching and Brownian motion schemes, ensuring a fair comparison, showed that mixing occurs up to 3$\times$ faster in a network with pinching.
 Pinching therefore reduces the time taken for proteins to reach remote areas of the network, such as by the cell membrane.
+The interactive simulation is provided online at \url{https://laseranalyticsgroup.github.io/er}, where model parameters such as pinch size, particle size, and mean free path can be adjusted, for example to input values measured from electron microscopy data. 
 
 Since ER is found in most eukaryotic cells, it is unsurprising that its malfunction is associated with a wide range of diseases.
 By contributing to the community's fundamental understanding of ER mechanisms, we advance our capability for finding cures.

@@ -25,7 +25,7 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:cx="637.516"
-     inkscape:cy="487.68575"
+     inkscape:cy="384.55709"
      inkscape:zoom="0.77573005"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -42,7 +42,9 @@
      fit-margin-top="10"
      fit-margin-right="10"
      fit-margin-bottom="10"
-     fit-margin-left="10">
+     fit-margin-left="10"
+     inkscape:measure-start="1379.35,30.9386"
+     inkscape:measure-end="978.433,30.9386">
     <inkscape:grid
        type="xygrid"
        id="grid23819"
@@ -10868,5 +10870,23 @@
          x="877.3576"
          y="253.93307"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.33333206px;font-family:'pt sans';-inkscape-font-specification:'pt sans';fill:#323232;fill-opacity:1">9</tspan></text>
+    <rect
+       style="opacity:1;fill:#000000;fill-opacity:1"
+       id="rect7962"
+       width="400.91266"
+       height="10.312866"
+       x="569.18073"
+       y="819.93622" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#225265;fill-opacity:1;stroke:none"
+       x="734.04675"
+       y="805.08606"
+       id="text11456-67-8"><tspan
+         sodipodi:role="line"
+         id="tspan11454-42-8"
+         x="734.04675"
+         y="805.08606"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.33333206px;font-family:'pt sans';-inkscape-font-specification:'pt sans';fill:#323232;fill-opacity:1">5μm</tspan></text>
   </g>
 </svg>

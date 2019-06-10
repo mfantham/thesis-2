@@ -178,7 +178,7 @@ In later experiments, detailed in Section~\ref{sec:MOF-siRNA}, a drug with bette
 	\includegraphics[width=\textwidth]{calcein-MOF-uptake-6}
 	\caption{24\,hours}\label{fig:calcein-MOF-uptake-6}
 \end{subfigure}
-\caption[MOFs: Calcein-loaded NU-1000 is taken up by cells over a \SI{24}{\hour} period]{Images of Hela cells, with endosomes coloured in magenta, captured over a ~\SI{24}{\hour} time period show the successful uptake of calcein-loaded NU-1000, coloured in green. The low quantity of uptake in the first \SI{2}{\hour} highlights the need for temperature treatment to delay payload release, avoiding the burst release effect. These images can be viewed interactively in 3D at \url{https://fpb.ceb.cam.ac.uk/MOF} to confirm MOF is located within the cells, and not simply sitting on the cell membrane. Cell culture and staining was performed by \textit{MT}. }
+\caption[MOFs: Calcein-loaded NU-1000 is taken up by cells over a \SI{24}{\hour} period]{Images of HeLa cells, with endosomes coloured in magenta, captured over a ~\SI{24}{\hour} time period show the successful uptake of calcein-loaded NU-1000, coloured in green. The low quantity of uptake in the first \SI{2}{\hour} highlights the need for temperature treatment to delay payload release, avoiding the burst release effect. These images can be viewed interactively in 3D at \url{https://fpb.ceb.cam.ac.uk/MOF} to confirm MOF is located within the cells, and not simply sitting on the cell membrane. Cell culture and staining was performed by \textit{MT}. }
 \label{fig:calcein-MOF-uptake}
 \end{figure}
 
@@ -293,13 +293,14 @@ To test this, endosome release factors were loaded into the MOF alongside the si
 \begin{figure}[htbp!]
 \centering
 \includegraphics[width=1.0\textwidth]{mCherry-expression}
-\caption[MOFs: siRNA suppresses mCherry expression when an endosome release factor is loaded to MOFs]{ Using siRNA loaded in NU-1000 causes an insignificant decrease in the mCherry expression level. Under this condition siRNA is not able to escape the endosome to cleave the mCherry. Addition of endosome release factors, such as KALA, break down the endosome, allowing the siRNA to enter the cytoplasm and perform its intended function. Treatment and measurement was performed by \textit{MT}. }
+\caption[MOFs: siRNA suppresses mCherry expression when an endosome release factor is loaded to MOFs]{ The expression of mCherry, measured with flow cytometry, was used to assess how effective different siRNA delivery methods are at gene silencing. Treatment with naked siRNA or NU-1000 MOF only causes no significant change in expression. Furthermore, using siRNA loaded in NU-1000 causes an insignificant decrease in the mCherry expression level. Under this condition it is hypothesised that siRNA is not able to escape the endosome to cleave the mCherry. Addition of endosome release factors, such as KALA, Proton-Sponge® (PS) or ammonium chloride ($\text{NH}_{\text{4}}\text{Cl}$) break down the endosome, allowing the siRNA to enter the cytoplasm and perform its intended function; although delivery with Lipofectamine (lipo), the current gold standard for transfection, is still the most effective method for gene silencing. Treatment and measurement was performed by \textit{MT}. }
 \label{fig:mCherry-expression}
 \end{figure}
 
 Three endosome release factors were used: Proton-Sponge®, an effective H\textsuperscript{+} scavenger from Sigma-Aldrich~\cite{ozkar2002nanocluster}; KALA, a cationic amphipathic cell-penetrating peptide which binds oligonucleotides and disrupts cell membrane; and ammonium chloride, which has previously been shown to induce release of molecules from sub-cellular vesicles~\cite{cervia2017distinct}.
+siRNA was also delivered to cells with Lipofectamine, the current gold standard for transfection, for comparison with delivery by MOFs. 
 
-Figure~\ref{fig:mCherry-expression} shows that, with the addition of any release cofactor, mCherry expression level was significantly reduced.
+Figure~\ref{fig:mCherry-expression} shows that with the addition of any release cofactor mCherry expression level was significantly reduced.
 The expected mechanism by which the siRNA is now able to suppress mCherry expression is as follows: siRNA and the endosome release factor load into the pores of MOFs; these MOF complexes are taken up into the cell by endocytosis, and are initially located in endosomes; the MOF begins to unload its contents in the endosome environment, releasing the endosome release factor and siRNA; the endosome release factor breaks down the endosome membrane before the endosome can break down the siRNA, releasing the siRNA into the cytoplasm; and finally, the siRNA can cleave mRNA, silencing expression of mCherry.
 
 The proposed mechanism for the successful gene silencing is confirmed by the SIM image in Figure~\ref{fig:siRNA-MOF-uptake}d.

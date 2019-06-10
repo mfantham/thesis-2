@@ -761,8 +761,9 @@ In order to simplify the upload process, I created the FPBioimage Helper plugin 
 These programs all support volumetric image data in a wide variety of formats thanks to OME Bioformats~\cite{linkert2010metadata}.
 Users simply have to open their 3D data in the program, click one button, and the plugin will output a web link that the researcher can share with others.
 
-By default, FPBioimage Helper will upload a simple webpage displaying the data to an Amazon Web Services (AWS) site.
-If the user would prefer to host their data on a private web server, for example to implement password protection or use their own website template, they can choose not to upload the data but simply save the formatted images and website to their local machine for their own purpose.
+By default, FPBioimage Helper will upload the data to FPBioimage-Host, a Firebase website hosted on Google Cloud Platform to make it easier for researchers to share volumetric image data~\cite{fpbhost}.
+Users log in to FPBioimage-Host with a Google account to manage their uploads, and can immediately copy the URL to allow colleagues and collaborators to view the data from anywhere in the world. 
+If the user would prefer to host their data on a private web server, for example to implement password protection for datasets or use their own website template, they can choose not to upload the data but simply save the formatted images and website to their local machine for their own purpose.
 
 Using the plugin, rather than manually uploading PNG image slices, also provides faster download times for those viewing the data.
 Instead of saving every plane as a separate PNG file, the plugin arranges images into texture atlases as described in Section~\ref{sec:fpbVolumeRendering}.
@@ -809,7 +810,7 @@ Since the mobile app uses the same rendering algorithm (presented in Section~\re
 \begin{figure}[t!]
 \centering
 \includegraphics[width=1.0\textwidth]{fpb-android}
-\caption[FPBioimage: The FPBioimage mobile app provides volumetric rendering in virtual reality]{FPBioimage has native apps for Android and iOS. The photo shows a split-screen stereo view, which can be used in conjunction with Google Cardboard~\cite{cardboard} to support virtual reality. Mouse embryo volume data from~\cite{sharpe2002optical}. } %
+\caption[FPBioimage: The FPBioimage mobile app provides volumetric rendering in virtual reality]{FPBioimage has native apps for Android and iOS. The screenshot shows a split-screen stereo view/, which can be used in conjunction with Google Cardboard~\cite{cardboard} to support virtual reality. The data shows MOF (green) taken up by HeLa cells labelled with a lysosomal marker (magenta), captured on the LAG SIM~\cite{teplensky2017temperature}. } %
 \label{fig:fpbMobile}
 \end{figure}
 
