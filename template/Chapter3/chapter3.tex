@@ -76,7 +76,7 @@ The key drawback of volumetric rendering compared to geometric rendering is spee
 In the simple volumetric renderer shown in Figure~\ref{fig:raymarch-diagram}, a ray is calculated for each pixel on the screen - 2$\times$\smaller[0.76]{10\textsuperscript{6}} pixels for a 1080p high definition display.
 If each ray takes \num{512} samples as it passes through the volume, each rendering of the volume requires over 1$\times$\smaller[0.76]{10\textsuperscript{9}} voxel calculations.
 
-When rendering a single volumetric image, or even a video which is first rendered then presented at a later time, this is not an issue: the rays can computed in parallel across a cluster of computers, and with some patience the images will build up.
+When rendering a single volumetric image, or even a video which is first rendered then presented at a later time, this is not an issue: the rays can be computed in parallel across a cluster of computers, and with some patience the images will build up.
 However, until recently displaying volumetric data at video rate in real time required specialised hardware optimised solely for volumetric rendering~\cite{ray2000resample}.
 
 The gaming industry has led to a rapid development of devices optimised for performing thousands of simple calculations in parallel.

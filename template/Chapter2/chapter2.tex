@@ -730,20 +730,11 @@ Similarly, when they \texttt{Stop \& Close} the software, their name and finish 
 Furthermore, every acquisition is also logged to the timeline.
 This contains metadata relating to the acquisition, for example number of \texttt{t-frames}, \texttt{z-steps}, laser powers, and exposure times.
 This is especially helpful is the user is later unsure what acquisition parameters were used for a particular image.
-
-The user can also add a customised post to the logbook, for example to record an error with the software.
-The online Labstep logbook can be opened by clicking the \texttt{Open logbook} button, opening the webpage shown in Figure~\ref{fig:labstepTimeline}.
-
-\begin{sidewaysfigure}[p]
-\centering
-\includegraphics[width=0.875\textwidth]{labstep-timeline}
-\caption[LAG SIM: Logging user activity with Labstep allows any problems to be identified and fixed quickly]{User activity is automatically logged to an online logbook hosted on Labstep to identify and fix any problems quickly. This figure shows the user logged onto the SIM at 09:00, acquired 2 images - a SIM z-stack then a 1000-frame widefield video - then logged off.}
-\label{fig:labstepTimeline}
-\end{sidewaysfigure}
+The online Labstep logbook can be opened by clicking the \texttt{Open logbook} button.
 
 Online logging benefits both the microscope user and the developer, allowing problems to be identified and fixed promptly.
+The implementation of the logging functionality is detailed in Appendix~\ref{appx:labview-lagsim}, and the program can be reused in any other LabVIEW software to record and monitor instrument use. 
 
-\clearpage
 \section{A comparison of reconstruction algorithms reveals their pros and cons} \label{sec:recon}
 Once SIM data is collected, it requires reconstruction to either enhance the resolution, remove out-of-focus light, or a mixture of both.
 
@@ -768,7 +759,7 @@ Various implementations of the SIM reconstruction algorithm exist.
 During the course of my PhD, I have utilised and modified three different reconstruction algorithms, and written a plugin for ImageJ tailored specifically for LAG SIM and detailed in Section~\ref{sec:lagsimFiji}.
 Each implementation has its own merits and disadvantages, discussed in the remainder of this section.
 
-\subsection{Lin Shao SIM reconstruction runs on CUDA GPUs}
+\subsection{Lin Shao SIM reconstruction runs on CUDA GPUs} \label{sec:shao-recon}
 The first implementation of the resolution-enhancing SIM algorithm used in the Laser Analytics Group was provided by Lin Shao, who worked on SIM with Mats Gustafsson~\cite{shao2011super}.
 It was developed during his time at Janelia Farm Research Campus, under the supervision of Gustafsson and Eric Betzig~\cite{beach2014nonmuscle}.
 
@@ -829,8 +820,8 @@ Optical sectioning removes out-of-focus light, so that 3D images can be reconstr
 
 As a set of MATLAB scripts and functions, the code can be executed on any computer with a MATLAB license.
 Therefore the implementation is available for all major desktop operating systems, and furthermore is easy to modify.
-I have made modifications to the original code to perform operations on the graphics processing unit (GPU), bringing a 20$\times$ increase in reconstruction speed.
-% Want to show a table of this??
+I have made modifications to the original code to perform operations on the graphics processing unit (GPU), bringing a 32$\times$ increase in reconstruction speed.
+More detail on the implementation and profiling on different hardware is provided in Appendix~\ref{appx:gpu-srossim}. 
 
 SROS-SIM has the disadvantage of not being publicly available or published and verified by the community.
 Furthermore the need for an expensive MATLAB license limits who can use the software.
@@ -848,8 +839,6 @@ The fairSIM user interface is cumbersome, and reconstruction can only be perform
 This process requires around 20 clicks, and input parameters must be resubmitted for every reconstruction.
 This, coupled with the fact that fairSIM does not have GPU support, makes reconstruction very slow, especially for large, multicolour image sets.
 
-% Hessian SIM?
-
 \subsection{LAG SIM is specifically designed for our microscope}
 LAG SIM is my personal implementation of the SIM reconstruction algorithm, built using the well-documented fairSIM Java library~\cite{fairsimGithub}.
 It is designed specifically for the Laser Analytic Group's SIM, simplifying the interface for non-advanced users, and implements a fast parameter-finding technique.
@@ -857,7 +846,7 @@ It is designed specifically for the Laser Analytic Group's SIM, simplifying the 
 It is available publicly as an ImageJ/Fiji plugin~\cite{lagsim}.
 This means that it is free, open source, and stays up-to-date for all users.
 
-The next section describes the LAG SIM plugin in detail, providing a detailed resource to anyone reconstructing LAG SIM data in the future.
+Snippets from the source code are given in Appendix~\ref{appx:fiji-lagsim}. The next section describes the LAG SIM plugin in detail for users of the software, providing a detailed resource to anyone reconstructing LAG SIM data in the future.
 
 
 \section{Reconstruction with LAG SIM for artefact-free images} \label{sec:lagsimFiji}
@@ -872,10 +861,10 @@ Selecting appropriate values for these parameters requires understanding what ea
 LAG SIM provides a number of tools designed to assist with common SIM reconstruction tasks, reducing the time required between acquisition and analysis of the data.
 The tools are accessed through the ImageJ menu shown in Figure~\ref{fig:lagsim-fiji-interface}a.
 
-\begin{figure}[b!]
+\begin{figure}[ph!]
 	\centering
 		\includegraphics[width=1.0\textwidth]{lagsim-fiji}
-	\caption[LAG SIM: A Fiji interface makes artefact-free reconstruction quick and simple for non-expert users]{The LAG SIM ImageJ/Fiji user interface, utilising the fairSIM reconstruction algorithm, is specifically designed for the LAG SIM to make artefact-free reconstruction quick and straightforward. (a) shows the main LAG SIM menu, with the many reconstruction and SIMcheck tools created; (b) shows the quick parameter tester, for finding the optimal reconstruction parameters; and (c) shows the main reconstruction interface, facilitating batch reconstruction. }
+	\caption[LAG SIM: A Fiji interface makes artefact-free reconstruction quick and simple for non-expert users]{The LAG SIM ImageJ/Fiji user interface, utilising the fairSIM reconstruction algorithm, is specifically designed for the LAG SIM to make artefact-free reconstruction quick and straightforward. (a) shows the main LAG SIM menu, with the many reconstruction and SIMcheck tools created; (b) shows the quick parameter tester, for finding the optimal reconstruction parameters; (c) shows the main reconstruction interface, facilitating batch reconstruction; and (d) shows Squirrel metrics~\cite{culley2018quantitative} which are calculated by the parameter tester for a numerical measure of artefacts. }
 \label{fig:lagsim-fiji-interface}
 \end{figure}
 
@@ -890,6 +879,15 @@ To find more optimal parameters, the ``Parameter chooser'' can be utilised, show
 Every time the ``Test!'' button is pressed, a frame is reconstructed with the given parameters and placed side-by-side with previous test reconstructions.
 This allows a user to quickly compare the effect of different reconstruction parameters to produce artefact-free images.
 A detailed description of each parameter follows in Sections~\ref{sec:LAGSIM-illumination-detection} through \ref{sec:LAGSIM-OTF-attenuation}.
+
+When investigating the effect of different reconstruction parameters on their data with the parameter tester, users can measure artefacts numerically by calculating Squirrel metrics. 
+Squirrel is an imageJ plugin designed to assess super-resolution quality through the calculation of two metrics, resolution-scaled Pearson's coefficient (RSP) and resolution-scaled error (RSE)~\cite{culley2018quantitative}. 
+To calculate these metrics, a widefield image is provided to Squirrel - for LAG SIM, simply the sum of the 9 raw frames - and this is compared to the super-resolution image convolved with a resolution scaling function (RSF), a kernel function designed to reduce the resolution of the SIM reconstruction into a widefield equivalent. 
+The RSP is the Pearson's correlation coefficient between the pixels of the widefield image and the resolution-scaled SIM reconstruction; the closer this value is to 1, the fewer artefacts have been introduced by the reconstruction algorithm. 
+The RSE metric describes the root-mean-square error between the widefield image and resolution-scaled SIM image; the smaller this value the better. 
+The RSE is intensity-dependent, so is useful for assessing non-linear intensity scaling applied by the reconstruction algorithm.
+As well as an average RSE for the whole image, the parameter tester will also output an error map showing the RSE for each pixel, which highlights areas of the image where the reconstruction algorithm is performing poorly. 
+Figure~\ref{fig:lagsim-fiji-interface}d, generated by running the parameter tester 8 times, shows how the Squirrel metrics can be used to reduce artefacts in the reconstruction as different parameters are optimised. 
 
 Once appropriate parameters have been chosen for optimal artefact-free reconstruction, the ``LAG SIM dialog,'' shown in Figure~\ref{fig:lagsim-fiji-interface}c, is used to reconstruct the full image stack or time series.
 Parameters are saved to the ImageJ user profile, so that they are entered automatically from the parameter chooser and do not have to be entered every time the dialog is opened.
@@ -957,7 +955,6 @@ The amount of noise filtering can be controlled by the user through LAG SIM's `W
 \centering
 \includegraphics[width=1.0\textwidth]{wiener-parameter}
 \caption[LAG SIM: The Wiener parameter and apodisation strength must be chosen to minimise artefacts]{The left column shows crops from a SIM reconstruction with various values of Wiener parameter ($w$) and apodisation strength ($a$), and a widefield image for comparison. Note that image contrast has been greatly enhanced to make the noise pattern visible. The middle column shows the line profile through a tubule, showing the noise pattern with a low Wiener parameter, ringing with a high Wiener parameter, and suppression of noise and ringing using apodisation. The right hand column shows the radially averaged Fourier transform plot of each image; note the local peak when a low Wiener filter is used, which boosts noise at this frequency causing the unconventional noise pattern.}
-% Really need to add a, b, c, etc to this, I think.
 \label{fig:wiener-parameter}
 \end{figure}
 
@@ -1125,7 +1122,18 @@ The sonication step means that beads are well spread out, so that individual bea
 	\includegraphics[width=\textwidth]{recon-beads-registered}
 	\caption{}\label{fig:recon-beads-registered}
 \end{subfigure}
-\caption[LAG SIM: Multicolour alignment beads are used for correcting chromatic offset]{A small chromatic offset between the three SIM colour channels can be seen in (a). When the offset is corrected, as in (b), the beads appear white; the offset parameters can then be used to correct other multicolour images captured during the same imaging session.  }
+
+~\newline
+\begin{subfigure}[b]{0.49\textwidth}
+	\includegraphics[width=\textwidth]{beads-sim}
+	\caption{}\label{fig:beads-full-fov}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.49\textwidth}
+	\includegraphics[width=\textwidth]{beads-squirrel}
+	\caption{}\label{fig:beads-squirrel}
+\end{subfigure}
+\caption[LAG SIM: Multicolour alignment beads are used for correcting chromatic offset]{A small chromatic offset between the three SIM colour channels can be seen in (a). When the offset is corrected, as in (b), the beads appear white; the offset parameters can then be used to correct other multicolour images captured during the same imaging session. (c) shows a single channel of beads for the full microscope field of view, which is analysed in (d) with Squirrel~\cite{culley2018quantitative} to assess microscope alignment and performance. }
 \label{fig:recon-beads}
 \end{figure}
 \afterpage{\clearpage}
@@ -1152,7 +1160,10 @@ After registration and correction, Figure~\ref{fig:recon-beads-registered} shows
 These same registration parameters can then be used for other multicolour experiments in the same imaging session.
 
 Furthermore, the images of fluorescent beads can be used to assess the microscope's performance to ensure it is operating optimally. 
-%TODO: talk about Squirrel to assess artefacts across image. Flat field. OTF shape. 
+Squirrel metrics of a reconstructed full field-of-view were calculated using the LAG SIM parameter tester, and the resulting error map is shown in Figure~\ref{fig:beads-squirrel}~\cite{culley2018quantitative}. 
+The map shows that errors are generally higher at the edges of the field-of-view, where the illumination is not as intense.
+Upon closer inspection, the Squirrel error map shows that the reconstructed PSF is not symmetrical, but has higher errors at \SI{120}{\degree} clockwise from horizontal which is not obvious in Figure~\ref{fig:beads-full-fov}.
+This implies that the illumination pattern in this direction is not optimal, and perhaps needs realigning or the polarisation rotation needs to be checked. 
 
 
 \subsection{Resolution-enhanced optical sectioning of HeLa cells shows MOF colocalised with endosomes} \label{sec:showcase-MOF}
