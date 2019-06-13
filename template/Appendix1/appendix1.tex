@@ -21,8 +21,16 @@ LabVIEW supports abstraction with inputs and outputs, like functions in other la
 The LAG SIM software is made up of 55 such files, and presenting them all here would be impractical; however, the entire project is available to download from \url{https://github.com/laseranalyticsgroup/sim-labview-control}. 
 Here I will present the implementation of LAG SIM's experiment logging feature, since it is a reusable component that could be useful in many other LabVIEW control programs. 
 
+\begin{sidewaysfigure}[p]
+\centering
+\includegraphics[width=\textwidth]{labstep-timeline}
+\caption[Logging user activity with Labstep allows any problems to be identified and fixed quickly]{User activity is automatically logged to an online logbook hosted on Labstep to identify and fix any problems quickly. The left-hand screenshot shows the users which have used the LAG SIM between 27-04-2019 and 08-05-2019; opening one of these experiments (right) shows each of the acquisitions with the instrument parameters recorded in JSON format.}
+\label{fig:labstepTimeline}
+\end{sidewaysfigure}
+
 Labstep is an online laboratory management system, designed to make research work compliant, collaborative, and audited. 
 Experiments can be logged in an electronic laboratory notebook and, because they are stored online, can be accessed from anywhere with an internet connection.
+An example of the Labstep timeline, along with details of an experiment, is shown in Figure~\ref{fig:labstepTimeline}. 
 Of particular interest to me was access to the system through an API, allowing requests to be made from any programming language that supports HTTP. 
 
 LabVIEW has built-in functions for making HTTP requests to a remote server. 
@@ -33,7 +41,7 @@ For LAG-SIM, the required functionality was: record which user has started an ex
 
 The block-diagram logic for starting an experiment is shown in Figure~\ref{fig:labstep-implementation}a. 
 First, an HTTP request handler is set up, and the API key is added as a header. 
-In parallel to this, a JSON string is created which will become the body of the HTTP request, containing a title ('name') for the experiment, and a description of the experiment which contains the time and date formatted as a string. 
+In parallel to this, a JSON string is created which will become the body of the HTTP request, containing a title (`name') for the experiment, and a description of the experiment which contains the time and date formatted as a string. 
 The body is POSTed to the appropriate endpoint, \url{https://api.labstep.com/api/generic/experiment-workflow}. 
 Finally, the response of the request is parsed to extract the \texttt{Thread ID} and \texttt{Experiment ID}, which will be required to add comments to the experiment and to finish the experiment respectively. 
 If the subVI cannot extract these IDs, it generates an error; this could occur if, for example, the API key is incorrect or there is no internet connection. 
@@ -60,16 +68,9 @@ The inputs are a \texttt{Thread ID}, from the initialisation subVI, and a string
 Every time an acquisition is made, this subVI is called with an input string which describes the microscope settings for that particular acquisition. 
 This is set up as a JSON string, as shown in Figure~\ref{fig:labstepTimeline}, which leaves potential for further processing on the metadata at a later time. 
 
-\begin{sidewaysfigure}[p]
-\centering
-\includegraphics[width=\textwidth]{labstep-timeline}
-\caption[Logging user activity with Labstep allows any problems to be identified and fixed quickly]{User activity is automatically logged to an online logbook hosted on Labstep to identify and fix any problems quickly. The left-hand screenshot shows the users which have used the LAG SIM between 27-04-2019 and 08-05-2019; opening one of these experiments (right) shows each of the acquisitions with the instrument parameters recorded in JSON format.}
-\label{fig:labstepTimeline}
-\end{sidewaysfigure}
-
 When the user has finished their session and closes the software, the snippet shown in Figure~\ref{fig:labstep-implementation-top}b is executed. 
 If an error occured during the software execution, this is logged just before the block to end the experiment is executed using the comment-positing subVI detailed in Figure~\ref{fig:labstep-implementation}b. 
-Finally, the 'END' subVI is called to close the experiment on Labstep; the contents of this block are shown in Figure~\ref{fig:labstep-implementation}c. 
+Finally, the `END' subVI is called to close the experiment on Labstep; the contents of this block are shown in Figure~\ref{fig:labstep-implementation}c. 
 
 The logging software described in this sectioning is available on the LabVIEW community file exchange, at \url{https://forums.ni.com/t5/Example-Program-Drafts/Logging-with-Labstep/ta-p/3822118}. 
 The blocks can be reused in any other LabVIEW program, providing the computer is connected to the internet. 
@@ -116,7 +117,7 @@ Overall, an 8$\times$ improvement in speed was achieved for parameter estimation
 These improvements made it possible to reconstruct data during acquisition, to see results almost immediately without endangering the longevity of live-cell experiments. 
 
 \begin{table}[h!]
-\caption[SROS-SIM reconstruction is 32X faster on the GPU than the CPU]{\label{tab:reconPerformance}The table shows the performance increase fromswitching from CPU to GPU computation, as well as other optimisations. This test was performed on a consumer desktop computer, with the following specification: 2-core i3-2120\,@\SI{3.30}{\giga\hertz}, \SI{8}{\giga\byte} RAM, NVIDIA GeForce GTX 750 Ti with \SI{2}{\giga\byte} graphics RAM.}
+\caption[SROS-SIM reconstruction is 32X faster on the GPU than the CPU]{\label{tab:reconPerformance}The table shows the performance increase by switching from CPU to GPU computation, as well as other optimisations. This test was performed on a consumer desktop computer, with the following specification: 2-core i3-2120\,@\SI{3.30}{\giga\hertz}, \SI{8}{\giga\byte} RAM, NVIDIA GeForce GTX 750 Ti with \SI{2}{\giga\byte} graphics RAM.}
 \centering
 \begin{tabular}{|l|c|c|}
 \hline
