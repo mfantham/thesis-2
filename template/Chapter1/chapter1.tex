@@ -68,14 +68,10 @@ Optical projection tomography (OPT) can be thought of as the optical analogue of
 Structured illumination microscopy (SIM) uses pattered illumination light to computationally remove out-of-focus light, which can also provide resolution enhancement, detailed in Chapter~\ref{chap:LAGSIM}. 
 Several techniques exist for 3D localisation microscopy, utilising one or more of astigmatism~\cite{huang2008three}, double-helix point-spread function (PSF) engineering~\cite{pavani2009three}, dual-lens interferometry~\cite{shtengel2009interferometric}, multiple focus planes~\cite{toprak2007three}, and Airy beams~\cite{jia2014isotropic}; these techniques report typical resolutions of \SIrange[range-phrase=--]{10}{30}{\nano\metre} in 3 dimensions. 
 
-Resolving microscopic biology in 3D reveals structures and events that would otherwise be invisible; for example, observing the development of zebrafish embryo from 64 cells to \num{20000} cells~\cite{keller2008reconstruction}, or the 3D interaction of mitochondria with microtubules~\cite{huang2016ultra}. 
-Presenting and publishing these information-rich datasets in an informative way presents a challenge to authors, who are restricted to showing 2D slices or projections of the data or videos from one perspective. 
-If readers were able to interact directly with the 3D volume they  would gain a deeper understanding of the volumetric arrangement of structures. 
-To address this problem, a new web-based tool for visualising volumetric 3D data is presented in Chapter~\ref{chap:FPB}. 
-
+An online tool for visualising and sharing such information-rich volumetric dataasets is presented in Chapter~\ref{chap:FPB}. 
 
 \section{Cell biology for microscopy}
-The tools described in Chapters~\ref{chap:LAGSIM} and \ref{chap:FPB} of this document have valuable applications in cell biology, which are detailed in Chapters~\ref{chap:MOF} and \ref{chap:ER}.
+The tools described in Chapters~\ref{chap:LAGSIM} and \ref{chap:FPB} have valuable applications in cell biology, which are detailed in Chapters~\ref{chap:MOF} and \ref{chap:ER}.
 Since this thesis covers a broad range of themes, from engineering through computer science to biology, this section is included to provide a background of cell biology necessary for appreciating the findings detailed in the application chapters. 
 
 \subsection{Labelling organelles to visualise cell location}
@@ -174,17 +170,19 @@ As a relatively new invention, super-resolution microscopes are often difficult 
 An important aim for LAG SIM was that any researcher should be able to use it, with minimal training required for capturing and reconstructing SIM data. 
 In Chapter 2, a showcase of reconstructed SIM data from a wide variety of experiments is provided as a reference for capturing high-quality images. 
 
-Many questions in biology can only be answered by observing the specimen in 3D.
+Resolving microscopic biology in 3D reveals structures and events that would otherwise be invisible; for example, observing the development of zebrafish embryo from 64 cells to \num{20000} cells~\cite{keller2008reconstruction}, or the 3D interaction of mitochondria with microtubules~\cite{huang2016ultra}. 
 LAG SIM is able to capture 3D data using a capability known as optical sectioning.
-Whilst this data is information-rich and exciting to explore in detail, transferring it for remote colleagues to evaluate is problematic due to large file sizes and complicated, expensive analysis software. 
+Whilst this data is information-rich and exciting to explore in detail, sharing and publishing the datasets in an informative way presents a challenge to authors, who are restricted to showing 2D slices or projections of the data or videos from one perspective.
+If readers were able to interact directly with the 3D volume they would gain a deeper understanding of the volumetric arrangement of structures.
 
 To address this issue, Chapter~\ref{chap:FPB} presents FPBioimage, an online tool for sharing and publishing 3D volumetric data. 
 A key aim again was that the software was easy to operate, so that non-expert users could effortlessly view or share data from and to anywhere in the world. 
+In combination with a suite of additional software built to complement the main tool, FPBioimage makes sharing and publishing 3D volumetric data a one-click process.
 The chapter describes the development of the software, and presents a wide assortment of data from different 3D imaging technologies highlighting the unique features of the tool. 
 
 Chapter~\ref{chap:MOF} demonstrates the capability of LAG SIM for facilitating hypothesis-driven research, introducing the use of metal organic frameworks (MOFs) as drug delivery vehicles for treating cancer. 
 Many potentially therapeutic drugs degrade quickly in extra-cellular media, either making them unsuitable for use as medicines or requiring a high dosage with unwelcome side-effects. 
-Model drugs, including small-interfering ribonucleic acid (siRNA) and dichloroacetic acid (DCA), were loaded into the porous structure of MOFs, with the aim of protecting the contents for delivery into cells. 
+Model drugs, including small-interfering ribonucleic acid (siRNA) and dichloroacetic acid (DCA), were loaded into the large pores of the MOF's crystalline structure, with the aim of protecting the contents for delivery into cells. 
 
 The LAG SIM was used to image the uptake of the treatment over a time period of 24-hours, and 3-dimensional images have been published online with FPBioimage to allow other researchers to explore the data themselves and verify the results. 
 Three biological experiments are described showing the therapeutic effects offered by this newly-developed technology. 
