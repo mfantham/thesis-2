@@ -11,7 +11,7 @@
 \chapter{Directed flow in the Endoplasmic Reticulum} \label{appx:er}
 Chapter~\ref{chap:ER} presented evidence for active flow in the endoplasmic reticulum (ER). 
 The chapter focussed on work that I had personally contributed to the project; this appendix provides background investigations completed by my collaborators which provide extra context for the work. 
-Further details still can be found in \textit{Nature Cell Biology}. 
+Further details still can be found in \textit{Nature Cell Biology}~\cite{holcman2018single}. 
 
 \section{Flow calculations} \label{appn:flow}
 Proteins localised within the ER network, known as luminal proteins, were initially imaged over time using a photoswitchable protein to track their movement. 
@@ -26,7 +26,7 @@ This property was exploited to track packets of luminal protein by illuminating 
 \label{fig:er-photoconversion}
 \end{figure}
 
-From this experiment, it was noted that luminal proteins did not appear to move with exclusively diffusive motion, but rather with directed motion along ER tubes and with Brownian motion at junctions. 
+From this experiment, it was noted that luminal proteins do not appear to move with exclusively diffusive motion, but rather with directed motion along ER tubes and with Brownian motion at junctions. 
 However, the photoswitching experiment can only track one particle group at a time, which is impractical for gathering large numbers of tracks for statistical confidence. 
 
 To gather a large number of luminal protein tracks, Halo-tagged calreticulin (Ctr) was labelled with chloroalkane–tetramethylrhodamine (TMR). 
@@ -53,14 +53,14 @@ This provides a much closer fit to the experimental data, which is particularly 
 In total, \num{80563} single particle tracks were used to calculate model parameters. 
 
 \section{FRET measurements} \label{appn:fret}
-When ATP was depleted from cells, a decrease in particle velocity was noticed, shown in Figure~\ref{fig:er-atp-depletion}. 
+When ATP was depleted from cells, a decrease in particle velocity was observed, shown in Figure~\ref{fig:er-atp-depletion}. 
 This could either come from a decrease in active transport due to energy starvation, or an increase in the resistance to motion. 
 To test the latter hypothesis, a method of measuring ER crowdedness was devised by measuring the fluorescence lifetime (FLT) of a sensitive fluorescence resonance energy transfer (FRET)-based probe. 
 
-The ER-crowdedness FRET probe was based on an expression vector encoding a cytosol-localized crowding probe, which was modified to encode an ER-localized probe by amino-terminal addition of mouse preprotrypsin signal sequence and carboxy-terminal addition of a KDEL motif by Gibson assembly. 
-SHSY-5Y cells were transfected with the probe, and fluorescent lifetime was measured under a number of treatment conditions, as shown in Figure~\ref{fig:er-fret-flt}. 
+The ER-crowdedness FRET probe was based on an expression vector encoding a cytosol-localised crowding probe, which was modified to encode an ER-localised probe by amino-terminal addition of mouse preprotrypsin signal sequence and C-terminus addition of a KDEL motif by Gibson assembly. 
+SHSY-5Y cells were transfected with the probe, and fluorescent lifetime was measured under a number of treatment conditions, as shown in Figure~\ref{fig:er-fret-flt}. % carboxyl-terminal?? 
 
-Under normal conditions, the probe shown an average fluorescent lifetime of \SI{2932}{\pico\second}. 
+Under normal conditions, the probe has an average fluorescent lifetime of \SI{2932}{\pico\second}. 
 To test the sensitivity of the probe, cells were placed under hyperosmotic or hypo-osmotic conditions with Hanks balanced salt solution (\SI{2.5}{\milli\Molar}, KCl, \SI{1.2}{\milli\Molar} CaCl\textsubscript{2}, \SI{0.5}{\milli\Molar} MgCl\textsubscript{2}, \SI{5}{\milli\Molar} glucose, \SI{10}{\milli\Molar} HEPES pH 7.5) supplemented by \SI{500}{\milli\Molar} NaCl or \SI{0}{\milli\Molar} NaCl respectively. 
 Under hyperosmotic conditions, the cell shrinks and we expected luminal crowdedness in the ER to increase; this was measured as a decrease in the fluorescent lifetime, 
 to \SI{2546}{\pico\second}. 
@@ -69,7 +69,7 @@ Conversely, under hypo-osmotic conditions we expect the cell to expand and crowd
 When ATP was depleted from the cell, no significant change in fluorescent lifetime was observed compared to the untreated condition. 
 This result contradicted the hypothesis that a decrease in particle velocity upon ATP depletion is caused by an increase in resistance from additional crowding, and led us into further investigation of the active process causing ER luminal flow, as detailed in Chapter~\ref{chap:ER}. 
 
-The fluorescent lifetime results measured are presented as an ER-crowdedness measure in Figure~\ref{fig:er-fret-probe}, where error bars showing standard deviation were calculated from 22 independently sampled cells. 
+The fluorescent lifetime results are presented as an ER-crowdedness measure in Figure~\ref{fig:er-fret-probe}, where error bars showing standard deviation were calculated from 22 independently sampled cells. 
 
 \begin{figure}[tbp]
 \centering

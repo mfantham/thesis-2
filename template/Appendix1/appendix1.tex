@@ -24,7 +24,7 @@ Here I will present the implementation of LAG SIM's experiment logging feature, 
 \begin{sidewaysfigure}[p]
 \centering
 \includegraphics[width=\textwidth]{labstep-timeline}
-\caption[Logging user activity with Labstep allows any problems to be identified and fixed quickly]{User activity is automatically logged to an online logbook hosted on Labstep to identify and fix any problems quickly. The left-hand screenshot shows the users which have used the LAG SIM between 27-04-2019 and 08-05-2019; opening one of these experiments (right) shows each of the acquisitions with the instrument parameters recorded in JSON format.}
+\caption[Logging user activity with Labstep allows any problems to be identified and fixed quickly]{User activity is automatically logged to an online logbook hosted on Labstep to identify and fix any problems quickly. The left-hand screenshot shows which users have used the LAG SIM between 27-04-2019 and 08-05-2019; opening one of these experiments (right) shows each of the acquisitions they made with the instrument parameters recorded in JSON format.}
 \label{fig:labstepTimeline}
 \end{sidewaysfigure}
 
@@ -59,7 +59,7 @@ The API key is stored in the program, and the user's name is collected from the 
 \begin{figure}[tbp]
 \centering
 \includegraphics[width=1.0\textwidth]{labstep-implementation-top}
-\caption[Top level functions for uploading to Labstep]{(a) shows the block diagram from Figure~\ref{fig:labstep-implementation}a abstracted to a single block with 2 inputs and 2 outputs. (b) shows the logic that runs when the user exits the LAG SIM control software: any errors are logged to the Labstep timeline for the experiment, using the logic of Figure~\ref{fig:labstep-implementation}b, and finally the experiment is ended with the logic of Figure~\ref{fig:labstep-implementation}c. } 
+\caption[Top-level LabVIEW functions for uploading to Labstep]{(a) shows the block diagram from Figure~\ref{fig:labstep-implementation}a abstracted to a single block with 2 inputs and 2 outputs. (b) shows the logic that runs when the user exits the LAG SIM control software: any errors are logged to the Labstep timeline for the experiment, using the logic of Figure~\ref{fig:labstep-implementation}b, and finally the experiment is ended with the logic of Figure~\ref{fig:labstep-implementation}c. } 
 \label{fig:labstep-implementation-top}
 \end{figure}
 
@@ -140,7 +140,7 @@ To ensure backwards compatibility on machines without GPUs, the revised code che
 If this flag is set, the array is sent to GPU with \texttt{gpuArray()}; else, it will be left as a MATLAB matrix which will be computed on the CPU. 
 
 \begin{lstfloat}
-\begin{lstlisting}[language=matlab,caption={A check must be performed at the start of the main program to detect if a suitable graphics card is installed for GPU computation},label={snip:gpu-check},frame=single]
+\begin{lstlisting}[language=matlab,caption={A check must be performed at the start of the top-level MATLAB program to detect if a suitable graphics card is installed for GPU computation},label={snip:gpu-check},frame=single]
 gpuPresent = false; 
 if (gpuDeviceCount > 0) 
     try
@@ -206,7 +206,7 @@ end
 The small wrapper function \texttt{gpuThis} could be used in any other MATLAB code to investigate whether it benefits from GPU computation. 
 The biggest speed increases will be achieved when large matrices require Fourier transforming, or other operations which can be computed in parallel. 
 
-The full SROS-SIM software, with the new GPU optimisations, is hosted at at \url{https://github.com/laseranalyticsgroup/jRL-SIM}. Access to the repository is available upon request. 
+The full SROS-SIM software, with the new GPU optimisations, is hosted at \url{https://github.com/laseranalyticsgroup/jRL-SIM}. Access to the repository is available upon request. 
 
 
 \section{ImageJ/Fiji plugin} \label{appx:fiji-lagsim}
@@ -215,7 +215,7 @@ The user interface is detailed in Section~\ref{sec:lagsimFiji}.
 This appendix contains extracts from the source code explaining the technical implementation of the plugin. 
 
 The plugin is implemented in Beanshell, a scripting language which closely resembles Java but allows execution without the need for compilation. 
-The plugin is built upon functions provided by the fairSIM project from Marcel M{\"u}ller and the Squirrel project from Si{\^a}n Culley. 
+The plugin is built upon functions provided by the fairSIM project from Marcel M{\"u}ller~\cite{muller2016open} and the Squirrel project from Si{\^a}n Culley~\cite{culley2018quantitative}. 
 These projects include efficient and accurate algorithms, but have generic user interfaces which requires unnecessarily repetitive clicking by LAG SIM users. 
 The LAG SIM plugin combines the two projects into one user interface, and automatically inputs the appropriate parameters for our instrument. 
 
@@ -229,7 +229,7 @@ Lines 8-13 show a sample of the modules which need to be imported for the Beansh
 Most modules are included with a standard ImageJ installation; however, fairSIM and NanoJ-Squirrel are notable dependencies which must be installed separately. 
 Both projects are distributed as ImageJ update sites, available in the ImageJ update menu. 
 
-The first task for the parameter finder is set the instrument parameters based on the lens and wavelength used on LAG SIM, shown in lines 22-49. 
+The first task for the parameter finder is to set the instrument parameters based on the lens and wavelength used on LAG SIM, shown in lines 22-49. 
 In the native fairSIM plugin, these would need to be entered every time a SIM reconstruction is required; abstracting the values into the LAG SIM plugin saves users time and reduces errors, since users do not have to remember lots of arbitrary numbers. 
 Furthermore, in batch mode the LAG SIM plugin is able to extract wavelength and lens information directly from the filename, removing the need for any user input. 
 
@@ -251,7 +251,7 @@ If the parameter tester or batch reconstruction plugins are run without inputs, 
 \clearpage
 \begin{lstlisting}[language=java,caption={Extracts from the Beanshell script used for the LAG SIM parameter tester},label={snip:lagsim-fiji},frame=single]
 //@String(label="Filter type", choices={"Wiener out", "RL out", "RL in, Wiener out", "RL in, RL out"}) filter
-//@Double(label="WienerParameter", value=0.05) wienerParameter
+//@Double(label="Wiener Parameter", value=0.05) wienerParameter
 //@Double(label="Apodisation cutoff", value=1.9) apoCutoff
 //@Double(label="Apodisation strength", value=0.8) apoBend
 //@Integer(label="Richardson-Lucy steps", value=5) rlSteps
@@ -264,14 +264,14 @@ import org.fairsim.sim_algorithm.SimAlgorithm;
 import nanoj.squirrel.java.gui.ErrorMap_;
 /* etc. */
 
-// Check open image only has 9 frames: we want this to be quick! 
+// Check active image only has 9 frames: we want this to be quick! 
 ImagePlus iPl = ij.WindowManager.getCurrentImage();
 if (iPl.getStackSize() != 9){
 	MessageDialog errorDlg = new MessageDialog(null, "Raw data stack size error!", "Please use a single-slice, single-channel image for parameter finding.");
 	return;
 }
 
-// Find illumination parameters with fairSIM. 
+// Find illumination parameters with fairSIM
 int nrAng   = 3;		// #angles
 int nrPha   = 3;		// #phases
 
@@ -321,15 +321,15 @@ if (mod0 < 0.5 || mod1 < 0.5 || mod2 < 0.5){
 	modStr += "\n Modulation dir2: " + String.format("%.2f", mod1);
 	modStr += "\n Modulation dir3: " + String.format("%.2f", mod2);
 						
-	GenericDialog moddlg = new GenericDialog("Modulation information");
-	moddlg.addMessage(modStr);
-	moddlg.showDialog();
+	GenericDialog modDlg = new GenericDialog("Modulation information");
+	modDlg.addMessage(modStr);
+	modDlg.showDialog();
 						
-	if(moddlg.wasCanceled())
+	if(modDlg.wasCanceled())
 		return;
 }
 
-// Set up test reconstructions, and loop until user finishes
+// Set up test reconstructions, and loop until user selects finish from the dialog
 ImageStack outputStack = new ImageStack(2*imgSize, 2*imgSize);
 boolean finished = false;
 
@@ -345,7 +345,7 @@ while (!finished){
 		/* etc. */
 		
 		// Run reconstruction! 
-		Vec2d.Real result = SimAlgorithm.runReconstruction( simParam, rawImages, idf, visualFeedback, otfBeforeShift, clipscale, null);
+		Vec2d.Real result = SimAlgorithm.runReconstruction( simParam, rawImages, idf, visualFeedback, otfBeforeShift, clipscale, null );
 		
 		// Add reconstruction to test stack
 		String testParams = filter + ", w: " + wienerParameter + ", RL: " + (int)rlSteps + ", apoC: " + apoCutoff + ", apoS: " + apoBend + ", at?: " + (otfAttenuation ? "true" : "false") + ", attFW: " + attenFWHM +  ", atS: " + attenStrength; 
@@ -377,7 +377,7 @@ while (!finished){
 	}
 }
 
-// Save parameters to ImageJ preferences. 
+// Save parameters to ImageJ preferences
 Prefs.set("lagsim.filter", filter);
 Prefs.set("lagsim.wienerParameter", String.valueOf(wienerParameter));
 Prefs.set("lagsim.rlSteps",  String.valueOf(rlSteps));
