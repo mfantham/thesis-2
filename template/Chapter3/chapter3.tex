@@ -321,16 +321,6 @@ for (int i=0; i<numSlices; i++){
 \end{lstlisting}
 \end{lstfloat}
 
-% Should I add some paragraphs here about XY and Z resolution? Probably should.
-%subsection{Rendering optimisation}
-% XY resolution can be adjusted cleverly.
-
-% Z resolution can also be adjusted
-
-% Interpolation
-
-% Rendering paused when there is no user input.
-
 \subsection{Movement provides personal exploration of the data}
 FPBioimage would not be a particularly exciting real-time volumetric renderer if the user only had one view of the data.
 By utilising Unity library functions, implementing movement is a straightforward and resource-efficient process.
@@ -538,7 +528,7 @@ Matching these parameters up to the volume rendering code described in Section~\
 
 \begin{sidewaysfigure}[p]
 \centering
-\includegraphics[width=\textwidth]{fpb-sliders-examples} % If possible separate caption onto new page?
+\includegraphics[width=\textwidth]{fpb-sliders-examples}
 \caption[FPBioimage: Advanced rendering features provide unique views of volumetric data]{(a–c): Four-colour OPT data of a mouse embryo. (d–f): MRI data of a human head. (g–i): two-colour light-sheet microscopy data of a drosophila embryo. FPBioimage's built-in transparency feature has been used to render (c) and (f), revealing data within the volume; the cutting tool has been used for (c), (f), (h) and (i), removing outer voxels from the data; and h shows a bookmark in creation, which can be shared with other users. Reproduced from \cite{fantham2017new}. Raw data provided by: (a–c), J. McGinty~\cite{sharpe2002optical}; (d–f), Stanford Volume Data Archive~\cite{levoy1988volume}; (g–i), P. Keller~\cite{chhetri2015whole}. }
 \label{fig:fpbRendering}
 \end{sidewaysfigure}
@@ -748,7 +738,7 @@ However, on dedicated graphics workstations where the GPU is able to render \SI{
 FPBioimage is a volumetric renderer designed to be used in a web browser.
 However, to assist users uploading their 3D data to share on the internet, plugins are available for the open-source image analysis platforms ImageJ, FIJI, and Icy.
 Furthermore, thanks to its open-source nature and an easy-to-use JSON interface, other groups have been able to integrate FPBioimage into their own software packages, for example OMERO-FPBioimage~\cite{omero2018website}.
-Finally, for users who want to view volumetric data on their mobile device, I have created dedicated Android and iOS apps, which support virtual reality for truly immersive interaction with the data. % and Oculus?
+Finally, for users who want to view volumetric data on their mobile device, I have created dedicated Android and iOS apps, which support virtual reality for truly immersive interaction with the data. 
 Together with FPBioimage, this collection of applications has been branded FPBioimage Suite.
 
 \subsection{Plugins are available for popular image analysis programs}
@@ -810,7 +800,7 @@ Since the mobile app uses the same rendering algorithm (presented in Section~\re
 \begin{figure}[t!]
 \centering
 \includegraphics[width=1.0\textwidth]{fpb-android}
-\caption[FPBioimage: The FPBioimage mobile app provides volumetric rendering in virtual reality]{FPBioimage has native apps for Android and iOS. The screenshot shows a split-screen stereo view/, which can be used in conjunction with Google Cardboard~\cite{cardboard} to support virtual reality. The data shows MOF (green) taken up by HeLa cells labelled with a lysosomal marker (magenta), captured on the LAG SIM~\cite{teplensky2017temperature}. } %
+\caption[FPBioimage: The FPBioimage mobile app provides volumetric rendering in virtual reality]{FPBioimage has native apps for Android and iOS. The screenshot shows a split-screen stereo view, which can be used in conjunction with Google Cardboard~\cite{cardboard} to support virtual reality. The data shows MOF (green) taken up by HeLa cells labelled with a lysosomal marker (magenta), captured on the LAG SIM~\cite{teplensky2017temperature}. } %
 \label{fig:fpbMobile}
 \end{figure}
 
@@ -824,10 +814,8 @@ This is a VR viewer - originally made of cardboard but now available in more rob
 The user simply has to open their data in the mobile app, click the "Start VR" button, and put their phone into their Cardboard viewer.
 This option allows users to view their data in VR, providing a truly immersive experience and giving a perspective of the data not possible through any other means.
 
-%Oculus rift?? :(
 
-
-\section{Conclusion} % Replaces the `examples of use' section
+\section{Conclusion}
 As an online volumetric rendering program, FPBioimage has a wide range of uses which have not been possible before.
 
 As a volumetric renderer, FPBioimage offers a number of volumetric rendering modes found in most offline volume visualisation software, including composite ray marching and maximum intensity projections.
