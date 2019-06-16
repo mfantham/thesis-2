@@ -44,6 +44,10 @@ LAG SIM's unique advantages over widefield microscopes, combined with its ease-o
 Chapter 2 included a showcase of experiments selected to show the range of applications for which LAG SIM is suited. 
 Suggested parameters for the LAG SIM ImageJ plugin have been provided alongside each reconstruction as a resource to future users seeking to answer their own biological questions. 
 
+Due to its ease-of-use, LAG SIM can now be used without supervision by an imaging specialist, and the variety of experiments undertaken on it continues to grow as responsibility for the instrument is passed on to the next generation of the Laser Analytics Group. 
+On the occasions when it needs realignment, perhaps because of temperature changes or mechanical drift, even the alignment procedure has been simplified using the software's alignment mode detailed in Section~\ref{sec:sim-debug}. 
+I look forward to reading future publications about correlative AFM-SIM, Alzheimer's research using C. Elegans, and expansion microscopy studies in kidneys, which have been facilitated by the LAG SIM. 
+
 The optical sectioning capability of LAG SIM allows extraordinary 3D datasets to be constructed, revealing information that cannot be observed in 2D slices. 
 Sharing this data with collaborators around the world, however, is not a trivial tasks.
 Large file sizes and complicated or expensive software make sharing 3D data a notorious problem in the microscopy community. 
@@ -60,6 +64,10 @@ web-based rendering of any volumetric data.
 The tool has found use in a diverse range of applications, including medical imaging and computer-generated 3D simulations. 
 With a focus on creating a tool that is intuitive and easy to use, all researchers around the world can now immediately view their colleagues experimental results, even when separated by thousands of miles. 
 
+The source code for FPBioimage is freely available, well documented, and carefully composed with reusability in mind. 
+This is evidenced by OMERO's adoption of FPBioimage as their default volumetric viewer, integrating it into their microscopy data management suite and increasing the number of researchers my software benefits. 
+I expect to continue active development of the software to add feature requests and address bug reports; however, since it is open source, the wider community is encouraged to develop it further as new technologies, for example more powerful graphics cards, become available.  
+
 Chapter 4 detailed an application of these two tools, LAG SIM and FPBioimage, for novel cancer treatments, demonstrating their capacity for facilitating hypothesis-driven research. 
 
 A problem of some potentially therapeutic drugs, such as siRNA or DCA, is their breakdown in extra-cellular media. 
@@ -70,17 +78,19 @@ The large pore size of metal organic frameworks (MOFs) makes them an ideal candi
 Using optical sectioning SIM, Chapter 4 showed that these MOF complexes are successfully endocytosed by the cell, and can therefore be used as effective drug delivery systems, with the potential of treating a wide range of cancers. 
 All volumetric imaging data collected as part of the study was published online with FPBioimage, as an example of how the tool can be used to allow others to examine the data and confirm the findings themselves. 
 
+The promising results from our work on MOFs have led to planning of experiments on animal models. 
+This is the next step on the long path from cell biology studies to a clinical drug which benefits human cancer patients. 
+
 One of LAG SIM's unique capabilities is fast, multi-colour TIRF microscopy in high resolution. 
 This was utilised in Chapter 5 to reveal a new phenomenon in the endoplasmic reticulum (ER) for transporting proteins around the cell. 
 
 Collaborators had observed directed laminar flow in the ER.
 Acquisitions made on LAG SIM at \SI{11}{\hertz} with \SI{80}{\nano\metre} resolution revealed pinching of the ER membrane which correlates with luminal flow speed. 
-
 This new discovery was investigated further using a computational model, which showed that pinching reduces the time taken for molecules to travel through the network up to 3$\times$ compared to Brownian particle motion. 
-This contribution to the community's fundamental understanding of cell biology will further assist the effort to find cures for the wide range of diseases associated with ER malfunction.
 
-My past three years work, presented in this document as a resource to those who require the tools to answer their own biological questions, has already had a meaningful impact on the community's knowledge and understanding.
+This contribution to the community's fundamental understanding of cell biology will further assist the effort to find cures for the wide range of diseases associated with ER malfunction.
+Investigations into the dynamic interaction of lysosomes and other sub-cellular organelles with the ER have already been started by Meng Lu, utilising the fast multi-colour super-resolution capabilities of LAG SIM. 
+
+My past three years' work, presented in this document as a resource to those who require the tools to answer their own biological questions, has already had a meaningful impact on the community's knowledge and understanding.
 This is evidenced by publications in several well-respected journals~\cite{teplensky2017temperature, fantham2017new, moghadam2018computer, holcman2018single, lautenschlager2018c}. 
 Ongoing experiments resulting from these investigations give me confidence that this work will continue to provide exciting discoveries. 
-
-% Put similar stuff in section 1.4 of the introduction? 

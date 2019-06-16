@@ -22,8 +22,8 @@ Lens technology continuously improved through the 17\textsuperscript{th} and 18\
 d = \frac{\lambda}{2n\sin\left (\alpha  \right )}\end{equation}
 
 A number of technologies which are not based on visible light exist to greatly surpass the resolution of optical microscopes, including transmission electron microscopy and scanning electron microscopy~\cite{reinhold1931configuration, wells2006early, reimer2013transmission}.
-However these techniques use a minimum electron dose which is lethal to cells~\cite{de2016live}, and require sample preparation which includes a combination of freezing, fixation or toxic staining~\cite{kuo2007electron}.
-Electron microscopy techniques are therefore incompatible with live cell biology.
+However these techniques require sample preparation which includes a combination of freezing, fixation, or toxic staining~\cite{kuo2007electron}; must image the sample under vacuum conditions at cryogenic temperatures; and use a minimum electron dose which is lethal to cells~\cite{de2016live}. 
+Electron microscopy is therefore incompatible with live cell biology.
 
 Furthermore, the invention of fluorescent labelling gives optical microscopy a distinct advantage over any other microscopy technique in terms of specificity. 
 Sophisticated biochemistry, based on antibody chemistry, genetic expression, and other biotechnologies, can be used to label specific cellular compartments or organelles with fluorescent molecules~\cite{day2014fluorescent}. 
@@ -36,27 +36,29 @@ This creates a high-contrast image showing the object of interest against a blac
 Furthermore the specificity of labelling means that other parts of the cell which are not of interest for a given experiment are invisible, further enhancing the observability of the labelled target~\cite{day2014fluorescent}.
 Finally, if two or more fluorescent labels are used with non-overlapping fluorescent spectra, then imaging in multiple channels can be used for colocalisation studies, for example to confirm that a certain protein interacts with a certain organelle~\cite{dunn2011practical}. 
 
-The unique advantages of florescent labelling have motivated researchers in the last two decades to invent optical methods to image at resolutions below the diffraction limit~\cite{cornea2014fluorescence}.
+The unique advantages of fluorescent labelling have motivated researchers in the last two decades to invent optical methods to image at resolutions below the diffraction limit~\cite{cornea2014fluorescence}.
 Whilst it remains impossible to capture an individual image beyond the diffraction limit, digital cameras and intensive computational reconstruction have enabled techniques which sacrifice temporal resolution for enhanced spatial resolution.
-This is the principle behind techniques based on photoactivated localisation microscopy (PALM)~\cite{betzig2006imaging} and stochastic optical reconstruction microscopy (STORM)~\cite{rust2006sub}: in each image, only a small fraction (<\SI{1}{\percent}) of fluorophores are emitting light.
-Assuming that two adjacent fluorophores do not emit simultaneously, the centre of the diffraction pattern is calculated as the true location of the molecule; when this is applied to a dataset of \num{1000}+ images, a super-resolution image can be constructed. 
+This is the principle behind techniques based on photoactivated localisation microscopy (PALM)~\cite{betzig2006imaging} and stochastic optical reconstruction microscopy (STORM)~\cite{rust2006sub}: in each image, only a small fraction - typically less than \SI{1}{\percent} - of fluorophores are emitting light.
+Multiple images are captured so that the molecules blink in a video of the raw data; assuming that two adjacent fluorophores do not emit simultaneously, the centre of the diffraction pattern is calculated as the true location of the molecule. 
+When enough frames have been captured for every fluorescent molecule to have a high probability of emitting - for example, 1000\,frames for a \SI{1}{\percent} duty cycle - the localisation algorithm is applied to every image in the dataset, and a super-resolution image can be constructed. 
 
-STORM is able to achieve a spatial resolution of \textasciitilde\SIrange[range-phrase=--]{10}{20}{\nano\metre}; however it takes around \SIrange[range-phrase=--]{1}{5}{\minute} of imaging to capture the data for a single reconstructed STORM image~\cite{heilemann2008subdiffraction}.
+In STORM microscopy, there is a trade-off between spatial resolution and acquisition time; a lower duty cycle with more frames captured will produce a higher spatial resolution, as there is a lower probability of two adjacent fluorescent molecules emitting simultaneously. 
+In practice, STORM has been shown to achieve a spatial resolution of \textasciitilde\SIrange[range-phrase=--]{10}{20}{\nano\metre}; however resolutions in this range typically require \SIrange[range-phrase=--]{1}{5}{\minute} of imaging to capture the data for a single reconstructed super-resolution image~\cite{heilemann2008subdiffraction}.
 Dynamic events in live cell biology cannot be captured, and so a faster technique must be used for such experiments. 
 
 Structured illumination microscopy (SIM) can produce a resolution-enhanced image beyond the diffraction limt with just 9 raw images~\cite{gustafsson2000surpassing}.
-Using state-of-the-art lenses and cameras, this can produce images with a spatial resolution of <\SI{100}{\nano\metre}, at a video rate of \SI{11}{\hertz}~\cite{young2016guide}.  
-This microscopy technique is described in detail in Chapter~\ref{chap:LAGSIM}. 
+The technique is described in detail in Chapter~\ref{chap:LAGSIM}, which explains how computational reconstruction produces an image with twice the resolution of a widefield image captured with the same lens. 
+Using state-of-the-art lenses and cameras, we have shown SIM datasets with a spatial resolution of <\SI{90}{\nano\metre}, at a video rate of \SI{11}{\hertz}~\cite{young2016guide}.   
 
 \section{Microscopy in 3D provides a deeper biological understanding}
-Capturing 2-dimensional images of microscopic biology has enhanced our understanding of life and disease, enabling development of new medicines and diagnosis techniques. % cite
+Capturing 2-dimensional (2D) images of microscopic biology has enhanced our understanding of life and disease, enabling development of new medicines and diagnosis techniques. 
 However human biology is made up of inherently 3-dimensional (3D) structures, from the sub-cellular scale to the full body. 
 
 Other fields of medicine have shown the advantages offered by capturing 3D information; for example, compare a 2D x-ray image with a 3D computed tomography (CT) dataset. 
 Whilst the former can be used for detecting breaks in bones or confirming the presence of foreign objects in the body~\cite{markose2009three}, the extra information provided by 3D data significantly improves diagnosis and treatment planning in ocology and trauma by accurately modelling tumours~\cite{zhang2013thin} or fractures~\cite{rangarajan2013three}. 
 
-In widefield epifluorescent microscopy, out-of-focus light makes 3D reconstructions impossible.
-To accurately represent fluorescent objects in 3 dimensions, an optical section must be captured - that is, a clear image deep in the sample without out-of-focus light. %cite
+In widefield epifluorescent microscopy, out-of-focus light makes visualising 3D reconstructions futile, as light emitting from a given axial position obscures structures in other focal planes of the lens. 
+To accurately represent fluorescent objects in 3 dimensions, an optical section must be captured - that is, a clear image deep in the sample without out-of-focus light.
 Several optical sections can then be gathered at a number of depths to build up a 3-dimensional dataset. 
 
 A number of modern microscopy techniques are able to perform optical sectioning. 
@@ -64,49 +66,41 @@ Confocal microscopy is a point-scanning technique which uses a pinhole in the em
 Single plane illumination microscopy (SPIM) uses one objective to generate a thin sheet of light in the sample which is imaged by a second orthogonal objective, providing optical sectioning physically by not generating out-of-focus light in the first place~\cite{huisken2004optical}. 
 Optical projection tomography (OPT) can be thought of as the optical analogue of x-ray computerised tomography, capturing images at several rotations of the sample and using the inverse Radon transform to reconstruct a 3-dimension dataset~\cite{sharpe2002optical}. 
 Structured illumination microscopy (SIM) uses pattered illumination light to computationally remove out-of-focus light, which can also provide resolution enhancement, detailed in Chapter~\ref{chap:LAGSIM}. 
-3D-STORM uses optical astigmatism to achieve a 3D localisation accuracy of \SIrange{20}{30}{\nano\metre}, producing 3D super-resolution datasets~\cite{huang2008three}. 
+Several techniques exist for 3D localisation microscopy, utilising one or more of astigmatism~\cite{huang2008three}, double-helix point-spread function (PSF) engineering~\cite{pavani2009three}, dual-lens interferometry~\cite{shtengel2009interferometric}, multiple focus planes~\cite{toprak2007three}, and Airy beams~\cite{jia2014isotropic}; these techniques report typical resolutions of \SIrange[range-phrase=--]{10}{30}{\nano\metre} in 3 dimensions. 
 
-Resolving microscopic biology in 3D reveals structures and events that would otherwise be invisible; for example, observing the development of zebrafish embryo from 64 cells to \num{20000} cells~\cite{keller2008reconstruction}, or the 3D interaction of mitochondria with microtubules~\cite{huang2016ultra}. 
-Presenting and publishing these information-rich datasets in an informative way presents a challenge to authors, who are restricted to showing 2D slices or projections of the data or videos from one perspective. 
-If readers were able to interact directly with the 3D volume they  would gain a deeper understanding of the volumetric arrangement of structures. 
-To address this problem, a new web-based tool for visualising volumetric 3D data is presented in Chapter~\ref{chap:FPB}. 
-
+An online tool for visualising and sharing such information-rich volumetric dataasets is presented in Chapter~\ref{chap:FPB}. 
 
 \section{Cell biology for microscopy}
-The tools described in Chapters~\ref{chap:LAGSIM} and \ref{chap:FPB} of this document have valuable applications in cell biology, which are detailed in Chapters~\ref{chap:MOF} and \ref{chap:ER}.
+The tools described in Chapters~\ref{chap:LAGSIM} and \ref{chap:FPB} have valuable applications in cell biology, which are detailed in Chapters~\ref{chap:MOF} and \ref{chap:ER}.
 Since this thesis covers a broad range of themes, from engineering through computer science to biology, this section is included to provide a background of cell biology necessary for appreciating the findings detailed in the application chapters. 
 
 \subsection{Labelling organelles to visualise cell location}
 Figure~\ref{fig:animal-cell} shows a generic animal cell~\cite{wikicell}. 
 Highlighted in colour are 8 organelles which are investigated in work presented throughout this thesis. 
+The scale and quoted sizes are approximate, included to convey which organelles are resolvable in standard widefield microscopy, and which are smaller than the diffraction limit requiring super-resolution to observe clearly. 
 
 \begin{figure}[htbp!]
 \centering
 \includegraphics[width=1.0\textwidth]{animal-cell}
 \captionsetup{singlelinecheck=off}
-\caption[Introduction: Animal cell labelled with organelles relevant to this thesis]{A generic animal cell, adapted from Wikipedia~\cite{wikicell}, but with the organelles discussed in this thesis highlighted in colour. Numbered annotations are as follows:\newline
-\begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}}
-\begin{enumerate} 
-	\item Cytosol 
-	\item Cell membrane 
-	\item Nucleus 
-	\item Lysosome 
-\end{enumerate} &
-\begin{enumerate} \setcounter{enumi}{4}
-	\item Endosome 
-	\item Mitochondria 
-	\item ER network 
-	\item ER sheets 
-\end{enumerate} &
-\begin{enumerate} \setcounter{enumi}{8}
-	\item Vesicle 
-	\item Golgi apparatus 
-	\item Centrosome 
-	\item Nucleolus
-\end{enumerate} \\
-\end{tabular}} % end of caption!
+\caption[Introduction: Animal cell labelled with organelles relevant to this thesis]{A generic animal cell, adapted from Wikipedia~\cite{wikicell}, but with the organelles discussed in this thesis highlighted in colour. Scalebar is approximate: most animal cells are \SIrange[range-phrase=--]{10}{30}{\micro\metre} in diameter. Numbered annotations with approximate sizes from~\cite{hammersen2002histology} are as follows:\newline 
+
+\begin{tabular}{p{1em}p{0.2\textwidth}p{0.5\textwidth}}
+	1. & Cytosol  &\SIrange[range-phrase=--]{10}{30}{\micro\metre} diameter \\
+	2. & Cell membrane  &\SI{1}{\nano\metre} thick \\
+	3. & Nucleus  &\SI{6}{\micro\metre} diameter (average) \\
+	4. & Lysosome  &\SIrange[range-phrase=--]{0.1}{1.2}{\micro\metre} \\
+	5. & Endosome  &\SIrange[range-phrase=--]{0.05}{1}{\micro\metre} \\
+	6. & Mitochondria  &\SI{250}{\nano\metre} wide, \SIrange[range-phrase=--]{2}{7}{\micro\metre} long \\
+	7. & ER network  &\SIrange[range-phrase=--]{30}{100}{\nano\metre} diameter \\
+	8. & ER sheets  &\SIrange[range-phrase=--]{40}{70}{\nano\metre} thick \\
+	9. & Vesicle  &\SIrange[range-phrase=--]{200}{300}{\nano\metre} diameter \\
+	10. & Golgi apparatus  &\SIrange[range-phrase=--]{1}{2}{\micro\metre} wide \\
+	11. & Centrosome  &\SI{200}{\nano\metre} diameter \\
+	12. & Nucleolus  &\SIrange[range-phrase=--]{2}{4}{\micro\metre} diameter 
+\end{tabular} } % end of caption!
 \label{fig:animal-cell}
-\end{figure}
+\end{figure} 
 
 Each of the organelles highlighted in Figure~\ref{fig:animal-cell} can be labelled with a fluorescent marker.
 Fluorescent labelling can provide a variety of information about the cell, depending on the function of the organelles of interest~\cite{day2014fluorescent}. 
@@ -176,17 +170,19 @@ As a relatively new invention, super-resolution microscopes are often difficult 
 An important aim for LAG SIM was that any researcher should be able to use it, with minimal training required for capturing and reconstructing SIM data. 
 In Chapter 2, a showcase of reconstructed SIM data from a wide variety of experiments is provided as a reference for capturing high-quality images. 
 
-Many questions in biology can only be answered by observing the specimen in 3D.
+Resolving microscopic biology in 3D reveals structures and events that would otherwise be invisible; for example, observing the development of a zebrafish embryo from 64 cells to \num{20000} cells~\cite{keller2008reconstruction}, or the 3D interaction of mitochondria with microtubules~\cite{huang2016ultra}. 
 LAG SIM is able to capture 3D data using a capability known as optical sectioning.
-Whilst this data is information-rich and exciting to explore in detail, transferring it for remote colleagues to evaluate is problematic due to large file sizes and complicated, expensive analysis software. 
+Whilst this data is information-rich and exciting to explore in detail, sharing and publishing the datasets in an informative way presents a challenge to authors, who are restricted to showing 2D slices or projections of the data or videos from one perspective.
+If readers were able to interact directly with the 3D volume they would gain a deeper understanding of the volumetric arrangement of structures.
 
 To address this issue, Chapter~\ref{chap:FPB} presents FPBioimage, an online tool for sharing and publishing 3D volumetric data. 
 A key aim again was that the software was easy to operate, so that non-expert users could effortlessly view or share data from and to anywhere in the world. 
+In combination with a suite of additional software built to complement the main tool, FPBioimage makes sharing and publishing 3D volumetric data a one-click process.
 The chapter describes the development of the software, and presents a wide assortment of data from different 3D imaging technologies highlighting the unique features of the tool. 
 
 Chapter~\ref{chap:MOF} demonstrates the capability of LAG SIM for facilitating hypothesis-driven research, introducing the use of metal organic frameworks (MOFs) as drug delivery vehicles for treating cancer. 
 Many potentially therapeutic drugs degrade quickly in extra-cellular media, either making them unsuitable for use as medicines or requiring a high dosage with unwelcome side-effects. 
-Model drugs, including small-interfering ribonucleic acid (siRNA) and dichloroacetic acid (DCA), were loaded into the porous structure of MOFs, with the aim of protecting the contents for delivery into cells. 
+Model drugs, including small-interfering ribonucleic acid (siRNA) and dichloroacetic acid (DCA), were loaded into the large pores of the MOF's crystalline structure, with the aim of protecting the contents for delivery into cells. 
 
 The LAG SIM was used to image the uptake of the treatment over a time period of 24-hours, and 3-dimensional images have been published online with FPBioimage to allow other researchers to explore the data themselves and verify the results. 
 Three biological experiments are described showing the therapeutic effects offered by this newly-developed technology. 
