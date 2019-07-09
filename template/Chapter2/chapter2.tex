@@ -257,6 +257,7 @@ Assuming phase steps are all equal, performing a 3D Fourier transform of the pha
 \begin{bmatrix} \hat{D_1} \\ \hat{D_2} \\ \hat{D_3} \end{bmatrix}
 \end{equation}
 
+\newpage
 When the matrix of Equation~\ref{eq:matrix-inversion} is inverted, an factor of $m$ can be extracted as a scaling factor in front of the high frequency Fourier components, shown in Equation~\ref{eq:matrix-solved}.
 In the same way that a smaller modulation depth $m$ reduces the signal-to-noise ratio in optical sectioning SIM, described in Section~\ref{sec:sim-background}, this factor shows that the signal-to-noise ratio of the high frequency components is directly proportional to the modulation depth of the illumination pattern.
 
@@ -285,6 +286,7 @@ The final step for this reconstruction procedure is to inverse Fourier transform
 Comparing Figure~\ref{fig:beads-isotropic-doubling} to Figure~\ref{fig:beads-widefield}, the beads appear smaller and two close beads which could not be resolved before can now be distinguished.
 However, the reconstruction procedure must be refined to reduce the hexagonal artefacts introduced by this reconstruction method.
 
+\newpage
 \subsection{Refining the reconstruction algorithm reduces artefacts} \label{sec:sim-artefacts}
 The 2D OTF of a focussed lens is a rotationally symmetric function which gradually reduces to zero as spatial frequency increases~\cite{williams2002introduction}.
 The line profile through the OTF of an ideal lens in Figure~\ref{fig:fourier-widefield} shows that the higher the spatial frequency, the less contrast the microscope produces.
@@ -359,6 +361,7 @@ A physical relocation of the laboratory in early 2017~\cite{newbuilding} provide
 
 As well as detailing solutions to these challenges, this chapter also presents a showcase of various biological experiments performed with LAG SIM.
 Section~\ref{sec:sim-showcase} can therefore be used a collection of case-study examples for anyone wishing to run similar investigations.
+\clearpage
 
 \section{SIM hardware} \label{sec:hardware}
 \subsection{Optical path design to generate a SIM pattern} \label{sec:lagsim-path}
@@ -937,6 +940,7 @@ If the detected pattern parameters do not correspond to the expected resolution 
 If the delta peaks' Fourier-space positions are correct but modulation contrast is low ($m$<0.5), the software waits for user confirmation that they wish to continue with the reconstruction, and recommends that they need to capture higher quality SIM images.
 Note that feedback is not provided in batch-reconstruction mode.
 
+\newpage
 \subsection{Wiener filtering and apodisation reduces noise, but can introduce artefacts}\label{sec:wiener-recon}
 When the Wiener filtering scheme is used for noise removal, the Wiener parameter and apodisation parameters are used in a complementary fashion.
 
@@ -1008,7 +1012,7 @@ If the center part of the OTF is computationally removed, out-of-focus light wil
 In conventional widefield microscopy, this would have the side-effect of also removing low-frequency information from the image.
 In structured illumination microscopy, however, this information can be recovered from shifted components in Fourier space.
 
-\begin{figure}[htbp!]
+\begin{figure}[bp!]
 \centering
 \includegraphics[width=1.0\textwidth]{oholleran-otf-attenuation}
 \caption[LAG SIM: OTF attenuation as part of the SIM reconstruction process removes out-of-focus light]{A widefield OTF, shown in red, does not have axial support at low lateral frequencies, leading to out-of-focus light in widefield images. Applying the red weighting as a Fourier-space filter removes this out-of-focus light; however in conventional epifluorescent microscopy, this would also remove low-frequency spatial information. The Fourier-space shifting inherent to SIM reconstruction recovers the attenuated information, as shown by the blue line, providing support at low lateral frequencies. When the shifted components are filtered by the blue weighting, which removes their own out-of-focus light, an optically-sectioned resolution-enhanced image can be reconstructed.  Adapted from~\cite{oholleran2014optimized}. }
@@ -1081,7 +1085,7 @@ Therefore if optical sectioning is required, it is recommended to use the "RL-in
 Using optical sectioning to remove the out-of-focus light allows 3D reconstructions of the sample to be created. 
 This can reveal information otherwise unobservable, such as whether a particle is located on the inside or outside of a cell membrane~\cite{teplensky2017temperature}.
 
-
+\clearpage
 \section{Results and Discussion} \label{sec:sim-showcase}
 LAG SIM has been designed to be a versatile and user-friendly microscope, providing high-speed multicolour imaging surpassing the diffraction limit with optical sectioning provided computationally or with TIRF.
 With a number of useful automations, LAG SIM can be used to create timelapse videos, 3D reconstructions, large mosaic images, and for unsupervised imaging of multiple cells at different locations around the coverslip.
